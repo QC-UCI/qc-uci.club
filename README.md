@@ -1,4 +1,6 @@
 # QC-UCI.github.io
+website for QC@UCI
+qc-uci.club
 
 # Todo
 - [ ] Index
