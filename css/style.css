@@ -11,6 +11,8 @@
    --padding: 12px;
 
    /* Font Size */
+   --font-huge: 48px;
+   --font-mega: 36px;
    --font-super: 24px;
    --font-large: 18px;
    --font-medium: 14px;
@@ -31,6 +33,7 @@
 body {
    font-family: var(--roboto);
    height: 100%;
+   background-color: var(--black-color);
 }
 
 ul,
@@ -170,3 +173,30 @@ section.banner .banner__btn {
    }
 }
 
+/*Contact Us*/
+
+ section.contact__body {
+   display:flex;
+   flex-direction: column;
+   align-items: center;
+   position: relative;
+   justify-content: center;
+   background-color: var(--white-color);
+   margin-top: 60px;
+   padding: 10px 0px;
+   width: 100%;
+}
+
+section.contact__body .contact__header {
+   color: var(--black-color);
+   width: 80%;
+   text-align: left;
+   font-size: var(--font-huge);
+}
+
+section.contact__body .info__header {
+   width: 80%;
+   margin: 40px 0px;
+   font-size: var(--font-mega);
+   text-align: left;
+}
