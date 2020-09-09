@@ -19,7 +19,10 @@
 
    /* Font Family */
    --merienda: merienda;
-   --roboto: Roboto
+   --roboto: Roboto;
+
+   /* Border Radius */
+   --border-radius: 6px;
 }
 
 * {
@@ -185,43 +188,100 @@ section.banner .banner__btn {
    text-transform: uppercase;
 }
 
+.team__navContainer {
+   width: 89%;
+}
+
+.team__nav {
+   width: 86%;
+   display: flex;
+   justify-content: flex-end;
+   margin-bottom: 5px;
+}
+
+.team__nav .team__li {
+   margin-right: 15px;
+   padding: 5px;
+   border-radius: var(--border-radius);
+}
+
+.team__nav .team__li:first-child {
+   margin-left: 0;
+}
+
+.team__nav .team__li:last-child {
+   margin-right: 0;
+}
+
+.team__nav .team__li.active {
+   padding-bottom: calc(var(--padding) / 2);
+   background-color: var(--white-color);
+   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.07);
+}
+
+.team__nav .team__li:hover {
+   cursor: pointer;
+   border-bottom: solid 1px var(--grey-dark-color);
+}
+
+.team__nav .team__li.active:hover {
+   border-bottom: none;
+}
+
 section.team {
    height: 100%;
    width: 100%;
    display: flex;
-   justify-content: center;
    align-content: space-around;
-   align-items: center;
    text-align: center;
    flex-wrap: wrap;
-
-}
-
-section.team .team__row {
-   width: 80%;
-   display: flex;
-   justify-content: space-between;
-   align-items: center;
 }
 
 section.team .team__member {
+   display: none;
+}
+
+section.team .team__member.active {
    display: flex;
    flex-direction: column;
    justify-content: space-evenly;
    max-width: 450px;
    max-height: 450px;
-   margin: 10px;
+   margin: 10px 20px;
+   position: relative;
+   left: 11%;
    background-color: var(--white-color);
-   border-radius: 6px;
+   border-radius: var(--border-radius);
    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.07);
    padding: 25px;
+   transition: transform 1s;
+   transform: scale(1);
+}
+
+@media screen and (max-width: 1255px) {
+   section.team .team__member.active {
+      width: 50%;
+      left: 13%;
+   }
+}
+
+@media screen and (max-width: 1000px) {
+   .team__nav {
+      width: 50%;
+      margin: 0 auto;
+      justify-content: center;
+   }
+
+   section.team .team__member.active {
+      left: 24.5%;
+   }
 }
 
 section.team .team__member img {
    width: 60%;
    margin: 0 auto;
    margin-bottom: 10px;
-   border-radius: 6px;
+   border-radius: var(--border-radius);
 }
 
 section.team .team__member .team__email {
@@ -250,7 +310,7 @@ section.team .team__member .team__btn i {
    width: 85px;
    margin: 0 5px;
    padding: 10px 5px;
-   border-radius: 6px;
+   border-radius: var(--border-radius);
    transition: all 0.3s ease;
    border-style: none;
    font-size: var(--font-large);
