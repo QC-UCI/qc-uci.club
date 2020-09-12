@@ -23,6 +23,9 @@
 
    /* Border Radius */
    --border-radius: 6px;
+
+   /* Backgroun Color */
+   --background-color: #242637;
 }
 
 * {
@@ -31,9 +34,14 @@
    box-sizing: border-box;
 }
 
+html {
+   overflow-y: scroll;
+}
+
 body {
    font-family: var(--roboto);
-   background-color: #f4f4f4;
+   /*background-color: #f4f4f4;*/
+   background-color: var(--background-color);
    height: 100%;
 }
 
@@ -61,7 +69,6 @@ header {
    align-items: center;
    color: var(--white-color);
    padding: 20px 100px;
-   background-color: var(--black-color);
 }
 
 header .header__title {
@@ -181,7 +188,8 @@ section.banner .banner__btn {
    width: 100%;
    padding: 30px;
    margin: 80px auto 30px;
-   background: var(--white-color);
+   /*background: var(--white-color);*/
+   background: #f4f4f4;
    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.07);
    text-align: center;
    font-size: 50px;
@@ -190,12 +198,14 @@ section.banner .banner__btn {
 
 .team__navContainer {
    width: 89%;
+   display: flex;
+   justify-content: center;
 }
 
 .team__nav {
-   width: 86%;
-   display: flex;
-   justify-content: flex-end;
+   margin: 0;
+   padding: 0;
+   text-align: center;
    margin-bottom: 5px;
 }
 
@@ -203,6 +213,8 @@ section.banner .banner__btn {
    margin-right: 15px;
    padding: 5px;
    border-radius: var(--border-radius);
+   display: inline-block;
+   color: var(--white-color);
 }
 
 .team__nav .team__li:first-child {
@@ -217,6 +229,7 @@ section.banner .banner__btn {
    padding-bottom: calc(var(--padding) / 2);
    background-color: var(--white-color);
    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.07);
+   color: var(--black-color);
 }
 
 .team__nav .team__li:hover {
@@ -235,6 +248,7 @@ section.team {
    align-content: space-around;
    text-align: center;
    flex-wrap: wrap;
+   justify-content: center;
 }
 
 section.team .team__member {
@@ -249,7 +263,6 @@ section.team .team__member.active {
    max-height: 450px;
    margin: 10px 20px;
    position: relative;
-   left: 11%;
    background-color: var(--white-color);
    border-radius: var(--border-radius);
    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.07);
@@ -261,7 +274,6 @@ section.team .team__member.active {
 @media screen and (max-width: 1255px) {
    section.team .team__member.active {
       width: 50%;
-      left: 13%;
    }
 }
 
@@ -272,9 +284,6 @@ section.team .team__member.active {
       justify-content: center;
    }
 
-   section.team .team__member.active {
-      left: 24.5%;
-   }
 }
 
 section.team .team__member img {
@@ -325,8 +334,4 @@ section.team .team__member .team__btn i {
    background: #007bb5;
    color: var(--white-color);
  }
-
- html {
-   overflow-y: scroll;
-}
 
