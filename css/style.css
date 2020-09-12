@@ -326,5 +326,7 @@ section.team .team__member .team__btn i {
    color: var(--white-color);
  }
 
-
+ html {
+   overflow-y: scroll;
+}
 
