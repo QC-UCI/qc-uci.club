@@ -188,14 +188,14 @@ section.banner .banner__btn {
 section.join__body {
    display:flex;
    flex-direction: column;
-   align-items: center;
+   align-items: stretch;
    position: relative;
-   justify-content: center;
+   justify-content: space-between;
    background-color: #f4f4f4;
    margin: 0 auto;
    margin-top: 60px;
    padding: 10px 0px;
-   width: 80%;
+   width: 20%;
 }
 
 section.join__body .contact__header {
@@ -221,7 +221,7 @@ section.join__body .join__platform {
 section.join__body .join__platform {
    margin-top: 15px;
    display: flex;
-   justify-content: center;
+   justify-content: space-between;
 }
 
 section.join__body .join__platform button {
