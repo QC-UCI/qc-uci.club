@@ -194,9 +194,3 @@ section.contact__body .contact__header {
    font-size: var(--font-huge);
 }
 
-section.contact__body .info__header {
-   width: 80%;
-   margin: 40px 0px;
-   font-size: var(--font-mega);
-   text-align: left;
-}
