@@ -19,7 +19,10 @@
 
    /* Font Family */
    --merienda: merienda;
-   --roboto: Roboto
+   --roboto: Roboto;
+
+   /* Border Radius */
+   --border-radius: 6px;
 }
 
 * {
@@ -183,6 +186,7 @@ section.banner .banner__btn {
    text-align: center;
    font-size: 50px;
    text-transform: uppercase;
+   border-radius: var(--border-radius);
 }
 
 section.join__body {
@@ -196,6 +200,7 @@ section.join__body {
    margin-top: 60px;
    padding: 10px 30px;
    width: 30%;
+   border-radius: var(--border-radius);
 }
 
 section.join__body .contact__header {
@@ -278,9 +283,96 @@ section.join__body .join__platform .fa-envelope:hover {
    text-align: center;
    font-size: 50px;
    text-transform: uppercase;
+   border-radius: var(--border-radius);
 }
 
-section.event__body {
-   margin-top: 3%;
-   text-align: center;
+.event__navContainer {
+   width: 89%;
+   display: flex;
+   justify-content: center;
 }
+
+.event__nav {
+   margin: 0;
+   padding: 0;
+   text-align: center;
+   margin-bottom: 5px;
+}
+
+.event__nav .event__li {
+   margin-right: 15px;
+   padding: 5px;
+   border-radius: var(--border-radius);
+   display: inline-block;
+   color: var(--white-color);
+}
+
+.event__nav .event__li:first-child {
+   margin-left: 0;
+}
+
+.event__nav .event__li:last-child {
+   margin-right: 0;
+}
+
+.event__nav .event__li.active {
+   padding-bottom: calc(var(--padding) / 2);
+   background-color: var(--white-color);
+   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.07);
+   color: var(--black-color);
+}
+
+.event__nav .event__li:hover {
+   cursor: pointer;
+   border-bottom: solid 1px var(--grey-dark-color);
+}
+
+.event__nav .event__li.active:hover {
+   border-bottom: none;
+}
+
+section.event {
+   width: 100%;
+   height: 100%;
+   margin-top: 3%;
+   margin-bottom: 3%;
+   text-align: center;
+   display: flex;
+   flex-wrap: wrap;
+   justify-content: space-around;
+   align-items: flex-start;
+}
+
+section.event .event__text {
+   display: none;
+   background-color: var(--white-color);
+   height: 70%;
+   min-width: 45%;
+   max-width: 49%;
+   padding-bottom: 20px;
+   border-radius: var(--border-radius);
+}
+
+section.event .event__text h2 {
+   margin-top: 30px;
+}
+
+
+section.event .event__text .event__info {
+   display: flex;
+   align-items: center;
+}
+
+section.event .event__text .event__info span:first-child {
+   margin: 10px 80px;
+}
+
+section.event .event__text.active {
+   display: block;
+}
+
+section.event iframe {
+   width: 50%;
+   height: 500px;
+}
+
