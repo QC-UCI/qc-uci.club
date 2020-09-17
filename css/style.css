@@ -261,6 +261,11 @@ section.join__body .join__platform .fa-github:hover {
    color: var(--white-color);
 }
 
+section.join__body .join__platform .fa-calendar-alt:hover {
+   background: #ff8c00;
+   color: var(--white-color);
+}
+
 section.join__body .join__platform .fa-envelope:hover {
    background: var(--red-color);
    color: var(--white-color);
