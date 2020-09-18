@@ -2,10 +2,12 @@ var submitButton = document.getElementById("contact__form");
 
 var form_components = document.getElementsByClassName("form_component");
 
-submitButton.addEventListener("submit", CheckPopulatedFields);
+// this listenner is actually preventing the form to be submitted
+// submitButton.addEventListener("submit", CheckPopulatedFields);
 
 
 //Checks if all fields are populated, otherwise doesn't submit
+// just use required="" for each required field.
 function CheckPopulatedFields(event)
 {
     event.preventDefault();
