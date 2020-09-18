@@ -28,7 +28,7 @@ for (let i = 0; i < navs.length; i++) {
 function updateMembers(id) {
    for (let i = 0; i < teamMembers.length; i++) {
       let teamMember = teamMembers[i];
-      if (teamMember.dataset.id === id) {
+      if (teamMember.dataset.id.indexOf(id) != -1) {
          teamMember.classList.add('active');
       } else {
          teamMember.classList.remove('active');
