@@ -289,3 +289,10 @@ section.contact__body .contact__header {
    text-align: left;
    font-size: var(--font-huge);
 }
+
+section.contact__body #contact__form {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   justify-content: center;
+}
