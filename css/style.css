@@ -11,7 +11,9 @@
    --padding: 12px;
 
    /* Font Size */
-   --font-super: 24px;
+   --font-huge: 48px;
+   --font-mega: 36px;
+   --font-super: 28px;
    --font-large: 18px;
    --font-medium: 14px;
    --font-small: 12px;
@@ -269,4 +271,66 @@ section.join__body .join__platform .fa-calendar-alt:hover {
 section.join__body .join__platform .fa-envelope:hover {
    background: var(--red-color);
    color: var(--white-color);
+}
+
+
+/*Contact Us*/
+
+section.contact__body {
+   display:flex;
+   flex-direction: column;
+   align-items: center;
+   vertical-align: top;
+   position: relative;
+   justify-content: top;
+   background-color: var(--white-color);
+   margin-top: 9vh;
+   padding: 10px 0px;
+   width: 100%;
+   height: 80vh;
+}
+
+section.contact__body .contact__header {
+   color: var(--black-color);
+   width: 80%;
+   text-align: center;
+   font-size: var(--font-huge);
+   padding: var(--padding);
+}
+
+section.contact__body #contact__form {
+   display: flex;
+   flex-direction: column;
+   align-items: left;
+   width: 30%;
+   margin: 0px auto;
+   font-size: var(--font-super);
+
+}
+
+section.contact__body input[type="text"]::placeholder, section.contact__body input[type="email"]::placeholder {
+   height: 30px;
+}
+
+section.contact__body textarea.form_component {
+   height: 100px;
+
+}
+
+.form_component {
+   width: 100%;
+   margin: 0px 0px 20px 0px;
+   font-size: var(--font-large);
+}
+
+
+@media screen and (max-width: 700px) {
+   section.contact__body {
+      margin-top: 12vh;
+   }
+
+   section.contact__body #contact__form {
+      width: 50%;
+   }
+
 }
