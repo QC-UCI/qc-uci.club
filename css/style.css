@@ -36,8 +36,14 @@
    box-sizing: border-box;
 }
 
+html {
+   overflow-y: scroll;
+}
+
 body {
    font-family: var(--roboto);
+   /*background-color: #f4f4f4;*/
+   background-color: var(--background-color);
    height: 100%;
    background-color: var(--background-color);
 }
@@ -179,7 +185,175 @@ section.banner .banner__btn {
    }
 }
 
-/* Join */
+/*************************/
+/*         Team         */
+/*************************/
+
+.team__title {
+   max-width: 500px;
+   width: 100%;
+   padding: 30px;
+   margin: 80px auto 30px;
+   /*background: var(--white-color);*/
+   background: #f4f4f4;
+   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.07);
+   text-align: center;
+   font-size: 50px;
+   text-transform: uppercase;
+}
+
+.team__navContainer {
+   width: 89%;
+   display: flex;
+   justify-content: center;
+}
+
+.team__nav {
+   margin: 0;
+   padding: 0;
+   text-align: center;
+   margin-bottom: 5px;
+}
+
+.team__nav .team__li {
+   margin-right: 15px;
+   padding: 5px;
+   border-radius: var(--border-radius);
+   display: inline-block;
+   color: var(--white-color);
+}
+
+.team__nav .team__li:first-child {
+   margin-left: 0;
+}
+
+.team__nav .team__li:last-child {
+   margin-right: 0;
+}
+
+.team__nav .team__li.active {
+   padding-bottom: calc(var(--padding) / 2);
+   background-color: var(--white-color);
+   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.07);
+   color: var(--black-color);
+}
+
+.team__nav .team__li:hover {
+   cursor: pointer;
+   border-bottom: solid 1px var(--grey-dark-color);
+}
+
+.team__nav .team__li.active:hover {
+   border-bottom: none;
+}
+
+section.team {
+   height: 100%;
+   width: 100%;
+   display: flex;
+   align-content: space-around;
+   text-align: center;
+   flex-wrap: wrap;
+   justify-content: center;
+}
+
+section.team .team__member {
+   flex-direction: column;
+   justify-content: space-evenly;
+   max-width: 430px;
+   max-height: 400px;
+   margin: 10px 20px;
+   position: relative;
+   background-color: var(--white-color);
+   border-radius: var(--border-radius);
+   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.07);
+   padding: 25px;
+   display: none;
+}
+
+section.team .team__member.active {
+   display: flex;
+}
+
+@media screen and (max-width: 1255px) {
+   section.team .team__member.active {
+      width: 50%;
+   }
+}
+
+@media screen and (max-width: 1000px) {
+   .team__nav {
+      width: 50%;
+      margin: 0 auto;
+      justify-content: center;
+   }
+
+}
+
+section.team .team__member img {
+   width: 60%;
+   height: 250px;
+   object-fit: cover;
+   margin: 0 auto;
+   margin-bottom: 10px;
+   border-radius: var(--border-radius);
+}
+
+section.team .team__member .team__major {
+   font-size: var(--font-medium);
+   color: var(--grey-dark-color);
+   margin-top: 1px;
+}
+
+section.team .team__member p {
+   margin-top: 5px;
+}
+
+section.team .team__member .team__btn {
+   margin-top: 15px;
+   display: flex;
+   justify-content: center;
+}
+
+section.team .team__member .team__btn button {
+   border: none;
+   background-color: var(--white-color);
+}
+
+section.team .team__member .team__btn i {
+   display: block;
+   width: 85px;
+   margin: 0 5px;
+   padding: 10px 5px;
+   border-radius: var(--border-radius);
+   transition: all 0.3s ease;
+   border-style: none;
+   font-size: var(--font-large);
+ }
+
+ section.team .team__member .fa-envelope:hover {
+   background: var(--red-color);
+   color: var(--white-color);
+ }
+
+ section.team .team__member .fa-linkedin:hover {
+   background: #007bb5;
+   color: var(--white-color);
+ }
+
+ section.team .team__member .fa-github:hover {
+   background: #040204;
+   color: var(--white-color);
+ }
+
+ section.team .team__member .fa-user:hover {
+   background: #2eb67d;
+   color: var(--white-color);
+ }
+
+/*************************/
+/*         Join          */
+/*************************/
 
 .join__title {
    max-width: 500px;
