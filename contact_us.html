@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script
+       src="https://kit.fontawesome.com/2d323a629b.js"
+       crossorigin="anonymous">
+    </script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto&display=swap"
+    rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <title>Home | QC@UCI</title>
+</head>
+<body>
+    <header>
+        <h2 class="header__title"><a href="index.html">QC@UCI</a></h2>
+        <nav>
+           <ul class="header__nav">
+              <li><a href="index.html">Home</a></li>
+              <li><a href="#">Team</a></li>
+              <li><a href="#">Events</a></li>
+              <li><a href="join.html">Join</a></li>
+              <li><a href="contact_us.html">Contact</a></li>
+           </ul>
+        </nav>
+     </header>
+     
+     <section class="contact__body">
+        <h2 class="contact__header">Send Us A Message!</h2>
+        <form id="contact__form" name="input" accept-charset="utf-8" action="https://formspree.io/quantumcomputing@uci.edu" method="POST"> 
+          Name: 
+          <input class="form_component" type="text" name="name" placeholder="Your name" required="">
+          Email: 
+          <input class="form_component" type="email" name="_replyto" placeholder="Your email" required="">
+          Message: 
+          <textarea class="form_component" name="message" placeholder="Type your message" required=""></textarea>
+          <input type="hidden" name="_subject" value="New message">
+          <input id="contact_us_submit" type="submit" value="Send">
+        </form>
+    </section>
+
+     
+</body>
+
+
+</html>
