@@ -186,7 +186,7 @@ section.banner .banner__btn {
 }
 
 /*************************/
-/*         Team         */
+/*         Team          */
 /*************************/
 
 .team__title {
@@ -200,6 +200,7 @@ section.banner .banner__btn {
    text-align: center;
    font-size: 50px;
    text-transform: uppercase;
+   border-radius: var(--border-radius);
 }
 
 .team__navContainer {
@@ -455,7 +456,9 @@ section.join__body .join__platform .fa-envelope:hover {
    color: var(--white-color);
 }
 
-/* Event */
+/*************************/
+/*         Event         */
+/*************************/
 
 .event__title {
    max-width: 500px;
@@ -560,7 +563,9 @@ section.event iframe {
    height: 500px;
 }
 
-/* Contact */
+/*************************/
+/*        Contact        */
+/*************************/
 
 .contact__title {
    max-width: 500px;
@@ -616,7 +621,6 @@ section.contact__body input[type="text"]::placeholder, section.contact__body inp
 
 section.contact__body textarea.form_component {
    height: 100px;
-
 }
 
 .form_component {
@@ -634,5 +638,4 @@ section.contact__body textarea.form_component {
    section.contact__body #contact__form {
       width: 50%;
    }
-
 }
