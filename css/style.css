@@ -259,7 +259,7 @@ section.team .team__member {
    flex-direction: column;
    justify-content: space-evenly;
    max-width: 430px;
-   max-height: 430px;
+   max-height: 400px;
    margin: 10px 20px;
    position: relative;
    background-color: var(--white-color);
@@ -290,6 +290,8 @@ section.team .team__member.active {
 
 section.team .team__member img {
    width: 60%;
+   height: 250px;
+   object-fit: cover;
    margin: 0 auto;
    margin-bottom: 10px;
    border-radius: var(--border-radius);
