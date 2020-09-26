@@ -11,7 +11,9 @@
    --padding: 12px;
 
    /* Font Size */
-   --font-super: 24px;
+   --font-huge: 48px;
+   --font-mega: 36px;
+   --font-super: 28px;
    --font-large: 18px;
    --font-medium: 14px;
    --font-small: 12px;
@@ -23,6 +25,9 @@
 
    /* Border Radius */
    --border-radius: 6px;
+
+   /* Backgroun Color */
+   --background-color: #242637;
 }
 
 * {
@@ -34,7 +39,7 @@
 body {
    font-family: var(--roboto);
    height: 100%;
-   background-color: #242637;
+   background-color: var(--background-color);
 }
 
 ul,
@@ -266,6 +271,11 @@ section.join__body .join__platform .fa-github:hover {
    color: var(--white-color);
 }
 
+section.join__body .join__platform .fa-calendar-alt:hover {
+   background: #ff8c00;
+   color: var(--white-color);
+}
+
 section.join__body .join__platform .fa-envelope:hover {
    background: var(--red-color);
    color: var(--white-color);
@@ -376,3 +386,79 @@ section.event iframe {
    height: 500px;
 }
 
+/* Contact */
+
+.contact__title {
+   max-width: 500px;
+   width: 100%;
+   padding: 30px;
+   margin: 80px auto 30px;
+   background: var(--white-color);
+   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.07);
+   text-align: center;
+   font-size: 50px;
+   text-transform: uppercase;
+   border-radius: var(--border-radius);
+}
+
+section.contact__body {
+   display:flex;
+   flex-direction: column;
+   align-items: center;
+   vertical-align: top;
+   position: relative;
+   justify-content: top;
+   background-color: var(--white-color);
+   margin: 0 auto;
+   margin-top: 9vh;
+   padding: 10px 0px;
+   width: 60%;
+   height: 60vh;
+   border-radius: var(--border-radius);
+}
+
+section.contact__body .contact__header {
+   color: var(--black-color);
+   width: 80%;
+   text-align: center;
+   font-size: var(--font-huge);
+   padding: var(--padding);
+}
+
+section.contact__body #contact__form {
+   display: flex;
+   flex-direction: column;
+   align-items: left;
+   width: 30%;
+   margin: 0px auto;
+   margin-top: 8px;
+   font-size: var(--font-super);
+
+}
+
+section.contact__body input[type="text"]::placeholder, section.contact__body input[type="email"]::placeholder {
+   height: 30px;
+}
+
+section.contact__body textarea.form_component {
+   height: 100px;
+
+}
+
+.form_component {
+   width: 100%;
+   margin: 0px 0px 20px 0px;
+   font-size: var(--font-large);
+}
+
+
+@media screen and (max-width: 700px) {
+   section.contact__body {
+      margin-top: 12vh;
+   }
+
+   section.contact__body #contact__form {
+      width: 50%;
+   }
+
+}
