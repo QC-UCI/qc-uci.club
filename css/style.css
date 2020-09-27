@@ -629,6 +629,15 @@ section.contact__body textarea.form_component {
    font-size: var(--font-large);
 }
 
+.footer {
+   position: relative;
+   bottom: -50px;
+   justify-content: center;
+   padding: 0px;
+   background-color: rgb(133, 129, 129);
+   color: #fff;  
+   text-align: center;
+}
 
 @media screen and (max-width: 700px) {
    section.contact__body {
