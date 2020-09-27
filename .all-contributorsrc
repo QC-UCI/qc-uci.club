@@ -1,0 +1,24 @@
+{
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": false,
+  "contributors": [
+    {
+      "login": "andyyPark",
+      "name": "Andy Park",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/25911821?v=4",
+      "profile": "http://andyyPark.github.io",
+      "contributions": [
+        "code"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7,
+  "projectName": "QC-UCI.github.io",
+  "projectOwner": "QC-UCI",
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "skipCi": true
+}
