@@ -23,7 +23,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 <table>
   <tr>
     <td align="center"><a href="http://andyyPark.github.io"><img src="https://avatars2.githubusercontent.com/u/25911821?v=4" width="100px;" alt=""/><br /><sub><b>Andy Park</b></sub></a><br /><a href="https://github.com/QC-UCI/QC-UCI.github.io/commits?author=andyyPark" title="Code">💻</a></td>
-    <td align="center"><a href="http://www.omarcostahamido.com"><img src="https://avatars0.githubusercontent.com/u/18335360?v=4" width="100px;" alt=""/><br /><sub><b>Omar Costa Hamido</b></sub></a><br /><a href="https://github.com/QC-UCI/QC-UCI.github.io/commits?author=omarcostahamido" title="Code">💻</a></td>
+    <td align="center"><a href="http://www.omarcostahamido.com"><img src="https://avatars0.githubusercontent.com/u/18335360?v=4" width="100px;" alt=""/><br /><sub><b>Omar Costa Hamido</b></sub></a><br /><a href="https://github.com/QC-UCI/QC-UCI.github.io/commits?author=omarcostahamido" title="Code">💻</a> <a href="https://github.com/QC-UCI/QC-UCI.github.io/issues?q=author%3Aomarcostahamido" title="Bug reports">🐛</a></td>
   </tr>
 </table>
 
