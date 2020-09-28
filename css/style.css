@@ -651,7 +651,6 @@ section.contact__body textarea.form_component {
 footer {
    width: 90%;
    max-height: 20%;
-   background-color: var(--white-color);
    margin: 2% auto;
    padding: var(--padding);
    border-radius: var(--border-radius);
@@ -660,52 +659,18 @@ footer {
    flex-wrap: wrap;
 }
 
-footer .footer__1 {
-   width: 50%;
-   text-align: center;
-}
-
-footer .footer__1 a {
-   text-decoration: underline;
-}
-
-footer .footer__2 {
-   width: 50%;
-   text-align: center;
-}
-
-footer .footer__2 a {
-   display: inline-block;
-   width: 25px;
-   height: 25px;
-   margin-right: 5px;
-   border-radius: 50%;
-   text-align: center;
-   line-height: 20px;
- }
-
- footer .footer__2 a i.fa-github {
-   color: #000;
- }
-
-
- footer .footer__2 a i.fa-linkedin {
-   color: #0077b5;
- }
-
- footer .footer__2 a i.fa-slack {
-    color: #00bd8d;
- }
-
 footer .footer__copyRight {
    width: 100%;
    text-align: center;
+   color: var(--white-color);
+   padding: var(--padding);
 }
 
 footer .footer__copyRight::before {
     display: inline-block;
     content: "";
-    border-top: 2px solid black;
-    width: 90%;
+    border-top: 2px solid var(--white-color);
+    width: 95%;
     margin: 0 auto;
+    margin-bottom: 1%;
 }
