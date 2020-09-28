@@ -6,6 +6,7 @@
    --red-color: #ff0000;
    --grey-dark-color: #909090;
    --grey-light-color: #e0e0e0;
+   --slategray-color: #708090;
 
    /* Size */
    --padding: 12px;
@@ -274,6 +275,10 @@ section.team .team__member {
 
 section.team .team__member.active {
    display: flex;
+}
+
+section.team .team__member.active .team__president {
+   color: var(--slategray-color);
 }
 
 @media screen and (max-width: 1255px) {
