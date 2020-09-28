@@ -249,6 +249,27 @@ section.banner .banner__btn {
    border-bottom: none;
 }
 
+.team__message {
+   width: 90%;
+   max-height: 100px;
+   background-color: var(--white-color);
+   margin: 10px auto;
+   border-radius: var(--border-radius);
+   padding: var(--padding);
+   text-align: center;
+   font-size: var(--font-large);
+   display: none;
+}
+
+.team__message a {
+   text-decoration: underline;
+   font-weight: bold;
+}
+
+.team__message.active {
+   display: block;
+}
+
 section.team {
    height: 100%;
    width: 100%;
