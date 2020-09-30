@@ -42,3 +42,16 @@ function updateMembers(id) {
    });
 }
 
+// Removing president tag from founding section
+var a =document.getElementById("founding")
+a.addEventListener('click',function(){
+   var b = document.getElementsByClassName("team__president"); 
+   b[1].innerHTML="";
+   var d= document.getElementById("prev")
+   d.addEventListener("click",function(){
+      var e = document.getElementsByClassName("team__president");
+      e[1].innerHTML="<h4>[ President ]</h4>";
+   })
+})
+
+
