@@ -5,7 +5,7 @@
 website for QC@UCI
 qc-uci.club
 
-# Todo
+## Todo
 - [ ] Index
 - [ ] Footer? 
 - [ ] Team
@@ -35,3 +35,14 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
 This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
+
+## Set up Tailwind
+
+We use Tailwind [CSS](https://tailwindcss.com/) for styling. To set up Tailwind locally, first make sure you have [Node.js](https://nodejs.org/en/download/package-manager/) and npm installed then just
+
+```bash
+npm install
+npm run build
+```
+
+Tailwind CSS + `css/style.css` = `css/tailwind_style.css`. Enjoy Tailwind in any HTML by linking `css/tailwind_style.css`.
