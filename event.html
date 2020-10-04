@@ -11,9 +11,46 @@
    rel="stylesheet">
    <link rel="stylesheet" href="css/style.css">
    <title>Home | QC@UCI</title>
+   <!-- for the new calendar -->
+   <link href='https://cdn.jsdelivr.net/npm/fullcalendar@5.3.2/main.min.css' rel='stylesheet' />
+   <script src='https://cdn.jsdelivr.net/npm/fullcalendar@5.3.2/main.min.js'></script>
+   <script type="text/javascript">
+      document.addEventListener('DOMContentLoaded', function() {
+         var calendarEl = document.getElementById('calendar');
+
+         var calendar = new FullCalendar.Calendar(calendarEl, {
+         headerToolbar: {
+            left: 'prev,next today',
+            center: 'title',
+            right: 'dayGridMonth,listYear'
+         },
+
+         displayEventTime: false, // don't show the time column in list view
+
+         // THIS KEY WON'T WORK IN PRODUCTION!!!
+         // To make your own Google API key, follow the directions here:
+         // http://fullcalendar.io/docs/google_calendar/
+         googleCalendarApiKey: 'AIzaSyDoddBmfFgdL7t2M_OxDV-ufRIaOYYo7Mw',
+
+         // US Holidays
+         events: 'c_vcfar2j3rma8jerqsrgq1ge8s8@group.calendar.google.com',
+
+         eventClick: function(arg) {
+
+            // opens events in a popup window
+            window.open(arg.event.url, '_blank', 'width=700,height=600');
+
+            // prevents current tab from navigating
+            arg.jsEvent.preventDefault();
+         }
+
+         });
+
+         calendar.render();
+      });
+   </script>
 </head>
 <body>
-
    <header>
       <h2 class="header__title"><a href="index.html">QC@UCI</a></h2>
       <nav>
@@ -324,10 +361,12 @@
 
          </ul>
       </div>
-
-      <iframe src="https://calendar.google.com/calendar/embed?src=c_vcfar2j3rma8jerqsrgq1ge8s8%40group.calendar.google.com&ctz=America%2FLos_Angeles" style="border: 0" frameborder="0" scrolling="no"></iframe>
+      
    </section>
-
+   <section class="" style="background: white">
+      <div id="calendar" class="fc fc-media-screen fc-direction-ltr fc-theme-standard">…</div>
+   </section>
+   
    <footer>
       <div class="footer__copyRight">
          <p>&copy 2020 <a href="./contact_us.html">QC@UCI</a>  - All Rights Reserved</p>
