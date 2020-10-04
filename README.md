@@ -5,14 +5,6 @@
 website for QC@UCI
 qc-uci.club
 
-## Todo
-- [ ] Index
-- [ ] Footer? 
-- [ ] Team
-- [ ] Events
-- [ ] Join
-- [ ] Contact
-
 ## Contributors ✨
 
 Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
