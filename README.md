@@ -32,4 +32,4 @@ This project follows the [all-contributors](https://github.com/all-contributors/
 
 We use [Tailwind CSS](https://tailwindcss.com/) for styling. To set up Tailwind locally, first make sure you have [Node.js](https://nodejs.org/en/download/package-manager/) and npm installed. Then install Tailwind and its dependicies (i.e. postcss and autoprefixer) by `npm install`.  
 
-If you need to tweak some style in `css/style.css`, remember to `npm run build` which will inject Tailwind CSS into our custom css. (Tailwind CSS + `css/style.css` = `css/tailwind_style.css`). Enjoy Tailwind in any HTML by linking `css/tailwind_style.css`.
+Whenever you need to tweak some style in `css/style.css`, remember to `npm run build` which will inject Tailwind CSS into our custom css. (Tailwind CSS + `css/style.css` = `css/tailwind_style.css`). Enjoy Tailwind in any HTML by linking `css/tailwind_style.css`.
