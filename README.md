@@ -1,9 +1,15 @@
-# QC-UCI.github.io
+# qc-uci.club
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
 [![All Contributors](https://img.shields.io/badge/all_contributors-5-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 website for QC@UCI
-qc-uci.club
+www.qc-uci.club
+
+## Set up Tailwind
+
+We use [Tailwind CSS](https://tailwindcss.com/) for styling. To set up Tailwind locally, first make sure you have [Node.js](https://nodejs.org/en/download/package-manager/) and npm installed. Then install Tailwind and its dependencies (i.e. postcss and autoprefixer) by `npm install`.  
+
+Whenever you need to tweak some style in `css/style.css`, remember to `npm run build` which will inject Tailwind CSS into our custom css. (Tailwind CSS + `css/style.css` = `css/tailwind_style.css`). Enjoy Tailwind in any HTML by linking `css/tailwind_style.css`.
 
 ## Contributors ✨
 
@@ -27,9 +33,3 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
 This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
-
-## Set up Tailwind
-
-We use [Tailwind CSS](https://tailwindcss.com/) for styling. To set up Tailwind locally, first make sure you have [Node.js](https://nodejs.org/en/download/package-manager/) and npm installed. Then install Tailwind and its dependencies (i.e. postcss and autoprefixer) by `npm install`.  
-
-Whenever you need to tweak some style in `css/style.css`, remember to `npm run build` which will inject Tailwind CSS into our custom css. (Tailwind CSS + `css/style.css` = `css/tailwind_style.css`). Enjoy Tailwind in any HTML by linking `css/tailwind_style.css`.
