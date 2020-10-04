@@ -27,17 +27,14 @@
 
          displayEventTime: false, // don't show the time column in list view
 
-         // THIS KEY WON'T WORK IN PRODUCTION!!!
-         // To make your own Google API key, follow the directions here:
-         // http://fullcalendar.io/docs/google_calendar/
          googleCalendarApiKey: 'AIzaSyDoddBmfFgdL7t2M_OxDV-ufRIaOYYo7Mw',
 
-         // US Holidays
          events: 'c_vcfar2j3rma8jerqsrgq1ge8s8@group.calendar.google.com',
 
          eventClick: function(arg) {
 
             // opens events in a popup window
+            // this also allows users to add event to their own calendar!
             window.open(arg.event.url, '_blank', 'width=700,height=600');
 
             // prevents current tab from navigating
