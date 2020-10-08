@@ -56,10 +56,20 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "Chriscrosser3310",
+      "name": "Jielun (Chris) Chen",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/31495624?v=4",
+      "profile": "https://github.com/Chriscrosser3310",
+      "contributions": [
+        "ideas",
+        "question"
+      ]
     }
   ],
   "contributorsPerLine": 7,
-  "projectName": "QC-UCI.github.io",
+  "projectName": "qc-uci.club",
   "projectOwner": "QC-UCI",
   "repoType": "github",
   "repoHost": "https://github.com",
