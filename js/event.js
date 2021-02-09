@@ -46,10 +46,10 @@ for (let i = 0; i < eventInfos.length; i++) {
   // datexx = [month, day, year]
   var datex = new Date(datexx[2],datexx[0]-1,datexx[1]);
   // Date with month > 9 and year > 2020 corresponds to at least Fall 2020
-  if (eventInfos[i].parentElement.parentElement.parentElement.dataset.id !== "events" && (datexx[0] > 9 && datexx[2] === 2020)) {
+  if ( eventInfos[i].parentElement.parentElement.parentElement.dataset.id !== "events" && ( (datexx[0] > 9 && datexx[2] === 2020) || (datexx[2] === 2021) )  ) {
      continue;
   }
   if (today > datex) {
-    eventInfos[i].style.color = "#d3d3d3";
+     eventInfos[i].style.color = "#d3d3d3";
   }
 }
