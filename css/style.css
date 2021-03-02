@@ -166,6 +166,12 @@ section.banner iframe {
    margin-bottom: -3%;
 }
 
+section.banner .banner__eqi {
+   color: var(--grey-light-color);
+   font-size: 32px;
+   margin-top: 5%;
+}
+
 @media screen and (max-width: 1000px) {
    section.banner {
       padding: 100px 50px;
