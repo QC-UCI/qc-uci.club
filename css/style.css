@@ -241,6 +241,18 @@ section.banner iframe {
    border-bottom: none;
 }
 
+.message {
+   width: 90%;
+   max-height: 100px;
+   background-color: var(--white-color);
+   margin: 10px auto;
+   border-radius: var(--border-radius);
+   padding: var(--padding);
+   text-align: center;
+   font-size: var(--font-large);
+   display: block;
+}
+
 .team__message {
    width: 90%;
    max-height: 100px;
@@ -275,14 +287,14 @@ section.team {
 section.team .team__member {
    flex-direction: column;
    justify-content: space-evenly;
-   max-width: 430px;
+   max-width: 400px;
    max-height: 400px;
-   margin: 10px 20px;
+   margin: 10px 10px;
    position: relative;
    background-color: var(--white-color);
    border-radius: var(--border-radius);
    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.07);
-   padding: 25px;
+   padding: 15px;
    display: none;
 }
 
@@ -310,7 +322,7 @@ section.team .team__member.active .team__president {
 }
 
 section.team .team__member img {
-   width: 60%;
+   width: 80%;
    height: 250px;
    object-fit: cover;
    margin: 0 auto;
@@ -453,6 +465,12 @@ section.join__body .join__platform .fa-slack:hover {
    background: #4a154b;
    color: var(--white-color);
 }
+
+section.join__body .join__platform .fa-discord:hover {
+   background: #7289da;
+   color: var(--white-color);
+}
+
 
 section.join__body .join__platform .fa-linkedin:hover {
    background: #007bb5;
