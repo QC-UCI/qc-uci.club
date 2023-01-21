@@ -9,6 +9,7 @@
    </script>
    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto&display=swap"
    rel="stylesheet">
+   <link rel="stylesheet" href="css/tailwind_style.css">
    <link rel="stylesheet" href="css/style.css">
    <title>Team | QC@UCI</title>
 </head>
@@ -19,9 +20,9 @@
       <nav>
          <ul class="header__nav">
             <li><a href="index.html">Home</a></li>
+            <li><a href="join.html">Join</a></li>
             <li><a href="team.html">Team</a></li>
             <li><a href="event.html">Events</a></li>
-            <li><a href="join.html">Join</a></li>
             <li><a href="contact_us.html">Contact</a></li>
          </ul>
       </nav>
@@ -38,11 +39,61 @@
       </ul>
    </nav>
 
+   <div class="team__message" data-id="current">
+      For the 22-23 school year, QC@UCI has returned with a new set of board members. Check out how to <a href="./join.html">join</a> us, and we hope to see you at our meetings.</a>
+   </div>
+
+   <div class="team__message" data-id="prev">
+      QC@UCI first became an official UCI club during Fall 2019. The first open meeting took place in November 15. Several open meetings followed, being lead by both board and club members
+   </div>
+
+   <div class="team__message" data-id="founding">
+      The idea of QC@UCI was born in the Summer of 2019 when Tony Tong and Omar Costa Hamido met in Switzerland at the <span style="font-style: italic;">Quantum Information for Developers</span> summer school at ETH, Zürich
+   </div>
+
    <section class="team">
+      <div class="team__member" data-id="current">
+         <img src="image/JoshuaWang.jpg" alt="#">
+         <h3>Joshua Wang</h3>
+         <div class="team__president">
+            <h4>[ Co-President ]</h4>
+         </div>
+         <span class="team__major">Physics/CSE</span>
+      </div>
 
       <div class="team__member" data-id="current">
+         <img src='image/QC@UCI Logo_small.png' alt="#">
+         <h3>Rohit Ganti</h3>
+         <div class="team__president">
+            <h4>[ Co-President ]</h4>
+         </div>
+         <span class="team__major">Physics</span>
+      </div>
+
+      <div class="team__member" data-id="current">
+         <img src='image/QC@UCI Logo_small.png' alt="#">
+         <h3>Sean Doan</h3>
+         <span class="team__major">Applied Physics</span>
+      </div>
+
+      <div class="team__member" data-id="current">
+         <img src='image/QC@UCI Logo_small.png' alt="#">
+         <h3>Diptanshu Sikdar</h3>
+         <span class="team__major">Computer Science</span>
+      </div>
+
+      <div class="team__member" data-id="current">
+         <img src='image/QC@UCI Logo_small.png' alt="#">
+         <h3>Arya Mhaiskar</h3>
+         <span class="team__major">Computer Science</span>
+      </div>
+
+      <div class="team__member" data-id="prev">
          <img src="image/ChrisChen.jpg" alt="#">
          <h3>Chris Chen</h3>
+         <div class="team__president">
+            <h4>[ President ]</h4>
+         </div>
          <span class="team__major">Physics/Computer Science</span>
          <div class="team__btn">
             <button>
@@ -59,7 +110,32 @@
          </div>
       </div>
 
-      <div class="team__member" data-id='["current", "prev", "founding"]'>
+      <div class="team__member" data-id="prev">
+         <img src="image/KylerFrazier.jpeg" alt="#">
+         <h3>Kyler Frazier</h3>
+         <span class="team__major">Physics/Computer Science</span>
+         <div class="team__btn">
+            <button>
+               <a href="https://github.com/kylerFrazier">
+                  <i class="fab fa-github"></i>
+               </a>
+            </button>
+
+            <button>
+               <a href="https://www.linkedin.com/in/kyler-frazier/">
+                  <i class="fab fa-linkedin"></i>
+               </a>
+            </button>
+         </div>
+      </div>
+
+      <div class="team__member" data-id="prev">
+         <img src="image/qc.png" alt="#">
+         <h3>Harry Goyal</h3>
+         <span class="team__major">Informatics</span>
+      </div>
+
+      <div class="team__member" data-id='["prev", "founding"]'>
          <img src="image/OCH.jpg" alt="#">
          <h3>Omar Hamido</h3>
          <span class="team__major">Music</span>
@@ -71,14 +147,14 @@
             </button>
 
             <button>
-               <a href="http://en.omarcostahamido.com/">
+               <a href="https://omarcostahamido.com/">
                   <i class="far fa-user"></i>
                </a>
             </button>
          </div>
       </div>
 
-      <div class="team__member" data-id="current">
+      <div class="team__member" data-id="prev">
          <img src="image/AndyPark.jpg" alt="#">
          <h3>Andy Park</h3>
          <span class="team__major">Physics/Mathematics</span>
@@ -96,58 +172,20 @@
             </button>
          </div>
       </div>
-
-      <div class="team__member" data-id="current">
-         <img src="image/KylerFrazier.jpeg" alt="#">
-         <h3>Kyler Frazier</h3>
-         <span class="team__major">Physics/Computer Science</span>
-         <div class="team__btn">
-            <button>
-               <a href="#">
-                  <i class="fas fa-envelope"></i>
-               </a>
-            </button>
-
-            <button>
-               <a href="#">
-                  <i class="fab fa-linkedin"></i>
-               </a>
-            </button>
-         </div>
-      </div>
       
-      <div class="team__member" data-id='["current", "prev"]'>
+      <div class="team__member" data-id='["prev", "founding"]'>
          <img src="image/AhmadSebdani.jpg" alt="#">
          <h3>Ahmadreza Rajabi</h3>
-         <span class="team__major">Chemistry</span>
+         <span class="team__major">Theoretical Chemistry</span>
          <div class="team__btn">
             <button>
-               <a href="#">
+               <a href="mailto:arajabis@uci.edu">
                   <i class="fas fa-envelope"></i>
                </a>
             </button>
 
             <button>
-               <a href="#">
-                  <i class="fab fa-linkedin"></i>
-               </a>
-            </button>
-         </div>
-      </div>
-
-      <div class="team__member" data-id="prev">
-         <img src="image/ZhuHaochen.jpg" alt="#">
-         <h3>Keira Zhu</h3>
-         <span class="team__major">Business Economics</span>
-         <div class="team__btn">
-            <button>
-               <a href="#">
-                  <i class="fas fa-envelope"></i>
-               </a>
-            </button>
-
-            <button>
-               <a href="#">
+               <a href="https://www.linkedin.com/in/ahmadreza-rajabi">
                   <i class="fab fa-linkedin"></i>
                </a>
             </button>
@@ -157,6 +195,9 @@
       <div class="team__member" data-id='["prev", "founding"]'>
          <img src="image/TonyTong.jpg" alt="#">
          <h3>Tony Tong</h3>
+         <div class="team__president">
+            <h4>[ President ]</h4>
+         </div>
          <span class="team__major">Physics/Computer Science</span>
          <div class="team__btn">
             <button>
@@ -172,8 +213,20 @@
             </button>
          </div>
       </div>
+
+      <div class="team__member" data-id="prev">
+         <img src="image/ZhuHaochen.jpg" alt="#">
+         <h3>Keira Zhu</h3>
+         <span class="team__major">Business Economics</span>
+      </div>
       
    </section>
+
+   <footer>
+      <div class="footer__copyRight">
+         <p><a href="./contact_us.html">QC@UCI</a> 2023</p>
+      </div>
+   </footer>
 
    <script src="js/team.js"></script>
 </body>

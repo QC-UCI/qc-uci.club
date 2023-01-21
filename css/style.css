@@ -1,3 +1,9 @@
+@tailwind base;
+
+@tailwind components;
+
+@tailwind utilities;
+
 :root {
    /* Color */
    --white-color: #fff;
@@ -6,6 +12,7 @@
    --red-color: #ff0000;
    --grey-dark-color: #909090;
    --grey-light-color: #e0e0e0;
+   --slategray-color: #708090;
 
    /* Size */
    --padding: 12px;
@@ -117,40 +124,18 @@ header .header__nav li:last-child {
 
 }
 
-/* Banner Area */
+/*************************/
+/*        Index          */
+/*************************/
 
 section.banner {
    display: flex;
    flex-direction: column;
    align-items: center;
-   padding: 110px 110px;
    position: relative;
    justify-content: center;
-   min-height: 100vh;
    color: var(--black-color);
    text-align: center;
-}
-
-section.banner .banner__img {
-   background-image: url("../image/sample.jpg");
-   position: absolute;
-   top: 0;
-   left: 0;
-   width: 100%;
-   height: 100%;
-   background-size: cover;
-   z-index: -1;
-}
-
-section.banner .banner__img::after {
-   content: '';
-   position: absolute;
-   top: 0;
-   left: 0;
-   width: 100%;
-   height: 100%;
-   background-color: var(--black-color);
-   opacity: .8;
 }
 
 section.banner .banner__title {
@@ -171,6 +156,14 @@ section.banner .banner__btn {
    font-size: var(--font-medium);
    color: var(--grey-light-color);
    text-transform: uppercase;
+   border: 2px solid var(--white-color);
+   padding: var(--padding);
+   border-radius: var(--border-radius);
+}
+
+section.banner iframe {
+   margin-top: 3%;
+   margin-bottom: -3%;
 }
 
 @media screen and (max-width: 1000px) {
@@ -248,6 +241,39 @@ section.banner .banner__btn {
    border-bottom: none;
 }
 
+.message {
+   width: 90%;
+   max-height: 100px;
+   background-color: var(--white-color);
+   margin: 10px auto;
+   border-radius: var(--border-radius);
+   padding: var(--padding);
+   text-align: center;
+   font-size: var(--font-large);
+   display: block;
+}
+
+.team__message {
+   width: 90%;
+   max-height: 100px;
+   background-color: var(--white-color);
+   margin: 10px auto;
+   border-radius: var(--border-radius);
+   padding: var(--padding);
+   text-align: center;
+   font-size: var(--font-large);
+   display: none;
+}
+
+.team__message a {
+   text-decoration: underline;
+   font-weight: bold;
+}
+
+.team__message.active {
+   display: block;
+}
+
 section.team {
    height: 100%;
    width: 100%;
@@ -261,19 +287,23 @@ section.team {
 section.team .team__member {
    flex-direction: column;
    justify-content: space-evenly;
-   max-width: 430px;
+   max-width: 400px;
    max-height: 400px;
-   margin: 10px 20px;
+   margin: 10px 10px;
    position: relative;
    background-color: var(--white-color);
    border-radius: var(--border-radius);
    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.07);
-   padding: 25px;
+   padding: 15px;
    display: none;
 }
 
 section.team .team__member.active {
    display: flex;
+}
+
+section.team .team__member.active .team__president {
+   color: var(--slategray-color);
 }
 
 @media screen and (max-width: 1255px) {
@@ -292,7 +322,7 @@ section.team .team__member.active {
 }
 
 section.team .team__member img {
-   width: 60%;
+   width: 80%;
    height: 250px;
    object-fit: cover;
    margin: 0 auto;
@@ -435,6 +465,12 @@ section.join__body .join__platform .fa-slack:hover {
    background: #4a154b;
    color: var(--white-color);
 }
+
+section.join__body .join__platform .fa-discord:hover {
+   background: #7289da;
+   color: var(--white-color);
+}
+
 
 section.join__body .join__platform .fa-linkedin:hover {
    background: #007bb5;
@@ -629,16 +665,6 @@ section.contact__body textarea.form_component {
    font-size: var(--font-large);
 }
 
-.footer {
-   position: relative;
-   bottom: -50px;
-   justify-content: center;
-   padding: 0px;
-   background-color: rgb(133, 129, 129);
-   color: #fff;  
-   text-align: center;
-}
-
 @media screen and (max-width: 700px) {
    section.contact__body {
       margin-top: 12vh;
@@ -647,4 +673,35 @@ section.contact__body textarea.form_component {
    section.contact__body #contact__form {
       width: 50%;
    }
+}
+
+/*************************/
+/*        Footer         */
+/*************************/
+
+footer {
+   width: 90%;
+   max-height: 20%;
+   margin: 2% auto;
+   padding: var(--padding);
+   border-radius: var(--border-radius);
+   display: flex;
+   justify-content: center;
+   flex-wrap: wrap;
+}
+
+footer .footer__copyRight {
+   width: 100%;
+   text-align: center;
+   color: var(--white-color);
+   padding: var(--padding);
+}
+
+footer .footer__copyRight::before {
+    display: inline-block;
+    content: "";
+    border-top: 2px solid var(--white-color);
+    width: 95%;
+    margin: 0 auto;
+    margin-bottom: 1%;
 }

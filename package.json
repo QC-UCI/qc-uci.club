@@ -1,0 +1,26 @@
+{
+  "name": "qc-uci.github.io",
+  "version": "1.0.0",
+  "description": "<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section --> [![All Contributors](https://img.shields.io/badge/all_contributors-4-orange.svg?style=flat-square)](#contributors-) <!-- ALL-CONTRIBUTORS-BADGE:END --> website for QC@UCI qc-uci.club",
+  "main": "postcss.config.js",
+  "dependencies": {
+    "autoprefixer": "^9.0.0",
+    "postcss": "^8.4.21",
+    "postcss-cli": "^8.0.0",
+    "tailwindcss": "^1.8.10"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "postcss css/style.css -o css/tailwind_style.css"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/QC-UCI/QC-UCI.github.io.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/QC-UCI/QC-UCI.github.io/issues"
+  },
+  "homepage": "https://github.com/QC-UCI/QC-UCI.github.io#readme"
+}

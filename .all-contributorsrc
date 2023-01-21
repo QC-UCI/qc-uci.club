@@ -11,7 +11,10 @@
       "avatar_url": "https://avatars2.githubusercontent.com/u/25911821?v=4",
       "profile": "http://andyyPark.github.io",
       "contributions": [
-        "code"
+        "code",
+        "review",
+        "maintenance",
+        "design"
       ]
     },
     {
@@ -21,7 +24,29 @@
       "profile": "http://www.omarcostahamido.com",
       "contributions": [
         "code",
+        "bug",
+        "projectManagement",
+        "question",
+        "mentoring"
+      ]
+    },
+    {
+      "login": "TDHTTTT",
+      "name": "TDHTTTT",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/24703459?v=4",
+      "profile": "http://tdhttt.com",
+      "contributions": [
+        "code",
         "bug"
+      ]
+    },
+    {
+      "login": "DanielQ56",
+      "name": "DanielQ56",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/42754322?v=4",
+      "profile": "https://github.com/DanielQ56",
+      "contributions": [
+        "code"
       ]
     },
     {
@@ -32,10 +57,29 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "pranavvp10",
+      "name": "Pranav V P",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/52486224?v=4",
+      "profile": "https://pranavvp10.github.io",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "Chriscrosser3310",
+      "name": "Jielun (Chris) Chen",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/31495624?v=4",
+      "profile": "https://github.com/Chriscrosser3310",
+      "contributions": [
+        "ideas",
+        "question"
+      ]
     }
   ],
   "contributorsPerLine": 7,
-  "projectName": "QC-UCI.github.io",
+  "projectName": "qc-uci.club",
   "projectOwner": "QC-UCI",
   "repoType": "github",
   "repoHost": "https://github.com",
