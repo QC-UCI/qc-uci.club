@@ -76,6 +76,17 @@
         "ideas",
         "question"
       ]
+    },
+    {
+      "login": "jcwang111",
+      "name": "Joshua Wang",
+      "avatar_url": "https://avatars.githubusercontent.com/u/23427258?v=4",
+      "profile": "https://github.com/jcwang111",
+      "contributions": [
+        "code",
+        "maintenance",
+        "design"
+      ]
     }
   ],
   "contributorsPerLine": 7,
@@ -83,5 +94,6 @@
   "projectOwner": "QC-UCI",
   "repoType": "github",
   "repoHost": "https://github.com",
-  "skipCi": true
+  "skipCi": true,
+  "commitConvention": "angular"
 }
