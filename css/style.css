@@ -205,7 +205,7 @@ section.body {
    align-items: center;
    position: relative;
    justify-content: center;
-   color: var(--black-color);
+   color: var(--white-color);
    text-align: center;
    background-color: rgb(76, 135, 154);
 }
