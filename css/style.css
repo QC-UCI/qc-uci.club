@@ -73,6 +73,18 @@ a {
    width: 50%;
  }
 
+ .left {
+   display: block;
+   margin-left: auto;
+   width: 50%;
+ }
+
+ .right {
+   display: block;
+   margin-right: auto;
+   width: 50%;
+ }
+
 /* Header */
 
 header {
