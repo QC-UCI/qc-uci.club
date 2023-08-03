@@ -73,20 +73,6 @@ a {
    width: 50%;
  }
 
-.left {
-   display: block;
-   margin-left: 50px;
-   margin-right: 50px;
-   width: 40%;
- }
-
-.right {
-   display: block;
-   margin-right: 50px;
-   margin-right: 50px;
-   width: 40%;
- }
-
 /* Header */
 
 header {
@@ -181,20 +167,6 @@ section.banner .banner__btn {
    padding: var(--padding);
    border-radius: var(--border-radius);
 } 
-
-section.banner .banner__left {
-   display: inline-block;
-   margin-left: 50px;
-   margin-right: 25px;
-   width: 40%;
-}
-
-section.banner .banner__right {
-   display: inline-block;
-   margin-left: 25px;
-   margin-right: 50px;
-   width: 40%;
-}
 
 section.banner iframe {
    margin-top: 3%;
