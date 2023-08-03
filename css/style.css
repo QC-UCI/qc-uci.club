@@ -76,11 +76,13 @@ a {
 .left {
    display: block;
    margin-left: 50px;
+   margin-right: 50px;
    width: 40%;
  }
 
 .right {
    display: block;
+   margin-right: 50px;
    margin-right: 50px;
    width: 40%;
  }
@@ -197,24 +199,26 @@ section.banner iframe {
    }
 }
 
-section.home {
+section.body {
    display: flex;
    flex-direction: column;
    align-items: center;
    position: relative;
    justify-content: center;
-   color: var(--white-color);
+   color: var(--black-color);
    text-align: center;
+   background-color: rgb(76, 135, 154);
 }
 
-section.home .home__title {
+section.body .body__title {
    font-size: 36px;
+   text-transform: uppercase;
    margin-bottom: var(--padding);
    color: var(--white-color);
    font-family: var(--arial);
 }
 
-section.home .home__aboutus {
+section.body .body__caption {
    font-size: 24px;
    margin-bottom: var(--padding);
    color: var(--white-color);
@@ -222,13 +226,13 @@ section.home .home__aboutus {
 }
 
 @media screen and (max-width: 1000px) {
-   section.home {
+   section.body {
       padding: 100px 50px;
    }
 }
 
 @media screen and (max-width: 600px) {
-   section.home {
+   section.body {
       padding: 125px 30px;
    }
 }
