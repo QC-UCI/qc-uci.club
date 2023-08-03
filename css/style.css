@@ -681,6 +681,7 @@ section.contact__body textarea.form_component {
 /*************************/
 
 footer {
+   margin-top: auto;
    width: 90%;
    max-height: 20%;
    margin: 2% auto;
@@ -692,6 +693,7 @@ footer {
 }
 
 footer .footer__copyRight {
+   margin-top: auto;
    width: 100%;
    text-align: center;
    color: var(--white-color);
@@ -699,10 +701,11 @@ footer .footer__copyRight {
 }
 
 footer .footer__copyRight::before {
-    display: inline-block;
-    content: "";
-    border-top: 2px solid var(--white-color);
-    width: 95%;
-    margin: 0 auto;
-    margin-bottom: 1%;
+   margin-top: auto;
+   display: inline-block;
+   content: "";
+   border-top: 2px solid var(--white-color);
+   width: 95%;
+   margin: 0 auto;
+   margin-bottom: 1%;
 }
