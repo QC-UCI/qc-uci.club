@@ -27,8 +27,17 @@
    </style>
 
    <style>
-      span.b {
-         display: inline-block;
+      span.left {
+         text-align: "left";
+         display: block;
+         width: 800px;
+      }
+   </style>
+
+   <style>
+      span.right {
+         text-align: "right";
+         display: block;
          width: 800px;
       }
    </style>
@@ -60,27 +69,45 @@
    </section>
 
    <section class="body">
-      <h2 class="body__title">About Us</h2>
+      <h2 class="body__title"><span class="left">About Us</span></h2>
       <div class="body__caption">
-         <div><span class="b">Quantum Computing at UCI is a student-led organization that enables Anteaters to learn, research, and implement quantum algorithms on simulators and quantum computers. We aim to foster interest in quantum software and develop the quantum information science community at UCI.</span></div>
+         <div><span class="left">Quantum Computing at UCI is a student-led organization that enables Anteaters to learn, research, and implement quantum algorithms on simulators and quantum computers. We aim to foster interest in quantum software and develop the quantum information science community at UCI.</span></div>
       </div>
    </section>
 
    <section class="body">
       <h2 class="body__title">What We Do</h2>
       <div class="body__caption">
-         <p>Weekly Discussion Meetings</p>
-         <p>Project Workshops</p>
-         <p>Guest Speakers from Industry and Academia</p>
+         <div><span class="right">Weekly Discussion Meetings</span></div>
+         <div><span class="right">Project Workshops</span></div>
+         <div><span class="right">Guest Speakers from Industry and Academia</span></div>
       </div>
    </section>
 
    <section class="body">
       <h2 class="body__title">Hackathons and Conferences</h2>
-      <div class="body__caption">
+      <figure>
+         <div style="text-align:left">
+         <img src="image/SQUID.png" alt="SQUID 2023" style="width:100%">
+         <figcaption>Symposium on Quantum Undergraduate Inquiry & Discovery</figcaption>
+       </figure>
+
+      <figure>
+         <div style="text-align:center">
+         <img src="image/iQuHACK.png" alt="MIT iQuHACK" style="width:100%">
+         <figcaption>MIT iQuHACK</figcaption>
+       </figure>
+
+      <figure>
+         <div style="text-align:right">
+         <img src="image/Qiskit-Fall-Fest.png" alt="Qiskit Fall Fest" style="width:100%">
+         <figcaption>Qiskit Fall Fest</figcaption>
+       </figure>
+      
+      <!-- <div class="body__caption">
          <p>Symposium on Quantum Undergraduate Inquiry & Discovery</p>
          <p>MIT iQuHACK</p>
-         <p>IBM Qiskit Fall Fest</p>
+         <p>IBM Qiskit Fall Fest</p>-->
       </div>
    </section>
 
