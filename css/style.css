@@ -180,6 +180,20 @@ section.banner .banner__btn {
    border: 2px solid var(--white-color);
    padding: var(--padding);
    border-radius: var(--border-radius);
+} 
+
+section.banner .banner__left {
+   display: block;
+   margin-left: 50px;
+   margin-right: 500px;
+   width: 40%;
+}
+
+section.banner .banner__right {
+   display: block;
+   margin-left: 500px;
+   margin-right: 50px;
+   width: 40%;
 }
 
 section.banner iframe {
@@ -220,6 +234,8 @@ section.body .body__title {
 
 section.body .body__caption {
    font-size: 24px;
+   margin-left: var(--padding);
+   margin-right: var(--padding);
    margin-bottom: var(--padding);
    color: var(--white-color);
    font-family: var(--arial);
