@@ -40,6 +40,35 @@
       <a href="./contact_us.html" class="banner__btn">Contact Us</a>
       <!--<iframe width="700" height="400" src="https://www.youtube.com/embed/1s9clhbkHk4" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>-->
    </section>
+
+   var images = [];
+
+   images[0] = ['photo1'];
+   images[1] = ['photo2'];
+   var index = 0;
+
+   function change() {
+      document.getElementById("mainPhoto").src = images[index];
+      if (index == 2) {
+         index = 0;
+      } else {
+         index++;
+      }
+
+      setTimeout(change, 5000);
+   }
+
+   window.onload = change();
+
+   <div class="body">
+      <a href="./contact_us.html">
+        <img id="mainPhoto">
+        <div class="mainSlider">
+          <img src="image/QC@UCI Logo_small.png" style="display: none">
+          <img src="image/qc.png" style="display: none">
+        </div>
+      </a>
+    </div>
    
    <footer>
       <div class="footer__copyRight">
