@@ -29,7 +29,7 @@
    <style>
       span.left {
          text-align: "left";
-         display: block;
+         display: inline-flex;
          width: 800px;
       }
    </style>
@@ -37,7 +37,7 @@
    <style>
       span.right {
          text-align: "right";
-         display: block;
+         display: inline-flex;
          width: 800px;
       }
    </style>
@@ -77,10 +77,11 @@
 
    <section class="body">
       <h2 class="body__title">What We Do</h2>
-      <div class="body__caption">
-         <div><span class="right">Weekly Discussion Meetings</span></div>
-         <div><span class="right">Project Workshops</span></div>
-         <div><span class="right">Guest Speakers from Industry and Academia</span></div>
+      <div class="body__caption"><span class="right">
+         <p>Weekly Discussion Meetings</p>
+         <p>Project Workshops</p>
+         <p>Guest Speakers from Industry and Academia</p>
+      </span>
       </div>
    </section>
 
@@ -88,26 +89,21 @@
       <h2 class="body__title">Hackathons and Conferences</h2>
       <figure>
          <div style="text-align:left">
-         <img src="image/SQUID.png" alt="SQUID 2023" style="width:100%">
+         <span class="a"><img src="image/SQUID.png" alt="SQUID 2023" style="width:100%"></span>
          <figcaption>Symposium on Quantum Undergraduate Inquiry & Discovery</figcaption>
        </figure>
 
       <figure>
          <div style="text-align:center">
-         <img src="image/iQuHACK.png" alt="MIT iQuHACK" style="width:100%">
+         <span class="a"><img src="image/iQuHACK.png" alt="MIT iQuHACK" style="width:100%"></span>
          <figcaption>MIT iQuHACK</figcaption>
        </figure>
 
       <figure>
          <div style="text-align:right">
-         <img src="image/Qiskit-Fall-Fest.png" alt="Qiskit Fall Fest" style="width:100%">
+         <span class="a"><img src="image/Qiskit-Fall-Fest.png" alt="Qiskit Fall Fest" style="width:100%"></span>
          <figcaption>Qiskit Fall Fest</figcaption>
        </figure>
-      
-      <!-- <div class="body__caption">
-         <p>Symposium on Quantum Undergraduate Inquiry & Discovery</p>
-         <p>MIT iQuHACK</p>
-         <p>IBM Qiskit Fall Fest</p>-->
       </div>
    </section>
 
