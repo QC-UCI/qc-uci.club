@@ -197,6 +197,30 @@ section.banner iframe {
    }
 }
 
+section.home {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   position: relative;
+   justify-content: center;
+   color: var(--white-color);
+   text-align: center;
+}
+
+section.home .home__title {
+   font-size: 36px;
+   margin-bottom: var(--padding);
+   color: var(--white-color);
+   font-family: var(--arial);
+}
+
+section.home .home__aboutus {
+   font-size: 24px;
+   margin-bottom: var(--padding);
+   color: var(--white-color);
+   font-family: var(--arial);
+}
+
 /*************************/
 /*         Team          */
 /*************************/
