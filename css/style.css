@@ -183,15 +183,15 @@ section.banner .banner__btn {
 } 
 
 section.banner .banner__left {
-   display: block;
+   display: inline-block;
    margin-left: 50px;
-   margin-right: 500px;
+   margin-right: 25px;
    width: 40%;
 }
 
 section.banner .banner__right {
-   display: block;
-   margin-left: 500px;
+   display: inline-block;
+   margin-left: 25px;
    margin-right: 50px;
    width: 40%;
 }
