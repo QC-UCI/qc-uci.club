@@ -27,6 +27,14 @@
    </style>
 
    <style>
+      span.a {
+         text-align: "left";
+         display: block;
+         width: 400px;
+      }
+   </style>
+
+   <style>
       span.left {
          text-align: "left";
          display: inline-block;
@@ -36,9 +44,9 @@
 
    <style>
       span.center {
-         text-align: "middle";
+         text-align: "center";
          display: inline-block;
-         width: 200px;
+         height: 200px;
       }
    </style>
 
@@ -46,7 +54,7 @@
       span.right {
          text-align: "right";
          display: inline-block;
-         width: 200px;
+         height: 200px;
       }
    </style>
 
@@ -79,7 +87,7 @@
    <section class="body">
       <h2 class="body__title">About Us</h2>
       <div class="body__caption">
-         <div><span class="middle">Quantum Computing at UCI is a student-led organization that enables Anteaters to learn, research, and implement quantum algorithms on simulators and quantum computers. We aim to foster interest in quantum software and develop the quantum information science community at UCI.</span></div>
+         <div><span class="a">Quantum Computing at UCI is a student-led organization that enables Anteaters to learn, research, and implement quantum algorithms on simulators and quantum computers. We aim to foster interest in quantum software and develop the quantum information science community at UCI.</span></div>
       </div>
    </section>
 
@@ -93,7 +101,9 @@
    </section>
 
    <section class="body">
+      <div>
       <h2 class="body__title">Hackathons and Conferences</h2>
+      
       <figure>
          <span class="left"><img src="image/SQUID.png" alt="SQUID 2023" height=50%></span>
          <figcaption>Symposium on Quantum Undergraduate Inquiry & Discovery</figcaption>
