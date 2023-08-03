@@ -73,16 +73,16 @@ a {
    width: 50%;
  }
 
- .left {
+.left {
    display: block;
-   margin-left: auto;
-   width: 50%;
+   margin-left: 50px;
+   width: 40%;
  }
 
- .right {
+.right {
    display: block;
-   margin-right: auto;
-   width: 50%;
+   margin-right: 50px;
+   width: 40%;
  }
 
 /* Header */
@@ -158,10 +158,10 @@ section.banner {
 }
 
 section.banner .banner__title {
-   font-size: 62px;
+   font-size: 64px;
    margin-bottom: var(--padding);
    color: var(--white-color);
-   font-family: var(--merienda);
+   font-family: var(--arial);
 }
 
 section.banner .banner__caption {
@@ -219,6 +219,18 @@ section.home .home__aboutus {
    margin-bottom: var(--padding);
    color: var(--white-color);
    font-family: var(--arial);
+}
+
+@media screen and (max-width: 1000px) {
+   section.home {
+      padding: 100px 50px;
+   }
+}
+
+@media screen and (max-width: 600px) {
+   section.home {
+      padding: 125px 30px;
+   }
 }
 
 /*************************/
