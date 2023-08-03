@@ -77,8 +77,7 @@ header {
    display: flex;
    justify-content: space-between;
    align-items: center;
-   /*color: var(--white-color);*/
-   color: var(#fff9b2);
+   color: var(--white-color);
    padding: 20px 100px;
 }
 
