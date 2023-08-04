@@ -18,6 +18,7 @@
    --padding: 12px;
 
    /* Font Size */
+   --font-giant: 64px;
    --font-huge: 48px;
    --font-mega: 36px;
    --font-super: 28px;
@@ -147,7 +148,7 @@ section.banner {
 }
 
 section.banner .banner__title {
-   font-size: 64px;
+   font-size: var(--font-giant);
    margin-bottom: var(--padding);
    color: var(--white-color);
    font-family: var(--arial);
@@ -161,8 +162,10 @@ section.banner .banner__caption {
 }
 
 section.banner .banner__btn {
-   font-size: var(--font-medium);
-   color: var(--grey-light-color);
+   font-size: 22px;
+   font-weight: bold;
+   background-color: #2eb67d;
+   color: var(--black-color);
    text-transform: uppercase;
    border: 2px solid var(--white-color);
    padding: var(--padding);
@@ -194,7 +197,7 @@ section.body {
    justify-content: center;
    color: var(--white-color);
    text-align: center;
-   background-color: rgb(99, 171, 195);
+   background-color: #363f7d;
 }
 
 section.body .body__title {
@@ -234,7 +237,7 @@ section.body2 {
    justify-content: center;
    color: var(--white-color);
    text-align: center;
-   background-color: #363f7d;
+   background-color: rgb(99, 171, 195);
 }
 
 section.body2 .body2__title {
@@ -252,6 +255,18 @@ section.body2 .body2__caption {
    margin-bottom: var(--padding);
    color: var(--white-color);
    font-family: var(--arial);
+}
+
+@media screen and (max-width: 1000px) {
+   section.body2 {
+      padding: 200px 50px;
+   }
+}
+
+@media screen and (min-width: 600px) {
+   section.body2 {
+      padding: 175px 30px;
+   }
 }
 
 /*************************/
@@ -724,7 +739,6 @@ section.contact__body #contact__form {
    margin: 0px auto;
    margin-top: 8px;
    font-size: var(--font-super);
-
 }
 
 section.contact__body input[type="text"]::placeholder, section.contact__body input[type="email"]::placeholder {
@@ -770,7 +784,7 @@ footer {
 
 footer .footer__copyRight {
    margin-top: auto;
-   width: 100%;
+   width: 95%;
    text-align: center;
    color: var(--white-color);
    padding: var(--padding);
