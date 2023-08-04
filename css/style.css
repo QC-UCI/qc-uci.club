@@ -72,6 +72,7 @@ a {
    margin-right: auto;
    width: 50%;
  }
+ 
 
 /* Header */
 
@@ -223,6 +224,34 @@ section.body .body__caption {
    section.body {
       padding: 125px 30px;
    }
+}
+
+section.body2 {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   position: relative;
+   justify-content: center;
+   color: var(--white-color);
+   text-align: center;
+   background-color: #363f7d;
+}
+
+section.body2 .body2__title {
+   font-size: 36px;
+   text-transform: uppercase;
+   margin-bottom: var(--padding);
+   color: var(--white-color);
+   font-family: var(--arial);
+}
+
+section.body2 .body2__caption {
+   font-size: 24px;
+   margin-left: var(--padding);
+   margin-right: var(--padding);
+   margin-bottom: var(--padding);
+   color: var(--white-color);
+   font-family: var(--arial);
 }
 
 /*************************/

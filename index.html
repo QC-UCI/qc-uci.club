@@ -16,8 +16,23 @@
    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
 </head>
 <body>
-
+   
    <style>
+      #grad1 {
+         height: 200px;
+         background-image: linear-gradient(#363f7d, rgb(99, 171, 195));
+      }
+
+      #grad2 {
+         height: 100px;
+         background-color: rgb(99, 171, 195);
+      }
+
+      #grad3 {
+         height: 200px;
+         background-image: linear-gradient(rgb(99, 171, 195), #363f7d);
+      }
+
       span.photo {
          display: inline-block;
          width: 500px;
@@ -73,7 +88,8 @@
       
       <div><span class="photo"><img src="image/group2.jpeg" width=500px></span> <span class="photo"><img src="image/group1.jpeg" width=500px></span></div>
    </section>
-   <p style="margin-bottom:100px;"></p>
+   
+   <div id="grad1"></div>
 
    <section class="body">
       <h2 class="body__title">About Us</h2>
@@ -81,17 +97,19 @@
          <div><span class="a">Quantum Computing at UCI is a student-led organization that enables Anteaters to learn, research, and implement quantum algorithms on simulators and quantum computers. We aim to foster interest in quantum software and develop the quantum information science community at UCI.</span></div>
       </div>
    </section>
-   <p style="margin-bottom:100px;"></p>
 
-   <section class="body">
-      <h2 class="body__title">What We Do</h2>
-      <div class="body__caption">
+   <div id="grad3"></div>
+
+   <section class="body2">
+      <h2 class="body2__title">What We Do</h2>
+      <div class="body2__caption">
          <p>Weekly Discussion Meetings</p>
          <p>Project Workshops</p>
          <p>Guest Speakers from Industry and Academia</p>
       </div>
    </section>
-   <p style="margin-bottom:100px;"></p>
+
+   <div id="grad1"></div>
 
    <section class="body">
       <h2 class="body__title">Hackathons and Conferences</h2>
@@ -103,6 +121,8 @@
       </p>
    </section>
    
+   <div id="grad3"></div>
+
    <footer>
       <div class="footer__copyRight">
          <p>Follow us on Discord, Instagram, and Linkedin.</p>
