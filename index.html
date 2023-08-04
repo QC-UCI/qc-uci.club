@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
    <meta charset="UTF-8">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,36 +13,131 @@
    <link rel="stylesheet" href="css/tailwind_style.css">
    <link rel="stylesheet" href="css/style.css">
    <title>Home | QC@UCI</title>
+   <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
 </head>
 <body>
+   
+   <style>
+      #grad1 {
+         height: 100px;
+         background-image: linear-gradient(#363f7d, rgba(43, 127, 112, 0.912));
+      }
+
+      #grad3 {
+         height: 100px;
+         background-image: linear-gradient(rgba(43, 127, 112, 0.912), #363f7d);
+      }
+
+      span.photo {
+         display: inline-block;
+         width: 500px;
+         padding: 5px;
+      }
+
+      span.a {
+         display: block;
+         width: 900px;
+      }
+   
+      span.left {
+         text-align: "left";
+         display: inline-block;
+         height: 200px;
+      }
+   
+      span.center {
+         text-align: "center";
+         display: inline-block;
+         height: 200px;
+      }
+   
+      span.right {
+         text-align: "right";
+         display: inline-block;
+         height: 200px;
+      }
+   </style>
 
    <header>
-      <h2 class="header__title"><a href="index.html">QC@UCI</a></h2>
+      <div id="left"><img src="image/QC@UCI Logo_small.png" width="125" alt="QC@UCI Logo"></div>
       <nav>
          <ul class="header__nav">
             <li><a href="index.html">Home</a></li>
+            <li><a href="join.html">Join</a></li>
             <li><a href="team.html">Team</a></li>
             <li><a href="event.html">Events</a></li>
-            <li><a href="join.html">Join</a></li>
             <li><a href="contact_us.html">Contact</a></li>
          </ul>
       </nav>
    </header>
+   <p style="margin-bottom:200px;"></p>
 
    <section class="banner">
       <h1 class="banner__title">Quantum Computing at UCI</h1>
-      <h2 class="banner__caption">a graduate and undergraduate student organization</h2>
-      <a href="./contact_us.html" class="banner__btn">Contact Us</a>
+      <a href="https://docs.google.com/forms/d/e/1FAIpQLSeZtyYb8oV3nUPXUksd5ULrCTAcWEbtvGW-8aNxpvVj6ZAcEw/viewform"
+         style="margin-bottom:10px;" class="banner__btn">Get Involved</a>
 
-      <iframe width="700" height="400" src="https://www.youtube.com/embed/1s9clhbkHk4" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      <p style="margin-bottom: 70px;"></p>
+      <!--<a href="./contact_us.html" class="banner__btn">Contact Us</a>-->
+      <!--<iframe width="700" height="400" src="https://www.youtube.com/embed/1s9clhbkHk4" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>-->
       
-      <h2 class="banner__eqi">Check out <a href="https://eqi.uci.edu/"><u> UCI Eddleman Quantum Institute</u></a></h2>
-
+      <div><span class="photo"><img src="image/group2.jpeg" width=500px></span><span class="photo"><img src="image/group1.jpeg" width=500px></span></div>
    </section>
 
+   <br> <br> <br> 
+   
+   <section class="body">
+      <h2 class="body__title">About Us</h2>
+      <div class="body__caption">
+         <div><span class="a">Quantum Computing at UCI is a student-led organization that enables Anteaters to learn, research, and implement quantum algorithms on simulators and quantum computers. We aim to foster interest in quantum software and develop the quantum information science community at UCI.</span></div>
+      </div>
+   </section>
+
+   <div id="grad1"></div>
+
+   <section class="body2">
+      <h2 class="body2__title" style = "position:absolute; top:60px;">What We Do</h2>
+      <br> <br>
+      <div style="text-align:center;display:inline-block;margin:10px;">
+         <t type="text"> Weekly Discussions </t>
+         <br>
+         <img src="image/workshop_icon.png"></img>         
+      </div>
+       <div style="text-align:center;display:inline-block;margin:10px;">
+         <t type="text"> Project Workshops </t>
+         <br>
+         <img src="image/research_icon.png"></img>
+       </div>
+       <div style="text-align:center;display:inline-block;margin:10px;">
+         <t type="text"> Host Guest Speakers </t>
+         <br>
+         <img src="image/guest_speaker.png"></img>
+      </div>
+
+      <!--<div class="body2__caption">
+         <p style = "position:absolute; top:140px; left:60px">Weekly Discussions</p>
+         <p style = "position:absolute; top:140px; left:350px">Project Workshops</p>
+         <img style = "position:absolute; top:200px; left:375px" src="image/workshop_icon.png"></img>
+         <p style = "position:absolute; top:140px; left:640px">Host Guest Speakers</p>
+      </div>-->
+   </section>
+
+   <div id="grad3"></div>
+
+   <section class="body">
+      <h2 class="body__title">Hackathons and Conferences</h2>
+      <p>
+         <span class="photo">
+            <img src="image/SQUID.png" alt="Quantum Coalition" style="float:left">
+            <img src="image/Qiskit-Fall-Fest.png" alt="Qiskit Fall Fest" style="float:right">
+         </span>
+      </p>
+   </section>
+   
    <footer>
       <div class="footer__copyRight">
-         <p>&copy 2020 <a href="./contact_us.html">QC@UCI</a>  - All Rights Reserved</p>
+         <p>Follow us on Discord, Instagram, and Linkedin.</p>
+         <p><a href="./contact_us.html">© Quantum Computing at UCI</a> 2023</p>
       </div>
    </footer>
 

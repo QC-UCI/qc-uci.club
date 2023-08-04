@@ -19,7 +19,7 @@
     },
     {
       "login": "omarcostahamido",
-      "name": "Omar Costa Hamido",
+      "name": "OCH",
       "avatar_url": "https://avatars0.githubusercontent.com/u/18335360?v=4",
       "profile": "http://www.omarcostahamido.com",
       "contributions": [
@@ -50,6 +50,15 @@
       ]
     },
     {
+      "login": "Prateeknandle",
+      "name": "Prateeknandle",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/56027872?v=4",
+      "profile": "https://github.com/Prateeknandle",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
       "login": "pranavvp10",
       "name": "Pranav V P",
       "avatar_url": "https://avatars2.githubusercontent.com/u/52486224?v=4",
@@ -67,6 +76,17 @@
         "ideas",
         "question"
       ]
+    },
+    {
+      "login": "jcwang111",
+      "name": "Joshua Wang",
+      "avatar_url": "https://avatars.githubusercontent.com/u/23427258?v=4",
+      "profile": "https://github.com/jcwang111",
+      "contributions": [
+        "code",
+        "maintenance",
+        "design"
+      ]
     }
   ],
   "contributorsPerLine": 7,
@@ -74,5 +94,6 @@
   "projectOwner": "QC-UCI",
   "repoType": "github",
   "repoHost": "https://github.com",
-  "skipCi": true
+  "skipCi": true,
+  "commitConvention": "angular"
 }

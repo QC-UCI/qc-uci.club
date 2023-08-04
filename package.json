@@ -5,10 +5,10 @@
   "main": "postcss.config.js",
   "dependencies": {
     "autoprefixer": "^9.0.0",
+    "postcss": "^8.4.21",
     "postcss-cli": "^8.0.0",
     "tailwindcss": "^1.8.10"
   },
-  "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "postcss css/style.css -o css/tailwind_style.css"

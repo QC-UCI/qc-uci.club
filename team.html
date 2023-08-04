@@ -16,13 +16,13 @@
 <body>
 
    <header>
-      <h2 class="header__title"><a href="index.html">QC@UCI</a></h2>
+      <div id="left"><img src="image/QC@UCI Logo_small.png" width="125" alt="QC@UCI Logo"></div>
       <nav>
          <ul class="header__nav">
             <li><a href="index.html">Home</a></li>
+            <li><a href="join.html">Join</a></li>
             <li><a href="team.html">Team</a></li>
             <li><a href="event.html">Events</a></li>
-            <li><a href="join.html">Join</a></li>
             <li><a href="contact_us.html">Contact</a></li>
          </ul>
       </nav>
@@ -35,25 +35,108 @@
       <ul class="team__nav">
          <li class="team__li active" id="current">Current Board</li>
          <li class="team__li" id="prev">Previous Board</li>
-         <li class="team__li" id="founding">Founding Members</li>
+         <li class="team__li" id="founding">Founders</li>
       </ul>
    </nav>
 
    <div class="team__message" data-id="current">
-      Despite the pandemic, and the several constrains associated with that, QC@UCI is facing the new academic with renewed energy and a new team. Check out how to <a href="./join.html">join</a> us, and head to our <a href="./event.html">event page</a>
+      For the 2023-2024 school year, QC@UCI has returned with a new set of board members. Check out how to <a href="./join.html">join</a> us, and we hope to see you at our meetings.</a>
    </div>
 
    <div class="team__message" data-id="prev">
-      QC@UCI first became an official UCI club during Fall 2019. The first open meeting took place in November 15. Several open meetings followed, being lead by both board and club members
+      QC@UCI first became an official UCI club during Fall 2019.
    </div>
 
    <div class="team__message" data-id="founding">
-      The idea of QC@UCI was born in the Summer of 2019 when Tony Tong and Omar Costa Hamido met in Switzerland at the <span style="font-style: italic;">Quantum Information for Developers</span> summer school at ETH, Zürich
+      The idea of QC@UCI was born in the Summer of 2019 when Tony Tong and Omar Costa Hamido met in Switzerland at the <span style="font-style: italic;">Quantum Information for Developers</span> summer school at ETH, Zürich.
    </div>
 
    <section class="team">
+      <div class="team__member" data-id="current">
+         <img src="image/DiptanshuSikdar.jpg" alt="#">
+         <h3>Diptanshu Sikdar</h3>
+         <div class="team__president">
+            <h4>[ President ]</h4>
+         </div>
+         <span class="team__major">Computer Science</span>
+      </div>
 
       <div class="team__member" data-id="current">
+         <img src='image/StewartSmith.jpg' alt="#">
+         <h3>Stewart Smith</h3>
+         <div class="team__vice__president">
+            <h4>[ Vice President ]</h4>
+         </div>
+         <span class="team__major">Computer Science</span>
+      </div>
+
+      <div class="team__member" data-id="current">
+         <img src='image/AryaMhaiskar.jpg' alt="#">
+         <h3>Arya Mhaiskar</h3>
+         <div class="team__secretary">
+            <h4>[ Marketing Director ]</h4>
+         </div>
+         <span class="team__major">Computer Science</span>
+      </div>
+
+      <div class="team__member" data-id="current">
+         <img src='image/RadhakrishnaVempati.jpg' alt="#">
+         <h3>Krishna Vempati</h3>
+         <div class="team__secretary">
+            <h4>[ Treasurer ]</h4>
+         </div>
+         <span class="team__major">Computer Science</span>
+      </div>
+
+      <div class="team__member" data-id="prev">
+         <img src="image/JoshuaWang.jpg" alt="#">
+         <h3>Joshua Wang</h3>
+         <div class="team__president">
+            <h4>[ Co-President ]</h4>
+         </div>
+         <span class="team__major">Physics/CSE</span>
+         <div class="team__btn">
+            <button>
+               <a href="https://github.com/jcwang111/">
+                  <i class="fab fa-github"></i>
+               </a>
+            </button>
+         </div>
+      </div>
+
+      <div class="team__member" data-id="prev">
+         <img src="image/RohitGanti.jpg" alt="#">
+         <h3>Rohit Ganti</h3>
+         <div class="team__president">
+            <h4>[ Co-President ]</h4>
+         </div>
+         <span class="team__major">Physics</span>
+         <div class="team__btn">
+            <button>
+               <a href="https://github.com/soundwaverohit">
+                  <i class="fab fa-github"></i>
+               </a>
+            </button>
+            <button>
+               <a href="https://www.linkedin.com/in/rohit-ganti-64280a19b/">
+                  <i class="fab fa-linkedin"></i>
+               </a>
+            </button>
+         </div>
+      </div>
+
+      <div class="team__member" data-id="prev">
+         <img src="image/SeanDoan.jpeg" alt="#">
+         <h3>Sean Doan</h3>
+         <div class="team__secretary">
+            <h4>[ Secretary ]</h4>
+         </div>
+         <span class="team__major">Physics</span>
+         <div class="team__btn">
+         </div>
+      </div>
+
+      <div class="team__member" data-id="prev">
          <img src="image/ChrisChen.jpg" alt="#">
          <h3>Chris Chen</h3>
          <div class="team__president">
@@ -75,7 +158,7 @@
          </div>
       </div>
 
-      <div class="team__member" data-id="current">
+      <div class="team__member" data-id="prev">
          <img src="image/KylerFrazier.jpeg" alt="#">
          <h3>Kyler Frazier</h3>
          <span class="team__major">Physics/Computer Science</span>
@@ -100,7 +183,7 @@
          <span class="team__major">Informatics</span>
       </div>
 
-      <div class="team__member" data-id='["current", "prev", "founding"]'>
+      <div class="team__member" data-id='["prev", "founding"]'>
          <img src="image/OCH.jpg" alt="#">
          <h3>Omar Hamido</h3>
          <span class="team__major">Music</span>
@@ -112,14 +195,14 @@
             </button>
 
             <button>
-               <a href="http://en.omarcostahamido.com/">
+               <a href="https://omarcostahamido.com/">
                   <i class="far fa-user"></i>
                </a>
             </button>
          </div>
       </div>
 
-      <div class="team__member" data-id="current">
+      <div class="team__member" data-id="prev">
          <img src="image/AndyPark.jpg" alt="#">
          <h3>Andy Park</h3>
          <span class="team__major">Physics/Mathematics</span>
@@ -138,7 +221,7 @@
          </div>
       </div>
       
-      <div class="team__member" data-id='["current", "prev", "founding"]'>
+      <div class="team__member" data-id='["prev", "founding"]'>
          <img src="image/AhmadSebdani.jpg" alt="#">
          <h3>Ahmadreza Rajabi</h3>
          <span class="team__major">Theoretical Chemistry</span>
@@ -189,7 +272,8 @@
 
    <footer>
       <div class="footer__copyRight">
-         <p>&copy 2020 <a href="./contact_us.html">QC@UCI</a>  - All Rights Reserved</p>
+         <p>Follow us on Discord, Instagram, and Linkedin.</p>
+         <p><a href="./contact_us.html">© Quantum Computing at UCI</a> 2023</p>
       </div>
    </footer>
 
