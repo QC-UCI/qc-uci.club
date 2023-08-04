@@ -164,7 +164,7 @@ section.banner .banner__caption {
 section.banner .banner__btn {
    font-size: 22px;
    font-weight: bold;
-   background-color: #2eb67d;
+   background-color: hsla(0, 100%, 66%, 0.864);
    color: var(--black-color);
    text-transform: uppercase;
    border: 2px solid var(--white-color);
@@ -237,7 +237,7 @@ section.body2 {
    justify-content: center;
    color: var(--white-color);
    text-align: center;
-   background-color: rgb(99, 171, 195);
+   background-color: rgba(43, 127, 112, 0.912);
 }
 
 section.body2 .body2__title {
@@ -259,13 +259,13 @@ section.body2 .body2__caption {
 
 @media screen and (max-width: 1000px) {
    section.body2 {
-      padding: 200px 50px;
+      padding: 150px 50px;
    }
 }
 
 @media screen and (min-width: 600px) {
    section.body2 {
-      padding: 175px 30px;
+      padding: 100px 30px;
    }
 }
 
