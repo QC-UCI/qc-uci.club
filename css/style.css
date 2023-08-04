@@ -403,6 +403,10 @@ section.team .team__member.active .team__president {
    color: var(--slategray-color);
 }
 
+section.team .team__member.active .team__advisor {
+   display: flex;
+}
+
 @media screen and (max-width: 1255px) {
    section.team .team__member.active {
       width: 50%;
