@@ -403,7 +403,7 @@ section.team .team__member.active .team__president {
    color: var(--slategray-color);
 }
 
-section.team .team__member.active .team__advisor {
+section.team .team__member .team__advisor {
    display: flex;
 }
 
