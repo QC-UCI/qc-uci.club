@@ -35,7 +35,7 @@
    --border-radius: 6px;
 
    /* Background Color */
-   --background-color: #363f7d; /*#584848;*/ /*#372424;*/
+   --background-color: #292c48; /*#584848;*/ /*#372424;*/
 }
 
 * {
@@ -203,7 +203,7 @@ section.body {
    justify-content: center;
    color: var(--white-color);
    text-align: center;
-   background-color: #363f7d;
+   background-color: #292c48;
 }
 
 section.body .body__title {
@@ -282,9 +282,8 @@ section.body2 .body2__caption {
 .team__title {
    max-width: 500px;
    width: 100%;
-   padding: 30px;
-   margin: 80px auto 30px;
-   /*background: var(--white-color);*/
+   padding: 20px;
+   margin: 80px auto 20px;
    background: #f4f4f4;
    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.07);
    text-align: center;
@@ -324,8 +323,8 @@ section.body2 .body2__caption {
 
 .team__nav .team__li.active {
    padding-bottom: calc(var(--padding) / 2);
-   background-color: var(--white-color);
-   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.07);
+   background-color: rgb(251, 234, 77);
+   box-shadow: 0 1px 2px rgba(50, 47, 47, 0.07);
    color: var(--black-color);
 }
 
@@ -352,9 +351,10 @@ section.body2 .body2__caption {
 
 .team__message {
    width: 90%;
+   max-width: 700px;
    max-height: 100px;
-   background-color: var(--white-color);
-   margin: 10px auto;
+   background-color: lightblue;
+   margin: 20px auto;
    border-radius: var(--border-radius);
    padding: var(--padding);
    text-align: center;
@@ -400,7 +400,7 @@ section.team .team__member.active {
 }
 
 section.team .team__member.active .team__president {
-   color: var(--slategray-color);
+   color: black;
 }
 
 section.team .team__member .team__advisor {
@@ -598,11 +598,12 @@ section.join__body .join__platform .fa-envelope:hover {
 /*************************/
 
 .event__title {
-   max-width: 500px;
+   max-width: 660px;
    width: 100%;
-   padding: 30px;
-   margin: 80px auto 30px;
+   padding: 10px;
+   margin: 80px auto 20px;
    background: var(--white-color);
+   color: hsla(0, 100%, 60%, 0.864);
    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.07);
    text-align: center;
    font-size: 50px;
@@ -672,8 +673,9 @@ section.event .event__text {
    background-color: var(--white-color);
    height: 70%;
    min-width: 45%;
-   max-width: 49%;
+   max-width: 75%;
    padding-bottom: 20px;
+   padding-right: 60px;
    border-radius: var(--border-radius);
 }
 
