@@ -56,6 +56,53 @@
          display: inline-block;
          height: 200px;
       }
+
+      .slideshowContainer {
+        max-width: 1000px;
+        position: relative;
+        margin: auto;
+      }
+      .slideshowSlides {
+        display: none;
+      }
+      .slideshowPrev, .slideshowNext {
+        cursor: pointer;
+        position: absolute;
+        top: 50%;
+        left: 0;
+        width: auto;
+        margin-top: -22px;
+        padding: 16px;
+        color: white;
+        font-weight: bold;
+        font-size: 18px;
+        transition: 0.6s ease;
+        border-radius: 0 3px 3px 0;
+        user-select: none;
+      }
+      .slideshowNext {
+        left: initial;
+        right: 0;
+        border-radius: 3px 0 0 3px;
+      }
+      .slideshowPrev:hover, .slideshowNext:hover {
+        background-color: rgba(0,0,0,0.8);
+      }
+      .slideshowNumber {
+        color: #f2f2f2;
+        font-size: 12px;
+        padding: 8px 12px;
+        position: absolute;
+        top: 0;
+      }
+      .slideshowFade {
+        animation-name: fade;
+        animation-duration: 1.5s;
+      }
+      @keyframes slideshowFade {
+        from {opacity: .4}
+        to {opacity: 1}
+      }
    </style>
 
    <header>
@@ -81,10 +128,29 @@
       <!--<a href="./contact_us.html" class="banner__btn">Contact Us</a>-->
       <!--<iframe width="700" height="400" src="https://www.youtube.com/embed/1s9clhbkHk4" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>-->
       
-      <div>
-         <span class="photo"><img src="image/group2.jpeg"></span>
-         <span class="photo"><img src="image/group1.jpeg"></span>
-      </div>
+      <!-- Slideshow container -->
+      <div class="slideshowContainer">
+
+        <!-- Full-width images with number -->
+        <div class="slideshowSlides slideshowFade">
+          <div class="slideshowNumber">1 / 3</div>
+          <img src="https://user-images.githubusercontent.com/69136009/258323294-6c35ee75-8509-4f9a-9cee-d6d99aec12e6.jpg" style="width:100%">
+        </div>
+
+        <div class="slideshowSlides slideshowFade">
+          <div class="slideshowNumber">2 / 3</div>
+          <img src="https://user-images.githubusercontent.com/69136009/258323433-0d01fcfb-20d8-4833-b65c-df1683e28d5f.jpg" style="width:100%">
+        </div>
+
+        <div class="slideshowSlides slideshowFade">
+          <div class="slideshowNumber">3 / 3</div>
+          <img src="https://user-images.githubusercontent.com/69136009/258323462-904e9b50-bd71-4e93-b40a-c68419f21080.jpg" style="width:100%">
+        </div>
+
+        <!-- Next and previous buttons -->
+        <a class="slideshowPrev" onclick="plusSlides(-1)">&#10094;</a>
+        <a class="slideshowNext" onclick="plusSlides(1)">&#10095;</a>
+      </div> 
    </section>
 
    <br> <br> <br> 
@@ -143,6 +209,41 @@
          <p><a href="./contact_us.html">© Quantum Computing at UCI</a> 2023</p>
       </div>
    </footer>
+   <script type="text/javascript">
+      let slideIndex = 1;
+      showSlides(slideIndex);
+      let autoslideIndex = 0;
+      autoshowSlides();
 
+      // Next/previous controls
+      function plusSlides(n) {
+        showSlides(slideIndex += n);
+        autoslideIndex = slideIndex+n;
+      }
+
+      function showSlides(n) {
+        let i;
+        let slides = document.getElementsByClassName("slideshowSlides");
+        if (n > slides.length) {slideIndex = 1}
+        if (n < 1) {slideIndex = slides.length}
+        for (i = 0; i < slides.length; i++) {
+          slides[i].style.display = "none";
+        }
+        slides[slideIndex-1].style.display = "block";
+      }
+
+      function autoshowSlides() {
+        let i;
+        let slides = document.getElementsByClassName("slideshowSlides");
+        for (i = 0; i < slides.length; i++) {
+          slides[i].style.display = "none";
+        }
+        autoslideIndex++;
+        slideIndex = autoslideIndex;
+        if (autoslideIndex > slides.length) {autoslideIndex = 1}
+        slides[autoslideIndex-1].style.display = "block";
+        setTimeout(autoshowSlides, 2000); // Change image every 2 seconds
+      }
+   </script>
 </body>
 </html>
