@@ -64,6 +64,8 @@
       }
       .slideshowSlides {
         display: none;
+        border-color: gold;
+        border-width: 2px;
       }
       .slideshowPrev, .slideshowNext {
         cursor: pointer;
@@ -97,7 +99,7 @@
       }
       .slideshowFade {
         animation-name: fade;
-        animation-duration: 1.5s;
+        animation-duration: 1.5;
       }
       @keyframes slideshowFade {
         from {opacity: .4}
@@ -134,17 +136,17 @@
         <!-- Full-width images with number -->
         <div class="slideshowSlides slideshowFade">
           <div class="slideshowNumber">1 / 3</div>
-          <img src="https://user-images.githubusercontent.com/69136009/258323294-6c35ee75-8509-4f9a-9cee-d6d99aec12e6.jpg" style="width:100%">
+          <img src="image/group2.jpeg" style="width:100%">
         </div>
 
         <div class="slideshowSlides slideshowFade">
           <div class="slideshowNumber">2 / 3</div>
-          <img src="https://user-images.githubusercontent.com/69136009/258323433-0d01fcfb-20d8-4833-b65c-df1683e28d5f.jpg" style="width:100%">
+          <img src="image/GuestSpeaker.jpg" style="width:100%">
         </div>
 
         <div class="slideshowSlides slideshowFade">
           <div class="slideshowNumber">3 / 3</div>
-          <img src="https://user-images.githubusercontent.com/69136009/258323462-904e9b50-bd71-4e93-b40a-c68419f21080.jpg" style="width:100%">
+          <img src="image/group1.jpeg" style="width:100%">
         </div>
 
         <!-- Next and previous buttons -->
@@ -242,7 +244,7 @@
         slideIndex = autoslideIndex;
         if (autoslideIndex > slides.length) {autoslideIndex = 1}
         slides[autoslideIndex-1].style.display = "block";
-        setTimeout(autoshowSlides, 2000); // Change image every 2 seconds
+        setTimeout(autoshowSlides, 5000); // Change image every 5 seconds
       }
    </script>
 </body>
