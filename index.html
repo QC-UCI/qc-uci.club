@@ -105,6 +105,16 @@
         from {opacity: .4}
         to {opacity: 1}
       }
+
+      #whatwedoitems {
+         align-content: center;
+         align-items: center;
+      }
+      .whatwedoitem {
+         display:inline-block;
+         margin:10px;
+         padding: 0 5vw 0 5vw;
+      }
    </style>
 
    <header>
@@ -168,19 +178,25 @@
    <section class="body2">
       <h2 class="body2__title" style = "position:absolute; top:60px;">What We Do</h2>
       <br> <br>
-      <div style="display:inline-block;margin:10px;">
-         <t type="text"> Weekly Discussions </t>
-         <img src="image/workshop_icon.png"></img>         
-      </div>
-       <div style="display:inline-block;margin:10px;">
-         <t type="text"> Project Workshops </t>
-         <br>
-         <img src="image/research_icon.png"></img>
-       </div>
-       <div style="display:inline-block;margin:10px;">
-         <t type="text"> Host Guest Speakers </t>
-         <br>
-         <img src="image/guest_speaker.png"></img>
+      <div id="whatwedoitems">
+         <div class="whatwedoitem">
+            <br>
+            <img src="image/workshop_icon.png"></img>         
+            <br>
+            <t type="text"> Weekly Discussions </t>
+         </div>
+          <div class="whatwedoitem">
+            <br>
+            <img src="image/research_icon.png"></img>
+            <br>
+            <t type="text"> Project Workshops </t>
+          </div>
+          <div class="whatwedoitem">
+            <br>
+            <img src="image/guest_speaker.png" width="150"></img>
+            <br>
+            <t type="text"> Host Guest Speakers </t>
+         </div>
       </div>
 
       <!--<div class="body2__caption">
