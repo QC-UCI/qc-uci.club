@@ -8,8 +8,13 @@
    /* Color */
    --white-color: #fff;
    --black-color: #000000;
+   --teal-color: rgba(43, 127, 112, 0.912);
    --blue-color: #045fd4;
+   --navy-color: #292c48;
    --red-color: #ff0000;
+   --lightred-color: hsl(0, 99%, 72%);
+   --pumpkin-color: rgb(255, 183, 0);
+   --yellow-color: rgb(251, 234, 77);
    --grey-dark-color: #909090;
    --grey-light-color: #e0e0e0;
    --slategray-color: #708090;
@@ -35,7 +40,7 @@
    --border-radius: 6px;
 
    /* Background Color */
-   --background-color: #292c48; /*#584848;*/ /*#372424;*/
+   --background-color: var(--navy-color); /*#584848;*/ /*#372424;*/
 }
 
 * {
@@ -164,7 +169,7 @@ section.banner .banner__caption {
 section.banner .banner__btn {
    font-size: 22px;
    font-weight: bold;
-   background-color: hsla(0, 100%, 66%, 0.864);
+   background-color: var(--lightred-color);
    color: var(--black-color);
    text-transform: uppercase;
    border: 2px solid var(--white-color);
@@ -203,7 +208,7 @@ section.body {
    justify-content: center;
    color: var(--white-color);
    text-align: center;
-   background-color: #292c48;
+   background-color: var(--navy-color);
 }
 
 section.body .body__title {
@@ -243,7 +248,7 @@ section.body2 {
    justify-content: center;
    color: var(--white-color);
    text-align: center;
-   background-color: rgba(43, 127, 112, 0.912);
+   background-color: var(--teal-color);
 }
 
 section.body2 .body2__title {
@@ -323,7 +328,7 @@ section.body2 .body2__caption {
 
 .team__nav .team__li.active {
    padding-bottom: calc(var(--padding) / 2);
-   background-color: rgb(251, 234, 77);
+   background-color: var(--yellow-color);
    box-shadow: 0 1px 2px rgba(50, 47, 47, 0.07);
    color: var(--black-color);
 }
@@ -490,9 +495,10 @@ section.team .team__member .team__btn i {
 .join__title {
    max-width: 500px;
    width: 100%;
-   padding: 30px;
-   margin: 80px auto 30px;
-   background: var(--white-color);
+   padding: 10px;
+   margin: 80px auto 10px;
+   background: var(--navy-color);
+   color: var(--pumpkin-color);
    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.07);
    text-align: center;
    font-size: 50px;
@@ -506,7 +512,7 @@ section.join__body {
    align-items: stretch;
    position: relative;
    justify-content: space-between;
-   background-color: #f4f4f4;
+   background-color: var(--navy-color);
    margin: 0 auto;
    margin-top: 60px;
    padding: 10px 30px;
@@ -538,6 +544,7 @@ section.join__body .join__platform {
    margin-top: 15px;
    display: flex;
    justify-content: space-between;
+   color: white;
 }
 
 section.join__body .join__platform button {
@@ -557,13 +564,8 @@ section.join__body .join__platform i {
    /*font-size: var(--font-large);*/
 }
 
-section.join__body .join__platform .fa-user-plus:hover {
+section.join__body .join__platform .fa-envelope:hover {
    background: #2eb67d;
-   color: var(--white-color);
-}
-
-section.join__body .join__platform .fa-slack:hover {
-   background: #4a154b;
    color: var(--white-color);
 }
 
@@ -572,9 +574,8 @@ section.join__body .join__platform .fa-discord:hover {
    color: var(--white-color);
 }
 
-
-section.join__body .join__platform .fa-linkedin:hover {
-   background: #007bb5;
+section.join__body .join__platform .fa-instagram:hover {
+   background: var(--lightred-color);
    color: var(--white-color);
 }
 
@@ -584,12 +585,7 @@ section.join__body .join__platform .fa-github:hover {
 }
 
 section.join__body .join__platform .fa-calendar-alt:hover {
-   background: #ff8c00;
-   color: var(--white-color);
-}
-
-section.join__body .join__platform .fa-envelope:hover {
-   background: var(--red-color);
+   background: var(--pumpkin-color);
    color: var(--white-color);
 }
 
@@ -603,7 +599,7 @@ section.join__body .join__platform .fa-envelope:hover {
    padding: 10px;
    margin: 80px auto 20px;
    background: var(--white-color);
-   color: hsla(0, 100%, 60%, 0.864);
+   color: var(--lightred-color);
    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.07);
    text-align: center;
    font-size: 50px;
