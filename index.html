@@ -59,13 +59,14 @@
       }
 
       .slideshowContainer {
-        max-width: 1000px;
+        width: 1000px;
+        height: 800px;
         position: relative;
         margin: auto;
       }
       .slideshowSlides {
         display: none;
-        border-color: gold;
+        border-color: white;
         border-width: 2px;
       }
       .slideshowPrev, .slideshowNext {
@@ -115,9 +116,7 @@
          display: inline-flex;
          flex-direction: column;
          margin:10px;
-         padding: 0 5vw 0 5vw;
-         align-items: center;
-         align-content: center;
+         padding: 10px 5vw 0 5vw;
       }
    </style>
 
@@ -185,19 +184,19 @@
       <div id="whatwedoitems">
          <div class="whatwedoitem">
             <br>
-            <img src="image/workshop_icon.png"></img>         
+            <img style="margin-inline: auto;" src="image/workshop_icon.png"></img>         
             <br>
             <t type="text" style="font-size: 24px; text-align:center"> Weekly Discussions </t>
          </div>
           <div class="whatwedoitem">
             <br>
-            <img src="image/research_icon.png"></img>
+            <img style="margin-inline: auto;" src="image/research_icon.png"></img>
             <br>
             <t type="text" style="font-size: 24px; text-align:center"> Project Workshops </t>
           </div>
           <div class="whatwedoitem">
             <br>
-            <img src="image/guest_speaker.png" width="150"></img>
+            <img style="margin-inline: auto;" src="image/guest_speaker.png" width="150"></img>
             <br>
             <t type="text" style="font-size: 24px; text-align:center"> Host Guest Speakers </t>
          </div>
@@ -208,10 +207,11 @@
 
    <section class="body">
       <h2 class="body__title">Hackathons and Conferences</h2>
+      <br>
       <p>
          <span class="photo">
-            <img src="image/SQUID.png" alt="Quantum Coalition" style="float:left">
-            <img src="image/Qiskit-Fall-Fest.png" alt="Qiskit Fall Fest" style="float:right">
+            <img style="background-color: white; float:left" src="image/SQUID.png" alt="Quantum Coalition">
+            <img style="float:right;" src="image/Qiskit-Fall-Fest.png" alt="Qiskit Fall Fest">
          </span>
       </p>
    </section>
@@ -255,7 +255,7 @@
         slideIndex = autoslideIndex;
         if (autoslideIndex > slides.length) {autoslideIndex = 1}
         slides[autoslideIndex-1].style.display = "block";
-        setTimeout(autoshowSlides, 5000); // Change image every 5 seconds
+        setTimeout(autoshowSlides, 7000); // Change image every 7 seconds
       }
    </script>
 </body>
