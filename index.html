@@ -19,14 +19,24 @@
    
    <style>
 
-      #grad1 {
-         height: 100px;
-         background-image: linear-gradient(#292c48, rgb(53, 157, 138));
+      #grad1in {
+         height: 150px;
+         background-image: linear-gradient(#3d426a, rgb(48, 144, 126));
       }
 
-      #grad3 {
-         height: 100px;
-         background-image: linear-gradient(rgb(53, 157, 138), #292c48);
+      #grad1out {
+         height: 150px;
+         background-image: linear-gradient(rgb(48, 144, 126), #3d426a);
+      }
+      
+      #grad3in {
+         height: 150px;
+         background-image: linear-gradient(rgb(48, 144, 126), #4d3965);
+      }
+
+      #grad3out {
+         height: 150px;
+         background-image: linear-gradient(#4d3965, #3d426a);
       }
 
       span.photo {
@@ -139,7 +149,7 @@
 
    <section class="banner">
       <h1 class="banner__title">Quantum Computing at UCI</h1>
-      <a href="https://docs.google.com/forms/d/e/1FAIpQLSeZtyYb8oV3nUPXUksd5ULrCTAcWEbtvGW-8aNxpvVj6ZAcEw/viewform"
+      <a href="https://www.qc-uci.club/join.html"
          style="margin-bottom:80px;" class="banner__btn">Get Involved</a>
 
       <!--<a href="./contact_us.html" class="banner__btn">Contact Us</a>-->
@@ -173,13 +183,14 @@
    <br> <br> <br> 
 
    <section class="body">
-      <h2 class="body__title">About Us</h2>
+      <h2 class="body__title">Who We Are</h2>
       <div class="body__caption">
          <div><span class="msg">Quantum Computing at UCI is a student-led organization that enables Anteaters to learn, research, and implement quantum algorithms on simulators and quantum computers. We aim to foster interest in quantum software and develop the quantum information science community at UCI.</span></div>
       </div>
+      <p style="margin-bottom:70px;"></p>
    </section>
 
-   <div id="grad1"></div>
+   <div id="grad1in"></div>
 
    <section class="body2">
       <h2 class="body2__title" style = "position:absolute; top:60px;">What We Do</h2>
@@ -206,7 +217,17 @@
       </div>
    </section>
 
-   <div id="grad3"></div>
+   <div id="grad3in"></div>
+
+   <section class="body3">
+      <br>
+      <h2 class="body3__title">What We Explore</h2>
+      <br>
+      <img src="image/QC_WordCloud.png" width="700" height="800">
+      <br>
+   </section>
+
+   <div id="grad3out"></div>
 
    <section class="body">
       <h2 class="body__title">Hackathons and Conferences</h2>

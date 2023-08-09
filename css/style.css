@@ -8,13 +8,14 @@
    /* Color */
    --white-color: #fff;
    --black-color: #000000;
-   --teal-color: rgb(53, 157, 138);
+   --teal-color: rgb(48, 144, 126);
    --blue-color: #045fd4;
-   --navy-color: #292c48;
+   --navy-color: #3d426a;
    --red-color: #ff0000;
    --lightred-color: hsl(0, 99%, 72%);
    --pumpkin-color: rgb(255, 183, 0);
    --yellow-color: rgb(251, 234, 77);
+   --purple-color: #4d3965;
    --grey-dark-color: #909090;
    --grey-light-color: #e0e0e0;
    --slategray-color: #708090;
@@ -278,6 +279,25 @@ section.body2 .body2__caption {
    section.body2 {
       padding: 100px 30px;
    }
+}
+
+section.body3 {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   position: relative;
+   justify-content: center;
+   color: var(--white-color);
+   text-align: center;
+   background-color: var(--purple-color);
+}
+
+section.body3 .body3__title {
+   font-size: 36px;
+   text-transform: uppercase;
+   margin-bottom: var(--padding);
+   color: var(--white-color);
+   font-family: var(--arial);
 }
 
 /*************************/
@@ -594,16 +614,18 @@ section.join__body .join__platform .fa-calendar-alt:hover {
 /*************************/
 
 .event__title {
-   max-width: 660px;
+   max-width: 500px;
    width: 100%;
    padding: 10px;
    margin: 80px auto 20px;
-   background: var(--white-color);
-   color: var(--lightred-color);
+   background: var(--navy-color);
+   color: var(--pumpkin-color);
    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.07);
    text-align: center;
    font-size: 50px;
+   font-weight: bold;
    text-transform: uppercase;
+   text-decoration: underline;
    border-radius: var(--border-radius);
 }
 
