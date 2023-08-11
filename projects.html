@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <script
+      src="https://kit.fontawesome.com/2d323a629b.js"
+      crossorigin="anonymous">
+   </script>
+   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto&display=swap"
+   rel="stylesheet">
+   <link rel="stylesheet" href="css/tailwind_style.css">
+   <link rel="stylesheet" href="css/style.css">
+   <title>Projects | QC@UCI</title>
+   <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+
+   <!--<meta name="viewport" content="width=device-width, initial-scale=1">-->
+
+</head>
+<body>
+   <header>
+      <div id="left"><img src="image/QC@UCI Logo_small.png" width="125" alt="QC@UCI Logo"></div>
+      <nav>
+         <ul class="header__nav">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="join.html">Join</a></li>
+            <li><a href="team.html">Team</a></li>
+            <li><a href="event.html">Events</a></li>
+            <li><a href="projects.html">Projects</a></li>
+            <li><a href="contact_us.html">Contact</a></li>
+         </ul>
+      </nav>
+   </header>
+   <p style="margin-bottom:200px;"></p>
+
+    <button class="collapsible">Upcoming Projects</button>
+    <div class="content">
+        <br>
+
+        <button class="sub_collapsible">Idea 1</button>
+        <div class="content" style="margin-left:150px">
+            <br>
+            <p>Coming Soon!    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+            <br>
+        </div>
+
+        <button class="sub_collapsible">Idea 2</button>
+        <div class="content" style="margin-left:150px">
+            <br>
+            <p>Coming Soon!</p>
+            <br>
+        </div>
+
+    </div>
+
+    <script>
+    var coll = document.getElementsByClassName("collapsible");
+    var i;
+
+    for (i = 0; i < coll.length; i++) {
+    coll[i].addEventListener("click", function() {
+        this.classList.toggle("active");
+        var content = this.nextElementSibling;
+        if (content.style.maxHeight){
+        content.style.maxHeight = null;
+        } else {
+        content.style.maxHeight = content.scrollHeight + "px";
+        } 
+    });
+    }
+
+    var coll = document.getElementsByClassName("sub_collapsible");
+    var i;
+
+    for (i = 0; i < coll.length; i++) {
+    coll[i].addEventListener("click", function() {
+        this.classList.toggle("active");
+        var content = this.nextElementSibling;
+        if (content.style.maxHeight){
+        content.style.maxHeight = null;
+        } else {
+        content.style.maxHeight = content.scrollHeight + "px";
+        } 
+    });
+    }
+    </script>
+
+   <footer>
+      <div class="footer__copyRight">
+         <p>Follow us on Discord and Instagram.</p>
+         <p><a href="./contact_us.html">© Quantum Computing at UCI</a> 2023</p>
+      </div>
+   </footer>
+
+</body>
+</html>
