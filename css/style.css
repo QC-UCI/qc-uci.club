@@ -625,7 +625,6 @@ section.join__body .join__platform .fa-calendar-alt:hover {
    font-size: 50px;
    font-weight: bold;
    text-transform: uppercase;
-   text-decoration: underline;
    border-radius: var(--border-radius);
 }
 
@@ -793,6 +792,90 @@ section.contact__body textarea.form_component {
    section.contact__body #contact__form {
       width: 50%;
    }
+}
+
+/*************************/
+/*       Projects        */
+/*************************/
+
+.projects__title {
+   max-width: 1000px;
+   width: 100%;
+   padding: 10px;
+   margin: 80px auto 20px;
+   background: var(--navy-color);
+   color: var(--pumpkin-color);
+   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.07);
+   text-align: center;
+   font-size: 50px;
+   font-weight: bold;
+   text-transform: uppercase;
+   border-radius: var(--border-radius);
+}
+
+.collapsible {
+   background-color: #6783e9;
+   color: white;
+   cursor: pointer;
+   padding: 18px;
+   width: 100%;
+   text-align: left;
+   outline: none;
+   font-size: 20px;
+   max-width: 1050px;
+   margin-left: 200px;
+}
+
+.sub_collapsible {
+   background-color: #6783e9;
+   color: white;
+   cursor: pointer;
+   padding: 18px;
+   width: 100%;
+   text-align: left;
+   outline: none;
+   font-size: 18px;
+   text-overflow: ellipsis;
+   max-width: 950px;
+   margin-left: 200px;
+}
+
+.active, .collapsible:hover {
+   color: black;
+   background-color: #ffd77a;
+}
+
+.active, .sub_collapsible:hover {
+   color: black;
+   background-color: #ffd77a;
+}
+
+.collapsible:after {
+   content: '\002B';
+   color: rgb(0, 0, 0);
+   font-weight: bold;
+   float: right;
+   margin-left: 5px;
+}
+
+.sub_collapsible:after{
+   content: '\002B';
+   color: rgb(0, 0, 0);
+   font-weight: bold;
+   float: right;
+   margin-left: 5px;
+}
+
+.active:after {
+   content: "\2212";
+}
+
+.content {
+   padding: 0 100px;
+   max-height: 0;
+   overflow: scroll;
+   color: white;
+   transition: max-height 0.2s ease-out;
 }
 
 /*************************/
