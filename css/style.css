@@ -5,7 +5,7 @@
 @tailwind utilities;
 
 :root {
-   /* Color */
+   /* Color */ 
    --white-color: #fff;
    --black-color: #000000;
    --teal-color: rgb(48, 144, 126);
