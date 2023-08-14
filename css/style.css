@@ -822,8 +822,8 @@ section.contact__body textarea.form_component {
    text-align: left;
    outline: none;
    font-size: 20px;
-   max-width: 1050px;
-   margin-left: 200px;
+   font-weight: bold;
+   align-content: center;
 }
 
 .sub_collapsible {
@@ -836,8 +836,8 @@ section.contact__body textarea.form_component {
    outline: none;
    font-size: 18px;
    text-overflow: ellipsis;
-   max-width: 950px;
-   margin-left: 200px;
+   font-weight: bold;
+   align-content: center;
 }
 
 .active, .collapsible:hover {
@@ -873,7 +873,8 @@ section.contact__body textarea.form_component {
 .content {
    padding: 0 100px;
    max-height: 0;
-   overflow: scroll;
+   overflow-wrap: normal;
+   overflow-y: scroll;
    color: white;
    transition: max-height 0.2s ease-out;
 }
