@@ -9,6 +9,7 @@
    --white-color: #fff;
    --black-color: #000000;
    --teal-color: rgb(48, 144, 126);
+   --gold-color: #FFD700;
    --blue-color: #045fd4;
    --navy-color: #3d426a;
    --red-color: #ff0000;
@@ -309,7 +310,8 @@ section.body3 .body3__title {
    width: 100%;
    padding: 20px;
    margin: 80px auto 20px;
-   background: #f4f4f4;
+   background: var(--navy-color);
+   color: var(--yellow-color);
    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.07);
    text-align: center;
    font-size: 50px;
@@ -318,7 +320,7 @@ section.body3 .body3__title {
 }
 
 .team__navContainer {
-   width: 89%;
+   width: 70%;
    display: flex;
    justify-content: center;
 }
@@ -348,7 +350,7 @@ section.body3 .body3__title {
 
 .team__nav .team__li.active {
    padding-bottom: calc(var(--padding) / 2);
-   background-color: var(--yellow-color);
+   background-color: var(--white-color);
    box-shadow: 0 1px 2px rgba(50, 47, 47, 0.07);
    color: var(--black-color);
 }
@@ -866,7 +868,7 @@ section.contact__body textarea.form_component {
    margin-left: 5px;
 }
 
-.active:after {
+.collapsible.active:after {
    content: "\2212";
 }
 
