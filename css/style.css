@@ -824,6 +824,7 @@ section.contact__body textarea.form_component {
    text-align: left;
    outline: none;
    font-size: 20px;
+   text-overflow: ellipsis;
    font-weight: bold;
    align-content: center;
 }
