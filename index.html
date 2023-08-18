@@ -8,7 +8,7 @@
       src="https://kit.fontawesome.com/2d323a629b.js"
       crossorigin="anonymous">
    </script>
-   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto&display=swap"
+   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montesserat&display=swap"
    rel="stylesheet">
    <link rel="stylesheet" href="css/tailwind_style.css">
    <link rel="stylesheet" href="css/style.css">
@@ -21,22 +21,17 @@
 
       #grad1in {
          height: 150px;
-         background-image: linear-gradient(#3d426a, rgb(48, 144, 126));
-      }
-
-      #grad1out {
-         height: 150px;
-         background-image: linear-gradient(rgb(48, 144, 126), #3d426a);
+         background-image: linear-gradient(#c8d2fc, #b2d7ff);
       }
       
       #grad3in {
          height: 150px;
-         background-image: linear-gradient(rgb(48, 144, 126), #4d3965);
+         background-image: linear-gradient(#b2d7ff, #d6ffff);
       }
 
       #grad3out {
          height: 150px;
-         background-image: linear-gradient(#4d3965, #3d426a);
+         background-image: linear-gradient(#d6ffff, #c8d2fc);
       }
 
       span.photo {
@@ -133,32 +128,35 @@
          padding: 10px 5vw 0 5vw;
       }
    </style>
-
-   <header>
-      <div id="left"><img src="image/QC@UCI Logo_small.png" width="125" alt="QC@UCI Logo"></div>
+   <header class="bg-black text-white pt-2 pb-2 pl-8 pr-8">
+      <a href="index.html">
+         <img src="image/QC@UCI Logo_small.png" width="75" alt="Home">
+     </a>
       <nav>
          <ul class="header__nav">
-            <li><a href="index.html">Home</a></li>
-            <li><a href="join.html">Join</a></li>
-            <li><a href="team.html">Team</a></li>
-            <li><a href="event.html">Events</a></li>
-            <li><a href="projects.html">Projects</a></li>
-            <li><a href="contact_us.html">Contact</a></li>
+            <li><a href="index.html" class="text-xl">Home</a></li>
+            <li><a href="join.html" class="text-xl">Join</a></li>
+            <li><a href="team.html" class="text-xl">Team</a></li>
+            <li><a href="event.html" class="text-xl">Events</a></li>
+            <li><a href="projects.html" class="text-xl">Projects</a></li>
+            <li><a href="contact_us.html" class="text-xl">Contact</a></li>
          </ul>
       </nav>
+      
    </header>
-   <p style="margin-bottom:200px;"></p>
+
+   <br> <br> <br>
 
    <section class="banner">
-      <h1 class="banner__title">Quantum Computing at UCI</h1>
-      <a href="https://www.qc-uci.club/join.html"
-         style="margin-bottom:80px;" class="banner__btn">Get Involved</a>
-
-      <!--<a href="./contact_us.html" class="banner__btn">Contact Us</a>-->
-      <!--<iframe width="700" height="400" src="https://www.youtube.com/embed/1s9clhbkHk4" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>-->
-      
-      <!-- Slideshow container -->
-      <div class="slideshowContainer">
+      <img src="image/Quantum-background.png" alt="Background Image" class="w-full" style="height: 80vh;">
+      <div class="absolute inset-0 flex flex-col justify-center items-center text-black">
+          <h1 class="header text-6xl">Quantum Computing at UCI</h1>
+          <a href="https://www.qc-uci.club/join.html" style="margin-bottom:80px;" class="banner__btn mt-4">Get Involved</a>
+      </div>
+  </section>
+<!-- TODO: make the image caroussel and who we are left-right -->
+   <section class="banner pt-0 flex items-center">
+      <div class="slideshowContainer w-1/2 pr-8"> 
 
         <!-- Full-width images with number -->
         <div class="slideshowSlides slideshowFade">
@@ -179,11 +177,8 @@
         <!-- Next and previous buttons -->
         <a class="slideshowPrev" onclick="plusSlides(-1)">&#10094;</a>
         <a class="slideshowNext" onclick="plusSlides(1)">&#10095;</a>
-      </div> 
+      </div>
    </section>
-
-   <br> <br> <br>  
-
    <section class="body">
       <h2 class="body__title">Who We Are</h2>
       <div class="body__caption">
