@@ -8,11 +8,13 @@
    /* Color */ 
    --white-color: #fff;
    --black-color: #000000;
+   --darkblue-color: rgb(51, 66, 153);
    --teal-color: rgb(48, 144, 126);
    --gold-color: #FFD700;
    --blue-color: #045fd4;
    --pastel-blue-color: #b2d7ff;
    --pastel-purple-color: #c8d2fc;
+   --green-color: green;
    --red-color: #ff0000;
    --lightred-color: hsl(0, 99%, 72%);
    --pumpkin-color: rgb(255, 183, 0);
@@ -806,57 +808,57 @@ section.contact__body textarea.form_component {
    width: 100%;
    padding: 10px;
    margin: 80px auto 20px;
-   background: var(--navy-color);
-   color: var(--pumpkin-color);
-   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.07);
+   color: var(--black-color);
    text-align: center;
    font-size: 50px;
    font-weight: bold;
    text-transform: uppercase;
-   border-radius: var(--border-radius);
 }
 
 .collapsible {
-   background-color: #6783e9;
+   background-color: rgb(89, 112, 238);
    color: white;
    cursor: pointer;
    padding: 18px;
-   width: 100%;
+   width: 90%;
    text-align: left;
    outline: none;
-   font-size: 20px;
-   text-overflow: ellipsis;
+   font-size: 24px;
    font-weight: bold;
    align-content: center;
+   margin-left: 5%;
+   margin-top: 1%;
+   margin-bottom: 1%;
 }
 
 .sub_collapsible {
-   background-color: #6783e9;
+   background-color: rgb(151, 81, 221);
    color: white;
    cursor: pointer;
    padding: 18px;
    width: 100%;
    text-align: left;
    outline: none;
-   font-size: 18px;
+   font-size: 22px;
    text-overflow: ellipsis;
-   font-weight: bold;
    align-content: center;
+   margin-top: 1%;
+   margin-bottom: 1%;
 }
 
 .active, .collapsible:hover {
-   color: black;
-   background-color: #ffd77a;
+   color: white;
+   background-color: var(--darkblue-color);
 }
 
 .active, .sub_collapsible:hover {
-   color: black;
-   background-color: #ffd77a;
+   color: white;
+   background-color: rgb(115, 61, 169);
 }
 
 .collapsible:after {
    content: '\002B';
-   color: rgb(0, 0, 0);
+   color: white;
    font-weight: bold;
    float: right;
    margin-left: 5px;
@@ -864,7 +866,7 @@ section.contact__body textarea.form_component {
 
 .sub_collapsible:after{
    content: '\002B';
-   color: rgb(0, 0, 0);
+   color: white;
    font-weight: bold;
    float: right;
    margin-left: 5px;
@@ -874,12 +876,17 @@ section.contact__body textarea.form_component {
    content: "\2212";
 }
 
+.sub_collapsible.active:after {
+   content: "\2212";
+}
+
 .content {
    padding: 0 100px;
    max-height: 0;
    overflow-wrap: normal;
    overflow-y: scroll;
-   color: white;
+   color: var(--black-color);
+   font-size: 20px;
    transition: max-height 0.2s ease-out;
 }
 
