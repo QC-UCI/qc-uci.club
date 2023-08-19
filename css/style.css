@@ -155,13 +155,13 @@ section.banner {
    position: relative;
    justify-content: center;
    color: var(--black-color);
-   text-align: center;
+   text-align: left;
 }
 
 section.banner .banner__title {
    font-size: var(--font-giant);
    margin-bottom: var(--padding);
-   color: var(--black-color);
+   color: var(--white-color);
    font-family: var(--arial);
 }
 
