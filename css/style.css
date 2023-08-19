@@ -46,6 +46,7 @@
 
    /* Background Color */
    --background-color: var(--pastel-purple-color); /*#584848;*/ /*#372424;*/
+   --text-color: var(--black-color);
 }
 
 * {
@@ -313,13 +314,10 @@ section.body3 .body3__title {
    width: 100%;
    padding: 20px;
    margin: 80px auto 20px;
-   background: var(--navy-color);
-   color: var(--yellow-color);
-   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.07);
+   color: var(--text-color);
    text-align: center;
    font-size: 50px;
    text-transform: uppercase;
-   border-radius: var(--border-radius);
 }
 
 .team__navContainer {
@@ -522,13 +520,10 @@ section.team .team__member .team__btn i {
    width: 100%;
    padding: 10px;
    margin: 80px auto 10px;
-   background: var(--navy-color);
-   color: var(--pumpkin-color);
-   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.07);
+   color: var(--text-color);
    text-align: center;
    font-size: 50px;
    text-transform: uppercase;
-   border-radius: var(--border-radius);
 }
 
 section.join__body {
@@ -569,12 +564,11 @@ section.join__body .join__platform {
    margin-top: 15px;
    display: flex;
    justify-content: space-between;
-   color: white;
+   color: var(--black-color);
 }
 
 section.join__body .join__platform button {
    border: none;
-   /*background-color: var(--white-color);*/
 }
 
 section.join__body .join__platform i {
@@ -610,7 +604,7 @@ section.join__body .join__platform .fa-github:hover {
 }
 
 section.join__body .join__platform .fa-calendar-alt:hover {
-   background: var(--pumpkin-color);
+   background: var(--text-color);
    color: var(--white-color);
 }
 
@@ -623,14 +617,11 @@ section.join__body .join__platform .fa-calendar-alt:hover {
    width: 100%;
    padding: 10px;
    margin: 80px auto 20px;
-   background: var(--navy-color);
-   color: var(--pumpkin-color);
-   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.07);
+   color: var(--text-color);
    text-align: center;
    font-size: 50px;
    font-weight: bold;
    text-transform: uppercase;
-   border-radius: var(--border-radius);
 }
 
 .event__navContainer {
@@ -731,8 +722,8 @@ section.event iframe {
 .contact__title {
    max-width: 500px;
    width: 100%;
-   padding: 30px;
-   margin: 80px auto 30px;
+   padding: 20px;
+   margin: 80px auto 20px;
    background: var(--white-color);
    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.07);
    text-align: center;
