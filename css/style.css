@@ -155,7 +155,7 @@ section.banner {
    position: relative;
    justify-content: center;
    color: var(--black-color);
-   text-align: left;
+   text-align: center;
 }
 
 section.banner .banner__title {
@@ -338,7 +338,7 @@ section.body3 .body3__title {
    padding: 5px;
    border-radius: var(--border-radius);
    display: inline-block;
-   color: var(--white-color);
+   color: var(--black-color);
 }
 
 .team__nav .team__li:first-child {
@@ -396,6 +396,9 @@ section.body3 .body3__title {
 }
 
 .team__message.active {
+   background-color: var(--darkblue-color);
+   max-width: 800px;
+   max-height: fit-content;
    display: block;
 }
 
@@ -411,6 +414,7 @@ section.team {
 
 section.team .team__member {
    flex-direction: column;
+   color: var(--black-color);
    justify-content: space-evenly;
    max-width: 400px;
    max-height: 400px;
@@ -642,7 +646,7 @@ section.join__body .join__platform .fa-calendar-alt:hover {
    padding: 5px;
    border-radius: var(--border-radius);
    display: inline-block;
-   color: var(--white-color);
+   color: var(--black-color);
 }
 
 .event__nav .event__li:first-child {
@@ -683,10 +687,11 @@ section.event {
 
 section.event .event__text {
    display: none;
+   color: var(--black-color);
    background-color: var(--white-color);
    height: 70%;
-   min-width: 45%;
-   max-width: 75%;
+   min-width: 50%;
+   max-width: 85%;
    padding-bottom: 20px;
    padding-right: 60px;
    border-radius: var(--border-radius);
