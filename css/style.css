@@ -520,7 +520,7 @@ section.team .team__member .team__btn i {
    right: 0;
    background-color: #5977ff;
    opacity: 90%;
-   overflow:hidden;
+   overflow:scroll;
    width: 100%;
    height: 100%;
    transform: scale(0);
