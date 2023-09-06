@@ -8,7 +8,7 @@
       src="https://kit.fontawesome.com/2d323a629b.js"
       crossorigin="anonymous">
    </script>
-   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montesserat&display=swap"
+   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto&display=swap"
    rel="stylesheet">
    <link rel="stylesheet" href="css/tailwind_style.css">
    <link rel="stylesheet" href="css/style.css">
@@ -21,17 +21,17 @@
 
       #grad1in {
          height: 150px;
-         background-image: linear-gradient(#c8d2fc, #b2d7ff);
+         background-image: linear-gradient(#c4cfff, #b2d7ff);
       }
       
       #grad3in {
          height: 150px;
-         background-image: linear-gradient(#b2d7ff, #d6ffff);
+         background-image: linear-gradient(#b2d7ff, #a0e7ff);
       }
 
       #grad3out {
          height: 150px;
-         background-image: linear-gradient(#d6ffff, #c8d2fc);
+         background-image: linear-gradient(#a0e7ff, #c4cfff);
       }
 
       span.photo {
@@ -64,11 +64,12 @@
       }
 
       .slideshowContainer {
-        width: 60%;
+        width: auto;
         height: auto;
         
         position: relative;
-        margin: auto;
+        margin-left: 210px;
+        margin-right: 210px;
       }
       .slideshowSlides {
         display: none;
@@ -130,7 +131,7 @@
    </style>
    <header class="bg-black text-white pt-2 pb-2 pl-8 pr-8">
       <a href="index.html">
-         <img src="image/QC@UCI Logo_small.png" width="75" alt="Home">
+         <img src="image/QC@UCI Logo_small.png" width="125" alt="Home">
      </a>
       <nav>
          <ul class="header__nav">
@@ -145,19 +146,21 @@
       
    </header>
 
-   <br> <br> <br>    
+   <p style="margin-bottom:100px;"></p>          
 
    <section class="banner">
       <img src="image/quantum_computer_2.jpg" alt="Background Image" class="w-full" style="height: 100vh;">
       <div class="banner absolute flex flex-col items-center text-white">
-          <h1 class="banner__title">Quantum Computing at UCI</h1>
-          <a href="https://www.qc-uci.club/join.html" style="margin-bottom:80px;" class="banner__btn mt-4">Get Involved</a>
+          <h1 class="banner__title"">Quantum Computing at UCI</h1>
+          <a href="https://www.qc-uci.club/join.html" style="margin-bottom:80px" class="banner__btn mt-4">Get Involved</a>
       </div>
   </section>
-  <br>
+  
+  <p style="margin-bottom:100px;"></p>
+
 <!-- TODO: make the image caroussel and who we are left-right -->
    <section class="banner pt-0 flex items-center">
-      <div class="slideshowContainer w-1/2 pr-8"> 
+      <div class="slideshowContainer w-1/2"> 
 
         <!-- Full-width images with number -->
         <div class="slideshowSlides slideshowFade">
@@ -180,6 +183,9 @@
         <a class="slideshowNext" onclick="plusSlides(1)">&#10095;</a>
       </div>
    </section>
+
+   <p style="margin-bottom:100px;"></p>
+
    <section class="body">
       <h2 class="body__title">Who We Are</h2>
       <div class="body__caption">
