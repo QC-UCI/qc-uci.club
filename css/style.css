@@ -518,7 +518,7 @@ section.team .team__member .team__btn i {
    bottom: 0;
    left: 0;
    right: 0;
-   background-color: #5977ff;
+   background-color: #149fdf;
    opacity: 90%;
    overflow:scroll;
    width: 100%;
@@ -537,9 +537,8 @@ section.team .team__member .team__btn i {
    color: white;
    font-size: 20px;
    position: relative;
-   margin-left: 15%;
-   margin-right: 15%;
-   padding: 60px 0;
+   
+   padding: 10% 15%;
    text-align: center;
  }
 
