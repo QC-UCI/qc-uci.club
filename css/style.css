@@ -150,19 +150,32 @@ header .header__nav li:last-child {
 
 section.banner {
    display: flex;
-   flex-direction: column;
-   align-items: center;
-   position: relative;
-   justify-content: center;
+   align-items: flex-start; /* Align items to the top of the banner */
    color: var(--black-color);
-   text-align: center;
 }
 
 section.banner .banner__title {
+   flex: 1; /* Take up 100% of the available width (left 50%) */
    font-size: var(--font-giant);
    margin-bottom: var(--padding);
    color: var(--white-color);
    font-family: var(--arial);
+   padding-left: 10%
+}
+
+section.banner .banner__btn {
+   flex: 1; /* Take up 100% of the available width (left 50%) */
+   font-size: 22px;
+   font-weight: bold;
+   background-color: var(--lightred-color);
+   color: var(--black-color);
+   text-transform: uppercase;
+   border: 2px solid var(--white-color);
+   padding: var(--padding);
+   border-radius: var(--border-radius);
+   margin-top: var(--padding); /* Add spacing between text and button */
+   left: 43%; /* Set the left edge of the button to 10% screen width */
+   position: absolute;
 }
 
 section.banner .banner__caption {
@@ -172,21 +185,11 @@ section.banner .banner__caption {
    margin-bottom: var(--padding);
 }
 
-section.banner .banner__btn {
-   font-size: 22px;
-   font-weight: bold;
-   background-color: var(--lightred-color);
-   color: var(--black-color);
-   text-transform: uppercase;
-   border: 2px solid var(--white-color);
-   padding: var(--padding);
-   border-radius: var(--border-radius);
-} 
-
 section.banner iframe {
    margin-top: 3%;
    margin-bottom: -3%;
 }
+
 
 section.banner .banner__eqi {
    color: var(--grey-light-color);
