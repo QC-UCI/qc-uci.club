@@ -979,7 +979,7 @@ footer .footer__copyRight::before {
 .about-left-section {
    width: 75%;
    padding: 5%;
-   font-size: 150%;
+   font-size: 125%;
    padding: 5% 5% 5% 10%;
    box-sizing: border-box;
 }
@@ -998,22 +998,32 @@ footer .footer__copyRight::before {
    height: auto;
 }
 
+.learn_txt {
+   text-align: center
+}
 
 .applications-container {
-   padding: 0 20px;
    display: flex;
-   justify-content: space-between;
+   flex-wrap: wrap;
 }
 
-.app-col-1,
-.app-col-2,
-.app-col-3 {
-   flex: 1;
-   padding: 20px;
-   border: 1px solid #ccc;
-   margin: 10px;
-   box-sizing: border-box;
+
+.app-item {
+   width: 100%;
+   display: flex;
+   margin-bottom: 20px;
 }
+
+.app-item .app-text {
+   width: 75%;
+   padding: 5%;
+}
+
+.app-item .app-img {
+   width: 25%;
+   padding: 5%;
+}
+
 
 h2 {
    font-size: 2em;
