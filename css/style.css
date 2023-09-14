@@ -1028,11 +1028,13 @@ footer .footer__copyRight::before {
 h2 {
    font-size: 2em;
    margin-bottom: 10px;
+   font-family: "Roboto", sans-serif;
 }
 
 p {
    font-size: 1.2em;
    margin-bottom: 10px;
+   font-family: "Roboto", sans-serif;
 }
 
 img {
