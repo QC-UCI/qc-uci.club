@@ -160,10 +160,10 @@ section.banner .banner__title {
    margin-bottom: var(--padding);
    color: var(--white-color);
    font-family: var(--arial);
-   padding-left: 10%
+   padding-left: 20%
 }
 
-section.banner .banner__btn {
+section.banner .banner__btn1 {
    flex: 1; /* Take up 100% of the available width (left 50%) */
    font-size: 22px;
    font-weight: bold;
@@ -174,7 +174,22 @@ section.banner .banner__btn {
    padding: var(--padding);
    border-radius: var(--border-radius);
    margin-top: var(--padding); /* Add spacing between text and button */
-   left: 43%; /* Set the left edge of the button to 10% screen width */
+   left: 35%; /* Set the left edge of the button to 10% screen width */
+   position: absolute;
+}
+
+section.banner .banner__btn2 {
+   flex: 1; /* Take up 100% of the available width (left 50%) */
+   font-size: 22px;
+   font-weight: bold;
+   background-color: lightseagreen;
+   color: var(--black-color);
+   text-transform: uppercase;
+   border: 2px solid var(--white-color);
+   padding: var(--padding);
+   border-radius: var(--border-radius);
+   margin-top: var(--padding); /* Add spacing between text and button */
+   left: 65%; /* Set the left edge of the button to 10% screen width */
    position: absolute;
 }
 
@@ -978,14 +993,14 @@ footer .footer__copyRight::before {
 
 .about-left-section {
    width: 75%;
-   padding: 5%;
-   font-size: 125%;
-   padding: 5% 5% 5% 10%;
+   padding: 5% 5% 5% 5%;
+   font-size: large;
+   text-align: justify;
    box-sizing: border-box;
 }
 
 .about-right-section {
-   width: 40%; 
+   width: 25%; 
    display: flex; 
    justify-content: center; 
    align-items: center; 
@@ -999,7 +1014,7 @@ footer .footer__copyRight::before {
 }
 
 .learn_txt {
-   text-align: center
+   text-align: justify;
 }
 
 .applications-container {
@@ -1017,6 +1032,8 @@ footer .footer__copyRight::before {
 .app-item .app-text {
    width: 75%;
    padding: 5%;
+   font-size: large;
+   text-align: justify;
 }
 
 .app-item .app-img {
