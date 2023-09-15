@@ -19,14 +19,19 @@
    
    <style>
 
-      #grad1 {
-         height: 100px;
-         background-image: linear-gradient(#292c48, rgb(53, 157, 138));
+      #grad1in {
+         height: 150px;
+         background-image: linear-gradient(#c4cfff, #b2d7ff);
+      }
+      
+      #grad3in {
+         height: 150px;
+         background-image: linear-gradient(#b2d7ff, #a0e7ff);
       }
 
-      #grad3 {
-         height: 100px;
-         background-image: linear-gradient(rgb(53, 157, 138), #292c48);
+      #grad3out {
+         height: 150px;
+         background-image: linear-gradient(#a0e7ff, #c4cfff);
       }
 
       span.photo {
@@ -59,14 +64,20 @@
       }
 
       .slideshowContainer {
-        max-width: 1000px;
+        width: auto;
+        height: auto;
+        
         position: relative;
-        margin: auto;
+        margin-left: 210px;
+        margin-right: 210px;
       }
       .slideshowSlides {
         display: none;
-        border-color: gold;
+        border-color: white;
         border-width: 2px;
+      }
+      .slideshowSlides > img {
+         height:90vh;
       }
       .slideshowPrev, .slideshowNext {
         cursor: pointer;
@@ -112,69 +123,79 @@
          align-items: center;
       }
       .whatwedoitem {
-         display:inline-block;
+         display: inline-flex;
+         flex-direction: column;
          margin:10px;
-         padding: 0 5vw 0 5vw;
+         padding: 10px 5vw 0 5vw;
       }
    </style>
-
-   <header>
-      <div id="left"><img src="image/QC@UCI Logo_small.png" width="125" alt="QC@UCI Logo"></div>
+   <header class="bg-black text-white pt-2 pb-2 pl-8 pr-8">
+      <a href="index.html">
+         <img src="image/QC@UCI Logo_small.png" width="125" alt="Home">
+     </a>
       <nav>
          <ul class="header__nav">
             <li><a href="index.html">Home</a></li>
             <li><a href="join.html">Join</a></li>
+            <li><a href="learn.html">Learn</a></li>
             <li><a href="team.html">Team</a></li>
             <li><a href="event.html">Events</a></li>
+            <li><a href="projects.html">Projects</a></li>
             <li><a href="contact_us.html">Contact</a></li>
          </ul>
       </nav>
+      
    </header>
-   <p style="margin-bottom:200px;"></p>
+
+   <p style="margin-bottom:100px;"></p>          
 
    <section class="banner">
-      <h1 class="banner__title">Quantum Computing at UCI</h1>
-      <a href="https://docs.google.com/forms/d/e/1FAIpQLSeZtyYb8oV3nUPXUksd5ULrCTAcWEbtvGW-8aNxpvVj6ZAcEw/viewform"
-         style="margin-bottom:80px;" class="banner__btn">Get Involved</a>
+      <img src="image/quantum_computer_right_justified.png" alt="Background Image" class="w-full" style="height: 100vh;">
+      <div class="banner absolute text-white">
+          <h1 class="banner__title">Quantum Computing at UCI</h1>
+          <a href="https://www.qc-uci.club/join.html" style="margin-bottom:80px" class="banner__btn mt-4">Get Involved</a>
+      </div>
+  </section>
+  
+  <p style="margin-bottom:100px;"></p>
 
-      <!--<a href="./contact_us.html" class="banner__btn">Contact Us</a>-->
-      <!--<iframe width="700" height="400" src="https://www.youtube.com/embed/1s9clhbkHk4" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>-->
-      
-      <!-- Slideshow container -->
-      <div class="slideshowContainer">
+<!-- TODO: make the image caroussel and who we are left-right -->
+   <section class="banner pt-0 flex items-center">
+      <div class="slideshowContainer w-1/2"> 
 
         <!-- Full-width images with number -->
         <div class="slideshowSlides slideshowFade">
           <div class="slideshowNumber">1 / 3</div>
-          <img src="image/group2.jpeg" style="width:100%">
+          <img src="image/group2.jpeg">
         </div>
 
         <div class="slideshowSlides slideshowFade">
           <div class="slideshowNumber">2 / 3</div>
-          <img src="image/GuestSpeaker.jpg" style="width:100%">
+          <img src="image/GuestSpeaker.jpg">
         </div>
 
         <div class="slideshowSlides slideshowFade">
           <div class="slideshowNumber">3 / 3</div>
-          <img src="image/group1.jpeg" style="width:100%">
+          <img src="image/group1.jpeg">
         </div>
 
         <!-- Next and previous buttons -->
         <a class="slideshowPrev" onclick="plusSlides(-1)">&#10094;</a>
         <a class="slideshowNext" onclick="plusSlides(1)">&#10095;</a>
-      </div> 
-   </section>
-
-   <br> <br> <br> 
-
-   <section class="body">
-      <h2 class="body__title">About Us</h2>
-      <div class="body__caption">
-         <div><span class="msg">Quantum Computing at UCI is a student-led organization that enables Anteaters to learn, research, and implement quantum algorithms on simulators and quantum computers. We aim to foster interest in quantum software and develop the quantum information science community at UCI.</span></div>
       </div>
    </section>
 
-   <div id="grad1"></div>
+   <p style="margin-bottom:100px;"></p>
+
+   <section class="body">
+      <h2 class="body__title">Who We Are</h2>
+      <div class="body__caption">
+         <div><span class="msg">Quantum Computing at UCI is a student-led organization that enables Anteaters to learn, research, and implement quantum algorithms on simulators and quantum computers. We aim to foster interest in quantum software and develop the quantum information science community at UCI.</span></div>
+      </div>
+      <p style="margin-bottom:70px;"></p>
+   </section>
+
+   <div id="grad1in"></div>
 
    <section class="body2">
       <h2 class="body2__title" style = "position:absolute; top:60px;">What We Do</h2>
@@ -182,33 +203,44 @@
       <div id="whatwedoitems">
          <div class="whatwedoitem">
             <br>
-            <img src="image/workshop_icon.png"></img>         
+            <img style="margin-inline: auto;" src="image/workshop_icon.png"></img>         
             <br>
-            <t type="text" style="font-size: 18px;"> Weekly Discussions </t>
+            <t type="text" style="font-size: 24px; text-align:center"> Weekly Discussions </t>
          </div>
           <div class="whatwedoitem">
             <br>
-            <img src="image/research_icon.png"></img>
+            <img style="margin-inline: auto;" src="image/research_icon.png"></img>
             <br>
-            <t type="text" style="font-size: 18px;"> Project Workshops </t>
+            <t type="text" style="font-size: 24px; text-align:center"> Project Workshops </t>
           </div>
           <div class="whatwedoitem">
             <br>
-            <img src="image/guest_speaker.png" width="150"></img>
+            <img style="margin-inline: auto;" src="image/guest_speaker.png" width="150"></img>
             <br>
-            <t type="text" style="font-size: 18px"> Host Guest Speakers </t>
+            <t type="text" style="font-size: 24px; text-align:center"> Host Guest Speakers </t>
          </div>
       </div>
    </section>
 
-   <div id="grad3"></div>
+   <div id="grad3in"></div>
+
+   <section class="body3">
+      <br>
+      <h2 class="body3__title">What We Explore</h2>
+      <br>
+      <img src="image/QC_WordCloud.png" width="700" height="800">
+      <br>
+   </section>
+
+   <div id="grad3out"></div>
 
    <section class="body">
       <h2 class="body__title">Hackathons and Conferences</h2>
+      <br>
       <p>
          <span class="photo">
-            <img src="image/SQUID.png" alt="Quantum Coalition" style="float:left">
-            <img src="image/Qiskit-Fall-Fest.png" alt="Qiskit Fall Fest" style="float:right">
+            <img style="background-color: white; float:left" src="image/SQUID.png" alt="Quantum Coalition">
+            <img style="float:right;" src="image/Qiskit-Fall-Fest.png" alt="Qiskit Fall Fest">
          </span>
       </p>
    </section>
@@ -219,6 +251,7 @@
          <p><a href="./contact_us.html">© Quantum Computing at UCI</a> 2023</p>
       </div>
    </footer>
+
    <script type="text/javascript">
       let slideIndex = 1;
       showSlides(slideIndex);
@@ -252,7 +285,7 @@
         slideIndex = autoslideIndex;
         if (autoslideIndex > slides.length) {autoslideIndex = 1}
         slides[autoslideIndex-1].style.display = "block";
-        setTimeout(autoshowSlides, 5000); // Change image every 5 seconds
+        setTimeout(autoshowSlides, 7000); // Change image every 7 seconds
       }
    </script>
 </body>
