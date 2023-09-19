@@ -68,8 +68,8 @@
         height: auto;
         
         position: relative;
-        margin-left: 210px;
-        margin-right: 210px;
+        margin-left: 10%;
+        margin-right: 10%;
       }
       .slideshowSlides {
         display: none;
@@ -128,10 +128,21 @@
          margin:10px;
          padding: 10px 5vw 0 5vw;
       }
+
+      .fixed-header{
+        width: 100%;
+        position: fixed;        
+        background: black;
+        padding: 30px 30px;
+        color: white;
+        font-size: medium;
+      }
+
    </style>
-   <header class="bg-black text-white pt-2 pb-2 pl-8 pr-8">
+   
+   <header class="fixed-header">
       <a href="index.html">
-         <img src="image/QC@UCI Logo_small.png" width="125" alt="Home">
+         <img src="image/Anteater+Eq_Logo.png" width="150" alt="Home">
      </a>
       <nav>
          <ul class="header__nav">
@@ -143,49 +154,58 @@
             <li><a href="projects.html">Projects</a></li>
             <li><a href="contact_us.html">Contact</a></li>
          </ul>
-      </nav>
-      
+      </nav>      
    </header>
 
-   <p style="margin-bottom:100px;"></p>          
+   <p style="margin-bottom:85px;"></p>
 
-   <section class="banner">
-      <img src="image/quantum_computer_right_justified.png" alt="Background Image" class="w-full" style="height: 100vh;">
+   <img src="image/Website-Bkgd.png" alt="Background Image" style="width: 100%; background-size:cover; background-color: #333; ;">
+
+   <section class="banner" style="display:contents;">
+      <a href="https://www.qc-uci.club/join.html" class="banner__btn1">Get Involved</a>
+      <br>
+      <br>
+      <a href="https://www.qc-uci.club/learn.html" class="banner__btn2">Learn More</a>
+   </section>
+
+   <p style="margin-bottom:85px;"></p>
+
+   <!-- CODE THAT WORKED PREVIOUSLY (ONLY USE TO REVERT BACK / Can use GitHub commit history too)-->
+   <!--<section class="banner">
+      <img src="image/quantum_computer_right_justified.png" alt="Background Image" class="w-full" style="height: 100vh; width: 100%;">
       <div class="banner absolute text-white">
           <h1 class="banner__title">Quantum Computing at UCI</h1>
           <a href="https://www.qc-uci.club/join.html" style="margin-bottom:80px" class="banner__btn1">Get Involved</a>
           <a href="https://www.qc-uci.club/learn.html" style="margin-bottom:80px" class="banner__btn2">Learn More</a>
       </div>
-  </section>
-  
-  <p style="margin-bottom:100px;"></p>
+  </section>-->
 
-  <section class="body">
+   <section class="body">
 <!-- TODO: make the image caroussel and who we are left-right -->
-   <section class="banner pt-0 flex items-center">
-      <div class="slideshowContainer w-1/2"> 
+      <section class="banner">
+         <div class="slideshowContainer"> 
 
-        <!-- Full-width images with number -->
-        <div class="slideshowSlides slideshowFade">
-          <div class="slideshowNumber">1 / 3</div>
-          <img src="image/group2.jpeg">
-        </div>
+         <!-- Full-width images with number -->
+         <div class="slideshowSlides slideshowFade">
+            <div class="slideshowNumber">1 / 3</div>
+            <img src="image/group1_small.jpg">
+         </div>
 
-        <div class="slideshowSlides slideshowFade">
-          <div class="slideshowNumber">2 / 3</div>
-          <img src="image/GuestSpeaker.jpg">
-        </div>
+         <div class="slideshowSlides slideshowFade">
+            <div class="slideshowNumber">2 / 3</div>
+            <img src="image/group2_small.jpg">
+         </div>
 
-        <div class="slideshowSlides slideshowFade">
-          <div class="slideshowNumber">3 / 3</div>
-          <img src="image/group1.jpeg">
-        </div>
+         <div class="slideshowSlides slideshowFade">
+            <div class="slideshowNumber">3 / 3</div>
+            <img src="image/GuestSpeaker_small.jpg">
+         </div>
 
-        <!-- Next and previous buttons -->
-        <a class="slideshowPrev" onclick="plusSlides(-1)">&#10094;</a>
-        <a class="slideshowNext" onclick="plusSlides(1)">&#10095;</a>
-      </div>
-   </section>
+         <!-- Next and previous buttons -->
+         <a class="slideshowPrev" onclick="plusSlides(-1)">&#10094;</a>
+         <a class="slideshowNext" onclick="plusSlides(1)">&#10095;</a>
+         </div>
+      </section>
 
    <p style="margin-bottom:100px;"></p>
 
@@ -230,7 +250,7 @@
       <br>
       <h2 class="body3__title">What We Explore</h2>
       <br>
-      <img src="image/QC_WordCloud.png" width="700" height="800">
+      <img src="image/QC_WordCloud.png" width="700" height="800" style="background-color: white;">
       <br>
    </section>
 
@@ -287,7 +307,7 @@
         slideIndex = autoslideIndex;
         if (autoslideIndex > slides.length) {autoslideIndex = 1}
         slides[autoslideIndex-1].style.display = "block";
-        setTimeout(autoshowSlides, 7000); // Change image every 7 seconds
+        setTimeout(autoshowSlides, 4000); // Change image every 4 seconds
       }
    </script>
 </body>
