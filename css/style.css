@@ -61,7 +61,6 @@ html {
 
 body {
    font-family: var(--roboto);
-   /*background-color: #f4f4f4;*/
    background-color: var(--background-color);
    height: 100%;
    background-color: var(--background-color);
