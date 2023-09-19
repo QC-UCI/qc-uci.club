@@ -97,7 +97,7 @@ header {
    justify-content: space-between;
    align-items: center;
    color: var(--white-color);
-   padding: 20px 100px;
+   background: rgb(0, 0, 0);
 }
 
 header .header__title {
@@ -140,7 +140,6 @@ header .header__nav li:last-child {
    header .header__nav li {
       margin: 0 7px;
    }
-
 }
 
 /*************************/
@@ -165,7 +164,7 @@ section.banner .banner__title {
 section.banner .banner__btn1 {
    flex: 1;
    width: 100%;
-   font-size: auto;
+   font-size: large;
    font-weight: bold;
    text-align: center;
    background-color: #ffd362;
@@ -180,7 +179,7 @@ section.banner .banner__btn1 {
 section.banner .banner__btn2 {
    flex: 1;
    width: 100%;
-   font-size: auto;
+   font-size: large;
    font-weight: bold;
    color: var(--black-color);
    background-color: lightseagreen;
