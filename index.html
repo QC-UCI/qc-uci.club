@@ -66,10 +66,7 @@
       .slideshowContainer {
         width: auto;
         height: auto;
-        
         position: relative;
-        margin-left: 10%;
-        margin-right: 10%;
       }
       .slideshowSlides {
         display: none;
@@ -78,6 +75,8 @@
       }
       .slideshowSlides > img {
          height:90vh;
+         object-fit: contain;
+         background-color: black;
       }
       .slideshowPrev, .slideshowNext {
         cursor: pointer;
@@ -175,7 +174,7 @@
 
    <section class="body">
 <!-- TODO: make the image caroussel and who we are left-right -->
-      <section class="banner">
+      <section class="banner" style="width: 100vw; padding: 0; align-items: center;">
          <div class="slideshowContainer"> 
 
          <!-- Full-width images with number -->
