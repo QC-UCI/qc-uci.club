@@ -83,6 +83,21 @@ a {
    margin-right: auto;
    width: 50%;
  }
+
+.noscroll {
+   overflow-y: scroll; /* Add the ability to scroll */
+ }
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.noscroll::-webkit-scrollbar {
+   display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.noscroll {
+ -ms-overflow-style: none;  /* IE and Edge */
+ scrollbar-width: none;  /* Firefox */
+}
  
 
 /* Header */
@@ -867,7 +882,6 @@ section.contact__body textarea.form_component {
    text-align: left;
    outline: none;
    font-size: 24px;
-   font-weight: bold;
    align-content: center;
    margin-left: 5%;
    margin-top: 1%;
@@ -924,7 +938,6 @@ section.contact__body textarea.form_component {
 }
 
 .content {
-   padding: 0 100px;
    max-height: 0;
    overflow-wrap: normal;
    overflow-y: scroll;
