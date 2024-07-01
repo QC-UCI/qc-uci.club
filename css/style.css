@@ -609,7 +609,7 @@ section.join__body {
 section.join__body .contact__header {
    color: var(--black-color);
    width: 80%;
-   text-align: left;
+   text-align: center;
    font-size: var(--font-huge);
 }
 
@@ -624,12 +624,9 @@ section.join__body .join__platform {
    text-transform: capitalize;
    padding: 10px 10px;
    font-size: 30px;
-}
-
-section.join__body .join__platform {
    margin-top: 15px;
    display: flex;
-   justify-content: space-between;
+   justify-content:center;
    color: var(--black-color);
 }
 
@@ -637,42 +634,88 @@ section.join__body .join__platform button {
    border: none;
 }
 
-section.join__body .join__platform i {
-   display: block;
-   width: 85px;
-   margin: 0 5px;
-   padding: 10px 5px;
-   border-radius: var(--border-radius);
+/* ############# */
+
+section.join__body .join__header {
+   width: 80%;
+   margin: 40px 0px;
+   /*font-size: var(--font-mega);*/
+   font-size: clamp(1.5rem, 2.5vw, 3rem); /* Changed line: Dynamic font size */
+   text-align: left;
+}
+
+section.join__body .join__platform {
+   text-transform: capitalize;
+   padding: 10px 10px;
+   /*font-size: 30px;*/
+   font-size: clamp(1rem, 2vw, 2.5rem); /* Changed line: Dynamic font size */
+   margin-top: 15px;
+   display: flex;
+   flex-direction: column; /* Stack buttons vertically */
+   align-items: flex-start; /* Align items to the start */
+   color: var(--black-color);
+   position: relative; /* Add relative positioning to the parent container */
+}
+
+section.join__body .text-container {
+   position: relative; /* Positioning context for the button */
+   display: flex; /* Ensure container is inline with text */
+   justify-content: center;
+   width: 100%; /* Make text container full width */
+   margin-bottom: 100px; /* Space between buttons */
+   text-align: center;
+}
+
+section.join__body .button-link {
+   text-decoration: none;
+   color: var(--white-color);
+   /*padding: 10px 20px;*/
+   padding: clamp(0.5rem, 1vw, 1rem) clamp(1rem, 2vw, 2rem); /* Changed line: Dynamic padding */
+   border: 2px solid var(--black-color);
+   border-radius: 15px;
    transition: all 0.3s ease;
-   border-style: none;
-   font-size: 25px;
-   /*font-size: var(--font-large);*/
+   /*font-size: 25px;*/
+   font-size: clamp(1rem, 2.5vw, 2rem); /* Changed line: Dynamic font size */
+   position: absolute; /* Overlay button on text */
+   top: 50%; /* Center vertically */
+   left: 50%; /* Center horizontally */
+   transform: translate(-50%, -50%); /* Adjust positioning */
+   pointer-events: auto; /* Ensure the link is clickable */
+   width: flex; /* Make buttons take up full width of container */
+   max-width: 200px; /* Set max width for buttons */
+   z-index: 1; /* Ensure it is above other elements */
+   white-space: nowrap;  /*Prevent the text from wrapping */
 }
 
-section.join__body .join__platform .fa-envelope:hover {
-   background: #2eb67d;
-   color: var(--white-color);
+section.join__body .button-link.email {
+   background-color: #bd0072; /* Sign Up color */
 }
 
-section.join__body .join__platform .fa-discord:hover {
-   background: #7289da;
-   color: var(--white-color);
+section.join__body .button-link.discord {
+   background-color: #4a71ff; /* Discord color */
 }
 
-section.join__body .join__platform .fa-instagram:hover {
-   background: var(--lightred-color);
-   color: var(--white-color);
+section.join__body .button-link.instagram {
+   background-color: #e4ab00; /* Instagram color */
 }
 
-section.join__body .join__platform .fa-github:hover {
-   background: #000000;
-   color: var(--white-color);
+section.join__body .button-link.github {
+   background-color: #6f6f6f; /* GitHub color */
 }
 
-section.join__body .join__platform .fa-calendar-alt:hover {
-   background: var(--text-color);
-   color: var(--white-color);
+section.join__body .button-link.calendar {
+   background-color: #08879b; /* Calendar color */
 }
+
+section.join__body .button-link:hover {
+   background: var(--white-color);
+   color: var(--black-color);
+   border-color: var(--black-color);
+}
+
+
+
+/* ############# */
 
 /*************************/
 /*         Event         */

@@ -4,24 +4,106 @@
 <head>
    <meta charset="UTF-8">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <script
-      src="https://kit.fontawesome.com/2d323a629b.js"
-      crossorigin="anonymous">
-   </script>
+   <script 
+        src="https://kit.fontawesome.com/2d323a629b.js" 
+        crossorigin="anonymous">
+    </script>
+
    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto&display=swap"
-   rel="stylesheet">
+   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
    <link rel="stylesheet" href="css/tailwind_style.css">
    <link rel="stylesheet" href="css/style.css">
    <title>Projects | QC@UCI</title>
    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
-
    <meta name="viewport" content="width=device-width, initial-scale=1">
-
+   <style>
+      body {
+         font-family: 'Roboto', sans-serif;
+      }
+      .header {
+         background-color: black;
+         padding: 10px 0;
+      }
+      .header__nav {
+         display: flex;
+         justify-content: center;
+         list-style: none;
+         padding: 0;
+         margin: 0;
+      }
+      .header__nav li {
+         margin: 0 15px;
+      }
+      .header__nav a {
+         color: white;
+         text-decoration: none;
+         font-size: 16px;
+      }
+      .projects__title {
+         text-align: center;
+         font-size: 2rem;
+         font-weight: bold;
+         margin-bottom: 50px;
+      }
+      .accordion .card-header {
+         background-color: white;
+         border: none;
+         cursor: pointer;
+      }
+      .accordion .btn-link {
+         width: 100%;
+         text-align: center;
+         font-size: 1.25rem;
+         color: #007bff;
+         text-decoration: none;
+      }
+      .accordion .card {
+         margin: 10px auto;
+         border: none;
+         border-radius: 10px;
+         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+         width: 90%;
+      }
+      .accordion .card-body {
+         display: flex;
+         flex-wrap: wrap;
+      }
+      .accordion .card-body .summary {
+         flex: 2;
+         padding-right: 15px;
+      }
+      .accordion .card-body .thumbnail {
+         flex: 1;
+         display: flex;
+         align-items: center;
+         justify-content: center;
+      }
+      .accordion .card-body .thumbnail img {
+         max-width: 100%;
+         border-radius: 10px;
+      }
+      .accordion .collapse.show {
+         background-color: #e9ecef;
+      }
+      .accordion .btn-link:focus {
+         box-shadow: none;
+      }
+      .footer__copyRight {
+         text-align: center;
+         padding: 20px 0;
+      }
+      .footer__copyRight a {
+         color: black;
+         text-decoration: none;
+      }
+   </style>
 </head>
+
 <body>
-   <header class="bg-black text-white pt-2 pb-2 pl-8 pr-8">
-      <div id="left"><img src="image/QC@UCI Logo_small.png" width="125" alt="QC@UCI Logo"></div>
+    <header class="header">
+        <a href="index.html">
+           <img src="image/Anteater+Eq_Logo.png" width="150" alt="Home">
+        </a>
       <nav>
          <ul class="header__nav">
             <li><a href="index.html">Home</a></li>
@@ -33,118 +115,108 @@
             <li><a href="contact_us.html">Contact</a></li>
          </ul>
       </nav>
-   </header>
+   </header> 
 
+ 
    <p style="margin-bottom:180px;"></p>
-
-
-   <div class="projects__title">Featured Projects</div>
+   <div class="projects__title">Research Projects</div>
    <p style="margin-bottom:50px;"></p>
-    
-    <button class="collapsible">Upcoming Projects</button>
-    <div class="content">
-        <div class="accordion" style="min-height: 400px;" id="upcomingProjects">
-            <div class="card" style="margin-left: 5%; margin-right: 5%; min-height:auto">
-            <div class="card-header" id="headingOne">
-                <h2 class="mb-0">
-                <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne" style="font-size: large">
-                    Implementing Variational Quantum Eigensolver to Find the Ground State Energies of Molecules 
-                </button>
-                </h2>
-            </div>
-        
-            <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#upcomingProjects">
-                <div class="card-body" style="font-size:medium; margin-left:3%">
-                    Coming Soon!
-                </div>
-            </div>
-            </div>
-    
-            <div class="card" style="margin-left: 5%; margin-right: 5%; min-height:auto">
-                <div class="card-header" id="headingOne">
-                <h2 class="mb-0">
-                    <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo" style="font-size: large">
-                        Creating a Quantum Deep Neural Network for Effective Stock Market Closing Price Prediction 
-                    </button>
-                </h2>
-                </div>
-            
-                <div id="collapseTwo" class="collapse" aria-labelledby="headingOne" data-parent="#upcomingProjects">
-                <div class="card-body" style="font-size:medium; margin-left:3%">
-                    Coming Soon!
-                </div>
-                </div>
-            </div>
-        </div>
-    </div>
 
-    
-
-    <button class="collapsible">Past Projects</button>
-    <div class="content">
-        <div class="accordion" style="min-height: 400px;" id="pastProjects">
-            <div class="card" style="margin-left: 5%; margin-right: 5%;">
-            <div class="card-header" id="headingOne">
-                <h2 class="mb-0">
-                <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree" style="font-size: large;">
-                    Variational Quantum Convolutional Neural Network for Image Recognition to Determine Steering Angle for Autonomous Vehicles 
-                </button>
-                </h2>
+   <div class="accordion" id="projectsAccordion">
+      <div class="card">
+         <div class="card-header" id="headingOne">
+            <h2 class="mb-0">
+               <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                Quantum Generative AI for Real-time Audio Synthesis
+               </button>
+            </h2>
+         </div>
+         <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#projectsAccordion">
+            <div class="card-body">
+               <div class="summary">
+                  Coming Soon!
+               </div>
+               <div class="thumbnail">
+                  <img src="https://via.placeholder.com/150" alt="Project Image">
+               </div>
             </div>
-        
-            <div id="collapseThree" class="collapse" aria-labelledby="headingOne" data-parent="#pastProjects">
-                <div class="card-body" style="font-size:medium; margin-left:3%">
-                    Autonomous cars, such as those that Tesla Inc. builds, use complex deep neural networks to make instantaneous decisions based on real-time data from sensors on the vehicle. One major example of an autopilot mode feature is controlling the steering angle of the vehicle relative to the road. To build better self-driving models, we either need billions of miles of driving data or more complex models that train faster on lesser data. Conventional deep neural networks like the Convolutional Neural Network (CNN) are excellent at predicting steering angles by analyzing image data as input. This project entails constructing a hybrid neural network that combines classical and “quantum” layers in order to predict the steering angle for a car based on video data. Once a functional model is built, we will build a fully classical CNN and use it to compare against our hybrid CNN. The premise behind exploring this project lies in using quantum transfer learning methods similar to Variational Quantum Eigensolvers. We have a quantum circuit and an optimizer which optimizes parameters for a set of iterations till we find a desired value using quantum circuits. We will be using the layers in a deep neural network and transferring the weights as parameters to the quantum circuits. The quantum circuits will augment the classical neural network and help find the optimum steering angle based on images from a car's front camera. We shall build a deep CNN with several convolutional layers, and the following layers will be the variational quantum circuits. We will evaluate the performances based on the prediction of the steering angle and the time it takes for the neural networks to be trained.
-                </div>
+         </div>
+      </div>
+      <div class="card">
+         <div class="card-header" id="headingTwo">
+            <h2 class="mb-0">
+               <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                  Implementing Variational Quantum Eigensolver to Find the Ground State Energies of Molecules
+               </button>
+            </h2>
+         </div>
+         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#projectsAccordion">
+            <div class="card-body">
+               <div class="summary">
+                  Coming Soon!
+               </div>
+               <div class="thumbnail">
+                  <img src="https://via.placeholder.com/150" alt="Project Image">
+               </div>
             </div>
+         </div>
+      </div>
+      <div class="card">
+         <div class="card-header" id="headingThree">
+            <h2 class="mb-0">
+               <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
+                 Quantum Deep Learning for Effective Stock Market Closing Price Prediction
+               </button>
+            </h2>
+         </div>
+         <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#projectsAccordion">
+            <div class="card-body">
+               <div class="summary">
+                  Coming Soon!
+                </div>
+               <div class="thumbnail">
+                  <img src="https://via.placeholder.com/150" alt="Project Image">
+               </div>
             </div>
-    
-            <div class="card" style="margin-left: 5%; margin-right: 5%; min-height:auto">
-                <div class="card-header" id="headingOne">
-                <h2 class="mb-0">
-                    <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseFour" aria-expanded="true" aria-controls="collapseFour" style="font-size: large">
-                        Implementation of Grover's Search Algorithm using Python and Qiskit
-                    </button>
-                </h2>
+         </div>
+      </div>
+      <div class="card">
+         <div class="card-header" id="headingFour">
+            <h2 class="mb-0">
+               <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseFour" aria-expanded="true" aria-controls="collapseFour">
+                Variational Quantum Convolutional Neural Network for Image Recognition to Determine Steering Angle for Autonomous Vehicles
+               </button>
+            </h2>
+         </div>
+         <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#projectsAccordion">
+            <div class="card-body">
+               <div class="summary">
+                Autonomous cars, such as those that Tesla Inc. builds, use complex deep neural networks to make instantaneous decisions based on real-time data from sensors on the vehicle. One major example of an autopilot mode feature is controlling the steering angle of the vehicle relative to the road. To build better self-driving models, we either need billions of miles of driving data or more complex models that train faster on lesser data. Conventional deep neural networks like the Convolutional Neural Network (CNN) are excellent at predicting steering angles by analyzing image data as input. This project entails constructing a hybrid neural network that combines classical and “quantum” layers in order to predict the steering angle for a car based on video data. Once a functional model is built, we will build a fully classical CNN and use it to compare against our hybrid CNN. The premise behind exploring this project lies in using quantum transfer learning methods similar to Variational Quantum Eigensolvers. We have a quantum circuit and an optimizer which optimizes parameters for a set of iterations till we find a desired value using quantum circuits. We will be using the layers in a deep neural network and transferring the weights as parameters to the quantum circuits. The quantum circuits will augment the classical neural network and help find the optimum steering angle based on images from a car's front camera. We shall build a deep CNN with several convolutional layers, and the following layers will be the variational quantum circuits. We will evaluate the performances based on the prediction of the steering angle and the time it takes for the neural networks to be trained.
                 </div>
-            
-                <div id="collapseFour" class="collapse" aria-labelledby="headingOne" data-parent="#pastProjects">
-                <div class="card-body" style="font-size:medium; margin-left:3%">
-                    This algorithm quadratically speeds up the process of finding the queried item from a large list of N unsorted items by using a quantum oracle and the amplitude amplification technique.
-                </div>
-                </div>
+               <div class="thumbnail">
+                  <img src="https://via.placeholder.com/150" alt="Project Image">
+               </div>
             </div>
-        </div>
-    </div>
+         </div>
+      </div>
+   </div>
 
-    <script>
-    var coll = document.getElementsByClassName("collapsible");
-    var i;
+   <footer>
+      <div class="footer__copyRight">
+         <p><a href="./contact_us.html">Copyright © 2024 Quantum Computing @ UCI. All Rights Reserved. </a></p>
+      </div>
+   </footer>
 
-    for (i = 0; i < coll.length; i++) {
-    coll[i].addEventListener("click", function() {
-        this.classList.toggle("active");
-        var content = this.nextElementSibling;
-        if (content.style.maxHeight){
-        content.style.maxHeight = null;
-        } else {
-        content.style.maxHeight = content.scrollHeight + "px";
-        } 
-    });
-    }
-    </script>
-
-    <footer>
-        <div class="footer__copyRight">
-            <p>Follow us on Discord and Instagram.</p>
-            <p><a href="./contact_us.html">© Quantum Computing at UCI</a> 2023</p>
-        </div>
-    </footer>
-
-
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-
+   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+   <script>
+      $(document).ready(function() {
+         $('#projectsAccordion').on('show.bs.collapse', function () {
+            $('#projectsAccordion .collapse').collapse('hide');
+         });
+      });
+   </script>
 </body>
+
 </html>
