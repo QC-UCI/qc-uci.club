@@ -33,143 +33,8 @@
       </nav>
     </header>
 
-   <style>
-      span.photo {
-         display: inline-block;
-         width: 500px;
-         padding: 5px;
-      }
-
-      span.msg {
-         display: block;
-         width: 900px;
-      }
-   
-      span.left {
-         text-align: "left";
-         display: inline-block;
-         height: 200px;
-      }
-   
-      span.center {
-         text-align: "center";
-         display: inline-block;
-         height: 200px;
-      }
-   
-      span.right {
-         text-align: "right";
-         display: inline-block;
-         height: 200px;
-      }
-
-      .slideshowContainer {
-        width: auto;
-        height: auto;
-        position: relative;
-      }
-      .slideshowSlides {
-        display: none;
-        border-color: white;
-        border-width: 2px;
-      }
-      .slideshowSlides > img {
-         height:90vh;
-         object-fit: contain;
-         background-color: black;
-      }
-      .slideshowPrev, .slideshowNext {
-        cursor: pointer;
-        position: absolute;
-        top: 50%;
-        left: 0;
-        width: auto;
-        margin-top: -22px;
-        padding: 16px;
-        color: white;
-        font-weight: bold;
-        font-size: 18px;
-        transition: 0.6s ease;
-        border-radius: 0 3px 3px 0;
-        user-select: none;
-      }
-      .slideshowNext {
-        left: initial;
-        right: 0;
-        border-radius: 3px 0 0 3px;
-      }
-      .slideshowPrev:hover, .slideshowNext:hover {
-        background-color: rgba(0,0,0,0.8);
-      }
-      .slideshowNumber {
-        color: #f2f2f2;
-        font-size: 12px;
-        padding: 8px 12px;
-        position: absolute;
-        top: 0;
-      }
-      .slideshowFade {
-        animation-name: fade;
-        animation-duration: 1.5;
-      }
-      @keyframes slideshowFade {
-        from {opacity: .4}
-        to {opacity: 1}
-      }
-
-      #whatwedoitems {
-         align-content: center;
-         align-items: center;
-      }
-      .whatwedoitem {
-         display: inline-flex;
-         flex-direction: column;
-         margin:10px;
-         padding: 10px 5vw 0 5vw;
-      }
-
-      .header{
-         position: relative;
-      }
-
-   </style>
-
-   <!--
-   <img src="image/Website-Bkgd.png" alt="Background Image" style="width: 100%; background-size:cover; background-color: #333;">
-   <section class="banner" style="display:contents;">
-      <a href="https://www.qc-uci.club/join.html" class="banner__btn1">Get Involved</a>
-      <a href="https://www.qc-uci.club/learn.html" class="banner__btn2">Learn More</a>
-   </section>
-   -->
-
-   <!--
    <section class="body">
-      <section class="banner" style="width: 100vw; padding: 0; align-items: center;">
-         <div class="slideshowContainer"> 
-
-         <div class="slideshowSlides slideshowFade">
-            <div class="slideshowNumber">1 / 3</div>
-            <img src="image/group1_small.jpg">
-         </div>
-
-         <div class="slideshowSlides slideshowFade">
-            <div class="slideshowNumber">2 / 3</div>
-            <img src="image/group2_small.jpg">
-         </div>
-
-         <div class="slideshowSlides slideshowFade">
-            <div class="slideshowNumber">3 / 3</div>
-            <img src="image/GuestSpeaker_small.jpg">
-         </div>
-
-         <a class="slideshowPrev" onclick="plusSlides(-1)">&#10094;</a>
-         <a class="slideshowNext" onclick="plusSlides(1)">&#10095;</a>
-         </div>
-      </section>
-   -->
-
-   <section class="body">
-      <p style="margin-bottom:70px;"></p>
+      <p style="margin-bottom:200px;"></p>
       <h2 class="body__title">Our Mission</h2>
       <div class="body__caption" style="margin-left: 10%; margin-right: 10%;">
          <div><span> We aim to cultivate interest in quantum software and develop the quantum information science community at UCI. We are dedicated to empowering students with the skills to design and implement quantum algorithms on quantum computers. Additionally, we aim to foster strong collaboration within and beyond our community by facilitating interdisciplinary research that combines quantum computing with various fields such as machine learning and optimization.</span></div>
@@ -178,26 +43,28 @@
    </section>
 
    <section class="body2">
-      <h2 class="body2__title" style = "position:absolute; top:60px;">What We Do</h2>
-      <br> <br>
-      <div id="whatwedoitems">
-         <div class="whatwedoitem">
-            <br>
-            <img style="margin-inline: auto;" src="image/workshop_icon.png"></img>         
-            <br>
-            <t type="text" style="font-size: 24px; text-align:center"> Weekly Discussions </t>
+      <h2 class="body2__title" style="text-align:center;">What We Do</h2>
+      <div class="whatwedoContainer">
+         <div class="whatwedoItem">
+            <img class="whatwedoImage" src="image/QFF_discussion.jpeg" alt="Weekly Discussions">
+            <div class="whatwedoDescription">
+               <div class="whatwedoTitle">Weekly Discussions</div>
+               <div class="whatwedoText">Join us every week for insightful discussions on the latest in quantum computing.</div>
+            </div>
          </div>
-          <div class="whatwedoitem">
-            <br>
-            <img style="margin-inline: auto;" src="image/research_icon.png"></img>
-            <br>
-            <t type="text" style="font-size: 24px; text-align:center"> Research Projects </t>
-          </div>
-          <div class="whatwedoitem">
-            <br>
-            <img style="margin-inline: auto;" src="image/guest_speaker.png" width="150"></img>
-            <br>
-            <t type="text" style="font-size: 24px; text-align:center"> Guest Speakers </t>
+         <div class="whatwedoItem">
+            <img class="whatwedoImage" src="image/research_proj_2024.png" alt="Research Projects">
+            <div class="whatwedoDescription">
+               <div class="whatwedoTitle">Research Projects</div>
+               <div class="whatwedoText">Participate in cutting-edge research projects and contribute to groundbreaking discoveries.</div>
+            </div>
+         </div>
+         <div class="whatwedoItem">
+            <img class="whatwedoImage" src="image/Shion_GuestSpeaker.JPG" alt="Guest Speakers">
+            <div class="whatwedoDescription">
+               <div class="whatwedoTitle">Guest Speakers</div>
+               <div class="whatwedoText">Attend talks by renowned experts in the field of quantum computing and expand your knowledge.</div>
+            </div>
          </div>
       </div>
    </section>
@@ -206,20 +73,43 @@
       <p style="margin-bottom:70px;"></p>
       <h2 class="body3__title">Hackathons and Conferences</h2>
       <div id="whatwedoitems">
-         <div class="whatwedoitem">
-            <br>
-            <img style="background-color: white; padding: 10%;" src="image/SQUID.png" alt="Quantum Coalition"></img>      
-            <br>
-            <t type="text" style="font-size: 24px; text-align:center"> Quantum Coalition </t>
-         </div>
           <div class="whatwedoitem">
             <br>
             <img style="margin-inline: auto;" src="image/QFF23_logo.png" alt="Qiskit Fall Fest 2023"></img>
             <br>
             <t type="text" style="font-size: 24px; text-align:center"> IBM Qiskit Fall Fest </t>
           </div>
+          <div class="whatwedoitem">
+            <br>
+            <img style="margin-inline: auto; background-color: white; padding: 10%;" src="image/SQUID.png" alt="Quantum Coalition"></img>      
+            <br>
+            <t type="text" style="font-size: 24px; text-align:center"> Quantum Coalition </t>
+          </div>
       </div>
       <p style="margin-bottom:70px;"></p>
+   </section>
+
+   <!-- News & Highlights Section -->
+   <section class="news-section">
+      <h2 class="news-title">News & Highlights</h2>
+      <div class="news-container">
+         <div class="news-item">
+            <div class="news-img" style="background-image: url('image/Anteater+Eq_Logo_Dark.png');"></div>
+            <div class="news-content">
+               <div class="news-date">June 28, 2024</div>
+               <div class="news-summary"> QC@UCI is officially an ICS-affiliated Organization.</div>
+               <div class="news-read-more"><a href="https://ics.uci.edu/student-experience/clubs-organizations/">Read more</a></div>
+            </div>
+         </div>
+         <div class="news-item">
+            <div class="news-img" style="background-image: url('image/sandyirani.jpg');"></div>
+            <div class="news-content">
+               <div class="news-date">April 15, 2024</div>
+               <div class="news-summary">Join us for an exciting guest lecture on quantum complexity theory by Professor Sandy Irani from UCI.</div>
+               <div class="news-read-more"><a href="https://simons.berkeley.edu/people/sandy-irani">Read bio</a></div>
+            </div>
+         </div>
+      </div>
    </section>
    
    <footer>
@@ -228,41 +118,5 @@
       </div>
     </footer>
 
-   <script type="text/javascript">
-      let slideIndex = 1;
-      showSlides(slideIndex);
-      let autoslideIndex = 0;
-      autoshowSlides();
-
-      // Next/previous controls
-      function plusSlides(n) {
-        showSlides(slideIndex += n);
-        autoslideIndex = slideIndex+n;
-      }
-
-      function showSlides(n) {
-        let i;
-        let slides = document.getElementsByClassName("slideshowSlides");
-        if (n > slides.length) {slideIndex = 1}
-        if (n < 1) {slideIndex = slides.length}
-        for (i = 0; i < slides.length; i++) {
-          slides[i].style.display = "none";
-        }
-        slides[slideIndex-1].style.display = "block";
-      }
-
-      function autoshowSlides() {
-        let i;
-        let slides = document.getElementsByClassName("slideshowSlides");
-        for (i = 0; i < slides.length; i++) {
-          slides[i].style.display = "none";
-        }
-        autoslideIndex++;
-        slideIndex = autoslideIndex;
-        if (autoslideIndex > slides.length) {autoslideIndex = 1}
-        slides[autoslideIndex-1].style.display = "block";
-        setTimeout(autoshowSlides, 4000); // Change image every 4 seconds
-      }
-   </script>
 </body>
 </html>
