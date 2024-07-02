@@ -1,39 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script
-       src="https://kit.fontawesome.com/2d323a629b.js"
-       crossorigin="anonymous">
-    </script>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto&display=swap"
-    rel="stylesheet">
-    <link rel="stylesheet" href="css/tailwind_style.css">
-    <link rel="stylesheet" href="css/style.css">
-    <title>Join | QC@UCI</title>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <script
+      src="https://kit.fontawesome.com/2d323a629b.js"
+      crossorigin="anonymous">
+   </script>
+   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto&display=swap"
+   rel="stylesheet">
+   <link rel="stylesheet" href="css/tailwind_style.css">
+   <link rel="stylesheet" href="css/style.css">
+   <title>Home | QC@UCI</title>
+   <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
 </head>
-
 <body>
-
-  <header class="header">
-    <a href="index.html">
-       <img src="image/Anteater+Eq_Logo.png" width="200" alt="Home">
-    </a>
-      <nav>
-        <ul class="header__nav">
-          <li><a href="index.html">Home</a></li>
-            <li><a href="join.html">Join</a></li>
-            <li><a href="learn.html">Learn</a></li>
-            <li><a href="team.html">Team</a></li>
-            <li><a href="event.html">Events</a></li>
-            <li><a href="projects.html">Projects</a></li>
-            <li><a href="contact_us.html">Contact</a></li>
-        </ul>
-      </nav>
-    </header>
-
+   
    <style>
+
+      #grad1in {
+         height: 150px;
+         background-image: linear-gradient(#c4cfff, #b2d7ff);
+      }
+      
+      #grad3in {
+         height: 150px;
+         background-image: linear-gradient(#b2d7ff, #a0e7ff);
+      }
+
+      #grad3out {
+         height: 150px;
+         background-image: linear-gradient(#a0e7ff, #c4cfff);
+      }
+
       span.photo {
          display: inline-block;
          width: 500px;
@@ -133,20 +133,51 @@
       }
 
    </style>
+   
+   <header class="header">
+      <a href="index.html">
+         <img src="image/Anteater+Eq_Logo.png" width="150" alt="Home">
+     </a>
+      <nav>
+         <ul class="header__nav">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="join.html">Join</a></li>
+            <li><a href="learn.html">Learn</a></li>
+            <li><a href="team.html">Team</a></li>
+            <li><a href="event.html">Events</a></li>
+            <li><a href="projects.html">Projects</a></li>
+            <li><a href="contact_us.html">Contact</a></li>
+         </ul>
+      </nav>      
+   </header>
 
-   <!--
    <img src="image/Website-Bkgd.png" alt="Background Image" style="width: 100%; background-size:cover; background-color: #333;">
+
    <section class="banner" style="display:contents;">
       <a href="https://www.qc-uci.club/join.html" class="banner__btn1">Get Involved</a>
+      <br>
+      <br>
       <a href="https://www.qc-uci.club/learn.html" class="banner__btn2">Learn More</a>
    </section>
-   -->
 
-   <!--
+   <p style="margin-bottom:85px;"></p>
+
+   <!-- CODE THAT WORKED PREVIOUSLY (ONLY USE TO REVERT BACK / Can use GitHub commit history too)-->
+   <!--<section class="banner">
+      <img src="image/quantum_computer_right_justified.png" alt="Background Image" class="w-full" style="height: 100vh; width: 100%;">
+      <div class="banner absolute text-white">
+          <h1 class="banner__title">Quantum Computing at UCI</h1>
+          <a href="https://www.qc-uci.club/join.html" style="margin-bottom:80px" class="banner__btn1">Get Involved</a>
+          <a href="https://www.qc-uci.club/learn.html" style="margin-bottom:80px" class="banner__btn2">Learn More</a>
+      </div>
+  </section>-->
+
    <section class="body">
+<!-- TODO: make the image caroussel and who we are left-right -->
       <section class="banner" style="width: 100vw; padding: 0; align-items: center;">
          <div class="slideshowContainer"> 
 
+         <!-- Full-width images with number -->
          <div class="slideshowSlides slideshowFade">
             <div class="slideshowNumber">1 / 3</div>
             <img src="image/group1_small.jpg">
@@ -162,20 +193,23 @@
             <img src="image/GuestSpeaker_small.jpg">
          </div>
 
+         <!-- Next and previous buttons -->
          <a class="slideshowPrev" onclick="plusSlides(-1)">&#10094;</a>
          <a class="slideshowNext" onclick="plusSlides(1)">&#10095;</a>
          </div>
       </section>
-   -->
 
-   <section class="body">
-      <p style="margin-bottom:70px;"></p>
+   <p style="margin-bottom:100px;"></p>
+
+   
       <h2 class="body__title">Our Mission</h2>
       <div class="body__caption" style="margin-left: 10%; margin-right: 10%;">
          <div><span> We aim to cultivate interest in quantum software and develop the quantum information science community at UCI. We are dedicated to empowering students with the skills to design and implement quantum algorithms on quantum computers. Additionally, we aim to foster strong collaboration within and beyond our community by facilitating interdisciplinary research that combines quantum computing with various fields such as machine learning and optimization.</span></div>
       </div>
       <p style="margin-bottom:70px;"></p>
    </section>
+
+   <div id="grad1in"></div>
 
    <section class="body2">
       <h2 class="body2__title" style = "position:absolute; top:60px;">What We Do</h2>
@@ -202,9 +236,20 @@
       </div>
    </section>
 
+   <div id="grad3in"></div>
+
    <section class="body3">
-      <p style="margin-bottom:70px;"></p>
-      <h2 class="body3__title">Hackathons and Conferences</h2>
+      <br>
+      <h2 class="body3__title">What We Explore</h2>
+      <br>
+      <img src="image/QC_WordCloud.png" width="700" height="800" style="background-color: white;">
+      <br>
+   </section>
+
+   <div id="grad3out"></div>
+
+   <section class="body">
+      <h2 class="body__title">Hackathons and Conferences</h2>
       <div id="whatwedoitems">
          <div class="whatwedoitem">
             <br>
@@ -219,14 +264,14 @@
             <t type="text" style="font-size: 24px; text-align:center"> IBM Qiskit Fall Fest </t>
           </div>
       </div>
-      <p style="margin-bottom:70px;"></p>
    </section>
    
    <footer>
       <div class="footer__copyRight">
-          <p><a href="./contact_us.html">Copyright © 2024 Quantum Computing @ UCI. All Rights Reserved. </a></p>
+         <p>Follow us on Discord and Instagram.</p>
+         <p><a href="./contact_us.html">© Quantum Computing at UCI</a> 2024</p>
       </div>
-    </footer>
+   </footer>
 
    <script type="text/javascript">
       let slideIndex = 1;
