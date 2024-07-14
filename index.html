@@ -16,22 +16,163 @@
 
 <body>
 
-  <header class="header">
-    <a href="index.html">
-       <img src="image/Anteater+Eq_Logo.png" width="200" alt="Home">
-    </a>
-      <nav>
-        <ul class="header__nav">
-          <li><a href="index.html">Home</a></li>
-            <li><a href="join.html">Join</a></li>
-            <li><a href="learn.html">Learn</a></li>
-            <li><a href="team.html">Team</a></li>
-            <li><a href="event.html">Events</a></li>
-            <li><a href="projects.html">Projects</a></li>
-            <li><a href="contact_us.html">Contact</a></li>
-        </ul>
-      </nav>
-    </header>
+   <header class="header">
+      <a href="index.html">
+         <img src="image/Anteater+Eq_Logo.png" width="200" alt="Home">
+      </a>
+        <nav>
+          <ul class="header__nav">
+            <li><a href="index.html">Home</a></li>
+              <li><a href="join.html">Join</a></li>
+              <li><a href="learn.html">Learn</a></li>
+              <li><a href="team.html">Team</a></li>
+              <li><a href="event.html">Events</a></li>
+              <li><a href="projects.html">Projects</a></li>
+              <li><a href="contact_us.html">Contact</a></li>
+          </ul>
+        </nav>
+      </header>
+
+   <p style="margin-bottom:200px;"></p>
+   
+   <style>
+      .qubit-container {
+         position: relative;
+         width: 50%;
+         height: 50%;
+         margin-top: 100px;  /* Margin top ensures it is below the header */
+         margin: 0 auto;
+         perspective: 1000px;
+      }
+
+      .qubit {
+         width: 25%;
+         height: 60%;
+         border: 5px solid black;
+         border-radius: 50%;
+         position: absolute;
+         top: 0;
+         left: 0;
+      }
+
+      .ellipse {
+         width: 24%;
+         height: 10%;
+         border-radius: 50%;
+         border: 2px dashed black;
+         position: absolute;
+         top: 25%;
+         left: 0%;
+         box-sizing:content-box;
+      }
+
+      .line {
+         position: absolute;
+         top: 30.5%;
+         left: 12.5%;
+         width: 0;
+         height: 3px;
+         background-color: black;
+         transform-origin: left center;
+         transition: transform 3s ease, width 3s ease;
+      }
+
+      .qubit-container .typing-container {
+         top: 40%;
+         left: 60%;
+         text-align: center;
+         margin-top: 20px;
+         font-size: 24px;
+         font-family: 'Courier New', Courier, monospace;
+         white-space: nowrap;
+         overflow: wrap;
+         border-right: 3px solid black;
+         width: 24ch; /* Width matches the length of the text */
+         animation: typing 4s steps(24) 1s 1 normal both, blink 0.5s step-end infinite;
+      }
+
+        @keyframes typing {
+            from {
+                width: 0;
+            }
+            to {
+                width: 24ch;
+            }
+        }
+
+        @keyframes blink {
+            from, to {
+                border-color: transparent;
+            }
+            50% {
+                border-color: black;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .qubit-container {
+                width: 150px;
+                height: 150px;
+            }
+
+            .qubit, .ellipse {
+                width: 100%;
+                height: 60%;
+            }
+
+            .typing-container {
+                font-size: 20px;
+                width: 20ch; /* Adjust width for smaller screens */
+            }
+        }
+   </style>
+
+   <!-- Qubit Animation Section -->
+   <section class="body">
+      <div class="qubit-container">
+         <div class="qubit"></div>
+         <div class="ellipse"></div>
+         <div class="line" id="line"></div>
+         <p style="margin-bottom:230px;"></p>
+         <div class="typing-container" id="typing"></div>
+         <script>
+            function getRandomInt(max) {
+                  return Math.floor(Math.random() * max);
+            }
+
+            function moveLine() {
+                  const line = document.getElementById('line');
+                  const angle = getRandomInt(360);
+                  const length = getRandomInt(70) + 10; // random length between 50 and 150
+                  line.style.width = `${length}px`;
+                  line.style.transform = `rotate(${angle}deg)`;
+            }
+
+            moveLine();
+            setInterval(moveLine, 4000);
+
+            // Typing effect
+            const text = "Quantum Computing at UCI";
+            const typingContainer = document.getElementById('typing');
+
+            function typeText() {
+                  let index = 0;
+                  function type() {
+                     if (index < text.length) {
+                        typingContainer.textContent += text.charAt(index);
+                        index++;
+                        setTimeout(type, 150); // Adjust typing speed here
+                     }
+                  }
+                  type();
+            }
+
+            typeText();
+         </script>
+      </div>
+   </section>
+
+   <p style="margin-bottom:100px;"></p>
 
    <section class="body">
       <p style="margin-bottom:200px;"></p>
@@ -117,6 +258,25 @@
           <p><a href="./contact_us.html">Copyright © 2024 Quantum Computing @ UCI. All Rights Reserved. </a></p>
       </div>
     </footer>
+
+    <script src="js/main.js"></script>
+
+    <script>
+      function getRandomInt(max) {
+            return Math.floor(Math.random() * max);
+        }
+
+        function moveLine() {
+            const line = document.getElementById('line');
+            const angle = getRandomInt(360);
+            const length = getRandomInt(40); // random length between 50 and 150
+            line.style.width = `${length}px`;
+            line.style.transform = `rotate(${angle}deg)`;
+        }
+
+        moveLine();
+        setInterval(moveLine, 4000);
+  </script>
 
 </body>
 </html>
