@@ -112,7 +112,7 @@ header {
     justify-content: space-between;
     align-items: center;
     color: var(--white-color);
-    background: var(--deep-navy);
+    background: #091b46;
 }
 
 header .header__title {
