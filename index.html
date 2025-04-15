@@ -1,14 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!DOCTYPE html>
+  <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="https://kit.fontawesome.com/2d323a629b.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto&display=swap">
     <link rel="stylesheet" href="css/tailwind_style.css">
     <link rel="stylesheet" href="css/style.css">
     <title>Join | QC@UCI</title>
     <style>
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+        overflow-x: hidden;
+      }
       .interactive-nav li a {
         transition: all 0.3s ease;
         position: relative;
@@ -26,34 +35,64 @@
       .interactive-nav li a:hover::after {
         width: 100%;
       }
+      .hero {
+        background: linear-gradient(135deg, #1e3a8a 0%, #312e81 100%);
+        color: white;
+        padding: 140px 20px 100px;
+        text-align: center;
+        animation: fadeIn 1.5s ease-out;
+      }
+      @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(10px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+      .hero h1 {
+        font-size: 3rem;
+        font-weight: 800;
+        margin-bottom: 20px;
+      }
+      .hero p {
+        font-size: 1.2rem;
+        max-width: 700px;
+        margin: 0 auto;
+        line-height: 1.6;
+      }
     </style>
+  </head>
+  <body class="overflow-auto">
+    <header class="header z-50 relative">
+      <a href="index.html">
+        <img src="image/navy_anteater_bloch.png" width="150" alt="Home">
+      </a>
+      <nav>
+        <ul class="header__nav interactive-nav">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="join.html">Join</a></li>
+          <li><a href="learn.html">Learn</a></li>
+          <li><a href="team.html">Team</a></li>
+          <li><a href="event.html">Events</a></li>
+          <li><a href="projects.html">Projects</a></li>
+          <li><a href="contact_us.html">Contact</a></li>
+        </ul>
+      </nav>
+    </header>
+  
+    <!-- Hero Section -->
+    <section class="hero relative z-0">
+      <h1>Welcome to Quantum Computing @ UCI</h1>
+      <p>Unleash your curiosity, implement cutting-edge algorithms, and explore the future of computation—one qubit at a time!</p>
+    </section>
+    
 </head>
 <body>
-  <header class="header">
-    <a href="index.html">
-      <img src="image/navy_anteater_bloch.png" width="150" alt="Home">
-    </a>
-    <nav>
-      <ul class="header__nav interactive-nav">
-        <li><a href="index.html">Home</a></li>
-        <li><a href="join.html">Join</a></li>
-        <li><a href="learn.html">Learn</a></li>
-        <li><a href="team.html">Team</a></li>
-        <li><a href="event.html">Events</a></li>
-        <li><a href="projects.html">Projects</a></li>
-        <li><a href="contact_us.html">Contact</a></li>
-      </ul>
-    </nav>
-  </header>
-
   <section class="body">
     <p style="margin-bottom:200px;"></p>
     <h2 class="body__title">Our Mission</h2>
     <div class="body__caption" style="margin-left: 10%; margin-right: 10%;">
       <div><span> 
         At the Quantum Computing Club, we’re all about unlocking the power of quantum software and building a vibrant quantum community at UCI! Whether you're a total beginner or already dreaming in qubits, we’re here to help you design, experiment, and innovate with real quantum algorithms.
-        But we don’t stop there! We love crossing boundaries—from machine learning to optimization and beyond—exploring how quantum computing can revolutionize different fields. With hands-on projects, collabs, and a passion for the future, we’re shaping the next wave of quantum pioneers.
-        Join us as we push the limits of what’s possible in quantum tech — one qubit at a time!</span></div>
+        But we don’t stop there! We love crossing boundaries—from machine learning to optimization and beyond—exploring how quantum computing can revolutionize different fields. With hands-on projects, collabs, and a passion for the future, we’re shaping the next wave of quantum pioneers. 
+      </span></div>
     </div>
     <p style="margin-bottom:70px;"></p>
   </section>
