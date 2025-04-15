@@ -4,107 +4,90 @@
 <head>
    <meta charset="UTF-8">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <script
-      src="https://kit.fontawesome.com/2d323a629b.js"
-      crossorigin="anonymous">
-   </script>
-   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+   <script src="https://kit.fontawesome.com/2d323a629b.js" crossorigin="anonymous"></script>
+   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto&display=swap">
    <link rel="stylesheet" href="css/tailwind_style.css">
    <link rel="stylesheet" href="css/style.css">
    <title>Learn | QC@UCI</title>
    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
-   <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
-<body>
+<body class="bg-gray-50 font-['Roboto']">
     <header class="header">
         <a href="index.html">
             <img src="image/navy_anteater_bloch.png" width="150" alt="Home">
         </a>
-      <nav>
-         <ul class="header__nav">
-            <li><a href="index.html">Home</a></li>
-            <li><a href="join.html">Join</a></li>
-            <li><a href="learn.html">Learn</a></li>
-            <li><a href="team.html">Team</a></li>
-            <li><a href="event.html">Events</a></li>
-            <li><a href="projects.html">Projects</a></li>
-            <li><a href="contact_us.html">Contact</a></li>
-         </ul>
-      </nav>
-   </header> 
+        <nav>
+            <ul class="header__nav">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="join.html">Join</a></li>
+                <li><a href="learn.html">Learn</a></li>
+                <li><a href="team.html">Team</a></li>
+                <li><a href="event.html">Events</a></li>
+                <li><a href="projects.html">Projects</a></li>
+                <li><a href="contact_us.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
 
-   <p style="margin-bottom:180px;"></p>
-   <div class="learn__title">What is Quantum Computing?</div>
-   <p style="margin-bottom:50px;"></p>
-
-   <div class="about-main-container">
-    <div class="about-left-section">
-        <p class="learn_txt">
-           <b>Quantum computing</b> is a new and rapidly evolving computational paradigm rooted in the principles of quantum mechanics, poised to compete with traditional computing models. It works in a very different way using quantum bits or <b>qubits</b>, rather than classical bits. Special properties of subatomic particles like electrons or photons grant quantum computers an inherent advantage in solving some complex problems.<br><br> Unlike classical computers, which process information sequentially, quantum computers can evaluate multiple solutions in parallel, which <b>exponentially</b> increases their computing power. This transformative technology holds the potential to reshape our approach to a multitude of challenges. From optimizing supply chains and revolutionizing cryptography to decoding the mysteries of quantum physics and advancing artificial intelligence, quantum computing transcends the boundaries of conventional computation.
-        </p>
-    </div>
-    <div class="about-right-section">
-        <img src="image/qc.png" alt="A picture of quantum mechanics.">
-    </div>
-    </div>
-
-    <div class="learn__title">Applications</div>
-
-    <div class="applications-container">
-      <div class="app-item">
-         <div class="app-text">
-             <h2>Cybersecurity</h2>
-             <p>Quantum computing presents a dual challenge and opportunity in cybersecurity. It threatens widely-used encryption algorithms like RSA with its potential to efficiently solve problems like integer factorization. This necessitates the development of quantum-resistant encryption methods like SHA-256. Simultaneously, quantum key distribution (QKD) harnesses the principles of quantum mechanics to establish unhackable encryption keys, ensuring data security in a post-quantum era.</p>
-         </div>
-         <div class="app-img">
-             <img src="image/app-image1.png" alt="Cybersecurity">
-         </div>
-     </div>
-     <div class="app-item">
-         <div class="app-text">
-             <h2>Machine Learning</h2>
-             <p>Quantum Machine Learning (QML) holds the potential to revolutionize fields like natural language processing, image recognition, and recommendation systems, where data processing and understanding are paramount. Scientists are exploring various quantum neural networks and building variational quantum algorithms for improved generality and better accuracy in reduced training time. Thus, QML offers the prospect of more potent and efficient AI models, redefining the landscape of artificial intelligence.</p>
-         </div>
-         <div class="app-img">
-             <img src="image/app-image2.png" alt="Machine Learning">
-         </div>
-     </div>
-     <div class="app-item">
-         <div class="app-text">
-             <h2>Optimization</h2>
-             <p>Quantum algorithms, such as the quantum approximate optimization algorithm (QAOA), promise significant acceleration of optimization tasks, enhancing training processes and model tuning. This technology also augments clustering and classification algorithms, enabling the identification of intricate patterns within vast datasets.</p>
-         </div>
-         <div class="app-img">
-             <img src="image/app-image3.png" alt="Optimization">
-         </div>
-     </div>
-     <div class="app-item">
-         <div class="app-text">
-             <h2>Chemistry</h2>
-             <p>Quantum computing revolutionizes chemistry by rapidly modeling molecules and chemical reactions at the quantum level. This breakthrough accelerates drug discovery, materials engineering, and fundamental chemical research, offering solutions to global challenges in healthcare and materials science.
-            </p>
-         </div>
-         <div class="app-img">
-             <img src="image/app-image4.png" alt="Chemistry">
-         </div>
-     </div>
-    </div>
-   <div class="app-item">
-         <div class="app-text">
-             <h2>Physics</h2>
-             <p>Quantum computing empowers physicists by simulating quantum systems, aiding research in quantum field theory, optics, and gravitational wave detection. It accelerates the study of particles, fundamental forces, and the mysteries of the universe, promising profound insights into the fabric of reality.</p>
-         </div>
-         <div class="app-img">
-             <img src="image/app-image5.png" alt="Physics">
-         </div>
-     </div>
-
-
-    <footer>
-        <div class="footer__copyRight">
-            <p><a href="./contact_us.html">Copyright © 2024 Quantum Computing @ UCI. All Rights Reserved. </a></p>
+    <section class="py-20 px-6 max-w-6xl mx-auto">
+        <h1 class="text-4xl font-bold text-center text-gray-800 mb-10">What is Quantum Computing?</h1>
+        <div class="flex flex-col md:flex-row gap-10 items-center">
+            <div class="flex-1 text-gray-700 text-lg">
+                <p>
+                    <strong>Quantum computing</strong> is a new and rapidly evolving computational paradigm rooted in the principles of quantum mechanics. It uses <strong>qubits</strong> — special quantum bits that can be 0 and 1 at the same time.
+                </p>
+                <p class="mt-4">
+                    This means quantum computers can process lots of possibilities simultaneously, giving them a powerful edge in solving complex problems. They're not just a faster computer — they think in a completely different way.
+                </p>
+                <ul class="mt-6 list-disc list-inside space-y-2 text-base">
+                    <li>💡 Simulate nature and molecules better than classical computers</li>
+                    <li>🔒 Break and also protect encryption</li>
+                    <li>🤖 Supercharge AI and pattern recognition</li>
+                </ul>
+            </div>
+            <div class="flex-1">
+                <img src="image/qc.png" alt="Quantum Mechanics Illustration" class="rounded-lg shadow-md" />
+            </div>
         </div>
-    </footer>
+    </section>
 
+    <section class="py-12 px-6 bg-white">
+        <h2 class="text-3xl font-bold text-center text-gray-800 mb-10">Applications</h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 max-w-6xl mx-auto">
+            <div class="bg-gray-100 rounded-lg p-6 shadow hover:shadow-lg transition">
+                <img src="image/app-image1.png" alt="Cybersecurity" class="h-32 mx-auto mb-4">
+                <h3 class="text-xl font-semibold text-center mb-2">Cybersecurity</h3>
+                <p class="text-sm text-gray-700 text-center">Quantum computers challenge RSA encryption — but also enable unbreakable quantum-secured messages via QKD.</p>
+            </div>
+
+            <div class="bg-gray-100 rounded-lg p-6 shadow hover:shadow-lg transition">
+                <img src="image/app-image2.png" alt="Machine Learning" class="h-32 mx-auto mb-4">
+                <h3 class="text-xl font-semibold text-center mb-2">Machine Learning</h3>
+                <p class="text-sm text-gray-700 text-center">Quantum Machine Learning could drastically improve how fast and smart AI models train and perform.</p>
+            </div>
+
+            <div class="bg-gray-100 rounded-lg p-6 shadow hover:shadow-lg transition">
+                <img src="image/app-image3.png" alt="Optimization" class="h-32 mx-auto mb-4">
+                <h3 class="text-xl font-semibold text-center mb-2">Optimization</h3>
+                <p class="text-sm text-gray-700 text-center">From delivery routes to machine tuning, quantum algorithms like QAOA can solve tough optimization tasks.</p>
+            </div>
+
+            <div class="bg-gray-100 rounded-lg p-6 shadow hover:shadow-lg transition">
+                <img src="image/app-image4.png" alt="Chemistry" class="h-32 mx-auto mb-4">
+                <h3 class="text-xl font-semibold text-center mb-2">Chemistry</h3>
+                <p class="text-sm text-gray-700 text-center">Quantum computers can simulate atoms and molecules, helping scientists design drugs and materials faster.</p>
+            </div>
+
+            <div class="bg-gray-100 rounded-lg p-6 shadow hover:shadow-lg transition">
+                <img src="image/app-image5.png" alt="Physics" class="h-32 mx-auto mb-4">
+                <h3 class="text-xl font-semibold text-center mb-2">Physics</h3>
+                <p class="text-sm text-gray-700 text-center">Physicists use quantum computers to explore black holes, gravity, and quantum field theories beyond simulation limits.</p>
+            </div>
+        </div>
+    </section>
+
+    <footer class="mt-16 py-6 bg-gray-800 text-white text-center">
+        <p><a href="./contact_us.html" class="underline">Copyright © 2024 Quantum Computing @ UCI. All Rights Reserved.</a></p>
+    </footer>
 </body>
 </html>
