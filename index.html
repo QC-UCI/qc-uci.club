@@ -3,123 +3,135 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script
-       src="https://kit.fontawesome.com/2d323a629b.js"
-       crossorigin="anonymous">
-    </script>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto&display=swap"
-    rel="stylesheet">
+    <script src="https://kit.fontawesome.com/2d323a629b.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto&display=swap">
     <link rel="stylesheet" href="css/tailwind_style.css">
     <link rel="stylesheet" href="css/style.css">
     <title>Join | QC@UCI</title>
+    <style>
+      .interactive-nav li a {
+        transition: all 0.3s ease;
+        position: relative;
+      }
+      .interactive-nav li a::after {
+        content: '';
+        position: absolute;
+        width: 0%;
+        height: 2px;
+        left: 0;
+        bottom: -2px;
+        background-color: #3b82f6;
+        transition: width 0.3s ease;
+      }
+      .interactive-nav li a:hover::after {
+        width: 100%;
+      }
+    </style>
 </head>
-
 <body>
-
   <header class="header">
     <a href="index.html">
-       <img src="image/navy_anteater_bloch.png" width="150" alt="Home">
+      <img src="image/navy_anteater_bloch.png" width="150" alt="Home">
     </a>
-      <nav>
-        <ul class="header__nav">
-          <li><a href="index.html">Home</a></li>
-            <li><a href="join.html">Join</a></li>
-            <li><a href="learn.html">Learn</a></li>
-            <li><a href="team.html">Team</a></li>
-            <li><a href="event.html">Events</a></li>
-            <li><a href="projects.html">Projects</a></li>
-            <li><a href="contact_us.html">Contact</a></li>
-        </ul>
-      </nav>
-    </header>
+    <nav>
+      <ul class="header__nav interactive-nav">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="join.html">Join</a></li>
+        <li><a href="learn.html">Learn</a></li>
+        <li><a href="team.html">Team</a></li>
+        <li><a href="event.html">Events</a></li>
+        <li><a href="projects.html">Projects</a></li>
+        <li><a href="contact_us.html">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
 
-   <section class="body">
-      <p style="margin-bottom:200px;"></p>
-      <h2 class="body__title">Our Mission</h2>
-      <div class="body__caption" style="margin-left: 10%; margin-right: 10%;">
-         <div><span> 
-             At the Quantum Computing Club, we’re all about unlocking the power of quantum software and building a vibrant quantum community at UCI! Whether you're a total beginner or already dreaming in qubits, we’re here to help you design, experiment, and innovate with real quantum algorithms.
-             But we don’t stop there! We love crossing boundaries—from machine learning to optimization and beyond—exploring how quantum computing can revolutionize different fields. With hands-on projects, collabs, and a passion for the future, we’re shaping the next wave of quantum pioneers.
-             Join us as we push the limits of what’s possible in quantum tech — one qubit at a time!</span></div>
-      </div>
-      <p style="margin-bottom:70px;"></p>
-   </section>
+  <section class="body">
+    <p style="margin-bottom:200px;"></p>
+    <h2 class="body__title">Our Mission</h2>
+    <div class="body__caption" style="margin-left: 10%; margin-right: 10%;">
+      <div><span> 
+        At the Quantum Computing Club, we’re all about unlocking the power of quantum software and building a vibrant quantum community at UCI! Whether you're a total beginner or already dreaming in qubits, we’re here to help you design, experiment, and innovate with real quantum algorithms.
+        But we don’t stop there! We love crossing boundaries—from machine learning to optimization and beyond—exploring how quantum computing can revolutionize different fields. With hands-on projects, collabs, and a passion for the future, we’re shaping the next wave of quantum pioneers.
+        Join us as we push the limits of what’s possible in quantum tech — one qubit at a time!</span></div>
+    </div>
+    <p style="margin-bottom:70px;"></p>
+  </section>
 
-   <section class="body2">
-      <h2 class="body2__title" style="text-align:center;">What We Do</h2>
-      <div class="whatwedoContainer">
-         <div class="whatwedoItem">
-            <img class="whatwedoImage" src="image/QFF_discussion.jpeg" alt="Weekly Discussions">
-            <div class="whatwedoDescription">
-               <div class="whatwedoTitle">Weekly Discussions</div>
-               <div class="whatwedoText">Join us every week for insightful discussions on the latest in quantum computing.</div>
-            </div>
-         </div>
-         <div class="whatwedoItem">
-            <img class="whatwedoImage" src="image/research_proj_2024.png" alt="Research Projects">
-            <div class="whatwedoDescription">
-               <div class="whatwedoTitle">Research Projects</div>
-               <div class="whatwedoText">Participate in cutting-edge research projects and contribute to groundbreaking discoveries.</div>
-            </div>
-         </div>
-         <div class="whatwedoItem">
-            <img class="whatwedoImage" src="image/Shion_GuestSpeaker.JPG" alt="Guest Speakers">
-            <div class="whatwedoDescription">
-               <div class="whatwedoTitle">Guest Speakers</div>
-               <div class="whatwedoText">Attend talks by renowned experts in the field of quantum computing and expand your knowledge.</div>
-            </div>
-         </div>
+  <section class="body2">
+    <h2 class="body2__title" style="text-align:center;">What We Do</h2>
+    <div class="whatwedoContainer">
+      <div class="whatwedoItem">
+        <img class="whatwedoImage" src="image/QFF_discussion.jpeg" alt="Weekly Discussions">
+        <div class="whatwedoDescription">
+          <div class="whatwedoTitle">Weekly Discussions</div>
+          <div class="whatwedoText">Join us every week for insightful discussions on the latest in quantum computing.</div>
+        </div>
       </div>
-   </section>
+      <div class="whatwedoItem">
+        <img class="whatwedoImage" src="image/research_proj_2024.png" alt="Research Projects">
+        <div class="whatwedoDescription">
+          <div class="whatwedoTitle">Research Projects</div>
+          <div class="whatwedoText">Participate in cutting-edge research projects and contribute to groundbreaking discoveries.</div>
+        </div>
+      </div>
+      <div class="whatwedoItem">
+        <img class="whatwedoImage" src="image/Shion_GuestSpeaker.JPG" alt="Guest Speakers">
+        <div class="whatwedoDescription">
+          <div class="whatwedoTitle">Guest Speakers</div>
+          <div class="whatwedoText">Attend talks by renowned experts in the field of quantum computing and expand your knowledge.</div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-   <section class="body3">
-      <p style="margin-bottom:70px;"></p>
-      <h2 class="body3__title">Hackathons and Conferences</h2>
-      <div id="whatwedoitems">
-          <div class="whatwedoitem">
-            <br>
-            <img style="margin-inline: auto;" src="image/QFF23_logo.png" alt="Qiskit Fall Fest 2023"></img>
-            <br>
-            <t type="text" style="font-size: 24px; text-align:center"> IBM Qiskit Fall Fest </t>
-          </div>
-          <div class="whatwedoitem">
-            <br>
-            <img style="margin-inline: auto; background-color: white; padding: 10%;" src="image/SQUID.png" alt="Quantum Coalition"></img>      
-            <br>
-            <t type="text" style="font-size: 24px; text-align:center"> Quantum Coalition </t>
-          </div>
+  <section class="body3 px-4 py-16 bg-gray-50">
+    <h2 class="text-3xl font-bold text-center mb-12">Hackathons and Conferences</h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto">
+      <div class="bg-white shadow-lg rounded-lg overflow-hidden transform transition duration-300 hover:scale-105">
+        <img class="w-full h-64 object-contain p-6" src="image/QFF23_logo.png" alt="Qiskit Fall Fest 2023">
+        <div class="px-6 pb-6">
+          <h3 class="text-xl font-semibold text-center">IBM Qiskit Fall Fest</h3>
+          <p class="mt-2 text-sm text-gray-600 text-center">A global quantum event hosted by students with IBM’s support, featuring workshops and coding challenges.</p>
+        </div>
       </div>
-      <p style="margin-bottom:70px;"></p>
-   </section>
 
-   <!-- News & Highlights Section -->
-   <section class="news-section">
-      <h2 class="news-title">News & Highlights</h2>
-      <div class="news-container">
-         <div class="news-item">
-            <div class="news-img" style="background-image: url('image/Anteater+Eq_Logo_Dark.png');"></div>
-            <div class="news-content">
-               <div class="news-date">June 28, 2024</div>
-               <div class="news-summary"> QC@UCI is officially an ICS-affiliated Organization.</div>
-               <div class="news-read-more"><a href="https://ics.uci.edu/student-experience/clubs-organizations/">Read more</a></div>
-            </div>
-         </div>
-         <div class="news-item">
-            <div class="news-img" style="background-image: url('image/sandyirani.jpg');"></div>
-            <div class="news-content">
-               <div class="news-date">April 15, 2024</div>
-               <div class="news-summary">Join us for an exciting guest lecture on quantum complexity theory by Professor Sandy Irani from UCI.</div>
-               <div class="news-read-more"><a href="https://simons.berkeley.edu/people/sandy-irani">Read bio</a></div>
-            </div>
-         </div>
+      <div class="bg-white shadow-lg rounded-lg overflow-hidden transform transition duration-300 hover:scale-105">
+        <img class="w-full h-64 object-contain bg-white p-6" src="image/SQUID.png" alt="Quantum Coalition">
+        <div class="px-6 pb-6">
+          <h3 class="text-xl font-semibold text-center">Quantum Coalition</h3>
+          <p class="mt-2 text-sm text-gray-600 text-center">A collaboration between top university quantum clubs across the world, focused on innovation, talks, and networking.</p>
+        </div>
       </div>
-   </section>
-   
-   <footer>
-      <div class="footer__copyRight">
-          <p><a href="./contact_us.html">Copyright © 2024 Quantum Computing @ UCI. All Rights Reserved. </a></p>
-      </div>
-    </footer>
+    </div>
+  </section>
 
+  <section class="news-section">
+    <h2 class="news-title">News & Highlights</h2>
+    <div class="news-container">
+      <div class="news-item">
+        <div class="news-img" style="background-image: url('image/Anteater+Eq_Logo_Dark.png');"></div>
+        <div class="news-content">
+          <div class="news-date">June 28, 2024</div>
+          <div class="news-summary"> QC@UCI is officially an ICS-affiliated Organization.</div>
+          <div class="news-read-more"><a href="https://ics.uci.edu/student-experience/clubs-organizations/">Read more</a></div>
+        </div>
+      </div>
+      <div class="news-item">
+        <div class="news-img" style="background-image: url('image/sandyirani.jpg');"></div>
+        <div class="news-content">
+          <div class="news-date">April 15, 2024</div>
+          <div class="news-summary">Join us for an exciting guest lecture on quantum complexity theory by Professor Sandy Irani from UCI.</div>
+          <div class="news-read-more"><a href="https://simons.berkeley.edu/people/sandy-irani">Read bio</a></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer__copyRight">
+      <p><a href="./contact_us.html">Copyright © 2024 Quantum Computing @ UCI. All Rights Reserved. </a></p>
+    </div>
+  </footer>
 </body>
 </html>
