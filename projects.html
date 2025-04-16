@@ -4,87 +4,91 @@
 <head>
    <meta charset="UTF-8">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <script 
-        src="https://kit.fontawesome.com/2d323a629b.js" 
-        crossorigin="anonymous">
-    </script>
-
-   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+   <script src="https://kit.fontawesome.com/2d323a629b.js" crossorigin="anonymous"></script>
+   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css">
+   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto&display=swap">
    <link rel="stylesheet" href="css/tailwind_style.css">
    <link rel="stylesheet" href="css/style.css">
    <title>Projects | QC@UCI</title>
    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
-   <meta name="viewport" content="width=device-width, initial-scale=1">
-   
    <style>
-      .projects__title {
+      .interactive-nav li a {
+         transition: all 0.3s ease;
+         position: relative;
+      }
+      .interactive-nav li a::after {
+         content: '';
+         position: absolute;
+         width: 0%;
+         height: 2px;
+         left: 0;
+         bottom: -2px;
+         background-color: #3b82f6;
+         transition: width 0.3s ease;
+      }
+      .interactive-nav li a:hover::after {
+         width: 100%;
+      }
+      
+      body {
+         font-family: 'Roboto', sans-serif;
+         background: linear-gradient(to right, #f9fafb, #eef2f7);
+      }
+      .projects-section {
+         padding: 180px 20px 100px;
          text-align: center;
-         font-size: 2rem;
-         font-weight: bold;
+      }
+      .projects-section h1 {
+         font-size: 3rem;
+         font-weight: 800;
+         color: #1e3a8a;
          margin-bottom: 50px;
       }
-      .accordion .card-header {
-         background-color: white;
-         border: none;
-         cursor: pointer;
+      .project-card {
+         background: white;
+         border-radius: 15px;
+         box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+         overflow: hidden;
+         transform: translateY(50px);
+         opacity: 0;
+         transition: all 0.6s ease-out;
       }
-      .accordion .btn-link {
+      .project-card.visible {
+         transform: translateY(0);
+         opacity: 1;
+      }
+      .project-card:hover {
+         transform: scale(1.02);
+      }
+      .project-card img {
          width: 100%;
-         text-align: center;
-         font-size: 1.25rem;
-         color: #007bff;
-         text-decoration: none;
+         object-fit: cover;
+         max-height: 250px;
       }
-      .accordion .card {
-         margin: 10px auto;
-         border: none;
-         border-radius: 10px;
-         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-         width: 90%;
+      .project-content {
+         padding: 30px;
+         text-align: left;
       }
-      .accordion .card-body {
-         display: flex;
-         flex-wrap: wrap;
+      .project-content h3 {
+         font-size: 1.5rem;
+         font-weight: 700;
+         color: #111827;
       }
-      .accordion .card-body .summary {
-         flex: 2;
-         padding-right: 15px;
-      }
-      .accordion .card-body .thumbnail {
-         flex: 1;
-         display: flex;
-         align-items: center;
-         justify-content: center;
-      }
-      .accordion .card-body .thumbnail img {
-         max-width: 100%;
-         border-radius: 10px;
-      }
-      .accordion .collapse.show {
-         background-color: #e9ecef;
-      }
-      .accordion .btn-link:focus {
-         box-shadow: none;
-      }
-      .footer__copyRight {
-         text-align: center;
-         padding: 20px 0;
-      }
-      .footer__copyRight a {
-         color: black;
-         text-decoration: none;
+      .project-content p {
+         font-size: 0.95rem;
+         color: #4b5563;
+         margin-top: 10px;
       }
    </style>
 </head>
 
 <body>
-    <header class="header">
-        <a href="index.html">
-          <img src="image/navy_anteater_bloch.png" width="150" alt="Home">
-        </a>
+   <header class="header position-relative z-10">
+      <a href="index.html">
+         <img src="image/navy_anteater_bloch.png" width="150" alt="Home">
+      </a>
       <nav>
-         <ul class="header__nav">
+         <ul class="header__nav interactive-nav">
             <li><a href="index.html">Home</a></li>
             <li><a href="join.html">Join</a></li>
             <li><a href="learn.html">Learn</a></li>
@@ -94,64 +98,33 @@
             <li><a href="contact_us.html">Contact</a></li>
          </ul>
       </nav>
-   </header> 
+   </header>
 
- 
-   <p style="margin-bottom:180px;"></p>
-   <div class="team__title">Our Research</div>
-   <p style="margin-bottom:50px;"></p>
-
-   <div class="accordion" id="projectsAccordion">
-      <div class="card">
-         <div class="card-header" id="headingOne">
-            <h2 class="mb-0">
-               <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                Traffic Optimization: Smarter Cities with Quantum Reinforcement Learning and Optimization
-               </button>
-            </h2>
-         </div>
-         <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#projectsAccordion">
-            <div class="card-body">
-               <div class="summary">
-                  We’re excited to share our latest project in the Quantum Computing Club — a deep dive into Quantum Reinforcement Learning (QRL) for traffic signal optimization! Imagine a world where traffic signals aren’t just following pre-set timers, but actively adapting to traffic in real time, reducing congestion, saving energy, and making city life smoother. Wouldn't that be awesome?! Well, in the Quantum Computing Club, that’s exactly what we’re working toward!
-
-                  What We’re Doing
-                  Traffic congestion is a major challenge in cities worldwide. Traditional methods of optimizing traffic signals often fall short, especially as cities grow. We’re exploring how Quantum Computing and Reinforcement Learning can work together to make traffic systems smarter and more efficient.
-                  
-                  Our approach:
-                  Use Quantum Optimization approaches like Quantum Annealing and QAOA to solve the traffic control problem
-Train and test Quantum Reinforcement Learning (QRL) agent(s) to learn and adapt to real-world traffic patterns
-Scale algorithms to various real-world traffic intersections and analyze their performance
-                  
-                  Stay tuned to see what we discover!!
+   <section class="projects-section">
+      <h1>Explore Our Projects</h1>
+      <div class="container px-4">
+         <div class="row justify-content-center">
+            <div class="col-md-6 mb-5">
+               <div class="project-card fade-in">
+                  <img src="image/TCO_project.png" alt="Traffic Optimization">
+                  <div class="project-content">
+                     <h3>Smarter Traffic with Quantum RL</h3>
+                     <p>We're building quantum reinforcement learning agents to optimize traffic lights in real time, improving city flow and reducing congestion. We explore quantum annealing, QAOA, and hybrid methods to control intersections adaptively using real-world data.</p>
+                  </div>
                </div>
-               <div class="thumbnail">
-                  <img src="image/TCO_project.png" alt="Project Image">
+            </div>
+            <div class="col-md-6 mb-5">
+               <div class="project-card fade-in">
+                  <img src="image/Steering_project.png" alt="Quantum CNN for Steering">
+                  <div class="project-content">
+                     <h3>Quantum CNN for Self-Driving Cars</h3>
+                     <p>We're experimenting with hybrid deep learning networks using quantum circuits to predict vehicle steering angles from road images. This blends classical CNN layers with quantum variational circuits, bringing quantum learning to real-world driving AI.</p>
+                  </div>
                </div>
             </div>
          </div>
       </div>
-      
-      <div class="card">
-         <div class="card-header" id="headingTwo">
-            <h2 class="mb-0">
-               <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseFour" aria-expanded="true" aria-controls="collapseFour">
-                Variational Quantum Convolutional Neural Network for Image Recognition to Determine Steering Angle for Autonomous Vehicles
-               </button>
-            </h2>
-         </div>
-         <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#projectsAccordion">
-            <div class="card-body">
-               <div class="summary">
-                Autonomous cars, such as those that Tesla Inc. builds, use complex deep neural networks to make instantaneous decisions based on real-time data from sensors on the vehicle. One major example of an autopilot mode feature is controlling the steering angle of the vehicle relative to the road. To build better self-driving models, we either need billions of miles of driving data or more complex models that train faster on lesser data. Conventional deep neural networks like the Convolutional Neural Network (CNN) are excellent at predicting steering angles by analyzing image data as input. This project entails constructing a hybrid neural network that combines classical and “quantum” layers in order to predict the steering angle for a car based on video data. Once a functional model is built, we will build a fully classical CNN and use it to compare against our hybrid CNN. The premise behind exploring this project lies in using quantum transfer learning methods similar to Variational Quantum Eigensolvers. We have a quantum circuit and an optimizer which optimizes parameters for a set of iterations till we find a desired value using quantum circuits. We will be using the layers in a deep neural network and transferring the weights as parameters to the quantum circuits. The quantum circuits will augment the classical neural network and help find the optimum steering angle based on images from a car's front camera. We shall build a deep CNN with several convolutional layers, and the following layers will be the variational quantum circuits. We will evaluate the performances based on the prediction of the steering angle and the time it takes for the neural networks to be trained.
-                </div>
-               <div class="thumbnail">
-                  <img src="image/Steering_project.png" alt="Project Image">
-               </div>
-            </div>
-         </div>
-      </div>
-   </div>
+   </section>
 
    <footer>
       <div class="footer__copyRight">
@@ -159,16 +132,18 @@ Scale algorithms to various real-world traffic intersections and analyze their p
       </div>
    </footer>
 
-   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
    <script>
-      $(document).ready(function() {
-         $('#projectsAccordion').on('show.bs.collapse', function () {
-            $('#projectsAccordion .collapse').collapse('hide');
+      const cards = document.querySelectorAll('.project-card');
+      const observer = new IntersectionObserver(entries => {
+         entries.forEach(entry => {
+            if (entry.isIntersecting) {
+               entry.target.classList.add('visible');
+               observer.unobserve(entry.target);
+            }
          });
-      });
+      }, { threshold: 0.1 });
+
+      cards.forEach(card => observer.observe(card));
    </script>
 </body>
-
 </html>
