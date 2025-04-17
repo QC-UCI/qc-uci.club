@@ -31,7 +31,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
     </tr>
     <tr>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/jcwang111"><img src="https://avatars.githubusercontent.com/u/23427258?v=4?s=100" width="100px;" alt="Joshua Wang"/><br /><sub><b>Joshua Wang</b></sub></a><br /><a href="https://github.com/QC-UCI/qc-uci.club/commits?author=jcwang111" title="Code">💻</a> <a href="#maintenance-jcwang111" title="Maintenance">🚧</a> <a href="#design-jcwang111" title="Design">🎨</a></td>
-      <td align="center" valign="top" width="14.28%"><a href="https://github.com/dsikdar"><img src="https://avatars.githubusercontent.com/u/23427258?v=4?s=100" width="100px;" alt="Diptanshu Sikdar"/><br /><sub><b>Diptanshu Sikdar</b></sub></a><br /><a href="https://github.com/QC-UCI/qc-uci.club/commits?author=dsikdar" title="Code">💻</a> <a href="#maintenance-dsikdar" title="Maintenance">🚧</a> <a href="#design-dsikdar" title="Design">🎨</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/dsikdar"><img src="https://avatars.githubusercontent.com/u/69136009?v=4" width="100px;" alt="Diptanshu Sikdar"/><br /><sub><b>Diptanshu Sikdar</b></sub></a><br /><a href="https://github.com/QC-UCI/qc-uci.club/commits?author=dssikdar" title="Code">💻</a> <a href="#maintenance-dssikdar" title="Maintenance">🚧</a> <a href="#design-dssikdar" title="Design">🎨</a></td>
     </tr>
   </tbody>
 </table>
