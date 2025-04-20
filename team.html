@@ -1,17 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
- <head>
-  <meta charset="utf-8"/>
-  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-  <script crossorigin="anonymous" src="https://kit.fontawesome.com/2d323a629b.js">
-  </script>
-  <link href="https://fonts.googleapis.com/css?family=Roboto&amp;display=swap" rel="stylesheet"/>
-  <link href="css/tailwind_style.css" rel="stylesheet"/>
-  <link href="css/style.css" rel="stylesheet"/>
-  <title>
-   Team | QC@UCI
-  </title>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://kit.fontawesome.com/2d323a629b.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto&display=swap">
+  <link rel="stylesheet" href="css/tailwind_style.css">
+  <link rel="stylesheet" href="css/style.css">
+  <title>Team | QC@UCI</title>
   <style>
+    .interactive-nav li a {
+      transition: all 0.3s ease;
+      position: relative;
+    }
+    .interactive-nav li a::after {
+      content: '';
+      position: absolute;
+      width: 0%;
+      height: 2px;
+      left: 0;
+      bottom: -2px;
+      background-color: #3b82f6;
+      transition: width 0.3s ease;
+    }
+    .interactive-nav li a:hover::after {
+      width: 100%;
+    }
+
    .team-container {
          display: flex;
          padding-top: 10px;
@@ -151,50 +166,22 @@ body {
   </style>
  </head>
  <body>
-  <header class="header">
-   <a href="index.html">
-    <img alt="Home" src="image/navy_anteater_bloch.png" width="150"/>
-   </a>
-   <nav>
-    <ul class="header__nav">
-     <li>
+   <header class="header">
       <a href="index.html">
-       Home
+        <img src="image/navy_anteater_bloch.png" width="150" alt="Home">
       </a>
-     </li>
-     <li>
-      <a href="join.html">
-       Join
-      </a>
-     </li>
-     <li>
-      <a href="learn.html">
-       Learn
-      </a>
-     </li>
-     <li>
-      <a href="team.html">
-       Team
-      </a>
-     </li>
-     <li>
-      <a href="event.html">
-       Events
-      </a>
-     </li>
-     <li>
-      <a href="projects.html">
-       Projects
-      </a>
-     </li>
-     <li>
-      <a href="contact_us.html">
-       Contact
-      </a>
-     </li>
-    </ul>
-   </nav>
-  </header>
+      <nav>
+        <ul class="header__nav interactive-nav">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="join.html">Join</a></li>
+          <li><a href="learn.html">Learn</a></li>
+          <li><a href="team.html">Team</a></li>
+          <li><a href="event.html">Events</a></li>
+          <li><a href="projects.html">Projects</a></li>
+          <li><a href="contact_us.html">Contact</a></li>
+        </ul>
+      </nav>
+    </header>
 
   <div class="team__title">
    Meet our team
@@ -400,6 +387,36 @@ body {
     </p>
    </div>
   </footer>
+
+  <script>
+   const isMobile = window.matchMedia("(max-width: 768px)").matches;
+   if (isMobile) {
+     const members = document.querySelectorAll(".team__member .relative");
+ 
+     members.forEach(member => {
+       const overlay = member.querySelector(".overlay");
+ 
+       member.addEventListener("click", () => {
+         // Hide all other overlays
+         document.querySelectorAll(".team__member .overlay").forEach(o => {
+           if (o !== overlay) o.style.opacity = 0;
+         });
+ 
+         // Toggle visibility of clicked overlay
+         overlay.style.opacity = (overlay.style.opacity == 1 || overlay.style.opacity === "1") ? 0 : 1;
+       });
+     });
+ 
+     // Optional: Hide overlays if clicked outside
+     document.addEventListener("click", function (event) {
+       const isTeamMember = event.target.closest(".team__member .relative");
+       if (!isTeamMember) {
+         document.querySelectorAll(".team__member .overlay").forEach(o => o.style.opacity = 0);
+       }
+     });
+   }
+ </script>
+ 
   <script>
    const buttons = document.querySelectorAll('.team-sidebar button');
       const sections = document.querySelectorAll('.team-content');
