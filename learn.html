@@ -27,13 +27,14 @@
       width: 100%;
     }
 
-    /* Flip animation styles */
+    /* Flip Animation (in-place) */
     .flip-container {
-      perspective: 1000px;
+      perspective: 1500px;
     }
     .flip-inner {
-      transition: transform 0.8s;
+      transition: transform 0.6s ease-in-out;
       transform-style: preserve-3d;
+      transform-origin: center center;
       position: relative;
       width: 100%;
       height: 100%;
@@ -63,13 +64,31 @@
       align-items: center;
       justify-content: center;
       padding: 1rem;
+      overflow: hidden;
     }
+
+    /* Responsive video wrapper */
+    .flip-back .video-wrapper {
+      position: relative;
+      width: 100%;
+      padding-bottom: 56.25%; /* 16:9 */
+      height: 0;
+    }
+    .flip-back .video-wrapper iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border-radius: 0.5rem;
+      border: 0;
+    }
+
     .application-card {
       height: 20rem;
     }
   </style>
 </head>
-
 <body>
   <header class="header">
     <a href="index.html">
@@ -88,7 +107,7 @@
     </nav>
   </header>
 
-  <section class="py-20 px-6 max-w-6xl mx-auto">
+<section class="pt-48 pb-20 px-6 max-w-6xl mx-auto">
     <h1 class="text-4xl font-bold text-center text-gray-800 mb-10">What is Quantum Computing?</h1>
     <div class="flex flex-col md:flex-row gap-10 items-center">
       <div class="flex-1 text-gray-700 text-lg">
@@ -117,7 +136,6 @@
       <!-- Cybersecurity -->
       <div class="flip-container application-card relative">
         <div class="flip-inner">
-          <!-- Front -->
           <div class="flip-front bg-gray-100 p-6 shadow">
             <img src="image/app-image1.png" alt="Cybersecurity" class="h-32 mx-auto mb-4">
             <h3 class="text-xl font-semibold text-center mb-2">Cybersecurity</h3>
@@ -125,13 +143,10 @@
               Quantum computers challenge RSA encryption — but also enable unbreakable quantum-secured messages via QKD.
             </p>
           </div>
-          <!-- Back -->
           <div class="flip-back">
-            <iframe class="w-full h-full rounded-lg"
-              width="560" height="315" src="https://www.youtube.com/embed/-UrdExQW0cs?start=0"
-              title="Cybersecurity & Quantum"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowfullscreen></iframe>
+            <div class="video-wrapper">
+              <iframe src="https://www.youtube.com/embed/-UrdExQW0cs?start=0" title="Cybersecurity & Quantum" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
           </div>
         </div>
       </div>
@@ -179,10 +194,9 @@
             </p>
           </div>
           <div class="flip-back">
-            <iframe width="560" height="315" src="https://www.youtube.com/embed/8VnZo8wVMm8?si=cjVG8JWhgFucmKZS" 
-            title="YouTube video player" frameborder="0" 
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-            referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+            <div class="video-wrapper">
+              <iframe src="https://www.youtube.com/embed/8VnZo8wVMm8?si=cjVG8JWhgFucmKZS" title="Chemistry & Quantum" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+            </div>
           </div>
         </div>
       </div>
