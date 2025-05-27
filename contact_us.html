@@ -1,37 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script
-       src="https://kit.fontawesome.com/2d323a629b.js"
-       crossorigin="anonymous">
-    </script>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto&display=swap"
-	 rel="stylesheet">
-	 <link rel="stylesheet" href="css/tailwind_style.css">
-	 <link rel="stylesheet" href="css/style.css">
-	 
-    <title>Contact Us | QC@UCI</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://kit.fontawesome.com/2d323a629b.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto&display=swap">
+  <link rel="stylesheet" href="css/tailwind_style.css">
+  <link rel="stylesheet" href="css/style.css">
+  <title>Join | QC@UCI</title>
+  <style>
+    .interactive-nav li a {
+      transition: all 0.3s ease;
+      position: relative;
+    }
+    .interactive-nav li a::after {
+      content: '';
+      position: absolute;
+      width: 0%;
+      height: 2px;
+      left: 0;
+      bottom: -2px;
+      background-color: #3b82f6;
+      transition: width 0.3s ease;
+    }
+    .interactive-nav li a:hover::after {
+      width: 100%;
+    }
+  </style>
 </head>
 <p style="margin-bottom:200px;"></p>
+
 <body>
-    <header class="header">
-		<a href="index.html">
-			<img src="image/navy_anteater_bloch.png" width="150" alt="Home">
-		</a>
-        <nav>
-           <ul class="header__nav">
-			<li><a href="index.html">Home</a></li>
-            <li><a href="join.html">Join</a></li>
-            <li><a href="learn.html">Learn</a></li>
-            <li><a href="team.html">Team</a></li>
-            <li><a href="event.html">Events</a></li>
-            <li><a href="projects.html">Projects</a></li>
-            <li><a href="contact_us.html">Contact</a></li>
-           </ul>
-        </nav>
-     </header>
+
+  <header class="header">
+    <a href="index.html">
+      <img src="image/navy_anteater_bloch.png" width="150" alt="Home">
+    </a>
+    <nav>
+      <ul class="header__nav interactive-nav">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="join.html">Join</a></li>
+        <li><a href="learn.html">Learn</a></li>
+        <li><a href="team.html">Team</a></li>
+        <li><a href="event.html">Events</a></li>
+        <li><a href="projects.html">Projects</a></li>
+        <li><a href="contact_us.html">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
 
      <div class="contact__title">Contact Us</div>
      
