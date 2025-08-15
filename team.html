@@ -52,23 +52,30 @@
 </head>
 <body class="text-slate-100 quantum-bg min-h-screen">
   <!-- Header -->
-  <header class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between py-4">
-    <a class="logo-wrap inline-flex items-center gap-3" href="index.html">
-      <img src="image/navy_anteater_bloch.png" alt="QC@UCI" class="h-12 w-auto"/>
-      <span class="sr-only">Return Home</span>
-    </a>
-    <nav class="hidden md:block">
-      <ul class="flex items-center gap-6 text-slate-200 text-sm">
-        <li><a class="header-link hover:text-white" href="index.html">Home</a></li>
-        <li><a class="header-link hover:text-white" href="join.html">Join</a></li>
-        <li><a class="header-link hover:text-white" href="learn.html">Learn</a></li>
-        <li><a class="header-link hover:text-white font-semibold" href="team.html">Team</a></li>
-        <li><a class="header-link hover:text-white" href="event.html">Events</a></li>
-        <li><a class="header-link hover:text-white" href="projects.html">Projects</a></li>
-        <li><a class="header-link hover:text-white" href="contact_us.html">Contact</a></li>
-      </ul>
-    </nav>
-  </header>
+  <header class="w-full" style="background-color: #091b46;">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 lg:h-auto">
+    <div class="flex flex-col items-center gap-3 lg:flex-row lg:items-center lg:justify-between lg:h-full py-3 lg:py-0">
+      <!-- Logo (stacks above on narrow screens) -->
+      <a class="logo-wrap inline-flex items-center gap-3 order-1 lg:order-none" href="index.html">
+        <img src="image/navy_anteater_bloch.png" alt="QC@UCI" class="h-auto w-40"/>
+        <span class="sr-only">Return Home</span>
+      </a>
+      <!-- Nav: always visible; wraps on narrow screens -->
+      <nav class="w-full lg:w-auto order-2 lg:order-none">
+        <ul class="flex flex-wrap items-center justify-center lg:justify-end gap-x-6 gap-y-2 text-slate-200 text-sm">
+          <li><a class="header-link hover:text-white" href="index.html">Home</a></li>
+          <li><a class="header-link hover:text-white" href="join.html">Join</a></li>
+          <li><a class="header-link hover:text-white" href="learn.html">Learn</a></li>
+          <li><a class="header-link hover:text-white font-semibold" href="team.html">Team</a></li>
+          <li><a class="header-link hover:text-white" href="event.html">Events</a></li>
+          <li><a class="header-link hover:text-white" href="projects.html">Projects</a></li>
+          <li><a class="header-link hover:text-white" href="contact_us.html">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+</header>
+
 
   <!-- Title -->
   <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4 pb-2">
@@ -76,7 +83,7 @@
       <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight">Meet our team</h1>
       <span class="hidden sm:inline-flex text-xs px-2 py-1 rounded-full bg-slate-800/60 date-badge">Quantum@UCI</span>
     </div>
-    <p class="mt-2 text-slate-300/90 max-w-3xl">We’re a student-led community building quantum software skills, hosting talks, and running projects across CS, Physics, and Engineering.</p>
+    <p class="mt-2 text-slate-300/90 max-w-3xl">We’re a student-led community building quantum software skills, hosting talks, and running projects across Computer Science, Physics, and Engineering.</p>
   </section>
 
   <!-- Sticky Tabs -->
@@ -98,7 +105,7 @@
             <img src="image/DiptanshuSikdar.png" alt="Diptanshu Sikdar" class="member-photo w-full object-cover"/>
             <div class="member-hover absolute inset-0 bg-slate-900/80 opacity-0 -translate-y-1 p-4">
               <p class="text-sm leading-relaxed text-slate-200">
-                Diptanshu is a senior in Computer Science. He focuses on quantum machine learning and has extensive experience with quantum software.
+                I’m a senior majoring in Computer Science at UC Irvine, with a strong interest in quantum machine learning algorithms and over five years of experience working with quantum software. As president of the Quantum Computing Club, I aim to make quantum computing approachable and exciting for students of all backgrounds. Outside of research and coding, I enjoy taking outdoor walks to clear my mind and listening to music from a wide range of genres.
               </p>
             </div>
           </div>
@@ -110,16 +117,6 @@
             </div>
             <p class="mt-1 text-xs text-slate-300 date-badge inline-flex items-center gap-1 px-2 py-1 rounded-md" data-dates-for="Diptanshu Sikdar">Role dates: <span class="dates">TBD</span></p>
             <p class="mt-2 text-slate-300 text-sm">Computer Science</p>
-
-            <button class="bio-collapsible mt-3 text-xs px-3 py-2 rounded-md border border-white/10 hover:bg-white/5" aria-expanded="false">Read bio</button>
-            <div class="bio-panel"><div>
-              <p class="text-sm text-slate-300/90 mt-2">Diptanshu is interested in QML algorithms, club leadership, and applied research across CS and physics.</p>
-            </div></div>
-
-            <div class="mt-4 flex items-center gap-3 text-slate-300">
-              <a class="hover:text-white" href="mailto:example@uci.edu" aria-label="Email"><i class="fa-regular fa-envelope"></i></a>
-              <a class="hover:text-white" href="#" aria-label="LinkedIn"><i class="fa-brands fa-linkedin"></i></a>
-            </div>
           </div>
         </article>
 
@@ -128,7 +125,7 @@
           <div class="relative">
             <img src="image/HokulaniTopping.png" alt="Hokulani Topping" class="member-photo w-full object-cover"/>
             <div class="member-hover absolute inset-0 bg-slate-900/80 opacity-0 -translate-y-1 p-4">
-              <p class="text-sm leading-relaxed text-slate-200">Senior in Informatics excited about quantum algorithms and real-world applications.</p>
+              <p class="text-sm leading-relaxed text-slate-200">Aloha everyone! My name is Hokulani Topping, and I’m a senior at UCI majoring in Informatics with a focus on Human–Computer Interaction. I have a growing interest in quantum computing, and as the new Vice President of the Quantum Computing Club, my goal is to make the field fun and welcoming to everyone—no matter their background. Outside of academics, I do taekwondo, I’m an avid surfer, and someone who’s always looking for ways to stay active. I’m deeply passionate about my Hawaiian culture, and I’m also a huge fan of rap music.</p>
             </div>
           </div>
           <div class="p-5">
@@ -139,10 +136,6 @@
             </div>
             <p class="mt-1 text-xs text-slate-300 date-badge inline-flex items-center gap-1 px-2 py-1 rounded-md" data-dates-for="Hokulani Topping">Role dates: <span class="dates">TBD</span></p>
             <p class="mt-2 text-slate-300 text-sm">Informatics</p>
-            <button class="bio-collapsible mt-3 text-xs px-3 py-2 rounded-md border border-white/10 hover:bg-white/5" aria-expanded="false">Read bio</button>
-            <div class="bio-panel"><div>
-              <p class="text-sm text-slate-300/90 mt-2">Interested in how quantum can shape future software systems and user experiences.</p>
-            </div></div>
           </div>
         </article>
 
@@ -151,7 +144,7 @@
           <div class="relative">
             <img src="image/NicoleYing.jpg" alt="Nicole Ying" class="member-photo w-full object-cover"/>
             <div class="member-hover absolute inset-0 bg-slate-900/80 opacity-0 -translate-y-1 p-4">
-              <p class="text-sm leading-relaxed text-slate-200">Applying quantum algorithms to complex problems and building community across disciplines.</p>
+              <p class="text-sm leading-relaxed text-slate-200">I’m a third-year Computer Science major with a strong interest in software engineering and machine learning. I joined the Quantum Computing Club in my freshman year, where I gained valuable knowledge of quantum computing algorithms and concepts through both learning sessions and hands-on projects. Beyond writing code, I have a passion for photography and aesthetics, which allows me to explore creativity and design from a different perspective.</p>
             </div>
           </div>
           <div class="p-5">
@@ -162,10 +155,6 @@
             </div>
             <p class="mt-1 text-xs text-slate-300 date-badge inline-flex items-center gap-1 px-2 py-1 rounded-md" data-dates-for="Nicole Ying">Role dates: <span class="dates">TBD</span></p>
             <p class="mt-2 text-slate-300 text-sm">Computer Science & Quantitative Economics</p>
-            <button class="bio-collapsible mt-3 text-xs px-3 py-2 rounded-md border border-white/10 hover:bg-white/5" aria-expanded="false">Read bio</button>
-            <div class="bio-panel"><div>
-              <p class="text-sm text-slate-300/90 mt-2">Keen on bridging CS, economics, and quantum to solve real problems.</p>
-            </div></div>
           </div>
         </article>
       </div>
@@ -238,6 +227,16 @@
         </article>
 
         <article class="member-card rounded-2xl border border-white/10 overflow-hidden shadow-xl">
+          <img src="image/AryaMhaiskar.jpg" alt="Arya Mhaiskar" class="member-photo w-full object-cover"/>
+          <div class="p-5">
+            <h3 class="text-lg font-semibold">Arya Mhaiskar</h3>
+            <p class="text-sky-400 font-medium mt-1">Marketing Chief</p>
+            <p class="mt-1 text-xs text-slate-300 date-badge inline-flex items-center gap-1 px-2 py-1 rounded-md" data-dates-for="Arya Mhaiskar">Served: <span class="dates">TBD</span></p>
+            <p class="text-slate-300 text-sm mt-2">Computer Science</p>
+          </div>
+        </article>
+
+        <article class="member-card rounded-2xl border border-white/10 overflow-hidden shadow-xl">
           <img src="image/JoshuaWang.jpg" alt="Joshua Wang" class="member-photo w-full object-cover"/>
           <div class="p-5">
             <h3 class="text-lg font-semibold">Joshua Wang</h3>
@@ -274,16 +273,6 @@
             <p class="text-sky-400 font-medium mt-1">President</p>
             <p class="mt-1 text-xs text-slate-300 date-badge inline-flex items-center gap-1 px-2 py-1 rounded-md" data-dates-for="Chris Chen">Served: <span class="dates">TBD</span></p>
             <p class="text-slate-300 text-sm mt-2">Physics / CS</p>
-          </div>
-        </article>
-
-        <article class="member-card rounded-2xl border border-white/10 overflow-hidden shadow-xl">
-          <img src="image/AryaMhaiskar.jpg" alt="Arya Mhaiskar" class="member-photo w-full object-cover"/>
-          <div class="p-5">
-            <h3 class="text-lg font-semibold">Arya Mhaiskar</h3>
-            <p class="text-sky-400 font-medium mt-1">Marketing Chief</p>
-            <p class="mt-1 text-xs text-slate-300 date-badge inline-flex items-center gap-1 px-2 py-1 rounded-md" data-dates-for="Arya Mhaiskar">Served: <span class="dates">TBD</span></p>
-            <p class="text-slate-300 text-sm mt-2">Computer Science</p>
           </div>
         </article>
 
@@ -335,20 +324,20 @@
   <script>
     // ===== Simple data mapping for role dates =====
     const ROLE_DATES = {
-      "Diptanshu Sikdar": { label: "Role dates", start: "Sep 2024", end: "Present" },
-      "Hokulani Topping": { label: "Role dates", start: "Sep 2024", end: "Present" },
-      "Nicole Ying": { label: "Role dates", start: "Sep 2024", end: "Present" },
-      "Professor Sandy Irani": { label: "Advisor since", start: "2023", end: null },
-      "Shion Fukuzawa": { label: "Advisor since", start: "2024", end: null },
-      "Stewart Smith": { label: "Served", start: "2023", end: "2024" },
-      "Krishna Vempati": { label: "Served", start: "2023", end: "2024" },
+      "Diptanshu Sikdar": { label: "Role dates", start: "June 2023", end: "Present" },
+      "Hokulani Topping": { label: "Role dates", start: "June 2025", end: "Present" },
+      "Nicole Ying": { label: "Role dates", start: "June 2025", end: "Present" },
+      "Professor Sandy Irani": { label: "Advisor since", start: "September 2024", end: null },
+      "Shion Fukuzawa": { label: "Advisor since", start: "August 2023", end: null },
+      "Stewart Smith": { label: "Served", start: "2023", end: "2025" },
+      "Krishna Vempati": { label: "Served", start: "2023", end: "2025" },
+      "Arya Mhaiskar": { label: "Served", start: "2023", end: "2024" },
       "Joshua Wang": { label: "Served", start: "2022", end: "2023" },
       "Rohit Ganti": { label: "Served", start: "2022", end: "2023" },
       "Sean Doan": { label: "Served", start: "2022", end: "2023" },
+      "Kyler Frazier": { label: "Served", start: "2021", end: "2022" },
       "Chris Chen": { label: "Served", start: "2021", end: "2022" },
-      "Arya Mhaiskar": { label: "Served", start: "2023", end: "2024" },
-      "Kyler Frazier": { label: "Served", start: "2022", end: "2023" },
-      "Harry Goyal": { label: "Served", start: "2022", end: "2023" },
+      "Harry Goyal": { label: "Served", start: "2021", end: "2022" },
       "Andy Park": { label: "Served", start: "2021", end: "2022" },
       "Keira Zhu": { label: "Served", start: "2021", end: "2022" },
     };
