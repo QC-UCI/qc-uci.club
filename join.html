@@ -10,43 +10,59 @@
   <script src="https://kit.fontawesome.com/2d323a629b.js" crossorigin="anonymous"></script>
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
-    :root { --qc-navy:#0b1b3a; --qc-blue:#2563eb; --qc-gold:#f59e0b; }
-    html, body { font-family:'Inter', system-ui; }
-    .quantum-bg { background:
+    :root{ --qc-navy:#0b1b3a; --qc-blue:#2563eb; --qc-emerald:#10b981; --qc-amber:#f59e0b; }
+    html, body{ font-family:'Inter', system-ui; }
+    .quantum-bg{ background:
       radial-gradient(900px 400px at 10% -10%, rgba(37,99,235,.10), transparent 60%),
       radial-gradient(700px 300px at 110% 0%, rgba(245,158,11,.08), transparent 60%),
-      linear-gradient(#0b1023, #0b1023);
+      linear-gradient(#0b1023,#0b1023);
     }
-    .glass { background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.04)); backdrop-filter:saturate(140%) blur(8px); }
-    .cta:hover { box-shadow:0 12px 28px rgba(37,99,235,.35); transform:translateY(-1px); }
-    .step::before { content:attr(data-step); }
-    .accordion-content { grid-template-rows:0fr; transition:grid-template-rows .25s ease, opacity .25s ease; opacity:.75; }
-    .accordion[aria-expanded="true"] + .accordion-content { grid-template-rows:1fr; opacity:1; }
-    .accordion-content > div { overflow:hidden; }
+    .glass{ background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.04)); backdrop-filter:saturate(140%) blur(8px); }
+    .cta:hover{ box-shadow:0 12px 28px rgba(37,99,235,.35); transform:translateY(-1px); }
+    .step::before{ content:attr(data-step); }
+
+    /* FAQ accordion: fully collapsed by default, expand to content height */
+    .accordion-content{ max-height:0; overflow:hidden; opacity:0; transition:max-height .35s ease, opacity .25s ease; }
+    .accordion[aria-expanded="true"] + .accordion-content{ opacity:1; }
+    .accordion-chevron{ transition: transform .25s ease; }
+
+    /* Slider */
+    .slider-track{ display:flex; will-change:transform; transition: transform .45s ease-in-out; }
+    .slide{ min-width:100%; }
+
+    /* Prominent buttons */
+    .pill-btn{ display:inline-flex; align-items:center; justify-content:center; gap:.5rem; font-weight:700; border-radius:9999px; padding:.6rem 1rem; line-height:1; border:1px solid rgba(255,255,255,.14); box-shadow:0 6px 16px rgba(0,0,0,.25); cursor:pointer; }
+    .pill-btn:focus{ outline:2px solid rgba(255,255,255,.35); outline-offset:2px; }
+    .pill-btn.featured{ background:var(--qc-blue); color:#fff; }
+    .pill-btn.featured:hover{ filter:brightness(0.95); }
+    .pill-btn.roles{ background:var(--qc-amber); color:#0b1023; }
+    .pill-btn.roles:hover{ filter:brightness(0.98); }
   </style>
 </head>
 <body class="text-slate-100 quantum-bg min-h-screen">
-  <!-- Header (consistent navy) -->
+  <!-- Header (unchanged pattern; tabs always visible; logo stacks on narrow) -->
   <header class="bg-[var(--qc-navy)]">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between py-4">
-      <a class="inline-flex items-center gap-3" href="index.html">
-        <img src="image/navy_anteater_bloch.png" alt="QC@UCI" class="h-12 w-auto" />
-      </a>
-      <nav class="hidden md:block">
-        <ul class="flex items-center gap-6 text-white text-sm">
-          <li><a href="index.html">Home</a></li>
-          <li><a class="font-semibold" href="join.html">Join</a></li>
-          <li><a href="learn.html">Learn</a></li>
-          <li><a href="team.html">Team</a></li>
-          <li><a href="event.html">Events</a></li>
-          <li><a href="projects.html">Projects</a></li>
-          <li><a href="contact_us.html">Contact</a></li>
-        </ul>
-      </nav>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+      <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+        <a class="inline-flex items-center gap-3" href="index.html">
+          <img src="image/navy_anteater_bloch.png" alt="QC@UCI" class="h-12 w-auto" />
+        </a>
+        <nav class="w-full sm:w-auto">
+          <ul class="flex flex-wrap items-center gap-x-6 gap-y-2 text-white text-sm">
+            <li><a href="index.html">Home</a></li>
+            <li><a class="font-semibold" href="join.html">Join</a></li>
+            <li><a href="learn.html">Learn</a></li>
+            <li><a href="team.html">Team</a></li>
+            <li><a href="event.html">Events</a></li>
+            <li><a href="projects.html">Projects</a></li>
+            <li><a href="contact_us.html">Contact</a></li>
+          </ul>
+        </nav>
+      </div>
     </div>
   </header>
 
-  <!-- Hero -->
+  <!-- Hero (unchanged content) -->
   <section class="relative overflow-hidden">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-14">
       <div class="grid md:grid-cols-2 gap-8 items-center">
@@ -59,13 +75,9 @@
               Become a member
             </a>
             <a href="https://www.instagram.com/qcatuci/" target="_blank" class="cta inline-flex items-center justify-center gap-2 rounded-xl px-5 py-3 glass border border-white/10 text-white font-semibold transition">
-              <i class="fa-brands fa-discord"></i>
+              <i class="fa-brands fa-instagram"></i>
               Join our Instagram
             </a>
-            <!--<a href="https://discord.gg/NMdhsk3UYQ" target="_blank" class="cta inline-flex items-center justify-center gap-2 rounded-xl px-5 py-3 glass border border-white/10 text-white font-semibold transition">
-              <i class="fa-brands fa-discord"></i>
-              Join our Discord
-            </a>-->
           </div>
           <p class="mt-2 text-xs text-slate-400">Takes ~2 minutes. You’ll receive meeting info and opportunities via Discord.</p>
         </div>
@@ -79,10 +91,6 @@
               <div class="text-3xl font-extrabold">6+</div>
               <div class="text-xs text-slate-300/80">Guest lectures / year</div>
             </div>
-            <!--<div class="rounded-2xl bg-slate-900/40 border border-white/10 p-4 text-center">
-              <div class="text-3xl font-extrabold">5+</div>
-              <div class="text-xs text-slate-300/80">Active projects</div>
-            </div>-->
           </div>
           <div class="mt-4 grid grid-cols-1 gap-3">
             <a href="https://www.instagram.com/qcatuci/" target="_blank" class="rounded-xl border border-white/10 p-3 flex items-center gap-3 hover:bg-white/5 transition">
@@ -95,7 +103,7 @@
     </div>
   </section>
 
-  <!-- How to get started -->
+  <!-- Three steps (unchanged content) -->
   <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
     <h2 class="text-2xl sm:text-3xl font-bold">Three simple steps</h2>
     <div class="mt-5 grid md:grid-cols-3 gap-5">
@@ -120,61 +128,142 @@
     </div>
   </section>
 
-  <!-- Opportunity cards -->
+  <!-- Ways to participate (with centered buttons + responsive sliders) -->
   <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
     <h2 class="text-2xl sm:text-3xl font-bold">Ways to participate</h2>
     <div class="mt-5 grid grid-cols-1 md:grid-cols-3 gap-5">
+      <!-- Card 1 -->
       <article class="rounded-2xl border border-white/10 glass p-6 hover:bg-white/[.06] transition">
         <div class="flex items-center gap-3 text-sky-300">
           <i class="fa-solid fa-chalkboard-user"></i>
           <h3 class="font-semibold text-white">Algorithm and Application Workshops</h3>
         </div>
         <p class="mt-2 text-sm text-slate-300/90">Intro to quantum computing, industry and academic guest speakers</p>
+        <div class="mt-4 flex justify-center">
+          <button class="pill-btn featured featured-btn" data-target="alg-slides" aria-controls="alg-slides" aria-expanded="false">
+            <i class="fa-solid fa-star"></i>
+            Featured
+          </button>
+        </div>
+        <div id="alg-slides" class="mt-4 hidden">
+          <div class="rounded-xl border border-white/10 overflow-hidden">
+            <div class="slider relative">
+              <div class="slider-track" data-index="0">
+                <div class="slide p-4"><div class="flex items-center gap-3"><i class="fa-solid fa-key"></i><span class="font-medium">Quantum Key Distribution</span></div></div>
+                <div class="slide p-4"><div class="flex items-center gap-3"><i class="fa-solid fa-magnifying-glass"></i><span class="font-medium">Grover's Search</span></div></div>
+                <div class="slide p-4"><div class="flex items-center gap-3"><i class="fa-solid fa-image"></i><span class="font-medium">Quantum Image Processing</span></div></div>
+              </div>
+              <div class="absolute inset-y-0 right-2 flex items-center gap-2">
+                <button class="nav prev rounded-md bg-white/5 px-2 py-1 text-xs" aria-label="Previous">‹</button>
+                <button class="nav next rounded-md bg-white/5 px-2 py-1 text-xs" aria-label="Next">›</button>
+              </div>
+            </div>
+          </div>
+        </div>
       </article>
+
+      <!-- Card 2 -->
       <article class="rounded-2xl border border-white/10 glass p-6 hover:bg-white/[.06] transition">
         <div class="flex items-center gap-3 text-emerald-300">
           <i class="fa-solid fa-code"></i>
           <h3 class="font-semibold text-white">Project squads</h3>
         </div>
         <p class="mt-2 text-sm text-slate-300/90">Hands-on teams implementing algorithms, building simulators, or creating real-world quantum applications. Beginners welcome!</p>
+        <div class="mt-4 flex justify-center">
+          <button class="pill-btn featured featured-btn" data-target="proj-slides" aria-controls="proj-slides" aria-expanded="false">
+            <i class="fa-solid fa-star"></i>
+            Featured
+          </button>
+        </div>
+        <div id="proj-slides" class="mt-4 hidden">
+          <div class="rounded-xl border border-white/10 overflow-hidden">
+            <div class="slider relative">
+              <div class="slider-track" data-index="0">
+                <div class="slide p-4"><div class="flex items-center gap-3"><i class="fa-solid fa-microchip"></i><span class="font-medium">Quantum computer simulator</span></div></div>
+                <div class="slide p-4"><div class="flex items-center gap-3"><i class="fa-solid fa-brain"></i><span class="font-medium">Quantum Image Classifier</span></div></div>
+              </div>
+              <div class="absolute inset-y-0 right-2 flex items-center gap-2">
+                <button class="nav prev rounded-md bg-white/5 px-2 py-1 text-xs" aria-label="Previous">‹</button>
+                <button class="nav next rounded-md bg-white/5 px-2 py-1 text-xs" aria-label="Next">›</button>
+              </div>
+            </div>
+          </div>
+        </div>
       </article>
+
+      <!-- Card 3 -->
       <article class="rounded-2xl border border-white/10 glass p-6 hover:bg-white/[.06] transition">
         <div class="flex items-center gap-3 text-amber-300">
           <i class="fa-solid fa-handshake-angle"></i>
           <h3 class="font-semibold text-white">Volunteer & leadership</h3>
         </div>
         <p class="mt-2 text-sm text-slate-300/90">Help mentor new members, run events, and shape the club’s direction.</p>
+        <div class="mt-4 flex justify-center">
+          <button class="pill-btn roles featured-btn" data-target="vol-slides" aria-controls="vol-slides" aria-expanded="false">
+            <i class="fa-solid fa-clipboard-list"></i>
+            Open Roles
+          </button>
+        </div>
+        <div id="vol-slides" class="mt-4 hidden">
+          <div class="rounded-xl border border-white/10 overflow-hidden">
+            <div class="slider relative">
+              <div class="slider-track" data-index="0">
+                <div class="slide p-4"><div class="flex items-center gap-3"><i class="fa-solid fa-coins"></i><span class="font-medium">Co‑treasurer</span></div></div>
+                <div class="slide p-4"><div class="flex items-center gap-3"><i class="fa-solid fa-bullhorn"></i><span class="font-medium">Marketing Trainee</span></div></div>
+                <div class="slide p-4"><div class="flex items-center gap-3"><i class="fa-solid fa-graduation-cap"></i><span class="font-medium">Education Team Trainee</span></div></div>
+              </div>
+              <div class="absolute inset-y-0 right-2 flex items-center gap-2">
+                <button class="nav prev rounded-md bg-white/5 px-2 py-1 text-xs" aria-label="Previous">‹</button>
+                <button class="nav next rounded-md bg-white/5 px-2 py-1 text-xs" aria-label="Next">›</button>
+              </div>
+            </div>
+          </div>
+        </div>
       </article>
     </div>
   </section>
 
-  <!-- FAQ -->
+  <!-- FAQ (improved)—all collapsed by default -->
   <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
     <h2 class="text-2xl sm:text-3xl font-bold">FAQ</h2>
-    <div class="mt-4 space-y-3">
-      <button class="accordion w-full text-left rounded-xl border border-white/10 glass px-4 py-3" aria-expanded="false">
-        Do I need prior quantum experience?
+    <div class="mt-4 space-y-3" id="faq">
+      <!-- Item 1 -->
+      <button class="accordion w-full text-left rounded-xl border border-white/10 glass px-4 py-3 flex items-center justify-between" aria-expanded="false">
+        <span>Do I need prior quantum experience?</span>
+        <i class="fa-solid fa-chevron-down accordion-chevron"></i>
       </button>
-      <div class="accordion-content grid"><div class="px-4 pb-3 text-sm text-slate-300/90">Absolutely not. We run beginner-friendly sessions and provide resources to get you started.</div></div>
+      <div class="accordion-content"><div class="px-4 pb-3 text-sm text-slate-300/90">Absolutely not. We run beginner-friendly sessions and provide resources to get you started.</div></div>
 
-      <button class="accordion w-full text-left rounded-xl border border-white/10 glass px-4 py-3" aria-expanded="false">
-        What’s the time commitment?
+      <!-- Item 2 -->
+      <button class="accordion w-full text-left rounded-xl border border-white/10 glass px-4 py-3 flex items-center justify-between" aria-expanded="false">
+        <span>What’s the time commitment?</span>
+        <i class="fa-solid fa-chevron-down accordion-chevron"></i>
       </button>
-      <div class="accordion-content grid"><div class="px-4 pb-3 text-sm text-slate-300/90">Totally flexible, but we highly recommend attending our club meetings. If you want to get your hands dirty, join a project team for weekly sprints.</div></div>
+      <div class="accordion-content"><div class="px-4 pb-3 text-sm text-slate-300/90">Totally flexible, but we highly recommend attending our club meetings. If you want to get your hands dirty, join a project team for weekly sprints.</div></div>
 
-      <button class="accordion w-full text-left rounded-xl border border-white/10 glass px-4 py-3" aria-expanded="false">
-        How do I hear about events?
+      <!-- Item 3 -->
+      <button class="accordion w-full text-left rounded-xl border border-white/10 glass px-4 py-3 flex items-center justify-between" aria-expanded="false">
+        <span>How do I hear about events?</span>
+        <i class="fa-solid fa-chevron-down accordion-chevron"></i>
       </button>
-      <div class="accordion-content grid"><div class="px-4 pb-3 text-sm text-slate-300/90">Look at Discord announcements for the most up-to-date information. We also post major events on Instagram. If you are on our mailing list, you will receive weekly newsletters too.</div></div>
-    
-      <button class="accordion w-full text-left rounded-xl border border-white/10 glass px-4 py-3" aria-expanded="false">
-        How many meetings do you have?
+      <div class="accordion-content"><div class="px-4 pb-3 text-sm text-slate-300/90">Look at Discord announcements for the most up-to-date information. We also post major events on Instagram. If you are on our mailing list, you will receive weekly newsletters too.</div></div>
+
+      <!-- Item 4 -->
+      <button class="accordion w-full text-left rounded-xl border border-white/10 glass px-4 py-3 flex items-center justify-between" aria-expanded="false">
+        <span>How many meetings do you have?</span>
+        <i class="fa-solid fa-chevron-down accordion-chevron"></i>
       </button>
-      <div class="accordion-content grid"><div class="px-4 pb-3 text-sm text-slate-300/90">we host two regular meetings each week. One session focuses on introducing quantum computing algorithms, starting from the fundamentals and gradually progressing to more advanced concepts. The other session is dedicated to hands-on project work, where members collaboratively implement the quantum computing concepts discussed during the algorithm meetings.</div></div>
+      <div class="accordion-content"><div class="px-4 pb-3 text-sm text-slate-300/90">We host two regular meetings each week. One session focuses on introducing quantum computing algorithms, starting from the fundamentals and gradually progressing to more advanced concepts. The other session is dedicated to hands-on project work, where members collaboratively implement the quantum computing concepts discussed during the algorithm meetings.</div></div>
+
+      <!-- Expand/Collapse all controls (optional) -->
+      <div class="pt-2 flex gap-2">
+        <button id="expand-all" class="rounded-lg border border-white/10 px-3 py-1.5 text-xs font-semibold hover:bg-white/5 transition"><i class="fa-solid fa-plus-square"></i> Expand all</button>
+        <button id="collapse-all" class="rounded-lg border border-white/10 px-3 py-1.5 text-xs font-semibold hover:bg-white/5 transition"><i class="fa-solid fa-minus-square"></i> Collapse all</button>
+      </div>
     </div>
   </section>
 
-  <!-- Sticky mobile join bar -->
+  <!-- Sticky mobile join bar (unchanged) -->
   <div class="fixed bottom-4 left-0 right-0 px-4 sm:hidden">
     <div class="glass border border-white/10 rounded-2xl p-2 flex gap-2">
       <a href="https://docs.google.com/forms/d/e/1FAIpQLSeZtyYb8oV3nUPXUksd5ULrCTAcWEbtvGW-8aNxpvVj6ZAcEw/viewform" target="_blank" class="flex-1 inline-flex items-center justify-center gap-2 rounded-xl px-4 py-2 bg-[var(--qc-blue)] text-white text-sm font-semibold"><i class="fa-solid fa-user-plus"></i> Join</a>
@@ -182,7 +271,7 @@
     </div>
   </div>
 
-  <!-- Footer -->
+  <!-- Footer (unchanged) -->
   <footer class="mt-14 border-t border-slate-800/60">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 text-center text-slate-400 text-sm">
       <a class="hover:text-slate-200" href="./contact_us.html">Copyright © 2025 Quantum Computing @ UCI. All Rights Reserved.</a>
@@ -190,11 +279,51 @@
   </footer>
 
   <script>
-    // Simple FAQ accordion
-    document.querySelectorAll('.accordion').forEach(btn => {
+    // FAQ accordion: per-item toggle, default collapsed
+    const accordions = document.querySelectorAll('.accordion');
+    accordions.forEach(btn => {
+      const panel = btn.nextElementSibling;
+      const icon = btn.querySelector('.accordion-chevron');
+      const collapse = () => { panel.style.maxHeight = '0px'; btn.setAttribute('aria-expanded','false'); if(icon) icon.style.transform = 'rotate(0deg)'; };
+      const expand = () => { panel.style.maxHeight = panel.scrollHeight + 'px'; btn.setAttribute('aria-expanded','true'); if(icon) icon.style.transform = 'rotate(180deg)'; };
+      // ensure default closed
+      collapse();
+      btn.addEventListener('click', () => { (btn.getAttribute('aria-expanded') === 'true') ? collapse() : expand(); });
+      // keyboard friendly
+      btn.addEventListener('keydown', (e) => { if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); btn.click(); }});
+      // on resize, recompute heights for open items
+      window.addEventListener('resize', () => { if(btn.getAttribute('aria-expanded') === 'true'){ panel.style.maxHeight = panel.scrollHeight + 'px'; }});
+    });
+
+    document.getElementById('expand-all')?.addEventListener('click', () => {
+      document.querySelectorAll('.accordion').forEach(b => { const p=b.nextElementSibling; p.style.maxHeight=p.scrollHeight+'px'; b.setAttribute('aria-expanded','true'); const i=b.querySelector('.accordion-chevron'); if(i){ i.style.transform='rotate(180deg)'; } });
+    });
+    document.getElementById('collapse-all')?.addEventListener('click', () => {
+      document.querySelectorAll('.accordion').forEach(b => { const p=b.nextElementSibling; p.style.maxHeight='0px'; b.setAttribute('aria-expanded','false'); const i=b.querySelector('.accordion-chevron'); if(i){ i.style.transform='rotate(0deg)'; } });
+    });
+
+    // Featured/Open Roles sliders: center buttons, toggle panels, responsive
+    function bindSlider(container){
+      const track = container.querySelector('.slider-track');
+      const slides = container.querySelectorAll('.slide');
+      const prev = container.querySelector('.nav.prev');
+      const next = container.querySelector('.nav.next');
+      const count = slides.length; let index = 0;
+      const go = (i) => { index = (i + count) % count; track.style.transform = `translateX(-${index*100}%)`; };
+      prev?.addEventListener('click', () => go(index - 1));
+      next?.addEventListener('click', () => go(index + 1));
+      let timer = setInterval(() => go(index + 1), 5000);
+      container.addEventListener('mouseenter', () => clearInterval(timer));
+      container.addEventListener('mouseleave', () => { timer = setInterval(() => go(index + 1), 5000); });
+    }
+
+    document.querySelectorAll('.featured-btn').forEach(btn => {
       btn.addEventListener('click', () => {
+        const targetId = btn.dataset.target; const wrap = document.getElementById(targetId);
         const expanded = btn.getAttribute('aria-expanded') === 'true';
-        btn.setAttribute('aria-expanded', String(!expanded));
+        if(!wrap) return;
+        if(expanded){ wrap.classList.add('hidden'); btn.setAttribute('aria-expanded','false'); }
+        else{ wrap.classList.remove('hidden'); btn.setAttribute('aria-expanded','true'); if(!wrap.dataset.bound){ wrap.querySelectorAll('.slider').forEach(bindSlider); wrap.dataset.bound='1'; } }
       });
     });
   </script>
