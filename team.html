@@ -1,500 +1,386 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <script src="https://kit.fontawesome.com/2d323a629b.js" crossorigin="anonymous"></script>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto&display=swap">
-  <link rel="stylesheet" href="css/tailwind_style.css">
-  <link rel="stylesheet" href="css/style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Team | QC@UCI</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://kit.fontawesome.com/2d323a629b.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
   <style>
-    .interactive-nav li a {
-      transition: all 0.3s ease;
-      position: relative;
+    :root {
+      --qc-navy: #0b1b3a;
+      --qc-blue: #2563eb;
+      --qc-gold: #f59e0b;
+      --card-bg: #0f172a;
     }
-    .interactive-nav li a::after {
-      content: '';
-      position: absolute;
-      width: 0%;
-      height: 2px;
-      left: 0;
-      bottom: -2px;
-      background-color: #3b82f6;
-      transition: width 0.3s ease;
+    html, body { font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji"; }
+    .quantum-bg {
+      background: radial-gradient(1000px 500px at 10% 0%, rgba(37,99,235,.08), transparent 60%),
+                  radial-gradient(800px 400px at 90% 10%, rgba(245,158,11,.08), transparent 60%),
+                  linear-gradient(#0b1023, #0b1023);
     }
-    .interactive-nav li a:hover::after {
-      width: 100%;
-    }
+    .sticky-tabs { backdrop-filter: saturate(140%) blur(8px); }
+    .tab-btn[aria-selected="true"] { color: white; background: linear-gradient(135deg, var(--qc-blue), #3b82f6); box-shadow: 0 6px 18px rgba(37, 99, 235, .35); }
+    .tab-btn { transition: transform .15s ease, box-shadow .2s ease; }
+    .tab-btn:active { transform: translateY(1px) scale(.98); }
 
-   .team-container {
-         display: flex;
-         padding-top: 10px;
-         max-width: 1300px;
-         margin: 0 auto;
-      }
-      .team-sidebar {
-         width: 220px;
-         padding: 2rem 1rem;
-         border-right: 1px solid #ccc;
-      }
-      .team-sidebar button {
-         display: block;
-         width: 100%;
-         margin-bottom: 1rem;
-         padding: 0.75rem 1rem;
-         background-color: #e2e8f0;
-         border: none;
-         border-radius: 0.5rem;
-         cursor: pointer;
-         font-weight: 500;
-         transition: background 0.3s;
-      }
-      .team-sidebar button:hover,
-      .team-sidebar button.active {
-         background-color: #1e3a8a;
-         color: white; font-weight: bold;
-      }
-      .team-content {
-         flex: 1;
-         padding: 2rem;
-         display: none;
-         flex-wrap: wrap;
-         gap: 1rem;
-         justify-content: center;
-         background-color: #ffffff;
-      }
-      .team-content.active {
-         display: flex;
-      }
-      .team__member {
-         position: relative;
-         overflow: hidden;
-         border-radius: 1rem;
-         padding: 1rem;
-         background-color: #fff;
-         box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-         width: 260px;
-         text-align: center;
-      }
-      .team__member img {
-         width: 150px;
-         height: 150px;
-         object-fit: cover;
-         border-radius: 0.75rem;
-         margin-bottom: 1rem;
-         transition: filter 0.3s ease;
-      }
-      .team__member .overlay {
-         position: absolute;
-         top: 0;
-         left: 0;
-         width: 100%;
-         height: 100%;
-         background: rgba(255, 255, 255, 0.95);
-         color: #111;
-         display: flex;
-         flex-direction: column;
-         justify-content: center;
-         align-items: center;
-         padding: 1rem;
-         opacity: 0;
-         transition: opacity 0.3s ease;
-         overflow-y: auto;
-         font-size: 0.9rem;
-      }
-      .overlay .text {
-         color: #111 !important;
-      }
-      .team__member:hover img,
-      .team__member:hover h3 {
-         filter: blur(2px);
-      }
-      .team__member:hover .overlay {
-         opacity: 1;
-      }
-      .team__member h3 {
-         font-size: 1.2rem;
-         font-weight: bold;
-         margin-bottom: 0.25rem;
-      }
-      .team__member h4,
-      .team__member .team__major {
-         font-style: italic;
-         color: #555;
-      }
-      .team__title {
-         color: #1e3a8a;
-         font-size: 2.5rem;
-         text-align: center;
-         font-weight: bold;
-         margin-top: 200px;
-      }
-  
-@media (max-width: 768px) {
-  .team-container {
-    flex-direction: column;
-    padding-top: 20px;
-  }
-  .team-sidebar {
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    gap: 1rem;
-    border-right: none;
-    border-bottom: 1px solid #ccc;
-  }
-  .team-sidebar button {
-    width: auto;
-    flex-grow: 1;
-  }
-}
-.team-sidebar button {
-  background-color: #e2e8f0;
-  color: #111;
-}
-.team-sidebar button:hover,
-.team-sidebar button.active {
-  background-color: #111;
-  color: white;
-  font-weight: bold;
-}
-body {
-  background-color: #ffffff !important;
-}
+    .member-card { background: linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02)); }
+    .member-card:hover { box-shadow: 0 12px 30px rgba(0,0,0,.35); }
+    /* SQUARE, FACE-FRIENDLY HEADSHOTS */
+    .member-photo { filter: saturate(105%); width: 100%; aspect-ratio: 1 / 1; object-fit: cover; object-position: center top; }
+    .member-hover { transition: opacity .25s ease, transform .25s ease; }
+    .member-card:hover .member-hover { opacity: 1; transform: translateY(0); }
+
+    .bio-collapsible[aria-expanded="true"] + .bio-panel { grid-template-rows: 1fr; opacity: 1; }
+    .bio-panel { display: grid; grid-template-rows: 0fr; transition: grid-template-rows .25s ease, opacity .25s ease; opacity: .8; }
+    .bio-panel > div { overflow: hidden; }
+
+    .tab-section { opacity: 0; transform: translateY(6px); transition: opacity .2s ease, transform .2s ease; display: none; }
+    .tab-section.active { display: block; opacity: 1; transform: translateY(0); }
+
+    .date-badge { border: 1px solid rgba(255,255,255,.12); }
+
+    .header-link { position: relative; }
+    .header-link:after { content:""; position:absolute; left:0; bottom:-6px; width:0; height:2px; background: var(--qc-blue); transition: width .2s ease; }
+    .header-link:hover:after { width:100%; }
+
+    .logo-wrap img { filter: drop-shadow(0 2px 6px rgba(0,0,0,.35)); }
   </style>
- </head>
- <body>
-   <header class="header">
-      <a href="index.html">
-        <img src="image/navy_anteater_bloch.png" width="150" alt="Home">
+</head>
+<body class="text-slate-100 quantum-bg min-h-screen">
+  <!-- Header -->
+  <header class="w-full" style="background-color: #091b46;">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 lg:h-auto">
+    <div class="flex flex-col items-center gap-3 lg:flex-row lg:items-center lg:justify-between lg:h-full py-3 lg:py-0">
+      <!-- Logo (stacks above on narrow screens) -->
+      <a class="logo-wrap inline-flex items-center gap-3 order-1 lg:order-none" href="index.html">
+        <img src="image/navy_anteater_bloch.png" alt="QC@UCI" class="h-auto w-40"/>
+        <span class="sr-only">Return Home</span>
       </a>
-      <nav>
-        <ul class="header__nav interactive-nav">
-          <li><a href="index.html">Home</a></li>
-          <li><a href="join.html">Join</a></li>
-          <li><a href="learn.html">Learn</a></li>
-          <li><a href="team.html">Team</a></li>
-          <li><a href="event.html">Events</a></li>
-          <li><a href="projects.html">Projects</a></li>
-          <li><a href="contact_us.html">Contact</a></li>
+      <!-- Nav: always visible; wraps on narrow screens -->
+      <nav class="w-full lg:w-auto order-2 lg:order-none">
+        <ul class="flex flex-wrap items-center justify-center lg:justify-end gap-x-6 gap-y-2 text-slate-200 text-sm">
+          <li><a class="header-link hover:text-white" href="index.html">Home</a></li>
+          <li><a class="header-link hover:text-white" href="join.html">Join</a></li>
+          <li><a class="header-link hover:text-white" href="learn.html">Learn</a></li>
+          <li><a class="header-link hover:text-white font-semibold" href="team.html">Team</a></li>
+          <li><a class="header-link hover:text-white" href="event.html">Events</a></li>
+          <li><a class="header-link hover:text-white" href="projects.html">Projects</a></li>
+          <li><a class="header-link hover:text-white" href="contact_us.html">Contact</a></li>
         </ul>
       </nav>
-    </header>
-
-  <div class="team__title">
-   Meet our team
-  </div>
-  <div class="team-container">
-   <aside class="team-sidebar">
-    <button class="active" data-tab="current">
-     Current Board
-    </button>
-    <button data-tab="advisor">
-     Advisors
-    </button>
-    <button data-tab="former">
-     Previous Board
-    </button>
-   </aside>
-   
-   <!-- CURRENT BOARD MEMBERS -->
-   <section class="team-content active" id="current">
-    <div class="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10">
-     <div class="bg-white rounded-2xl shadow-xl overflow-hidden relative hover:shadow-2xl transition-all">
-      <div class="relative">
-       <img alt="Diptanshu Sikdar" class="w-full h-64 object-cover" src="image/DiptanshuSikdar.png"/>
-       <div class="absolute inset-0 bg-black bg-opacity-90 opacity-0 hover:opacity-100 transition-opacity p-4 text-sm overflow-y-auto">
-        <p>
-         Diptanshu is a senior, majoring in computer science at UC Irvine. He is interested in quantum machine learning algorithms and has over five years of experience with quantum software.
-        </p>
-       </div>
-      </div>
-      <div class="text-center p-5">
-       <h3 class="text-xl font-semibold text-gray-900">
-        Diptanshu Sikdar
-       </h3>
-       <p class="text-blue-600 font-medium">
-        President
-       </p>
-       <p class="text-sm text-gray-500">
-        Computer Science
-       </p>
-      </div>
-     </div>
-     <div class="bg-white rounded-2xl shadow-xl overflow-hidden relative hover:shadow-2xl transition-all">
-      <div class="relative">
-       <img alt="Hokulani Topping" class="w-full h-64 object-cover" src="image/HokulaniTopping.png"/>
-       <div class="absolute inset-0 bg-black bg-opacity-90 opacity-0 hover:opacity-100 transition-opacity p-4 text-sm overflow-y-auto">
-        <p>
-         Hokulani is a senior studying Informatics who is excited about quantum computing, algorithms, and all the cool ways quantum tech can shape the future!
-        </p>
-       </div>
-      </div>
-      <div class="text-center p-5">
-       <h3 class="text-xl font-semibold text-gray-900">
-        Hokulani Topping
-       </h3>
-       <p class="text-blue-600 font-medium">
-        Vice President
-       </p>
-       <p class="text-sm text-gray-500">
-        Informatics
-       </p>
-      </div>
-     </div>
-     <div class="bg-white rounded-2xl shadow-xl overflow-hidden relative hover:shadow-2xl transition-all">
-      <div class="relative">
-       <img alt="Nicole Ying" class="w-full h-64 object-cover" src="image/NicoleYing.jpg"/>
-       <div class="absolute inset-0 bg-black bg-opacity-90 opacity-0 hover:opacity-100 transition-opacity p-4 text-sm overflow-y-auto">
-        <p>
-         Nicole is a junior, majoring in Computer Science and Quantitative Economics. She is interested in applying quantum algorithms to solve complex problems and connecting with others who share the same curiosity.
-        </p>
-       </div>
-      </div>
-      <div class="text-center p-5">
-       <h3 class="text-xl font-semibold text-gray-900">
-        Nicole Ying
-       </h3>
-       <p class="text-blue-600 font-medium">
-        Treasurer
-       </p>
-       <p class="text-sm text-gray-500">
-        Computer Science &amp; Quantitative Economics
-       </p>
-      </div>
-     </div>
     </div>
-   </section>
-
-   <!-- CURRENT ADVISORS -->
-   <section class="team-content" id="advisor">
-    <div class="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10">
-     <div class="bg-white rounded-2xl shadow-xl overflow-hidden relative hover:shadow-2xl transition-all">
-      <div class="relative">
-       <img alt="Professor Sandy Irani" class="w-full h-64 object-cover" src="image/sandyirani.jpg"/>
-       <div class="absolute inset-0 bg-black bg-opacity-90 opacity-0 hover:opacity-100 transition-opacity p-4 text-sm overflow-y-auto">
-        <p>
-         Professor Irani is a Computer Science professor at UCI and Associate Dean for Undergraduate Student Affairs of the School of ICS. She has been researching Quantum Computation with a special focus on Quantum Complexity Theory.
-        </p>
-       </div>
-      </div>
-      <div class="text-center p-5">
-       <h3 class="text-xl font-semibold text-gray-900">
-        Professor Sandy Irani
-       </h3>
-       <p class="text-blue-600 font-medium">
-        Faculty Advisor
-       </p>
-       <p class="text-sm text-gray-500">
-        Computer Science Dept.
-       </p>
-      </div>
-     </div>
-     <div class="bg-white rounded-2xl shadow-xl overflow-hidden relative hover:shadow-2xl transition-all">
-      <div class="relative">
-       <img alt="Shion Fukuzawa" class="w-full h-64 object-cover" src="image/ShionFukuzawa.png"/>
-       <div class="absolute inset-0 bg-black bg-opacity-90 opacity-0 hover:opacity-100 transition-opacity p-4 text-sm overflow-y-auto">
-        <p>
-         Shion is a sixth-year PhD student in computer science at UC Irvine. He is interested in theoretical computer science, specifically computational geometry and quantum computing. In his free time, he enjoys playing video games, baking, and taking walks.
-        </p>
-       </div>
-      </div>
-      <div class="text-center p-5">
-       <h3 class="text-xl font-semibold text-gray-900">
-        Shion Fukuzawa
-       </h3>
-       <p class="text-blue-600 font-medium">
-        Graduate Advisor
-       </p>
-       <p class="text-sm text-gray-500">
-        Computer Science Dept.
-       </p>
-      </div>
-     </div>
-    </div>
-   </section>
-
-   <!-- PREVIOUS BOARD MEMBERS -->
-    <section class="team-content" id="former">
-      <div class="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10">
-      
-      <!-- Stewart Smith -->
-      <div class="bg-white rounded-2xl shadow-xl overflow-hidden relative hover:shadow-2xl transition-all">
-         <div class="relative">
-         <img alt="Stewart Smith" class="w-full h-64 object-cover" src="image/StewartSmith.jpg"/>
-         </div>
-         <div class="text-center p-5">
-         <h3 class="text-xl font-semibold text-gray-900">Stewart Smith</h3>
-         <p class="text-blue-600 font-medium">Vice President</p>
-         <p class="text-sm text-gray-500">Computer Science</p>
-         </div>
-      </div>
-
-      <!-- Krishna Vempati -->
-      <div class="bg-white rounded-2xl shadow-xl overflow-hidden relative hover:shadow-2xl transition-all">
-         <div class="relative">
-         <img alt="Krishna Vempati" class="w-full h-64 object-cover" src="image/RadhakrishnaVempati.jpg"/>
-         </div>
-         <div class="text-center p-5">
-         <h3 class="text-xl font-semibold text-gray-900">Krishna Vempati</h3>
-         <p class="text-blue-600 font-medium">Treasurer</p>
-         <p class="text-sm text-gray-500">Computer Science</p>
-         </div>
-      </div>
-
-      <!-- Joshua Wang -->
-      <div class="bg-white rounded-2xl shadow-xl overflow-hidden relative hover:shadow-2xl transition-all">
-         <div class="relative">
-         <img alt="Joshua Wang" class="w-full h-64 object-cover" src="image/JoshuaWang.jpg"/>
-         </div>
-         <div class="text-center p-5">
-         <h3 class="text-xl font-semibold text-gray-900">Joshua Wang</h3>
-         <p class="text-blue-600 font-medium">Co-President</p>
-         <p class="text-sm text-gray-500">Physics/CSE</p>
-         </div>
-      </div>
-      <!-- Rohit Ganti -->
-      <div class="bg-white rounded-2xl shadow-xl overflow-hidden relative hover:shadow-2xl transition-all">
-         <div class="relative">
-         <img alt="Rohit Ganti" class="w-full h-64 object-cover" src="image/RohitGanti.png"/>
-         </div>
-         <div class="text-center p-5">
-         <h3 class="text-xl font-semibold text-gray-900">Rohit Ganti</h3>
-         <p class="text-blue-600 font-medium">Co-President</p>
-         <p class="text-sm text-gray-500">Physics</p>
-         </div>
-      </div>
-      <!-- Sean Doan -->
-      <div class="bg-white rounded-2xl shadow-xl overflow-hidden relative hover:shadow-2xl transition-all">
-         <div class="relative">
-         <img alt="Sean Doan" class="w-full h-64 object-cover" src="image/SeanDoan.jpeg"/>
-         </div>
-         <div class="text-center p-5">
-         <h3 class="text-xl font-semibold text-gray-900">Sean Doan</h3>
-         <p class="text-blue-600 font-medium">Secretary</p>
-         <p class="text-sm text-gray-500">Physics</p>
-         </div>
-      </div>
-      <!-- Chris Chen -->
-      <div class="bg-white rounded-2xl shadow-xl overflow-hidden relative hover:shadow-2xl transition-all">
-         <div class="relative">
-         <img alt="Chris Chen" class="w-full h-64 object-cover" src="image/ChrisChen.jpg"/>
-         </div>
-         <div class="text-center p-5">
-         <h3 class="text-xl font-semibold text-gray-900">Chris Chen</h3>
-         <p class="text-blue-600 font-medium">President</p>
-         <p class="text-sm text-gray-500">Physics/CS</p>
-         </div>
-      </div>
-      <!-- Arya Mhaiskar -->
-      <div class="bg-white rounded-2xl shadow-xl overflow-hidden relative hover:shadow-2xl transition-all">
-         <div class="relative">
-         <img alt="Arya Mhaiskar" class="w-full h-64 object-cover" src="image/AryaMhaiskar.jpg"/>
-         </div>
-         <div class="text-center p-5">
-         <h3 class="text-xl font-semibold text-gray-900">Arya Mhaiskar</h3>
-         <p class="text-blue-600 font-medium">Marketing Chief</p>
-         <p class="text-sm text-gray-500">Computer Science</p>
-         </div>
-      </div>
-      <!-- Kyler Frazier -->
-      <div class="bg-white rounded-2xl shadow-xl overflow-hidden relative hover:shadow-2xl transition-all">
-         <div class="relative">
-         <img alt="Kyler Frazier" class="w-full h-64 object-cover" src="image/KylerFrazier.jpeg"/>
-         </div>
-         <div class="text-center p-5">
-         <h3 class="text-xl font-semibold text-gray-900">Kyler Frazier</h3>
-         <p class="text-sm text-gray-500">Physics/CS</p>
-         </div>
-      </div>
-      <!-- Harry Goyal -->
-      <div class="bg-white rounded-2xl shadow-xl overflow-hidden relative hover:shadow-2xl transition-all">
-         <div class="relative">
-         <img alt="Harry Goyal" class="w-full h-64 object-cover" src="image/qc.png"/>
-         </div>
-         <div class="text-center p-5">
-         <h3 class="text-xl font-semibold text-gray-900">Harry Goyal</h3>
-         <p class="text-sm text-gray-500">Informatics</p>
-         </div>
-      </div>
-      <!-- Andy Park -->
-      <div class="bg-white rounded-2xl shadow-xl overflow-hidden relative hover:shadow-2xl transition-all">
-         <div class="relative">
-         <img alt="Andy Park" class="w-full h-64 object-cover" src="image/AndyPark.jpg"/>
-         </div>
-         <div class="text-center p-5">
-         <h3 class="text-xl font-semibold text-gray-900">Andy Park</h3>
-         <p class="text-sm text-gray-500">Physics/Mathematics</p>
-         </div>
-      </div>
-      <!-- Keira Zhu -->
-      <div class="bg-white rounded-2xl shadow-xl overflow-hidden relative hover:shadow-2xl transition-all">
-         <div class="relative">
-         <img alt="Keira Zhu" class="w-full h-64 object-cover" src="image/ZhuHaochen.jpg"/>
-         </div>
-         <div class="text-center p-5">
-         <h3 class="text-xl font-semibold text-gray-900">Keira Zhu</h3>
-         <p class="text-sm text-gray-500">Business Economics</p>
-         </div>
-      </div>
-   </div>
-   </section>
-
   </div>
-  <footer>
-   <div class="footer__copyRight">
-    <p>
-     <a href="./contact_us.html">
-      Copyright © 2025 Quantum Computing @ UCI. All Rights Reserved.
-     </a>
-    </p>
-   </div>
+</header>
+
+
+  <!-- Title -->
+  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4 pb-2">
+    <div class="flex items-center gap-3">
+      <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight">Meet our team</h1>
+      <span class="hidden sm:inline-flex text-xs px-2 py-1 rounded-full bg-slate-800/60 date-badge">Quantum@UCI</span>
+    </div>
+    <p class="mt-2 text-slate-300/90 max-w-3xl">We’re a student-led community building quantum software skills, hosting talks, and running projects across Computer Science, Physics, and Engineering.</p>
+  </section>
+
+  <!-- Sticky Tabs -->
+  <div class="sticky top-0 z-40 px-4 sm:px-6 lg:px-8">
+    <div class="sticky-tabs max-w-7xl mx-auto bg-slate-900/70 border border-slate-700/40 rounded-2xl p-2 flex gap-2">
+      <button class="tab-btn flex-1 md:flex-none md:px-4 px-3 py-2 rounded-xl text-slate-200 text-sm font-medium" data-tab="current" aria-selected="true">Current Board</button>
+      <button class="tab-btn flex-1 md:flex-none md:px-4 px-3 py-2 rounded-xl text-slate-200 text-sm font-medium" data-tab="advisors" aria-selected="false">Advisors</button>
+      <button class="tab-btn flex-1 md:flex-none md:px-4 px-3 py-2 rounded-xl text-slate-200 text-sm font-medium" data-tab="previous" aria-selected="false">Previous Board</button>
+    </div>
+  </div>
+
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-10">
+    <!-- CURRENT BOARD -->
+    <section id="tab-current" class="tab-section active">
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- Card: Diptanshu Sikdar -->
+        <article class="member-card group rounded-2xl border border-white/10 overflow-hidden shadow-xl">
+          <div class="relative">
+            <img src="image/DiptanshuSikdar.png" alt="Diptanshu Sikdar" class="member-photo w-full object-cover"/>
+            <div class="member-hover absolute inset-0 bg-slate-900/80 opacity-0 -translate-y-1 p-4">
+              <p class="text-sm leading-relaxed text-slate-200">
+                I’m a senior majoring in Computer Science at UC Irvine, with a strong interest in quantum machine learning algorithms and over five years of experience working with quantum software. As president of the Quantum Computing Club, I aim to make quantum computing approachable and exciting for students of all backgrounds. Outside of research and coding, I enjoy taking outdoor walks to clear my mind and listening to music from a wide range of genres.
+              </p>
+            </div>
+          </div>
+          <div class="p-5">
+            <h3 class="text-lg font-semibold">Diptanshu Sikdar</h3>
+            <div class="flex items-center gap-2 mt-1 text-sky-400 font-medium">
+              <i class="fa-solid fa-crown"></i>
+              <span>President</span>
+            </div>
+            <p class="mt-1 text-xs text-slate-300 date-badge inline-flex items-center gap-1 px-2 py-1 rounded-md" data-dates-for="Diptanshu Sikdar">Role dates: <span class="dates">TBD</span></p>
+            <p class="mt-2 text-slate-300 text-sm">Computer Science</p>
+          </div>
+        </article>
+
+        <!-- Card: Hokulani Topping -->
+        <article class="member-card group rounded-2xl border border-white/10 overflow-hidden shadow-xl">
+          <div class="relative">
+            <img src="image/HokulaniTopping.png" alt="Hokulani Topping" class="member-photo w-full object-cover"/>
+            <div class="member-hover absolute inset-0 bg-slate-900/80 opacity-0 -translate-y-1 p-4">
+              <p class="text-sm leading-relaxed text-slate-200">Aloha everyone! My name is Hokulani Topping, and I’m a senior at UCI majoring in Informatics with a focus on Human–Computer Interaction. I have a growing interest in quantum computing, and as the new Vice President of the Quantum Computing Club, my goal is to make the field fun and welcoming to everyone—no matter their background. Outside of academics, I do taekwondo, I’m an avid surfer, and someone who’s always looking for ways to stay active. I’m deeply passionate about my Hawaiian culture, and I’m also a huge fan of rap music.</p>
+            </div>
+          </div>
+          <div class="p-5">
+            <h3 class="text-lg font-semibold">Hokulani Topping</h3>
+            <div class="flex items-center gap-2 mt-1 text-sky-400 font-medium">
+              <i class="fa-regular fa-compass"></i>
+              <span>Vice President</span>
+            </div>
+            <p class="mt-1 text-xs text-slate-300 date-badge inline-flex items-center gap-1 px-2 py-1 rounded-md" data-dates-for="Hokulani Topping">Role dates: <span class="dates">TBD</span></p>
+            <p class="mt-2 text-slate-300 text-sm">Informatics</p>
+          </div>
+        </article>
+
+        <!-- Card: Nicole Ying -->
+        <article class="member-card group rounded-2xl border border-white/10 overflow-hidden shadow-xl">
+          <div class="relative">
+            <img src="image/NicoleYing.jpg" alt="Nicole Ying" class="member-photo w-full object-cover"/>
+            <div class="member-hover absolute inset-0 bg-slate-900/80 opacity-0 -translate-y-1 p-4">
+              <p class="text-sm leading-relaxed text-slate-200">I’m a third-year Computer Science major with a strong interest in software engineering and machine learning. I joined the Quantum Computing Club in my freshman year, where I gained valuable knowledge of quantum computing algorithms and concepts through both learning sessions and hands-on projects. Beyond writing code, I have a passion for photography and aesthetics, which allows me to explore creativity and design from a different perspective.</p>
+            </div>
+          </div>
+          <div class="p-5">
+            <h3 class="text-lg font-semibold">Nicole Ying</h3>
+            <div class="flex items-center gap-2 mt-1 text-sky-400 font-medium">
+              <i class="fa-solid fa-coins"></i>
+              <span>Treasurer</span>
+            </div>
+            <p class="mt-1 text-xs text-slate-300 date-badge inline-flex items-center gap-1 px-2 py-1 rounded-md" data-dates-for="Nicole Ying">Role dates: <span class="dates">TBD</span></p>
+            <p class="mt-2 text-slate-300 text-sm">Computer Science & Quantitative Economics</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- ADVISORS -->
+    <section id="tab-advisors" class="tab-section">
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- Sandy Irani -->
+        <article class="member-card group rounded-2xl border border-white/10 overflow-hidden shadow-xl">
+          <div class="relative">
+            <img src="image/sandyirani.jpg" alt="Professor Sandy Irani" class="member-photo w-full object-cover"/>
+            <div class="member-hover absolute inset-0 bg-slate-900/80 opacity-0 -translate-y-1 p-4">
+              <p class="text-sm leading-relaxed text-slate-200">Professor of Computer Science, Associate Dean for Undergraduate Student Affairs (ICS). Research in quantum computation and complexity.</p>
+            </div>
+          </div>
+          <div class="p-5">
+            <h3 class="text-lg font-semibold">Professor Sandy Irani</h3>
+            <div class="flex items-center gap-2 mt-1 text-amber-300 font-medium">
+              <i class="fa-solid fa-user-tie"></i>
+              <span>Faculty Advisor</span>
+            </div>
+            <p class="mt-1 text-xs text-slate-300 date-badge inline-flex items-center gap-1 px-2 py-1 rounded-md" data-dates-for="Professor Sandy Irani">Advisor since: <span class="dates">TBD</span></p>
+            <p class="mt-2 text-slate-300 text-sm">Computer Science Dept.</p>
+          </div>
+        </article>
+
+        <!-- Shion Fukuzawa -->
+        <article class="member-card group rounded-2xl border border-white/10 overflow-hidden shadow-xl">
+          <div class="relative">
+            <img src="image/ShionFukuzawa.png" alt="Shion Fukuzawa" class="member-photo w-full object-cover"/>
+            <div class="member-hover absolute inset-0 bg-slate-900/80 opacity-0 -translate-y-1 p-4">
+              <p class="text-sm leading-relaxed text-slate-200">PhD candidate in Computer Science (Theory). Focus on computational geometry and quantum.</p>
+            </div>
+          </div>
+          <div class="p-5">
+            <h3 class="text-lg font-semibold">Shion Fukuzawa</h3>
+            <div class="flex items-center gap-2 mt-1 text-amber-300 font-medium">
+              <i class="fa-solid fa-graduation-cap"></i>
+              <span>Graduate Advisor</span>
+            </div>
+            <p class="mt-1 text-xs text-slate-300 date-badge inline-flex items-center gap-1 px-2 py-1 rounded-md" data-dates-for="Shion Fukuzawa">Advisor since: <span class="dates">TBD</span></p>
+            <p class="mt-2 text-slate-300 text-sm">Computer Science Dept.</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- PREVIOUS BOARD -->
+    <section id="tab-previous" class="tab-section">
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <article class="member-card rounded-2xl border border-white/10 overflow-hidden shadow-xl">
+          <img src="image/StewartSmith.jpg" alt="Stewart Smith" class="member-photo w-full object-cover"/>
+          <div class="p-5">
+            <h3 class="text-lg font-semibold">Stewart Smith</h3>
+            <p class="text-sky-400 font-medium mt-1">Vice President</p>
+            <p class="mt-1 text-xs text-slate-300 date-badge inline-flex items-center gap-1 px-2 py-1 rounded-md" data-dates-for="Stewart Smith">Served: <span class="dates">TBD</span></p>
+            <p class="text-slate-300 text-sm mt-2">Computer Science</p>
+          </div>
+        </article>
+
+        <article class="member-card rounded-2xl border border-white/10 overflow-hidden shadow-xl">
+          <img src="image/RadhakrishnaVempati.jpg" alt="Krishna Vempati" class="member-photo w-full object-cover"/>
+          <div class="p-5">
+            <h3 class="text-lg font-semibold">Krishna Vempati</h3>
+            <p class="text-sky-400 font-medium mt-1">Treasurer</p>
+            <p class="mt-1 text-xs text-slate-300 date-badge inline-flex items-center gap-1 px-2 py-1 rounded-md" data-dates-for="Krishna Vempati">Served: <span class="dates">TBD</span></p>
+            <p class="text-slate-300 text-sm mt-2">Computer Science</p>
+          </div>
+        </article>
+
+        <article class="member-card rounded-2xl border border-white/10 overflow-hidden shadow-xl">
+          <img src="image/AryaMhaiskar.jpg" alt="Arya Mhaiskar" class="member-photo w-full object-cover"/>
+          <div class="p-5">
+            <h3 class="text-lg font-semibold">Arya Mhaiskar</h3>
+            <p class="text-sky-400 font-medium mt-1">Marketing Chief</p>
+            <p class="mt-1 text-xs text-slate-300 date-badge inline-flex items-center gap-1 px-2 py-1 rounded-md" data-dates-for="Arya Mhaiskar">Served: <span class="dates">TBD</span></p>
+            <p class="text-slate-300 text-sm mt-2">Computer Science</p>
+          </div>
+        </article>
+
+        <article class="member-card rounded-2xl border border-white/10 overflow-hidden shadow-xl">
+          <img src="image/JoshuaWang.jpg" alt="Joshua Wang" class="member-photo w-full object-cover"/>
+          <div class="p-5">
+            <h3 class="text-lg font-semibold">Joshua Wang</h3>
+            <p class="text-sky-400 font-medium mt-1">Co-President</p>
+            <p class="mt-1 text-xs text-slate-300 date-badge inline-flex items-center gap-1 px-2 py-1 rounded-md" data-dates-for="Joshua Wang">Served: <span class="dates">TBD</span></p>
+            <p class="text-slate-300 text-sm mt-2">Physics / CSE</p>
+          </div>
+        </article>
+
+        <article class="member-card rounded-2xl border border-white/10 overflow-hidden shadow-xl">
+          <img src="image/RohitGanti.png" alt="Rohit Ganti" class="member-photo w-full object-cover"/>
+          <div class="p-5">
+            <h3 class="text-lg font-semibold">Rohit Ganti</h3>
+            <p class="text-sky-400 font-medium mt-1">Co-President</p>
+            <p class="mt-1 text-xs text-slate-300 date-badge inline-flex items-center gap-1 px-2 py-1 rounded-md" data-dates-for="Rohit Ganti">Served: <span class="dates">TBD</span></p>
+            <p class="text-slate-300 text-sm mt-2">Physics</p>
+          </div>
+        </article>
+
+        <article class="member-card rounded-2xl border border-white/10 overflow-hidden shadow-xl">
+          <img src="image/SeanDoan.jpeg" alt="Sean Doan" class="member-photo w-full object-cover"/>
+          <div class="p-5">
+            <h3 class="text-lg font-semibold">Sean Doan</h3>
+            <p class="text-sky-400 font-medium mt-1">Secretary</p>
+            <p class="mt-1 text-xs text-slate-300 date-badge inline-flex items-center gap-1 px-2 py-1 rounded-md" data-dates-for="Sean Doan">Served: <span class="dates">TBD</span></p>
+            <p class="text-slate-300 text-sm mt-2">Physics</p>
+          </div>
+        </article>
+
+        <article class="member-card rounded-2xl border border-white/10 overflow-hidden shadow-xl">
+          <img src="image/ChrisChen.jpg" alt="Chris Chen" class="member-photo w-full object-cover"/>
+          <div class="p-5">
+            <h3 class="text-lg font-semibold">Chris Chen</h3>
+            <p class="text-sky-400 font-medium mt-1">President</p>
+            <p class="mt-1 text-xs text-slate-300 date-badge inline-flex items-center gap-1 px-2 py-1 rounded-md" data-dates-for="Chris Chen">Served: <span class="dates">TBD</span></p>
+            <p class="text-slate-300 text-sm mt-2">Physics / CS</p>
+          </div>
+        </article>
+
+        <article class="member-card rounded-2xl border border-white/10 overflow-hidden shadow-xl">
+          <img src="image/KylerFrazier.jpeg" alt="Kyler Frazier" class="member-photo w-full object-cover"/>
+          <div class="p-5">
+            <h3 class="text-lg font-semibold">Kyler Frazier</h3>
+            <p class="mt-1 text-xs text-slate-300 date-badge inline-flex items-center gap-1 px-2 py-1 rounded-md" data-dates-for="Kyler Frazier">Served: <span class="dates">TBD</span></p>
+            <p class="text-slate-300 text-sm mt-2">Physics / CS</p>
+          </div>
+        </article>
+
+        <article class="member-card rounded-2xl border border-white/10 overflow-hidden shadow-xl">
+          <img src="image/qc.png" alt="Harry Goyal" class="member-photo w-full object-cover"/>
+          <div class="p-5">
+            <h3 class="text-lg font-semibold">Harry Goyal</h3>
+            <p class="mt-1 text-xs text-slate-300 date-badge inline-flex items-center gap-1 px-2 py-1 rounded-md" data-dates-for="Harry Goyal">Served: <span class="dates">TBD</span></p>
+            <p class="text-slate-300 text-sm mt-2">Informatics</p>
+          </div>
+        </article>
+
+        <article class="member-card rounded-2xl border border-white/10 overflow-hidden shadow-xl">
+          <img src="image/AndyPark.jpg" alt="Andy Park" class="member-photo w-full object-cover"/>
+          <div class="p-5">
+            <h3 class="text-lg font-semibold">Andy Park</h3>
+            <p class="mt-1 text-xs text-slate-300 date-badge inline-flex items-center gap-1 px-2 py-1 rounded-md" data-dates-for="Andy Park">Served: <span class="dates">TBD</span></p>
+            <p class="text-slate-300 text-sm mt-2">Physics / Mathematics</p>
+          </div>
+        </article>
+
+        <article class="member-card rounded-2xl border border-white/10 overflow-hidden shadow-xl">
+          <img src="image/ZhuHaochen.jpg" alt="Keira Zhu" class="member-photo w-full object-cover"/>
+          <div class="p-5">
+            <h3 class="text-lg font-semibold">Keira Zhu</h3>
+            <p class="mt-1 text-xs text-slate-300 date-badge inline-flex items-center gap-1 px-2 py-1 rounded-md" data-dates-for="Keira Zhu">Served: <span class="dates">TBD</span></p>
+            <p class="text-slate-300 text-sm mt-2">Business Economics</p>
+          </div>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="mt-12 border-t border-slate-800/60">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 text-center text-slate-400 text-sm">
+      <a class="hover:text-slate-200" href="./contact_us.html">Copyright © 2025 Quantum Computing @ UCI. All Rights Reserved.</a>
+    </div>
   </footer>
 
   <script>
-   const isMobile = window.matchMedia("(max-width: 768px)").matches;
-   if (isMobile) {
-     const members = document.querySelectorAll(".team__member .relative");
- 
-     members.forEach(member => {
-       const overlay = member.querySelector(".overlay");
- 
-       member.addEventListener("click", () => {
-         // Hide all other overlays
-         document.querySelectorAll(".team__member .overlay").forEach(o => {
-           if (o !== overlay) o.style.opacity = 0;
-         });
- 
-         // Toggle visibility of clicked overlay
-         overlay.style.opacity = (overlay.style.opacity == 1 || overlay.style.opacity === "1") ? 0 : 1;
-       });
-     });
- 
-     // Optional: Hide overlays if clicked outside
-     document.addEventListener("click", function (event) {
-       const isTeamMember = event.target.closest(".team__member .relative");
-       if (!isTeamMember) {
-         document.querySelectorAll(".team__member .overlay").forEach(o => o.style.opacity = 0);
-       }
-     });
-   }
- </script>
- 
-  <script>
-   const buttons = document.querySelectorAll('.team-sidebar button');
-      const sections = document.querySelectorAll('.team-content');
+    // ===== Simple data mapping for role dates =====
+    const ROLE_DATES = {
+      "Diptanshu Sikdar": { label: "Role dates", start: "June 2023", end: "Present" },
+      "Hokulani Topping": { label: "Role dates", start: "June 2025", end: "Present" },
+      "Nicole Ying": { label: "Role dates", start: "June 2025", end: "Present" },
+      "Professor Sandy Irani": { label: "Advisor since", start: "September 2024", end: null },
+      "Shion Fukuzawa": { label: "Advisor since", start: "August 2023", end: null },
+      "Stewart Smith": { label: "Served", start: "2023", end: "2025" },
+      "Krishna Vempati": { label: "Served", start: "2023", end: "2025" },
+      "Arya Mhaiskar": { label: "Served", start: "2023", end: "2024" },
+      "Joshua Wang": { label: "Served", start: "2022", end: "2023" },
+      "Rohit Ganti": { label: "Served", start: "2022", end: "2023" },
+      "Sean Doan": { label: "Served", start: "2022", end: "2023" },
+      "Kyler Frazier": { label: "Served", start: "2021", end: "2022" },
+      "Chris Chen": { label: "Served", start: "2021", end: "2022" },
+      "Harry Goyal": { label: "Served", start: "2021", end: "2022" },
+      "Andy Park": { label: "Served", start: "2021", end: "2022" },
+      "Keira Zhu": { label: "Served", start: "2021", end: "2022" },
+    };
 
-      buttons.forEach(btn => {
-         btn.addEventListener('click', () => {
-            buttons.forEach(b => b.classList.remove('active'));
-            sections.forEach(s => s.classList.remove('active'));
+    document.querySelectorAll('[data-dates-for]').forEach(el => {
+      const name = el.getAttribute('data-dates-for');
+      const data = ROLE_DATES[name];
+      if (data) {
+        const labelSpan = el.querySelector('.dates');
+        const text = data.end ? `${data.start} – ${data.end}` : `${data.start}`;
+        labelSpan.textContent = text;
+        if (data.label) {
+          el.firstChild.nodeValue = `${data.label}: `;
+        }
+      }
+    });
 
-            btn.classList.add('active');
-            document.getElementById(btn.dataset.tab).classList.add('active');
-         });
+    // ===== Tabs (no auto-scroll) =====
+    const tabButtons = Array.from(document.querySelectorAll('.tab-btn'));
+    const sections = {
+      current: document.getElementById('tab-current'),
+      advisors: document.getElementById('tab-advisors'),
+      previous: document.getElementById('tab-previous')
+    };
+
+    tabButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const key = btn.dataset.tab;
+        tabButtons.forEach(b => b.setAttribute('aria-selected', 'false'));
+        btn.setAttribute('aria-selected', 'true');
+        Object.values(sections).forEach(s => s.classList.remove('active'));
+        sections[key].classList.add('active');
+        // Auto-scroll intentionally disabled per request
       });
+    });
+
+    // ===== Mobile bio collapsibles =====
+    document.querySelectorAll('.bio-collapsible').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const expanded = btn.getAttribute('aria-expanded') === 'true';
+        btn.setAttribute('aria-expanded', String(!expanded));
+      });
+    });
   </script>
- </body>
+</body>
 </html>
