@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Tensors | QC@UCI</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap">
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" defer></script>
+  <style>
+    :root{ --bg:#0a0f1d; --card:#101933; --text:#e5e7eb; --muted:#93a3b8; --accent:#A78BFA; }
+    *{ box-sizing:border-box }
+    html,body{ margin:0; background:var(--bg); color:var(--text); font-family:Inter,system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif }
+    a{ color:#6EE7F9; }
+    a:hover{ color:var(--accent) }
+    .wrap{ max-width: 900px; margin: 0 auto; padding: 28px 16px; }
+    .card{ background: linear-gradient(180deg,rgba(255,255,255,.04),rgba(255,255,255,.02)); border:1px solid rgba(255,255,255,.08); border-radius:14px; padding:18px; }
+    .grid{ display:grid; gap:16px }
+    @media(min-width:880px){ .grid{ grid-template-columns: 1.2fr .8fr } }
+
+    .info{ display:flex; align-items:flex-start; gap:10px; padding:12px; border-left:4px solid var(--accent); background:rgba(167,139,250,0.08); border-radius:8px; margin:18px 0; }
+    .info-icon{ font-weight:bold; border:2px solid var(--accent); border-radius:50%; width:22px; height:22px; display:flex; align-items:center; justify-content:center; margin-top:2px; }
+
+    .qa{ border:1px solid rgba(255,255,255,.1); border-radius:12px; padding:14px; margin:10px 0; background:var(--card) }
+    .q{ display:flex; align-items:center; justify-content:space-between; gap:12px }
+    .q h4{ margin:0; font-size:16px }
+    .ans{ max-height:0; overflow:hidden; transition:max-height .35s ease, opacity .35s ease; opacity:0 }
+    .ans.open{ max-height:360px; opacity:1 }
+    .btn{ appearance:none; border:1px solid rgba(255,255,255,.2); background:transparent; color:var(--text); border-radius:10px; padding:6px 10px; cursor:pointer }
+    .btn:hover{ border-color:var(--accent) }
+    .muted{ color:var(--muted) }
+    header{ display:flex; align-items:center; justify-content:space-between; gap:10px; margin-bottom:16px }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <h1 style="margin:0">Tensors</h1>
+      <a href="/learn.html" class="btn">← Back to Learn</a>
+    </header>
+
+    <section class="card">
+      <h2>Vectors</h2>
+      <p>A <strong>vector</strong> is an ordered list of numbers. They can represent quantities with both magnitude and direction.</p>
+      <p>Example of a 2D vector: \(\vec{v} = (3, 4)\)</p>
+      <h3>Operations</h3>
+      <ul>
+        <li><strong>Addition:</strong> \((a,b) + (c,d) = (a+c, b+d)\)</li>
+        <li><strong>Subtraction:</strong> \((a,b) - (c,d) = (a-c, b-d)\)</li>
+        <li><strong>Scalar multiplication:</strong> \(k(a,b) = (ka, kb)\)</li>
+        <li><strong>Dot product:</strong> \(\vec{u} \cdot \vec{v} = u_1 v_1 + u_2 v_2\)</li>
+        <li><strong>Cross product (3D):</strong> $$\vec{u} \times \vec{v} = (u_2v_3 - u_3v_2, u_3v_1 - u_1v_3, u_1v_2 - u_2v_1)$$</li>
+      </ul>
+
+    <!-- Vector Addition & Subtraction — Interactive SVG (integrated) -->
+<div class="va-demo">
+  <style>
+    /* Scoped styles for the vector addition demo */
+    .va-demo{ margin-top:16px }
+    .va-wrap{ width:100%; max-width:950px; aspect-ratio:3/2; border:1px solid rgba(255,255,255,.12); border-radius:12px; box-shadow:0 8px 32px rgba(0,0,0,.2); overflow:hidden; background: var(--card); position: relative; margin-inline:auto }
+    .va-wrap svg{ width:100%; height:100%; display:block }
+
+    /* Theme tokens for the demo */
+    .va-demo{ --a:#6EE7F9; --b:#F97316; --sum:#10B981; --diff:#EF4444; --grid:#334155; --axis:#64748B; --text:#e5e7eb; }
+    .va-legend{ position:absolute; left:12px; top:12px; padding:8px 10px; border-radius:10px; background: rgba(2,6,23,0.85); box-shadow: 0 4px 16px rgba(0,0,0,.25); font-size:14px; line-height:1.1; border:1px solid rgba(255,255,255,.08) }
+    .va-legend div{ display:flex; align-items:center; gap:.5rem; margin:4px 0 }
+    .va-swatch{ width:14px; height:14px; border-radius:3px; flex:none }
+    .va-note{ font-size:12px; opacity:.85; margin-top:6px; color: var(--muted) }
+
+    .va-readout{ position:absolute; right:12px; top:12px; padding:8px 10px; border-radius:10px; background: rgba(2,6,23,0.85); box-shadow: 0 4px 16px rgba(0,0,0,.25); font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace; font-size:13px; line-height:1.2; border:1px solid rgba(255,255,255,.08); color: var(--text) }
+
+    .va-controls{ position:absolute; left:50%; bottom:10px; transform: translateX(-50%); background: rgba(2,6,23,0.85); border-radius:999px; padding:6px 10px; box-shadow:0 4px 16px rgba(0,0,0,.25); display:flex; gap:12px; align-items:center; font-size:14px; border:1px solid rgba(255,255,255,.08); color: var(--text) }
+    .va-controls label{ display:inline-flex; align-items:center; gap:6px; user-select:none }
+    .va-controls input{ accent-color: var(--accent) }
+
+    /* Keep strokes crisp when scaling */
+    [vector]{ vector-effect: non-scaling-stroke }
+
+    .va-handle{ cursor: grab; transition: r .15s ease }
+    .va-handle:active{ cursor: grabbing }
+    .va-handle:hover{ r: 7.5px }
+  </style>
+
+  <div class="va-wrap">
+    <!-- Legend -->
+    <div class="va-legend">
+      <div><span class="va-swatch" style="background:var(--a)"></span> a</div>
+      <div><span class="va-swatch" style="background:var(--b)"></span> b</div>
+      <div><span class="va-swatch" style="background:var(--sum)"></span> a + b</div>
+      <div><span class="va-swatch" style="background:var(--diff)"></span> a − b</div>
+      <div class="va-note">Drag the colored dots to move vectors.</div>
+    </div>
+
+    <!-- Numeric readout -->
+    <pre class="va-readout" id="va-readout"></pre>
+
+    <!-- Show/hide helpers -->
+    <div class="va-controls">
+      <label><input type="checkbox" id="va-showParallelogram" checked> Parallelogram</label>
+      <label><input type="checkbox" id="va-showNegB" checked> Show −b helper</label>
+      <label><input type="checkbox" id="va-snap"> Snap to grid</label>
+    </div>
+
+    <svg id="va-scene" viewBox="-300 -200 600 400" xmlns="http://www.w3.org/2000/svg" aria-labelledby="vaTitle">
+      <title id="vaTitle">Interactive vector addition/subtraction</title>
+      <defs>
+        <!-- Arrowhead that inherits the stroke color of whatever uses it -->
+        <marker id="va-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+          <path d="M0,0 L10,5 L0,10 Z" fill="context-stroke"/>
+        </marker>
+      </defs>
+
+      <!-- grid -->
+      <g id="va-grid" stroke="var(--grid)" stroke-width=".75" vector>
+        <g id="va-vlines"></g>
+        <g id="va-hlines"></g>
+      </g>
+
+      <!-- axes -->
+      <g id="va-axes" stroke="var(--axis)" stroke-width="1.25" vector>
+        <line x1="-300" y1="0" x2="300" y2="0" />
+        <line x1="0" y1="-200" x2="0" y2="200" />
+        <g id="va-ticks"></g>
+      </g>
+
+      <!-- Parallelogram helper lines for a+b -->
+      <g id="va-parallelogram" stroke="var(--b)" stroke-dasharray="6 6" stroke-width="1" opacity=".65" vector>
+        <line id="va-bFromA" marker-end="url(#va-arrow)"/>
+        <line id="va-aFromB" stroke="var(--a)" marker-end="url(#va-arrow)"/>
+      </g>
+
+      <!-- -b helper -->
+      <g id="va-negBHelper" stroke="var(--b)" stroke-dasharray="4 4" opacity=".75" vector>
+        <line id="va-negBLine" />
+      </g>
+
+      <!-- vectors -->
+      <g id="va-vectors" stroke-width="2.5" fill="none" marker-end="url(#va-arrow)" vector>
+        <line id="va-aLine" stroke="var(--a)" />
+        <line id="va-bLine" stroke="var(--b)" />
+        <line id="va-sumLine" stroke="var(--sum)" />
+        <line id="va-diffLine" stroke="var(--diff)" />
+      </g>
+
+      <!-- draggable handles -->
+      <g id="va-handles" fill="white" stroke-width="2" vector>
+        <circle id="va-aHandle" class="va-handle" stroke="var(--a)" r="6" />
+        <circle id="va-bHandle" class="va-handle" stroke="var(--b)" r="6" />
+      </g>
+    </svg>
+  </div>
+
+  <script>
+    (function(){
+      const svg = document.getElementById('va-scene');
+      const readout = document.getElementById('va-readout');
+
+      const snapCheckbox = document.getElementById('va-snap');
+      const showParallelogram = document.getElementById('va-showParallelogram');
+      const showNegB = document.getElementById('va-showNegB');
+
+      // Grid rendering
+      const vlines = document.getElementById('va-vlines');
+      const hlines = document.getElementById('va-hlines');
+      const ticks = document.getElementById('va-ticks');
+
+      const W = 600, H = 400, halfW = 300, halfH = 200;
+      const step = 50;
+
+      for (let x = -halfW; x <= halfW; x += step) {
+        const l = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+        l.setAttribute('x1', x); l.setAttribute('x2', x);
+        l.setAttribute('y1', -halfH); l.setAttribute('y2', halfH);
+        vlines.appendChild(l);
+      }
+      for (let y = -halfH; y <= halfH; y += step) {
+        const l = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+        l.setAttribute('y1', y); l.setAttribute('y2', y);
+        l.setAttribute('x1', -halfW); l.setAttribute('x2', halfW);
+        hlines.appendChild(l);
+      }
+      // Axis ticks
+      for (let x = -halfW; x <= halfW; x += step) {
+        if (x === 0) continue;
+        const t = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+        t.setAttribute('x1', x); t.setAttribute('x2', x);
+        t.setAttribute('y1', -4); t.setAttribute('y2', 4);
+        ticks.appendChild(t);
+      }
+      for (let y = -halfH; y <= halfH; y += step) {
+        if (y === 0) continue;
+        const t = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+        t.setAttribute('y1', y); t.setAttribute('y2', y);
+        t.setAttribute('x1', -4); t.setAttribute('x2', 4);
+        ticks.appendChild(t);
+      }
+
+      // Elements
+      const aLine   = document.getElementById('va-aLine');
+      const bLine   = document.getElementById('va-bLine');
+      const sumLine = document.getElementById('va-sumLine');
+      const diffLine= document.getElementById('va-diffLine');
+
+      const aHandle = document.getElementById('va-aHandle');
+      const bHandle = document.getElementById('va-bHandle');
+
+      const bFromA  = document.getElementById('va-bFromA');
+      const aFromB  = document.getElementById('va-aFromB');
+
+      const negBGroup = document.getElementById('va-negBHelper');
+      const negBLine  = document.getElementById('va-negBLine');
+
+      // Model (origin at 0,0; y grows downward because of SVG)
+      let a = { x: 120, y: -60 };
+      let b = { x: 80,  y: 90  };
+
+      // Utilities
+      const clamp = (v, min, max) => Math.min(max, Math.max(min, v));
+      function fmt(n){ return Math.abs(n - Math.round(n)) < 1e-6 ? String(Math.round(n)) : n.toFixed(1); }
+      function setLine(line, x2, y2){ line.setAttribute('x1', 0); line.setAttribute('y1', 0); line.setAttribute('x2', x2); line.setAttribute('y2', y2); }
+      function setHandle(handle, p){ handle.setAttribute('cx', p.x); handle.setAttribute('cy', p.y); }
+
+      function update(){
+        // Vectors
+        setLine(aLine, a.x, a.y);
+        setLine(bLine, b.x, b.y);
+
+        const sum  = { x: a.x + b.x, y: a.y + b.y };
+        const diff = { x: a.x - b.x, y: a.y - b.y };
+
+        setLine(sumLine, sum.x, sum.y);
+        setLine(diffLine, diff.x, diff.y);
+
+        setHandle(aHandle, a);
+        setHandle(bHandle, b);
+
+        // Parallelogram helpers: translate b to start at a; translate a to start at b
+        bFromA.setAttribute('x1', a.x); bFromA.setAttribute('y1', a.y); bFromA.setAttribute('x2', a.x + b.x); bFromA.setAttribute('y2', a.y + b.y);
+        aFromB.setAttribute('x1', b.x); aFromB.setAttribute('y1', b.y); aFromB.setAttribute('x2', a.x + b.x); aFromB.setAttribute('y2', a.y + b.y);
+
+        // -b helper from origin
+        negBLine.setAttribute('x1', 0); negBLine.setAttribute('y1', 0); negBLine.setAttribute('x2', -b.x); negBLine.setAttribute('y2', -b.y);
+
+        // Toggles
+        document.getElementById('va-parallelogram').style.display = showParallelogram.checked ? '' : 'none';
+        negBGroup.style.display = showNegB.checked ? '' : 'none';
+
+        // Readout
+        readout.textContent = `a = (${fmt(a.x)}, ${fmt(a.y)})
+b = (${fmt(b.x)}, ${fmt(b.y)})
+a + b = (${fmt(sum.x)}, ${fmt(sum.y)})
+a − b = (${fmt(diff.x)}, ${fmt(diff.y)})`;
+      }
+
+      // Pointer utilities: map client coords to SVG coords
+      const pt = svg.createSVGPoint();
+      function cursorSvgPoint(evt){ pt.x = evt.clientX; pt.y = evt.clientY; const inv = svg.getScreenCTM().inverse(); const p = pt.matrixTransform(inv); return { x: p.x, y: p.y }; }
+
+      let dragging = null; // 'a' or 'b'
+      function startDrag(which){ return (evt)=>{ dragging = which; evt.target.setPointerCapture?.(evt.pointerId); }; }
+      function doDrag(evt){
+        if (!dragging) return;
+        const p = cursorSvgPoint(evt);
+        const step = 50, halfW = 300, halfH = 200;
+        const snapped = document.getElementById('va-snap').checked ? { x: Math.round(p.x / step) * step, y: Math.round(p.y / step) * step } : p;
+        if (dragging === 'a'){ a.x = clamp(snapped.x, -halfW, halfW); a.y = clamp(snapped.y, -halfH, halfH); }
+        else { b.x = clamp(snapped.x, -halfW, halfW); b.y = clamp(snapped.y, -halfH, halfH); }
+        update();
+      }
+      function endDrag(){ dragging = null; }
+
+      document.getElementById('va-aHandle').addEventListener('pointerdown', startDrag('a'));
+      document.getElementById('va-bHandle').addEventListener('pointerdown', startDrag('b'));
+      svg.addEventListener('pointermove', doDrag);
+      svg.addEventListener('pointerup', endDrag);
+      svg.addEventListener('pointerleave', endDrag);
+
+      document.getElementById('va-showParallelogram').addEventListener('change', update);
+      document.getElementById('va-showNegB').addEventListener('change', update);
+      document.getElementById('va-snap').addEventListener('change', update);
+
+      update();
+    })();
+  </script>
+</div>
+    
+    
+    </section>
+
+    <section class="card">
+      <h2>Matrices</h2>
+      <p>A <strong>matrix</strong> is a rectangular array of numbers arranged in rows and columns.</p>
+      <p>Example: $$ A = \begin{bmatrix}1 & 2 \\ 3 & 4\end{bmatrix} $$</p>
+      <h3>Operations</h3>
+      <ul>
+        <li><strong>Addition:</strong> element-wise</li>
+        <li><strong>Multiplication:</strong> row by column rule</li>
+        <li><strong>Transpose:</strong> \(A^T\)</li>
+        <li><strong>Determinant:</strong> \(\det(A)\)</li>
+        <li><strong>Inverse:</strong> \(A^{-1}\), when it exists</li>
+      </ul>
+      <h3>Eigenvalues and Eigenvectors</h3>
+      <p>They satisfy: $$A \vec{v} = \lambda \vec{v}$$</p>
+      <div class="info">
+        <div class="info-icon">i</div>
+        <p>Eigenvalues are central in many algorithms. For example, they underpin techniques like the Variational Quantum Eigensolver (VQE).</p>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Tensors</h2>
+      <p><strong>Tensors</strong> generalize vectors (1D) and matrices (2D) to higher dimensions.</p>
+      <div class="info">
+        <div class="info-icon">i</div>
+        <p>Tensors are fundamental to understanding data structures in computing and physics. In quantum computing, they relate to how we represent multiple qubits.</p>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Tensor Products</h2>
+      <p>The <strong>tensor (Kronecker) product</strong> of two matrices \(A\) and \(B\) is denoted \(A \otimes B\).</p>
+      <p>Example: $$ \begin{bmatrix}a & b \\ c & d\end{bmatrix} \otimes \begin{bmatrix}e & f \\ g & h\end{bmatrix} = \begin{bmatrix} ae & af & be & bf \\ ag & ah & bg & bh \\ ce & cf & de & df \\ cg & ch & dg & dh \end{bmatrix} $$</p>
+      <div class="info">
+        <div class="info-icon">i</div>
+        <p>Tensor products are used to build larger spaces from smaller components. In quantum computing, they describe how multi-part systems combine.</p>
+      </div>
+    </section>
+
+    <h3>Practice</h3>
+    <div class="qa">
+      <div class="q">
+        <h4>1) Compute \((2,3) + (4,1)\).</h4>
+        <button class="btn" data-toggle>Show answer</button>
+      </div>
+      <div class="ans"><p>\((6,4)\)</p></div>
+    </div>
+    <div class="qa">
+      <div class="q">
+        <h4>2) Find the dot product of \((1,2,3)\) and \((4,5,6)\).</h4>
+        <button class="btn" data-toggle>Show answer</button>
+      </div>
+      <div class="ans"><p>\(1*4 + 2*5 + 3*6 = 32\)</p></div>
+    </div>
+    <div class="qa">
+      <div class="q">
+        <h4>3) For matrix \(A = \begin{bmatrix}2 & 0 \\ 0 & 3\end{bmatrix}\), what are its eigenvalues?</h4>
+        <button class="btn" data-toggle>Show answer</button>
+      </div>
+      <div class="ans"><p>\(2\) and \(3\)</p></div>
+    </div>
+    <div class="qa">
+      <div class="q">
+        <h4>4) Compute the tensor product of \((1,0)\) and \((0,1)\).</h4>
+        <button class="btn" data-toggle>Show answer</button>
+      </div>
+      <div class="ans"><p>\((0,1,0,0)\)</p></div>
+    </div>
+
+  </div>
+
+  <script>
+    document.querySelectorAll('[data-toggle]').forEach(btn=>{
+      btn.addEventListener('click', ()=>{
+        const ans = btn.closest('.qa').querySelector('.ans');
+        ans.classList.toggle('open');
+        btn.textContent = ans.classList.contains('open') ? 'Hide answer' : 'Show answer';
+      });
+    });
+  </script>
+</body>
+</html>

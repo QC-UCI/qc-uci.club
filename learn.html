@@ -1,18 +1,99 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <script src="https://kit.fontawesome.com/2d323a629b.js" crossorigin="anonymous"></script>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
   <link rel="stylesheet" href="css/tailwind_style.css">
   <link rel="stylesheet" href="css/style.css">
   <title>Learn | QC@UCI</title>
   <style>
-    .interactive-nav li a {
-      transition: all 0.3s ease;
-      position: relative;
+    :root{
+      --qc-primary:#6EE7F9; /* cyan-300 */
+      --qc-accent:#A78BFA;  /* violet-400 */
+      --qc-bg:#0a0f1d;      /* deep navy */
+      --qc-card:#101933;    /* card bg */
+      --qc-grid:rgba(167,139,250,0.22);
+      --qc-neon:0 0 1px #fff, 0 0 8px var(--qc-accent), 0 0 18px var(--qc-accent);
+      --qc-header-h: 120px; /* JS updates actual value */
     }
+
+    /* Base theme */
+    html, body { background-color: var(--qc-bg) !important; color:#e5e7eb !important; margin:0; padding:0; max-width:100%; overflow-x:hidden; }
+    a{ color: var(--qc-primary); }
+    a:hover{ color: var(--qc-accent); }
+
+    /* Prevent background pseudo-elements from causing sideways scroll */
+    .quantum-canvas{ position:relative; isolation:isolate; overflow:hidden; }
+    section { position: relative; z-index: 1; }
+
+    /* Consistent side spacing on ALL screen sizes (except header/footer) */
+    body > *:not(header):not(footer){ padding-left:5%; padding-right:5%; }
+
+    /* Animated starfield + grid */
+    .quantum-canvas::before, .quantum-canvas::after{ content:""; position:absolute; inset:0; z-index:-1;}
+    .quantum-canvas::before{ background:
+      radial-gradient(2px 2px at 20% 30%, rgba(255,255,255,.7) 40%, transparent 42%),
+      radial-gradient(1.5px 1.5px at 70% 60%, rgba(255,255,255,.6) 40%, transparent 42%),
+      radial-gradient(1.5px 1.5px at 40% 80%, rgba(255,255,255,.5) 40%, transparent 42%),
+      radial-gradient(1px 1px at 80% 20%, rgba(255,255,255,.45) 40%, transparent 42%),
+      radial-gradient(1px 1px at 10% 70%, rgba(255,255,255,.35) 40%, transparent 42%);
+      animation: twinkle 6s linear infinite;
+    }
+    .quantum-canvas::after{
+      background-image:
+        linear-gradient(to right, var(--qc-grid) 1px, transparent 1px),
+        linear-gradient(to bottom, var(--qc-grid) 1px, transparent 1px);
+      background-size: 40px 40px;
+      mask-image: radial-gradient(100% 60% at 50% 0%, rgba(0,0,0,.9), transparent 85%);
+      transform: perspective(800px) rotateX(60deg) translateY(-15%);
+      transform-origin: top center;
+      filter: drop-shadow(0 0 8px rgba(167,139,250,.35));
+    }
+    @keyframes twinkle{ 50%{ opacity:.6 } }
+
+    /* Divider */
+    .neon-divider{ height:1px; background:linear-gradient(90deg, transparent, var(--qc-primary), var(--qc-accent), transparent); box-shadow: var(--qc-neon); opacity:.55; margin: 2rem 0; }
+
+    /* Cards */
+    .qc-card{ background:linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,.01)); border:1px solid rgba(255,255,255,.08); backdrop-filter: blur(8px); border-radius:1rem; color:#e5e7eb; }
+    .qc-card-hover{ transition: transform .35s ease, box-shadow .35s ease, border-color .35s ease; }
+    .qc-card-hover:hover{ transform: translateY(-6px); border-color: rgba(167,139,250,.6); box-shadow:0 6px 30px rgba(167,139,250,.25); }
+
+    /* Tabs */
+    #tabs, #applications, #videos { scroll-margin-top: calc(var(--qc-header-h) + 12px); }
+    .tab-btn{ border-bottom:2px solid transparent; text-align:center; }
+    .tab-btn[aria-selected="true"]{ color:#e2e8f0; border-color: var(--qc-accent); text-shadow: var(--qc-neon); }
+    .tab-panel{ display:none }
+    .tab-panel[data-active="true"]{ display:block }
+
+    /* Video wrapper */
+    .video-wrap{ position:relative; padding-top:56.25%; border-radius:0.75rem; overflow:hidden; }
+    .video-wrap iframe{ position:absolute; inset:0; width:100%; height:100%; border:0 }
+    /* Limit Applications video width on non‑mobile */
+    @media (min-width: 769px){
+      #applications .video-wrap{ width:60%; margin-left:auto; margin-right:auto; }
+    }
+
+    /* Responsive grids */
+    .autogrid{ display:grid; gap:1rem; }
+    @media (min-width: 640px){ .autogrid.sm-2{ grid-template-columns: repeat(2, minmax(0,1fr)); } }
+    @media (min-width: 1024px){ .autogrid.lg-3{ grid-template-columns: repeat(3, minmax(0,1fr)); } }
+
+    /* --- Applications UI (buttons + swap video) --- */
+    .app-buttons{ display:flex; gap:.5rem; flex-wrap:wrap; justify-content:center; }
+    .app-btn{ appearance:none; cursor:pointer; padding:.6rem .9rem; border-radius:.75rem; border:1px solid rgba(255,255,255,.12); background:var(--qc-card); color:#e5e7eb; font-weight:600; display:flex; align-items:center; gap:.5rem; }
+    .app-btn[aria-selected="true"]{ border-color: var(--qc-accent); box-shadow: var(--qc-neon); }
+
+    .app-panel{ display:none; justify-content:center; margin-top:1rem; }
+    .app-panel.active{ display:flex; }
+    .app-panel-inner{ width:100%; }
+    @media(min-width:769px){ .app-panel-inner{ width:60%; } }
+
+    /* Header nav underline (white text, blue wipe) */
+    .interactive-nav li a { position: relative; color:#fff !important; text-decoration:none; }
+    .interactive-nav li a:hover { color:#fff !important; }
     .interactive-nav li a::after {
       content: '';
       position: absolute;
@@ -20,76 +101,14 @@
       height: 2px;
       left: 0;
       bottom: -2px;
-      background-color: #3b82f6;
+      background-color: #3b82f6; /* Tailwind blue-500 */
       transition: width 0.3s ease;
     }
-    .interactive-nav li a:hover::after {
-      width: 100%;
-    }
-
-    /* Flip Animation (in-place) */
-    .flip-container {
-      perspective: 1500px;
-    }
-    .flip-inner {
-      transition: transform 0.6s ease-in-out;
-      transform-style: preserve-3d;
-      transform-origin: center center;
-      position: relative;
-      width: 100%;
-      height: 100%;
-    }
-    .flip-container:hover .flip-inner {
-      transform: rotateY(180deg);
-    }
-    .flip-front,
-    .flip-back {
-      backface-visibility: hidden;
-      -webkit-backface-visibility: hidden;
-      border-radius: 0.5rem;
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-    }
-    .flip-front {
-      z-index: 2;
-    }
-    .flip-back {
-      transform: rotateY(180deg);
-      background-color: #1e293b;
-      color: white;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 1rem;
-      overflow: hidden;
-    }
-
-    /* Responsive video wrapper */
-    .flip-back .video-wrapper {
-      position: relative;
-      width: 100%;
-      padding-bottom: 56.25%; /* 16:9 */
-      height: 0;
-    }
-    .flip-back .video-wrapper iframe {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      border-radius: 0.5rem;
-      border: 0;
-    }
-
-    .application-card {
-      height: 20rem;
-    }
+    .interactive-nav li a:hover::after { width: 100%; }
   </style>
 </head>
-<body>
+<body class="min-h-screen selection:bg-violet-600/60 selection:text-white">
+  <!-- ====== HEADER (kept) ====== -->
   <header class="header">
     <a href="index.html">
       <img src="image/navy_anteater_bloch.png" width="150" alt="Home">
@@ -107,155 +126,117 @@
     </nav>
   </header>
 
-  <section class="pt-48 pb-20 px-6 max-w-6xl mx-auto">
-  <h1 class="text-4xl font-bold text-center text-gray-800 mb-10">
-    What is Quantum Computing?
-  </h1>
-  <div class="flex flex-col md:flex-row gap-10 items-start">
-    <!-- Left column: unchanged text -->
-    <div class="flex-1 text-gray-700 text-lg">
-      <p>
-        <strong>Quantum computing</strong> is a new and rapidly evolving computational
-        paradigm rooted in the principles of quantum mechanics. It uses quantum bits 
-        (or <strong> qubits</strong>) that can be 0 and 1 at the same time.
-      </p>
-      <p class="mt-4">
-        Quantum computers can process lots of possibilities simultaneously,
-        giving them a powerful edge in solving complex problems. They're not a
-        faster computer per se — <i>they just work differently</i>.
-      </p>
-      <ul class="mt-6 list-disc list-inside space-y-2 text-base">
-        <li>💡 Simulate nature and molecules better than classical computers</li>
-        <li>🔒 Break and also protect encryption</li>
-        <li>🤖 Supercharge AI and pattern recognition</li>
-      </ul>
-    </div>
-
-    <!-- Right column: responsive video -->
-    <div class="flex-1 w-full application-card bg-gray-100 p-6 shadow">
-      <div class="relative w-full" style="padding-top: 56.25%;"> 
-        <iframe
-          class="absolute inset-0 w-full h-full"
-          src="https://www.youtube.com/embed/ZLAZ6lJ42ak?si=vRPOGfluaialIWl7"
-          title="Quantum Applications"
-          frameborder="0"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-          referrerpolicy="strict-origin-when-cross-origin"
-          allowfullscreen>
-        </iframe>
+  <!-- ====== HERO ====== -->
+  <section class="quantum-canvas page" id="hero" style="padding-top: calc(var(--qc-header-h) + 1.6rem); padding-bottom: 2rem;">
+    <div class="max-w-7xl mx-auto grid lg:grid-cols-2 gap-10 items-center">
+      <div>
+        <h1 class="text-4xl md:text-5xl font-extrabold leading-tight">What is Quantum Computing?</h1>
+        <p class="mt-4 text-slate-300/90 text-lg">A curated, click-first guide to fundamentals and real-world applications.</p>
+        <div class="mt-6 flex flex-wrap gap-3">
+          <a href="#tabs" class="qc-card qc-card-hover px-5 py-3 inline-flex items-center gap-2"><i class="fa-solid fa-microchip"></i><span>Start with the Basics</span></a>
+          <a href="#applications" class="qc-card qc-card-hover px-5 py-3 inline-flex items-center gap-2"><i class="fa-solid fa-rocket"></i><span>See Applications</span></a>
+        </div>
+      </div>
+      <div class="qc-card p-5 shadow-xl">
+        <div class="video-wrap shadow-inner">
+          <iframe src="https://www.youtube.com/embed/ZLAZ6lJ42ak" title="Quantum Applications" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe>
+        </div>
+        <p class="mt-3 text-sm text-slate-300/80">2‑minute overview of where quantum helps.</p>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-  <section class="py-12 px-6 bg-white">
-    <h2 class="text-3xl font-bold text-center text-gray-800 mb-10">Applications</h2>
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 max-w-6xl mx-auto">
+  <div class="neon-divider"></div>
 
-      <!-- Quantum Machine Learning -->
-      <div class="flip-container application-card relative">
-        <div class="flip-inner">
-          <div class="flip-front bg-gray-100 p-6 shadow">
-            <img src="image/app-image2.png" alt="Machine Learning" class="h-32 mx-auto mb-4">
-            <h3 class="text-xl font-semibold text-center mb-2">Quantum Machine Learning</h3>
-            <p class="text-sm text-gray-700 text-center">
-              The fusion of quantum computing and machine learning enables unprecedented speed and scalability in AI, transforming how models learn, adapt, and solve complex problems.         
-            </p>
-          </div>
-          <div class="flip-back">
-            <div class="video-wrapper">
-              <iframe src="https://www.youtube.com/embed/hWx2Rws3L-A?si=OjQ1virC-13fYIpp" title="Machine Learning & Quantum" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-            </div>
-          </div>
-        </div>
+  <!-- ====== TABS ====== -->
+  <section id="tabs" class="py-8 page">
+    <div class="max-w-7xl mx-auto">
+      <div role="tablist" class="flex flex-wrap gap-2 justify-center">
+        <button class="tab-btn qc-card qc-card-hover px-4 py-2" role="tab" aria-selected="true" aria-controls="tab-overview" id="tab-btn-overview">Overview</button>
+        <button class="tab-btn qc-card qc-card-hover px-4 py-2" role="tab" aria-selected="false" aria-controls="tab-math" id="tab-btn-math">Math Intuition</button>
       </div>
 
-      <!-- Cybersecurity -->
-      <div class="flip-container application-card relative">
-        <div class="flip-inner">
-          <div class="flip-front bg-gray-100 p-6 shadow">
-            <img src="image/app-image1.png" alt="Cybersecurity" class="h-32 mx-auto mb-4">
-            <h3 class="text-xl font-semibold text-center mb-2">Cybersecurity</h3>
-            <p class="text-sm text-gray-700 text-center">
-              Quantum computers challenge RSA encryption — but also enable unbreakable quantum-secured messages via QKD.
-            </p>
-          </div>
-          <div class="flip-back">
-            <div class="video-wrapper">
-              <iframe src="https://www.youtube.com/embed/-UrdExQW0cs?start=0" title="Cybersecurity & Quantum" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-            </div>
-          </div>
-        </div>
+      <!-- Overview Panel -->
+      <div id="tab-overview" class="tab-panel mt-8 grid lg:grid-cols-12 gap-6" data-active="true" role="tabpanel" aria-labelledby="tab-btn-overview">
+        <article class="qc-card p-6 lg:col-span-5">
+          <h2 class="text-2xl font-bold mb-2">What is Quantum Computing?</h2>
+          <p class="text-slate-300/90">Quantum computing is a new and rapidly evolving computational paradigm rooted in the principles of quantum mechanics. It uses quantum bits (or qubits) that can in <strong>superpositions</strong> of 0 and 1 simultaneously. Combined with <strong>interference</strong> and <strong>entanglement</strong>, quantum programs can explore many possibilities in parallel and find solutions to certain complex problems much faster than classical computers. They're not faster computers; they just work <em>differently</em>. </p>
+          <h2 class="text-xl font-semibold">Key Concepts</h2>
+          <ol class="mt-4 space-y-3 text-slate-300/90">
+            <li class="qc-card qc-card-hover p-3"><span class="font-semibold">Superposition</span> — represent many states at once</li>
+            <li class="qc-card qc-card-hover p-3"><span class="font-semibold">Entanglement</span> — intrinsic relationship between two or more qubits</li>
+            <li class="qc-card qc-card-hover p-3"><span class="font-semibold">Interference</span> — amplifies right answers, cancels wrong ones</li>
+            <li class="qc-card qc-card-hover p-3"><span class="font-semibold">Decoherence</span> — quantum systems collapse due to environmental disturbance</li>
+          </ol>
+        </article> 
+        <!--<aside class="qc-card qc-card-hover p-6 lg:col-span-7">
+        </aside>-->
       </div>
 
-      <!-- Logistics -->
-      <div class="flip-container application-card relative">
-        <div class="flip-inner">
-          <div class="flip-front bg-gray-100 p-6 shadow">
-            <img src="image/app-image3.png" alt="Optimization" class="h-32 mx-auto mb-4">
-            <h3 class="text-xl font-semibold text-center mb-2">Logistics</h3>
-            <p class="text-sm text-gray-700 text-center">
-              From delivery routes to machine tuning, quantum algorithms like QAOA can solve tough optimization and scheduling tasks, which are of prime importance in logistics.
-            </p>
-          </div>
-          <div class="flip-back">
-            <div class="video-wrapper">
-              <iframe src="https://www.youtube.com/embed/DWY3dB9FHRk?si=3d3GcgyzBRz7_2K-" title="Logistics & Quantum" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+      <!-- Math Intuition Panel -->
+      <div id="tab-math" class="tab-panel mt-8" role="tabpanel" aria-labelledby="tab-btn-math">
+        <article class="qc-card p-6">
+          <h2 class="text-xl font-semibold mb-4">Math Intuition</h2>
+          <div class="autogrid sm-2 lg-3">
+            <div class="qc-card p-4">
+              <b>Real &amp; Imaginary Numbers</b>
+              <p class="text-slate-300/90 mt-1">Complex numbers, magnitude/phase, Euler's formula.</p>
+              <a class="underline mt-2 inline-block" href="learn_math_real_imag.html">Read more →</a>
+            </div>
+            <div class="qc-card p-4">
+              <b>Tensors</b>
+              <p class="text-slate-300/90 mt-1">Vectors, matrices, tensor products (⊗), and dimensions.</p>
+              <a class="underline mt-2 inline-block" href="learn_math_tensors.html">Read more →</a>
+            </div>
+            <div class="qc-card p-4">
+              <b>Trigonometry</b>
+              <p class="text-slate-300/90 mt-1">Sine/cosine, phase shifts, and periodic signals.</p>
+              <a class="underline mt-2 inline-block" href="learn_math_trigonometry.html">Read more →</a>
             </div>
           </div>
-        </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <div class="neon-divider"></div>
+
+  <!-- ====== APPLICATIONS ====== -->
+  <section id="applications" class="px-6 py-12 page">
+    <div class="max-w-7xl mx-auto">
+      <h2 class="text-3xl font-bold mb-3 text-center">Applications</h2>
+
+      <!-- Buttons row (centered, wraps on mobile) -->
+      <div class="app-buttons" role="tablist" aria-label="Applications">
+        <button class="app-btn" data-app="qml" aria-selected="true" role="tab"><img src="image/app-image2.png" alt="" class="h-6 w-6"> Machine Learning</button>
+        <button class="app-btn" data-app="finance" aria-selected="false" role="tab"><img src="image/app-image6.png" alt="" class="h-6 w-6"> Finance</button>
+        <button class="app-btn" data-app="physics" aria-selected="false" role="tab"><img src="image/app-image5.png" alt="" class="h-6 w-6"> Physics</button>
+        <button class="app-btn" data-app="logistics" aria-selected="false" role="tab"><img src="image/app-image3.png" alt="" class="h-6 w-6"> Logistics</button>
+        <button class="app-btn" data-app="cyber" aria-selected="false" role="tab"><img src="image/app-image1.png" alt="" class="h-6 w-6"> Cybersecurity</button>
+        <button class="app-btn" data-app="chem" aria-selected="false" role="tab"><img src="image/app-image4.png" alt="" class="h-6 w-6"> Chemistry</button>
       </div>
 
-      <!-- Chemistry -->
-      <div class="flip-container application-card relative">
-        <div class="flip-inner">
-          <div class="flip-front bg-gray-100 p-6 shadow">
-            <img src="image/app-image4.png" alt="Chemistry" class="h-32 mx-auto mb-4">
-            <h3 class="text-xl font-semibold text-center mb-2">Chemistry</h3>
-            <p class="text-sm text-gray-700 text-center">
-              Quantum computers can simulate atoms and molecules, helping scientists design drugs and materials faster.
-            </p>
+      <!-- Instant-appear video panel (single, swaps content) -->
+      <div id="app-panel" class="app-panel qc-card mt-4" role="region" aria-live="polite" aria-label="Application video">
+        <div class="app-panel-inner">
+          <!-- default content (QML) -->
+          <div class="video-wrap shadow-inner" data-app-panel="qml">
+            <iframe src="https://www.youtube.com/embed/hWx2Rws3L-A?si=OjQ1virC-13fYIpp" title="Machine Learning & Quantum" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
           </div>
-          <div class="flip-back">
-            <div class="video-wrapper">
-              <iframe src="https://www.youtube.com/embed/8VnZo8wVMm8?si=cjVG8JWhgFucmKZS" title="Chemistry & Quantum" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-            </div>
+          <div class="video-wrap shadow-inner" data-app-panel="cyber" hidden>
+            <iframe src="https://www.youtube.com/embed/-UrdExQW0cs" title="Cybersecurity & Quantum" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
           </div>
-        </div>
-      </div>
-
-      <!-- Finance -->
-      <div class="flip-container application-card relative">
-        <div class="flip-inner">
-          <div class="flip-front bg-gray-100 p-6 shadow">
-            <img src="image/app-image6.png" alt="Finance" class="h-32 mx-auto mb-4">
-            <h3 class="text-xl font-semibold text-center mb-2">Finance</h3>
-            <p class="text-sm text-gray-700 text-center">
-              Quantum algorithms can revolutionize complex tasks like portfolio optimization and risk assessment, enabling more precise asset allocation and derivative pricing than classical methods.
-            </p>
+          <div class="video-wrap shadow-inner" data-app-panel="logistics" hidden>
+            <iframe src="https://www.youtube.com/embed/DWY3dB9FHRk" title="Logistics & Quantum" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
           </div>
-          <div class="flip-back">
-            <div class="video-wrapper">
-              <iframe src="https://www.youtube.com/embed/zTK4KRzfSzw?si=139xfb77C9o-dzrC" title="Finance & Quantum" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-            </div>
+          <div class="video-wrap shadow-inner" data-app-panel="chem" hidden>
+            <iframe src="https://www.youtube.com/embed/8VnZo8wVMm8" title="Chemistry & Quantum" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
           </div>
-        </div>
-      </div>
-
-      <!-- Physics -->
-      <div class="flip-container application-card relative">
-        <div class="flip-inner">
-          <div class="flip-front bg-gray-100 p-6 shadow">
-            <img src="image/app-image5.png" alt="Physics" class="h-32 mx-auto mb-4">
-            <h3 class="text-xl font-semibold text-center mb-2">Physics</h3>
-            <p class="text-sm text-gray-700 text-center">
-              Physicists use quantum computers to explore black holes, gravity, and quantum field theories beyond simulation limits.
-            </p>
+          <div class="video-wrap shadow-inner" data-app-panel="finance" hidden>
+            <iframe src="https://www.youtube.com/embed/zTK4KRzfSzw" title="Finance & Quantum" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
           </div>
-          <div class="flip-back">
-            <div class="video-wrapper">
-              <iframe src="https://www.youtube.com/embed/HUr40m_Dda0?si=7yWJvlZxH2fIDxTD" title="Physics & Quantum" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-            </div>
+          <div class="video-wrap shadow-inner" data-app-panel="physics" hidden>
+            <iframe src="https://www.youtube.com/embed/HUr40m_Dda0" title="Physics & Quantum" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
           </div>
         </div>
       </div>
@@ -263,8 +244,56 @@
     </div>
   </section>
 
-  <footer class="mt-16 py-6 bg-gray-800 text-white text-center">
+  <div class="neon-divider"></div>
+
+  <footer class="mt-10 py-6 bg-gray-800 text-white text-center">
     <p><a href="./contact_us.html" class="underline">Copyright © 2025 Quantum Computing @ UCI. All Rights Reserved.</a></p>
   </footer>
+
+  <script>
+    // Space content under the original header (don't modify header styles)
+    function setHeaderHeight(){
+      const h = document.querySelector('header.header') || document.querySelector('header');
+      const px = (h?.offsetHeight || 120) + 'px';
+      document.documentElement.style.setProperty('--qc-header-h', px);
+    }
+    setHeaderHeight();
+    window.addEventListener('resize', setHeaderHeight);
+
+    // Tabs logic (Overview / Math)
+    const tabButtons = document.querySelectorAll('[role="tab"].tab-btn');
+    const panels = { overview: document.getElementById('tab-overview'), math: document.getElementById('tab-math') };
+    tabButtons.forEach(btn=>btn.addEventListener('click', ()=>{
+      const id = btn.id.replace('tab-btn-','');
+      tabButtons.forEach(b=>b.setAttribute('aria-selected', String(b===btn)));
+      Object.values(panels).forEach(p=>p && p.setAttribute('data-active','false'));
+      panels[id]?.setAttribute('data-active','true');
+    }));
+
+    // --- Applications: buttons + single panel (instant swap, no animation) ---
+    const appBtns = Array.from(document.querySelectorAll('.app-btn'));
+    const appViews = Array.from(document.querySelectorAll('[data-app-panel]'));
+    const appPanel = document.getElementById('app-panel');
+
+    function showApp(key){
+      appBtns.forEach(b=> b.setAttribute('aria-selected', String(b.dataset.app===key)));
+      appViews.forEach(v=>{
+        const isTarget = v.dataset.appPanel === key;
+        if(isTarget){ v.hidden = false; }
+        else{
+          // Pause hidden videos by resetting src if they were visible
+          if(!v.hidden){
+            const iframe = v.querySelector('iframe');
+            iframe.src = iframe.src;
+          }
+          v.hidden = true;
+        }
+      });
+      appPanel.classList.add('active');
+    }
+
+    appBtns.forEach(b=> b.addEventListener('click', ()=> showApp(b.dataset.app)) );
+    showApp(document.querySelector('.app-btn[aria-selected="true"]').dataset.app);
+  </script>
 </body>
 </html>
