@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Trigonometry | QC@UCI</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap">
+  <style>
+    :root{ --bg:#0a0f1d; --card:#101933; --text:#e5e7eb; --muted:#93a3b8; --accent:#A78BFA; }
+    *{ box-sizing:border-box }
+    html,body{ margin:0; background:var(--bg); color:var(--text); font-family:Inter,system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif }
+    a{ color:#6EE7F9; }
+    a:hover{ color:var(--accent) }
+    .wrap{ max-width: 900px; margin: 0 auto; padding: 28px 16px; }
+    .card{ background: linear-gradient(180deg,rgba(255,255,255,.04),rgba(255,255,255,.02)); border:1px solid rgba(255,255,255,.08); border-radius:14px; padding:18px; }
+    .grid{ display:grid; gap:16px }
+    @media(min-width:880px){ .grid{ grid-template-columns: 1.2fr .8fr } }
+
+    /* Q&A accordion */
+    .qa{ border:1px solid rgba(255,255,255,.1); border-radius:12px; padding:14px; margin:10px 0; background:var(--card) }
+    .q{ display:flex; align-items:center; justify-content:space-between; gap:12px }
+    .q h4{ margin:0; font-size:16px }
+    .ans{ max-height:0; overflow:hidden; transition:max-height .35s ease, opacity .35s ease; opacity:0 }
+    .ans.open{ max-height:360px; opacity:1 }
+    .btn{ appearance:none; border:1px solid rgba(255,255,255,.2); background:transparent; color:var(--text); border-radius:10px; padding:6px 10px; cursor:pointer }
+    .btn:hover{ border-color:var(--accent) }
+    .muted{ color:var(--muted) }
+    header{ display:flex; align-items:center; justify-content:space-between; gap:10px; margin-bottom:16px }
+  </style>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" defer></script>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <h1 style="margin:0">Trigonometry</h1>
+      <a href="/learn.html" class="btn">← Back to Learn</a>
+    </header>
+
+    <div class="grid">
+      <section class="card">
+        <h2 style="margin-top:0">Summary</h2>
+        <p>Quantum phases and rotations rely on sine/cosine. Unit complex numbers sit on the unit circle: $$e^{i\theta} = \cos\theta + i \sin\theta$$ Small rotations compound.</p>
+        <ul>
+          <li>SU(2) rotations: $$R(\theta) = \begin{bmatrix}\cos\theta & -\sin\theta \\ \sin\theta & \cos\theta\end{bmatrix}$$</li>
+          <li>Angles in radians are natural for gates</li>
+          <li>Phase shifts add: $$e^{i\alpha}e^{i\beta} = e^{i(\alpha+\beta)}$$</li>
+        </ul>
+      </section>
+      <aside class="card">
+        <h3 style="margin-top:0">Cheat Sheet</h3>
+        <ul class="muted">
+          <li>\(\cos^2\theta + \sin^2\theta = 1\)</li>
+          <li>Euler's Theorem: \(e^{i\theta} = \cos\theta + i\sin\theta\)</li>
+          <li>Trig identities for angle addition</li>
+        </ul>
+      </aside>
+    </div>
+
+    <h3>Practice</h3>
+    <div class="qa">
+      <div class="q">
+        <h4>1) If \(e^{i\theta} = \cos\theta + i\sin\theta\), what is \(e^{-i\theta}\)?</h4>
+        <button class="btn" data-toggle>Show answer</button>
+      </div>
+      <div class="ans"><p>\(\cos\theta - i\sin\theta\) is the complex conjugate on the unit circle.</p></div>
+    </div>
+    <div class="qa">
+      <div class="q">
+        <h4>2) Compute \(\cos(\alpha+\beta)\) in terms of \(cos\)/\(sin\).</h4>
+        <button class="btn" data-toggle>Show answer</button>
+      </div>
+      <div class="ans"><p>\(\cos\alpha \cos\beta - \sin\alpha \sin\beta\).</p></div>
+    </div>
+    <div class="qa">
+      <div class="q">
+        <h4>3) For small \(\theta\), approximate \(\sin\theta\) and \(\cos\theta\) to first order.</h4>
+        <button class="btn" data-toggle>Show answer</button>
+      </div>
+      <div class="ans"><p>\(\sin\theta \approx \theta\), \(\cos\theta \approx 1 - \tfrac{\theta^2}{2}\).</p></div>
+    </div>
+  </div>
+
+  <script>
+    document.querySelectorAll('[data-toggle]').forEach(btn=>{
+      btn.addEventListener('click', ()=>{
+        const ans = btn.closest('.qa').querySelector('.ans');
+        ans.classList.toggle('open');
+        btn.textContent = ans.classList.contains('open') ? 'Hide answer' : 'Show answer';
+      });
+    });
+  </script>
+</body>
+</html>

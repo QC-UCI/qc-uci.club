@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://kit.fontawesome.com/2d323a629b.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto&display=swap">
+  <link rel="stylesheet" href="css/tailwind_style.css">
+  <link rel="stylesheet" href="css/style.css">
+  <title>Learn | QC@UCI</title>
+  <style>
+    .interactive-nav li a {
+      transition: all 0.3s ease;
+      position: relative;
+    }
+    .interactive-nav li a::after {
+      content: '';
+      position: absolute;
+      width: 0%;
+      height: 2px;
+      left: 0;
+      bottom: -2px;
+      background-color: #3b82f6;
+      transition: width 0.3s ease;
+    }
+    .interactive-nav li a:hover::after {
+      width: 100%;
+    }
+
+    /* Flip Animation (in-place) */
+    .flip-container {
+      perspective: 1500px;
+    }
+    .flip-inner {
+      transition: transform 0.6s ease-in-out;
+      transform-style: preserve-3d;
+      transform-origin: center center;
+      position: relative;
+      width: 100%;
+      height: 100%;
+    }
+    .flip-container:hover .flip-inner {
+      transform: rotateY(180deg);
+    }
+    .flip-front,
+    .flip-back {
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
+      border-radius: 0.5rem;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+    .flip-front {
+      z-index: 2;
+    }
+    .flip-back {
+      transform: rotateY(180deg);
+      background-color: #1e293b;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+      overflow: hidden;
+    }
+
+    /* Responsive video wrapper */
+    .flip-back .video-wrapper {
+      position: relative;
+      width: 100%;
+      padding-bottom: 56.25%; /* 16:9 */
+      height: 0;
+    }
+    .flip-back .video-wrapper iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border-radius: 0.5rem;
+      border: 0;
+    }
+
+    .application-card {
+      height: 20rem;
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <a href="index.html">
+      <img src="image/navy_anteater_bloch.png" width="150" alt="Home">
+    </a>
+    <nav>
+      <ul class="header__nav interactive-nav">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="join.html">Join</a></li>
+        <li><a href="learn.html">Learn</a></li>
+        <li><a href="team.html">Team</a></li>
+        <li><a href="event.html">Events</a></li>
+        <li><a href="projects.html">Projects</a></li>
+        <li><a href="contact_us.html">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section class="pt-48 pb-20 px-6 max-w-6xl mx-auto">
+  <h1 class="text-4xl font-bold text-center text-gray-800 mb-10">
+    What is Quantum Computing?
+  </h1>
+  <div class="flex flex-col md:flex-row gap-10 items-start">
+    <!-- Left column: unchanged text -->
+    <div class="flex-1 text-gray-700 text-lg">
+      <p>
+        <strong>Quantum computing</strong> is a new and rapidly evolving computational
+        paradigm rooted in the principles of quantum mechanics. It uses quantum bits 
+        (or <strong> qubits</strong>) that can be 0 and 1 at the same time.
+      </p>
+      <p class="mt-4">
+        Quantum computers can process lots of possibilities simultaneously,
+        giving them a powerful edge in solving complex problems. They're not a
+        faster computer per se — <i>they just work differently</i>.
+      </p>
+      <ul class="mt-6 list-disc list-inside space-y-2 text-base">
+        <li>💡 Simulate nature and molecules better than classical computers</li>
+        <li>🔒 Break and also protect encryption</li>
+        <li>🤖 Supercharge AI and pattern recognition</li>
+      </ul>
+    </div>
+
+    <!-- Right column: responsive video -->
+    <div class="flex-1 w-full application-card bg-gray-100 p-6 shadow">
+      <div class="relative w-full" style="padding-top: 56.25%;"> 
+        <iframe
+          class="absolute inset-0 w-full h-full"
+          src="https://www.youtube.com/embed/ZLAZ6lJ42ak?si=vRPOGfluaialIWl7"
+          title="Quantum Applications"
+          frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          referrerpolicy="strict-origin-when-cross-origin"
+          allowfullscreen>
+        </iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+  <section class="py-12 px-6 bg-white">
+    <h2 class="text-3xl font-bold text-center text-gray-800 mb-10">Applications</h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 max-w-6xl mx-auto">
+
+      <!-- Quantum Machine Learning -->
+      <div class="flip-container application-card relative">
+        <div class="flip-inner">
+          <div class="flip-front bg-gray-100 p-6 shadow">
+            <img src="image/app-image2.png" alt="Machine Learning" class="h-32 mx-auto mb-4">
+            <h3 class="text-xl font-semibold text-center mb-2">Quantum Machine Learning</h3>
+            <p class="text-sm text-gray-700 text-center">
+              The fusion of quantum computing and machine learning enables unprecedented speed and scalability in AI, transforming how models learn, adapt, and solve complex problems.         
+            </p>
+          </div>
+          <div class="flip-back">
+            <div class="video-wrapper">
+              <iframe src="https://www.youtube.com/embed/hWx2Rws3L-A?si=OjQ1virC-13fYIpp" title="Machine Learning & Quantum" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Cybersecurity -->
+      <div class="flip-container application-card relative">
+        <div class="flip-inner">
+          <div class="flip-front bg-gray-100 p-6 shadow">
+            <img src="image/app-image1.png" alt="Cybersecurity" class="h-32 mx-auto mb-4">
+            <h3 class="text-xl font-semibold text-center mb-2">Cybersecurity</h3>
+            <p class="text-sm text-gray-700 text-center">
+              Quantum computers challenge RSA encryption — but also enable unbreakable quantum-secured messages via QKD.
+            </p>
+          </div>
+          <div class="flip-back">
+            <div class="video-wrapper">
+              <iframe src="https://www.youtube.com/embed/-UrdExQW0cs?start=0" title="Cybersecurity & Quantum" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Logistics -->
+      <div class="flip-container application-card relative">
+        <div class="flip-inner">
+          <div class="flip-front bg-gray-100 p-6 shadow">
+            <img src="image/app-image3.png" alt="Optimization" class="h-32 mx-auto mb-4">
+            <h3 class="text-xl font-semibold text-center mb-2">Logistics</h3>
+            <p class="text-sm text-gray-700 text-center">
+              From delivery routes to machine tuning, quantum algorithms like QAOA can solve tough optimization and scheduling tasks, which are of prime importance in logistics.
+            </p>
+          </div>
+          <div class="flip-back">
+            <div class="video-wrapper">
+              <iframe src="https://www.youtube.com/embed/DWY3dB9FHRk?si=3d3GcgyzBRz7_2K-" title="Logistics & Quantum" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Chemistry -->
+      <div class="flip-container application-card relative">
+        <div class="flip-inner">
+          <div class="flip-front bg-gray-100 p-6 shadow">
+            <img src="image/app-image4.png" alt="Chemistry" class="h-32 mx-auto mb-4">
+            <h3 class="text-xl font-semibold text-center mb-2">Chemistry</h3>
+            <p class="text-sm text-gray-700 text-center">
+              Quantum computers can simulate atoms and molecules, helping scientists design drugs and materials faster.
+            </p>
+          </div>
+          <div class="flip-back">
+            <div class="video-wrapper">
+              <iframe src="https://www.youtube.com/embed/8VnZo8wVMm8?si=cjVG8JWhgFucmKZS" title="Chemistry & Quantum" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Finance -->
+      <div class="flip-container application-card relative">
+        <div class="flip-inner">
+          <div class="flip-front bg-gray-100 p-6 shadow">
+            <img src="image/app-image6.png" alt="Finance" class="h-32 mx-auto mb-4">
+            <h3 class="text-xl font-semibold text-center mb-2">Finance</h3>
+            <p class="text-sm text-gray-700 text-center">
+              Quantum algorithms can revolutionize complex tasks like portfolio optimization and risk assessment, enabling more precise asset allocation and derivative pricing than classical methods.
+            </p>
+          </div>
+          <div class="flip-back">
+            <div class="video-wrapper">
+              <iframe src="https://www.youtube.com/embed/zTK4KRzfSzw?si=139xfb77C9o-dzrC" title="Finance & Quantum" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Physics -->
+      <div class="flip-container application-card relative">
+        <div class="flip-inner">
+          <div class="flip-front bg-gray-100 p-6 shadow">
+            <img src="image/app-image5.png" alt="Physics" class="h-32 mx-auto mb-4">
+            <h3 class="text-xl font-semibold text-center mb-2">Physics</h3>
+            <p class="text-sm text-gray-700 text-center">
+              Physicists use quantum computers to explore black holes, gravity, and quantum field theories beyond simulation limits.
+            </p>
+          </div>
+          <div class="flip-back">
+            <div class="video-wrapper">
+              <iframe src="https://www.youtube.com/embed/HUr40m_Dda0?si=7yWJvlZxH2fIDxTD" title="Physics & Quantum" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <footer class="mt-16 py-6 bg-gray-800 text-white text-center">
+    <p><a href="./contact_us.html" class="underline">Copyright © 2025 Quantum Computing @ UCI. All Rights Reserved.</a></p>
+  </footer>
+</body>
+</html>
