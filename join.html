@@ -11,7 +11,7 @@
 <script crossorigin="anonymous" src="https://kit.fontawesome.com/2d323a629b.js"></script>
 <script src="https://cdn.tailwindcss.com"></script>
 <style>
-    :root{ --qc-navy:#0b1b3a; --qc-blue:#2563eb; --qc-emerald:#10b981; --qc-amber:#f59e0b; }
+    :root{ --qc-navy:#0b1b3a; --qc-blue:#2563eb; --qc-emerald:#10b981; --qc-amber:#f59e0b; --qc-indigo:#4f46e5;}
     html, body{ font-family:'Inter', system-ui; }
     .quantum-bg{ background:
       radial-gradient(900px 400px at 10% -10%, rgba(37,99,235,.10), transparent 60%),
@@ -47,10 +47,11 @@
 
     /* Role cards */
     .role-card{ position:relative; border-radius:1rem; border:1px solid rgba(255,255,255,.10); padding:1rem; background:rgba(15,23,42,.55); }
-    .role-card[data-variant="blue"]{ background:linear-gradient(0deg, rgba(37,99,235,.10), rgba(37,99,235,.06)), rgba(15,23,42,.55); }
-    .role-card[data-variant="emerald"]{ background:linear-gradient(0deg, rgba(16,185,129,.10), rgba(16,185,129,.06)), rgba(15,23,42,.55); }
-    .role-card[data-variant="amber"]{ background:linear-gradient(0deg, rgba(245,158,11,.10), rgba(245,158,11,.06)), rgba(15,23,42,.55); }
-
+    .role-card[data-variant="blue"]{ background:linear-gradient(0deg, rgba(37,99,235,.25), rgba(37,99,235,.1)), rgba(15,23,42,.55); }
+    .role-card[data-variant="emerald"]{ background:linear-gradient(0deg, rgba(16,185,129,.25), rgba(16,185,129,.1)), rgba(15,23,42,.55); }
+    .role-card[data-variant="amber"]{ background:linear-gradient(0deg, rgba(245,158,11,.25), rgba(245,158,11,.1)), rgba(15,23,42,.55); }
+    .role-card[data-variant="indigo"]{ background:linear-gradient(0deg, rgba(75, 16, 185, 0.25), rgba(21, 6, 48, 0.1)), rgba(15,23,42,.55); }
+    
     .role-toggle{ display:inline-flex; align-items:center; gap:.5rem; border:1px solid rgba(255,255,255,.14); border-radius:.5rem; padding:.4rem .65rem; font-weight:600; }
     .apply-btn{ display:inline-flex; align-items:center; gap:.5rem; border-radius:.5rem; padding:.5rem .75rem; background:var(--qc-blue); color:#fff; font-weight:700; border:1px solid rgba(255,255,255,.18); }
     .apply-btn:hover{ filter:brightness(.97); }
@@ -267,54 +268,22 @@ body{ padding-top: 110px; }
       Note: Both sessions are flexible—content may swap based on schedule and member interest.
     </p>
 </div></section>
+
+
 <!-- ===== Leadership & Volunteering ===== -->
 <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
 <div class="flex items-center justify-between gap-3 flex-wrap">
-<h2 class="text-2xl sm:text-3xl font-bold">Leadership &amp; Volunteering</h2>
+  <h2 class="text-2xl sm:text-3xl font-bold">Leadership &amp; Volunteering</h2>
 </div>
 <p class="mt-2 text-sm text-slate-300/90 max-w-3xl">Step up to help run the club, grow our community, and mentor newcomers. Explore the roles below and apply anytime.</p>
-<div class="mt-5 grid grid-cols-1 md:grid-cols-3 gap-5">
-<!-- Co-treasurer -->
-<article class="role-card" data-variant="blue">
-<div class="flex items-start justify-between gap-3">
-<h3 class="font-semibold text-white inline-flex items-center gap-2"><i class="fa-solid fa-coins"></i> Co-treasurer</h3>
-<a class="apply-btn" href="https://www.qc-uci.club/join.html" target="_blank">
-<i class="fa-solid fa-paper-plane"></i> Coming Soon!
-          </a>
-</div>
-<div class="mt-3 flex items-center gap-2">
-<button aria-expanded="false" class="role-toggle">
-<i class="fa-solid fa-chevron-down role-chevron"></i>
-            Role Details
-          </button>
-</div>
-<div class="role-details mt-3">
-<div class="grid sm:grid-rows-2 gap-3 text-sm">
-<div>
-<h4 class="font-semibold text-white">Qualifications</h4>
-<ul class="mt-1 list-disc list-inside space-y-1 text-white">
-<li>Budgeting &amp; spreadsheet skills (Excel/Sheets)</li>
-<li>Reliable, organized, detail-oriented</li>
-<li>Prior treasury experience is a plus</li>
-</ul>
-</div>
-<div>
-<h4 class="font-semibold text-white">Expectations</h4>
-<ul class="mt-1 list-disc list-inside space-y-1 text-white">
-<li>Track expenses, reimbursements, receipts</li>
-<li>Coordinate club fund requests and fundraising</li>
-<li>Plan budgets for events &amp; merch</li>
-</ul>
-</div>
-</div>
-</div>
-</article>
+<div class="mt-5 grid grid-cols-1 md:grid-cols-2 gap-5">
+
 <!-- Marketing team trainee -->
 <article class="role-card" data-variant="amber">
 <div class="flex items-start justify-between gap-3">
 <h3 class="font-semibold text-white inline-flex items-center gap-2"><i class="fa-solid fa-bullhorn"></i> Marketing team trainee</h3>
 <a class="apply-btn" href="https://www.qc-uci.club/join.html" target="_blank">
-<i class="fa-solid fa-paper-plane"></i> Coming Soon!
+<i class="fa-solid fa-paper-plane"></i> Opens Oct 8!
           </a>
 </div>
 <div class="mt-3 flex items-center gap-2">
@@ -329,65 +298,152 @@ body{ padding-top: 110px; }
 <h4 class="font-semibold text-white">Qualifications</h4>
 <ul class="mt-1 list-disc list-inside space-y-1 text-white">
 <li>Interest in design, social, or writing</li>
-<li>Basic Canva/Photoshop or short-form video</li>
-<li>Clear communication &amp; follow-through</li>
+<li>Experience with Canva/Figma and short-form video</li>
+<li>Strong communication skills &amp; dedication</li>
 </ul>
 </div>
 <div>
 <h4 class="font-semibold text-white">Expectations</h4>
 <ul class="mt-1 list-disc list-inside space-y-1 text-white">
 <li>Create event posts, flyers, recaps</li>
-<li>Publish to Discord/Instagram; track reach</li>
-<li>Table at fairs; capture photo/video</li>
+<li>Publish to Discord &amp; Instagram</li>
+<li>Capture photos &amp; videos during events</li>
 </ul>
 </div>
 </div>
 </div>
 </article>
+
 <!-- Education team trainee -->
-<article class="role-card" data-variant="emerald">
-<div class="flex items-start justify-between gap-3">
-<h3 class="font-semibold text-white inline-flex items-center gap-2"><i class="fa-solid fa-graduation-cap"></i> Education team trainee</h3>
-<a class="apply-btn" href="https://www.qc-uci.club/join.html" target="_blank">
-<i class="fa-solid fa-paper-plane"></i> Coming Soon!
-          </a>
-</div>
-<div class="mt-3 flex items-center gap-2">
-<button aria-expanded="false" class="role-toggle">
-<i class="fa-solid fa-chevron-down role-chevron"></i>
-            Role Details
-          </button>
-</div>
-<div class="role-details mt-3">
-<div class="grid sm:grid-rows-1 gap-3 text-sm">
-<div>
-<h4 class="font-semibold text-white">Requirements</h4>
-<ul class="mt-1 list-disc list-inside space-y-1 text-white">
-<li>Strong mathematical foundation (basic linear algebra, complex numbers, classical computing principles)</li>
-<li>Basic Python programming experience</li>
-</ul>
-</div>
-<div>
-<h4 class="font-semibold text-white">Preferred</h4>
-<ul class="mt-1 list-disc list-inside space-y-1 text-white">
-<li>Enthusiasm for and experience teaching or tutoring</li>
-<li>Experience with quantum libraries like IBM Qiskit</li>
-</ul>
-</div>
-<div>
-<h4 class="font-semibold text-white">Responsibilities</h4>
-<ul class="mt-1 list-disc list-inside space-y-1 text-white">
-<li>Create education material (e.g., slides, demos)</li>
-<li>Present teaching material to students</li>
-<li>Provide beginners with conceptual and programming help</li>
-</ul>
-</div>
-</div>
-</div>
+<article class="role-card" data-variant="blue">
+  <div class="flex items-start justify-between gap-3">
+    <h3 class="font-semibold text-white inline-flex items-center gap-2"><i class="fa-solid fa-graduation-cap"></i> Education team trainee</h3>
+    <a class="apply-btn" href="https://www.qc-uci.club/join.html" target="_blank">
+      <i class="fa-solid fa-paper-plane"></i> Opens Oct 8!
+    </a>
+  </div>
+  <div class="mt-3 flex items-center gap-2">
+    <button aria-expanded="false" class="role-toggle">
+      <i class="fa-solid fa-chevron-down role-chevron"></i>
+      Role Details
+    </button>
+  </div>
+  <div class="role-details mt-3">
+    <div class="grid sm:grid-rows-1 gap-3 text-sm">
+      <div>
+        <h4 class="font-semibold text-white">Requirements</h4>
+        <ul class="mt-1 list-disc list-inside space-y-1 text-white">
+          <li>Strong mathematical foundation (basic linear algebra, complex numbers, classical computing principles)</li>
+          <li>Basic Python programming experience</li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="font-semibold text-white">Preferred</h4>
+        <ul class="mt-1 list-disc list-inside space-y-1 text-white">
+          <li>Enthusiasm for and experience teaching or tutoring</li>
+          <li>Experience with quantum libraries like IBM Qiskit</li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="font-semibold text-white">Responsibilities</h4>
+        <ul class="mt-1 list-disc list-inside space-y-1 text-white">
+          <li>Create education material (e.g., slides, demos)</li>
+          <li>Present teaching material to students</li>
+          <li>Provide beginners with conceptual and programming help</li>
+        </ul>
+      </div>
+    </div>
+  </div>
 </article>
+
+<!-- Treasurer -->
+<article class="role-card" data-variant="emerald">
+  <div class="flex items-start justify-between gap-3">
+    <h3 class="font-semibold text-white inline-flex items-center gap-2"><i class="fa-solid fa-coins"></i> Treasurer</h3>
+    <a class="apply-btn" href="https://www.qc-uci.club/join.html" target="_blank">
+      <i class="fa-solid fa-paper-plane"></i> Opens Oct 8!
+    </a>
+  </div>
+  <div class="mt-3 flex items-center gap-2">
+    <button aria-expanded="false" class="role-toggle">
+      <i class="fa-solid fa-chevron-down role-chevron"></i>
+      Role Details
+    </button>
+  </div>
+  <div class="role-details mt-3">
+    <div class="grid sm:grid-rows-2 gap-3 text-sm">
+      <div>
+        <h4 class="font-semibold text-white">Qualifications</h4>
+        <ul class="mt-1 list-disc list-inside space-y-1 text-white">
+          <li>Budgeting &amp; spreadsheet skills (Excel/Sheets)</li>
+          <li>Reliable, organized, detail-oriented</li>
+          <li>Prior treasury experience is a plus</li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="font-semibold text-white">Expectations</h4>
+        <ul class="mt-1 list-disc list-inside space-y-1 text-white">
+          <li>Track expenses, reimbursements, receipts</li>
+          <li>Coordinate club fund requests and fundraising</li>
+          <li>Plan budgets for events &amp; merch</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</article>
+
+<!-- Webmaster -->
+<article class="role-card" data-variant="indigo">
+  <div class="flex items-start justify-between gap-3">
+    <h3 class="font-semibold text-white inline-flex items-center gap-2"><i class="fa-solid fa-graduation-cap"></i> Webmaster</h3>
+    <a class="apply-btn" href="https://www.qc-uci.club/join.html" target="_blank">
+      <i class="fa-solid fa-paper-plane"></i> Opens Oct 8!
+    </a>
+  </div>
+  <div class="mt-3 flex items-center gap-2">
+    <button aria-expanded="false" class="role-toggle">
+      <i class="fa-solid fa-chevron-down role-chevron"></i>
+      Role Details
+    </button>
+  </div>
+  <div class="role-details mt-3">
+    <div class="grid sm:grid-rows-1 gap-3 text-sm">
+      <div>
+        <h4 class="font-semibold text-white">Requirements</h4>
+        <ul class="mt-1 list-disc list-inside space-y-1 text-white">
+          <li>Proficiency in HTML, CSS, JavaScript</li>
+          <li>Experience with responsive design</li>
+          <li>Basic Git/GitHub familiarity</li>
+          <li>Strong attention to detail and effective communication skills</li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="font-semibold text-white">Preferred</h4>
+        <ul class="mt-1 list-disc list-inside space-y-1 text-white">
+          <li>Strong UI/UX design sense</li>
+          <li>Experience with TailwindCSS, Bootstrap, or other similar frameworks</li>
+          <li>Experience with API Integration</li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="font-semibold text-white">Responsibilities</h4>
+        <ul class="mt-1 list-disc list-inside space-y-1 text-white">
+          <li>Up-to-date content integration</li>
+          <li>Website Maintenance</li>
+          <li>Feature expansion</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</article>
+
 </div>
+
+
 <div class="mt-4 text-xs text-slate-400">Tip: You can apply to multiple roles. We review applications on a rolling basis.</div>
 </section>
+
+
 <!-- Divider -->
 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 <hr class="my-8 border-t border-white/10"/>
