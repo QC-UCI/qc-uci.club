@@ -57,6 +57,89 @@
         margin: 0 auto;
         line-height: 1.6;
       }
+
+      /* === Slideshow + Mission layout === */
+      .mission-wrap {
+        display: flex;
+        align-items: stretch;
+        gap: 24px;
+        margin-left: 10%;
+        margin-right: 10%;
+      }
+      .slideshow {
+        flex: 0 0 420px;               /* fixed nice width on desktop */
+        max-width: 100%;
+        border-radius: 12px;
+        overflow: hidden;
+        position: relative;
+        background: #0f172a;           /* subtle dark bg while loading */
+        box-shadow: 0 10px 25px rgba(0,0,0,.15);
+        /* make slideshow landscape using aspect-ratio (16:9) */
+        aspect-ratio: 16 / 9;
+        min-height: 230px;
+      }
+      /* Text column that contains the title (centered relative to this column) and the caption */
+      .mission-text {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        flex: 1 1 0;
+        gap: 12px;
+      }
+      .slide-img {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        /* Use contain so the full image fits inside the landscape frame without cropping */
+        object-fit: contain;
+        object-position: center center;
+        background: #0f172a; /* match slideshow background so letterboxing looks intentional */
+        opacity: 0;
+        transition: opacity .6s ease-in-out;
+      }
+      .slide-img.active { opacity: 1; }
+
+      /* Optional tiny overlay counter */
+      .slide-counter {
+        position: absolute;
+        right: 10px;
+        bottom: 10px;
+        font-size: 12px;
+        color: #e5e7eb;
+        background: rgba(0,0,0,.35);
+        padding: 4px 8px;
+        border-radius: 999px;
+      }
+
+      /* Stack on small screens: slideshow above mission text */
+      @media (max-width: 900px) {
+        .mission-wrap {
+          flex-direction: column;
+          margin-left: 6%;
+          margin-right: 6%;
+        }
+        .slideshow {
+          flex: 0 0 auto;
+          width: 100%;
+          min-height: 220px;
+          aspect-ratio: 16 / 9;
+        }
+      }
+
+      /* Center the title inside the mission-text column, not the whole page */
+      .mission-text .body__title {
+        text-align: center;
+        margin: 0;
+      }
+      /* Justify mission paragraph and keep a readable line length */
+      .body__caption {
+        text-align: justify;
+        text-align-last: center;
+        display: block;
+        max-width: 680px;
+      }
+      .body__caption > div { margin: 0; }
     </style>
   </head>
   <body class="overflow-auto">
@@ -85,15 +168,30 @@
     
 </head>
 <body>
-  <section class="body">
+    <section class="body">
     <p style="margin-bottom:200px;"></p>
-    <h2 class="body__title">Our Mission</h2>
-    <div class="body__caption" style="margin-left: 10%; margin-right: 10%;">
-      <div><span> 
-        At the Quantum Computing Club, we’re all about unlocking the power of quantum software and building a vibrant quantum community at UCI! Whether you're a total beginner or already dreaming in qubits, we’re here to help you design, experiment, and innovate with real quantum algorithms.
-        But we don’t stop there! We love crossing boundaries—from machine learning to optimization and beyond—exploring how quantum computing can revolutionize different fields. With hands-on projects, collabs, and a passion for the future, we’re shaping the next wave of quantum pioneers. 
-      </span></div>
+
+    <!-- === New: Slideshow + Mission statement side-by-side (stacks on small screens) === -->
+    <div class="mission-wrap">
+      <!-- Slideshow (auto-discovers photos/1..20 with common extensions) -->
+      <div class="slideshow" id="mission-slideshow" aria-label="Club photos slideshow">
+        <!-- Images injected by JS -->
+        <div class="slide-counter" id="slide-counter" aria-hidden="true">0/0</div>
+      </div>
+
+      <!-- Text column: title + caption. Title centered relative to this column only -->
+      <div class="mission-text">
+        <h2 class="body__title">Our Mission</h2>
+        <div class="body__caption">
+          <div><span>
+            At the Quantum Computing Club, we’re all about unlocking the power of quantum software and building a vibrant quantum community at UCI! Whether you're a total beginner or already dreaming in qubits, we’re here to help you design, experiment, and innovate with real quantum algorithms.
+            But we don’t stop there! We love crossing boundaries—from machine learning to optimization and beyond—exploring how quantum computing can revolutionize different fields. With hands-on projects, collabs, and a passion for the future, we’re shaping the next wave of quantum pioneers.
+          </span></div>
+        </div>
+      </div>
     </div>
+    <!-- === End new block === -->
+
     <p style="margin-bottom:70px;"></p>
   </section>
 
@@ -172,5 +270,86 @@
       <p><a href="./contact_us.html">Copyright © 2025 Quantum Computing @ UCI. All Rights Reserved. </a></p>
     </div>
   </footer>
+
+  <!-- Minimal JS to auto-discover photos and run slideshow -->
+  <script>
+    (function () {
+      const container = document.getElementById('mission-slideshow');
+      if (!container) return;
+
+      // Predefined list of actual photo filenames found in the repo (try these first).
+      const knownPhotos = [
+        'photos/fall_quarter_meeting1.jpeg',
+        'photos/farewall_2025_pic1.jpg',
+        'photos/hackatuci_workshop_1.jpg',
+        'photos/sandy_irani_talk1.jpg',
+        'photos/sean_doan_guest_lecture_1.jpg',
+        'photos/shion_guest_lecture_1.jpg',
+        'photos/winter_quarter_2024_pic1.jpg',
+        'photos/winter_quarter_meeting_3.jpg'
+      ];
+
+      // Try to auto-discover up to N photos with common names/extensions as a fallback.
+      const MAX_TRY = 20;
+      const bases = Array.from({length: MAX_TRY}, (_, i) => (i+1).toString());
+      const exts  = ['jpg','jpeg','png','webp'];
+      const candidates = [];
+      bases.forEach(b => exts.forEach(e => candidates.push(`photos/${b}.${e}`)));
+
+      // Also try some common gallery names.
+      ['cover','hero','group','event','img1','img2','img3'].forEach(name=>{
+        exts.forEach(e => candidates.push(`photos/${name}.${e}`));
+      });
+
+      // Preload images; keep only those that actually load. Use a Set to avoid duplicates.
+      let active = 0;
+      const found = [];
+      const attempted = new Set();
+
+      function addSlide(src) {
+        if (attempted.has(src)) return;
+        attempted.add(src);
+        const img = new Image();
+        img.onload = () => {
+          found.push(src);
+          const el = document.createElement('img');
+          el.src = src;
+          el.className = 'slide-img' + (found.length === 1 ? ' active' : '');
+          el.alt = 'Club photo';
+          container.insertBefore(el, container.firstChild);
+          updateCounter();
+        };
+        img.onerror = () => {};
+        img.src = src;
+      }
+
+      function updateCounter() {
+        const c = document.getElementById('slide-counter');
+        if (!c) return;
+        if (found.length === 0) {
+          c.style.display = 'none';
+          return;
+        }
+        c.style.display = '';
+        c.textContent = `${(active % found.length) + 1}/${found.length}`;
+      }
+
+      // Try known explicit filenames first (these match the repository photos/ folder).
+      knownPhotos.forEach(addSlide);
+
+      // Then try the guessed numbered/common names as a fallback.
+      candidates.forEach(addSlide);
+
+      // Advance slides every 3.5s
+      setInterval(() => {
+        const slides = container.querySelectorAll('.slide-img');
+        if (slides.length < 1) return;
+        slides.forEach(s => s.classList.remove('active'));
+        active = (active + 1) % slides.length;
+        slides[active].classList.add('active');
+        updateCounter();
+      }, 3500);
+    })();
+  </script>
 </body>
 </html>
