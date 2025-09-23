@@ -319,12 +319,20 @@
     function createUpcomingCard(evt){
       const dateLabel = fmtDate(evt.start);
       const timeLabel = evt.start.__allday ? 'All day' : `${fmtTime(evt.start)}${evt.end? ' – ' + fmtTime(evt.end) : ''}`;
+      // Split description at marker '[More Details]'. Text before marker is preview; after marker goes to modal as bullets.
+      const rawDesc = (evt.description || '').replace(/\r/g,'');
+      const parts = rawDesc.split(/\[More Details\]/i);
+      const previewText = (parts[0] || '').trim().replace(/\n+/g,' ');
+      const moreDetailsText = (parts[1] || '').trim();
+      const moreLines = moreDetailsText ? moreDetailsText.split(/\n+/).map(s=>s.trim()).filter(Boolean) : [];
+
       const el = document.createElement('article');
       el.className = 'event-card';
       el.dataset.category = evt.category || '';
       el.dataset.title = evt.title || '';
       el.dataset.date = evt.start.toISOString().slice(0,10);
       el.dataset.location = evt.location || '';
+      if (moreLines.length) el.dataset.more = JSON.stringify(moreLines);
       el.innerHTML = `
         <div class="event-accent" aria-hidden="true"></div>
         <div class="p-5">
@@ -333,7 +341,7 @@
             <time class="text-sm font-semibold text-slate-700">${dateLabel}</time>
           </div>
           <h3 class="mt-2 text-xl font-bold text-slate-900">${evt.title}</h3>
-          <p class="mt-1 text-sm text-slate-600 line-clamp-2">${(evt.description||'').replace(/\\n/g,' ').slice(0,180)}</p>
+          <p class="mt-1 text-sm text-slate-600 line-clamp-2">${previewText || ((evt.description||'').replace(/\n/g,' ').slice(0,180))}</p>
           <div class="mt-3 flex flex-wrap items-center gap-2 text-sm text-slate-600">
             <span class="inline-flex items-center gap-1"><i class="fa-regular fa-clock"></i> ${timeLabel}</span>
             ${evt.location? `<span class="inline-flex items-center gap-1"><i class="fa-solid fa-location-dot"></i> ${evt.location}</span>`: ''}
@@ -352,6 +360,14 @@
       container.dataset.title = evt.title || '';
       container.dataset.date = evt.start.toISOString().slice(0,10);
       container.dataset.location = evt.location || '';
+      // Split description at marker '[More Details]' similar to upcoming cards
+      const rawDesc = (evt.description || '').replace(/\r/g,'');
+      const parts = rawDesc.split(/\[More Details\]/i);
+      const previewText = (parts[0] || '').trim().replace(/\n+/g,' ');
+      const moreDetailsText = (parts[1] || '').trim();
+      const moreLines = moreDetailsText ? moreDetailsText.split(/\n+/).map(s=>s.trim()).filter(Boolean) : [];
+      if (moreLines.length) container.dataset.more = JSON.stringify(moreLines);
+
       container.innerHTML = `
         <span class="t-dot" aria-hidden="true" style="top: .6rem"></span>
         <div class="event-card p-5">
@@ -361,7 +377,7 @@
             <time class="text-sm font-semibold text-slate-700">${fmtDate(evt.start)}</time>
           </div>
           <h3 class="mt-2 text-xl font-bold text-slate-900">${evt.title}</h3>
-          <p class="mt-1 text-sm text-slate-600">${(evt.description||'').replace(/\\n/g,' ').slice(0,220)}</p>
+          <p class="mt-1 text-sm text-slate-600">${previewText || ((evt.description||'').replace(/\n/g,' ').slice(0,220))}</p>
           <div class="mt-3 flex flex-wrap items-center gap-2 text-sm text-slate-600">
             ${evt.start.__allday? `<span class="inline-flex items-center gap-1"><i class="fa-regular fa-clock"></i> All day</span>` : `<span class="inline-flex items-center gap-1"><i class="fa-regular fa-clock"></i> ${fmtTime(evt.start)}${evt.end? ' – ' + fmtTime(evt.end) : ''}</span>`}
             ${evt.location? `<span class="inline-flex items-center gap-1"><i class="fa-solid fa-location-dot"></i> ${evt.location}</span>`: ''}
@@ -401,30 +417,39 @@
           mt.textContent = evt.title;
           ms.innerHTML = `${fmtDate(evt.start)} · ${evt.start.__allday? 'All day' : `${fmtTime(evt.start)}${evt.end? ' – ' + fmtTime(evt.end) : ''}`} ${evt.location? ' · ' + evt.location: ''}`;
           mb.innerHTML = '';
-          (evt.description || 'Details will be announced soon.').split(/\n+/).slice(0,10).forEach(line=>{
-            const li = document.createElement('li'); li.textContent = line; mb.appendChild(li);
-          });
-          ma.innerHTML = '';
-          if (evt.url){
-            const a = document.createElement('a');
-            a.href = evt.url; a.target = '_blank';
-            a.className = 'inline-flex items-center gap-2 rounded-lg px-3 py-2 bg-slate-900 text-white text-sm font-semibold hover:bg-slate-800';
-            a.innerHTML = '<i class="fa-solid fa-ticket"></i> RSVP';
-            ma.appendChild(a);
+          // If the card stored a `data-more` JSON array, use that for the modal bullets.
+          const moreData = card.dataset.more ? (function(){ try{ return JSON.parse(card.dataset.more); }catch(e){ return null; } })() : null;
+          if (Array.isArray(moreData) && moreData.length){
+            moreData.slice(0,20).forEach(line=>{ const li = document.createElement('li'); li.textContent = line; mb.appendChild(li); });
+          } else {
+            // Fallback: if the full description contains a marker, take everything after marker and split lines.
+            const raw = (evt.description || '').replace(/\r/g,'');
+            const parts = raw.split(/\[More Details\]/i);
+            const after = (parts[1] || '').trim();
+            if (after){ after.split(/\n+/).map(s=>s.trim()).filter(Boolean).slice(0,20).forEach(line=>{ const li = document.createElement('li'); li.textContent = line; mb.appendChild(li); }); }
+            else { const li = document.createElement('li'); li.textContent = (evt.description || 'Details will be announced soon.'); mb.appendChild(li); }
           }
-          const btn = document.createElement('button');
-          btn.className = 'inline-flex items-center gap-2 rounded-lg px-3 py-2 bg-white ring-1 ring-black/10 text-sm font-semibold hover:bg-slate-50 add-to-cal';
-          btn.innerHTML = '<i class="fa-regular fa-calendar-plus"></i> Add to Calendar';
-          btn.addEventListener('click', ()=>{
-            const ics = makeICS({ title: evt.title, start: toICSDate(evt.start), end: evt.end? toICSDate(evt.end) : toICSDate(new Date(evt.start.getTime()+60*60*1000)), location: evt.location || '' });
-            downloadICS(ics, `${evt.title.replace(/\s+/g,'_')}.ics`);
-          });
-          ma.appendChild(btn);
+           ma.innerHTML = '';
+           if (evt.url){
+             const a = document.createElement('a');
+             a.href = evt.url; a.target = '_blank';
+             a.className = 'inline-flex items-center gap-2 rounded-lg px-3 py-2 bg-slate-900 text-white text-sm font-semibold hover:bg-slate-800';
+             a.innerHTML = '<i class="fa-solid fa-ticket"></i> RSVP';
+             ma.appendChild(a);
+           }
+           const btn = document.createElement('button');
+           btn.className = 'inline-flex items-center gap-2 rounded-lg px-3 py-2 bg-white ring-1 ring-black/10 text-sm font-semibold hover:bg-slate-50 add-to-cal';
+           btn.innerHTML = '<i class="fa-regular fa-calendar-plus"></i> Add to Calendar';
+           btn.addEventListener('click', ()=>{
+             const ics = makeICS({ title: evt.title, start: toICSDate(evt.start), end: evt.end? toICSDate(evt.end) : toICSDate(new Date(evt.start.getTime()+60*60*1000)), location: evt.location || '' });
+             downloadICS(ics, `${evt.title.replace(/\s+/g,'_')}.ics`);
+           });
+           ma.appendChild(btn);
 
-          modal.classList.add('open');
-        });
-      }
-    }
+           modal.classList.add('open');
+         });
+       }
+     }
 
     let ALL_EVENTS = [];
     let FOCUS_DATE = null;
@@ -437,11 +462,17 @@
     }
 
     function splitUpcomingPast(evts){
-      const today = new Date(); today.setHours(0,0,0,0);
+      // Use current time as the cutoff so events that ended earlier today are treated as past.
+      // For all-day events we consider them to end at the end of the day.
+      const now = new Date();
       const upcoming = [], past = [];
       for (const e of evts){
-        const end = e.end || e.start;
-        if (end < today) past.push(e); else upcoming.push(e);
+        const rawEnd = e.end || e.start;
+        let end = rawEnd;
+        if (end && end.__allday){
+          end = new Date(end.getFullYear(), end.getMonth(), end.getDate(), 23, 59, 59, 999);
+        }
+        if (end < now) past.push(e); else upcoming.push(e);
       }
       upcoming.sort((a,b)=> a.start - b.start);
       past.sort((a,b)=> b.start - a.start);
