@@ -245,17 +245,20 @@
       const m = raw.match(/^\s*\[(.*?)\]\s*(.*)$/);
       let cat = '';
       let cleanTitle = raw;
+      let hasValidPrefix = false;
       if (m){
-        const tag = (m[1]||'').toLowerCase().trim();
+        const tagRaw = (m[1]||'').trim();
+        const tag = tagRaw.toLowerCase();
         cleanTitle = m[2]||'';
-        if (/(workshop)/i.test(tag)) cat = 'workshop';
-        else if (/(guest|guest speaker)/i.test(tag)) cat = 'guest';
-        else if (/(social)/i.test(tag)) cat = 'social';
-        else cat = 'event';
+        if (/^workshop\b/i.test(tag)) { cat = 'workshop'; hasValidPrefix = true; }
+        else if (/^guest\b/i.test(tag)) { cat = 'guest'; hasValidPrefix = true; }
+        else if (/^social\b/i.test(tag)) { cat = 'social'; hasValidPrefix = true; }
+        else if (/^event\b/i.test(tag)) { cat = 'event'; hasValidPrefix = true; }
+        else { cat = 'event'; }
       }
       if (!cat) cat = fallbackCategory || 'event';
       const titleTagged = `[${toTitleCase(cat)}] ${cleanTitle || 'Untitled Event'}`;
-      return { category: cat, cleanTitle: cleanTitle || 'Untitled Event', titleTagged };
+      return { category: cat, cleanTitle: cleanTitle || 'Untitled Event', titleTagged, hasValidPrefix };
     }
 
     function unfoldICSLines(text){ return text.replace(/\r?\n[ \t]/g, ''); }
@@ -296,7 +299,8 @@
         else if (/event|seminar|colloquium/i.test(summary)) category = 'event';
 
         const norm = normalizeTitleAndCategory(summary, category || 'event');
-
+        // Only include events whose summary starts with an allowed bracketed prefix
+        if (!norm.hasValidPrefix) continue;
         events.push({
           title: norm.cleanTitle,
           titleTagged: norm.titleTagged,
@@ -741,6 +745,7 @@ function mapGoogleEvent(it){
   const description = stripHtml(it.description || '');
   const prelimCat = deriveCategoryFromText(rawSummary, description);
   const norm = normalizeTitleAndCategory(rawSummary, prelimCat);
+  if (!norm.hasValidPrefix) return null;
   return {
     id: it.id,
     title: norm.cleanTitle,
@@ -762,7 +767,7 @@ async function loadCalendar(){
     const upJson = await upRes.json();
     const pastJson = await pastRes.json();
     const combined = [ ...(upJson.items||[]), ...(pastJson.items||[]) ];
-    const mapped = combined.map(mapGoogleEvent).filter(e => e.start && !isNaN(e.start));
+    const mapped = combined.map(mapGoogleEvent).filter(e => e && e.start && !isNaN(e.start));
     const byId = new Map();
     mapped.forEach(e=>{ if(!byId.has(e.id)) byId.set(e.id, e); else { const prev = byId.get(e.id); if((e.end||e.start) > (prev.end||prev.start)) byId.set(e.id, e);} });
     ALL_EVENTS = Array.from(byId.values());
