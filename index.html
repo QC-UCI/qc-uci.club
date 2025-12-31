@@ -1,187 +1,282 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!DOCTYPE html>
-  <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script src="https://kit.fontawesome.com/2d323a629b.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto&display=swap">
-    <link rel="stylesheet" href="css/tailwind_style.css">
-    <link rel="stylesheet" href="css/style.css">
-    <title>Join | QC@UCI</title>
-    <style>
-      html, body {
-        height: 100%;
-        margin: 0;
-        padding: 0;
-        overflow-x: hidden;
-      }
-      .interactive-nav li a {
-        transition: all 0.3s ease;
-        position: relative;
-      }
-      .interactive-nav li a::after {
-        content: '';
-        position: absolute;
-        width: 0%;
-        height: 2px;
-        left: 0;
-        bottom: -2px;
-        background-color: #3b82f6;
-        transition: width 0.3s ease;
-      }
-      .interactive-nav li a:hover::after {
-        width: 100%;
-      }
-      .hero {
-        background: linear-gradient(135deg, #1e3a8a 0%, #312e81 100%);
-        color: white;
-        padding: 140px 20px 100px;
-        text-align: center;
-        animation: fadeIn 1.5s ease-out;
-      }
-      @keyframes fadeIn {
-        from { opacity: 0; transform: translateY(10px); }
-        to { opacity: 1; transform: translateY(0); }
-      }
-      .hero h1 {
-        font-size: 3rem;
-        font-weight: 800;
-        margin-bottom: 20px;
-      }
-      .hero p {
-        font-size: 1.2rem;
-        max-width: 700px;
-        margin: 0 auto;
-        line-height: 1.6;
-      }
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<script crossorigin="anonymous" src="https://kit.fontawesome.com/2d323a629b.js"></script>
+<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900&display=swap" rel="stylesheet"/>
+<link href="css/tailwind_style.css" rel="stylesheet"/>
+<link href="css/style.css" rel="stylesheet"/>
+<title>QC@UCI — Quantum Computing Club</title>
+<style>
+  :root { --qc-primary:#0ea5e9; --qc-accent:#a78bfa; --qc-dark:#0b1020; --qc-mid:#121635; --qc-grid:rgba(255,255,255,0.08); --focus:2px solid #93c5fd; }
+  html, body { height:100%; margin:0; padding:0; overflow-x:hidden; font-family:'Roboto', system-ui, -apple-system, Segoe UI, Helvetica, Arial; background:var(--qc-dark); color:#e5e7eb; }
+  a { text-decoration:none; }
 
-      /* === Slideshow + Mission layout === */
-      .mission-wrap {
-        display: flex;
-        align-items: stretch;
-        gap: 24px;
-        margin-left: 10%;
-        margin-right: 10%;
-      }
-      .slideshow {
-        flex: 0 0 420px;               /* fixed nice width on desktop */
-        max-width: 100%;
-        border-radius: 12px;
-        overflow: hidden;
-        position: relative;
-        background: #0f172a;           /* subtle dark bg while loading */
-        box-shadow: 0 10px 25px rgba(0,0,0,.15);
-        /* make slideshow landscape using aspect-ratio (16:9) */
-        aspect-ratio: 16 / 9;
-        min-height: 230px;
-      }
-      /* Text column that contains the title (centered relative to this column) and the caption */
-      .mission-text {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        flex: 1 1 0;
-        gap: 12px;
-      }
-      .slide-img {
-        position: absolute;
-        inset: 0;
-        width: 100%;
-        height: 100%;
-        /* Use contain so the full image fits inside the landscape frame without cropping */
-        object-fit: contain;
-        object-position: center center;
-        background: #0f172a; /* match slideshow background so letterboxing looks intentional */
-        opacity: 0;
-        transition: opacity .6s ease-in-out;
-      }
-      .slide-img.active { opacity: 1; }
+  /* Header */
+  .header { position:sticky; top:0; backdrop-filter:saturate(140%) blur(8px); background:linear-gradient(180deg, rgba(10,15,35,0.85), rgba(10,15,35,0.55)); border-bottom:1px solid rgba(255,255,255,0.08); padding:10px 18px; display:flex; align-items:center; justify-content:space-between; z-index:40; }
+  .header__nav { display:flex; gap:18px; list-style:none; padding:0; margin:0; font-weight:500; flex-wrap:nowrap; flex-wrap:wrap; white-space:normal; overflow:visible; }
+  .header__nav a { color:#d1d5db; position:relative; padding:8px 10px; border-radius:10px; transition:color .25s ease, transform .25s ease; flex:0 0 auto; }
+  .header__nav a:focus-visible { outline:var(--focus); outline-offset:3px; }
+  .header__nav a::after { content:''; position:absolute; left:10px; right:10px; bottom:6px; height:2px; transform:scaleX(0); transform-origin:left; background:linear-gradient(90deg, var(--qc-primary), var(--qc-accent)); transition:transform .35s ease; border-radius:999px; }
+  .header__nav a:hover { color:#fff; transform:translateY(-1px); }
+  .header__nav a:hover::after { transform:scaleX(1); }
 
-      /* Optional tiny overlay counter */
-      .slide-counter {
-        position: absolute;
-        right: 10px;
-        bottom: 10px;
-        font-size: 12px;
-        color: #e5e7eb;
-        background: rgba(0,0,0,.35);
-        padding: 4px 8px;
-        border-radius: 999px;
-      }
-
-      /* Stack on small screens: slideshow above mission text */
-      @media (max-width: 900px) {
-        .mission-wrap {
-          flex-direction: column;
-          margin-left: 6%;
-          margin-right: 6%;
-        }
-        .slideshow {
-          flex: 0 0 auto;
-          width: 100%;
-          min-height: 220px;
-          aspect-ratio: 16 / 9;
-        }
-      }
-
-      /* Center the title inside the mission-text column, not the whole page */
-      .mission-text .body__title {
-        text-align: center;
-        margin: 0;
-      }
-      /* Justify mission paragraph and keep a readable line length */
-      .body__caption {
-        text-align: justify;
-        text-align-last: center;
-        display: block;
-        max-width: 680px;
-      }
-      .body__caption > div { margin: 0; }
-    </style>
-  </head>
-  <body class="overflow-auto">
-    <header class="header z-50 relative">
-      <a href="index.html">
-        <img src="image/navy_anteater_bloch.png" width="150" alt="Home">
-      </a>
-      <nav>
-        <ul class="header__nav interactive-nav">
-          <li><a href="index.html">Home</a></li>
-          <li><a href="join.html">Join</a></li>
-          <li><a href="learn.html">Learn</a></li>
-          <li><a href="team.html">Team</a></li>
-          <li><a href="event.html">Events</a></li>
-          <li><a href="projects.html">Projects</a></li>
-          <li><a href="contact_us.html">Contact</a></li>
-        </ul>
-      </nav>
-    </header>
+  /* HERO (starting animation kept) */
+  .hero { position:relative; min-height:68vh; display:grid; place-items:center; text-align:center; overflow:hidden; isolation:isolate; padding:120px 16px 80px; background:
+      radial-gradient(1000px 600px at 10% -10%, rgba(14,165,233,0.25), transparent 60%),
+      radial-gradient(900px 500px at 90% 0%, rgba(167,139,250,0.24), transparent 60%),
+      linear-gradient(180deg, var(--qc-mid), var(--qc-dark) 55%); }
+  .hero::before { content:''; position:absolute; inset:0; z-index:-1; background-image:
+      linear-gradient(var(--qc-grid) 1px, transparent 1px),
+      linear-gradient(90deg, var(--qc-grid) 1px, transparent 1px);
+    background-size:40px 40px, 40px 40px; mask-image: radial-gradient(100% 75% at 50% 0%, black 40%, transparent 80%); animation:gridPan 30s linear infinite; }
+  @keyframes gridPan { to { background-position: 0 40px, 40px 0; } }
+  .halo { position:absolute; width:1200px; height:1200px; border-radius:50%; background:conic-gradient(from 0deg, rgba(14,165,233,0.05), rgba(167,139,250,0.22), rgba(14,165,233,0.05)); filter:blur(40px); animation:spin 40s linear infinite; z-index:-1; }
+  @keyframes spin { to { transform: rotate(360deg); }
+  }
   
-    <!-- Hero Section -->
-    <section class="hero relative z-0">
-      <h1>Welcome to Quantum Computing @ UCI</h1>
-      <p>Unleash your curiosity, implement cutting-edge algorithms, and explore the future of computation—one qubit at a time!</p>
-    </section>
-    
+  @media (prefers-reduced-motion: reduce) {
+    .hero::before {
+      animation: none;
+    }
+    .halo {
+      animation: none;
+    }
+    .cursor {
+      animation: none;
+    }
+  }
+ 
+  .hero h1 { font-size:clamp(1.6rem, 6vw, 3.5rem); line-height:1.1; font-weight:900; letter-spacing:-0.02em; background:linear-gradient(90deg, #fff, #e5e7eb 40%, #c7d2fe);
+    -webkit-background-clip:text; background-clip:text; color:transparent; margin:0 0 12px;
+    white-space:normal; overflow:visible; text-overflow:clip; max-width:min(42rem, 95vw); margin-inline:auto; text-align:center; }
+  @media (max-width: 480px){ .hero { padding-top: 96px; } }
+  .subhead { color:#cbd5e1; max-width:780px; margin-inline:auto; font-size:clamp(0.95rem, 1.6vw, 1.2rem); }
+  .cursor { display:inline-block; width:1ch; animation:blink 1.1s steps(1) infinite; }
+  @keyframes blink { 50% { opacity:0; } }
+  .cta { display:flex; gap:14px; justify-content:center; margin-top:26px; flex-wrap:wrap; }
+  .btn { padding:12px 18px; border-radius:14px; font-weight:700; letter-spacing:.01em; border:1px solid rgba(255,255,255,0.12); transition:transform .18s ease, box-shadow .18s ease; display:inline-flex; align-items:center; gap:10px; white-space:nowrap; }
+  .btn-primary { background:linear-gradient(90deg, var(--qc-primary), var(--qc-accent)); color:#0b0f1f !important; }
+  .btn-primary:hover, .btn-primary:focus, .btn-primary:active { background:linear-gradient(90deg, var(--qc-primary), var(--qc-accent)); color:#0b0f1f !important; transform:none; box-shadow:none; }
+  .btn-ghost { background:rgba(255,255,255,0.06); color:#e5e7eb; }
+  .btn-ghost:hover { transform:translateY(-2px); background:rgba(255,255,255,0.10); }
+  #quantumField { position:absolute; inset:0; z-index:-2; opacity:.9; }
+
+  section { padding:60px 16px; }
+  .section-title { text-align:center; font-size:clamp(1.6rem, 3vw, 2.2rem); font-weight:800; margin-bottom:10px; }
+  .section-sub { text-align:center; color:#9ca3af; max-width:760px; margin:0 auto 36px; }
+
+  /* What we do (creative icons) */
+  .wwd-grid { max-width:1200px; margin:0 auto; display:grid; grid-template-columns: repeat(auto-fit, minmax(240px,1fr)); gap:16px; }
+  .wwd-card { position:relative; border:1px solid rgba(255,255,255,0.08); background:linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02)); border-radius:16px; padding:16px 16px 16px 72px; display:block; overflow:hidden; }
+  .wwd-card::before { content:''; position:absolute; left:0; top:0; bottom:0; width:4px; background: var(--bar, linear-gradient(180deg, #60a5fa, #a78bfa)); opacity:.9; }
+  .wwd-ico { position:absolute; left:16px; top:16px; width:44px; height:44px; border-radius:14px; display:grid; place-items:center; color:#fff;
+             background: radial-gradient( circle at 30% 30%, rgba(255,255,255,.25), rgba(255,255,255,.05) ),
+                         linear-gradient(135deg, var(--g1,#0ea5e9), var(--g2,#a78bfa));
+             box-shadow: inset 0 0 0 2px rgba(255,255,255,.15), 0 8px 20px rgba(0,0,0,.35); }
+  .wwd-ico::after { content:''; position:absolute; inset:-3px; border-radius:16px;
+                    background: conic-gradient(from 0deg, var(--g1,#0ea5e9), var(--g2,#a78bfa), var(--g1,#0ea5e9));
+                    -webkit-mask: radial-gradient(circle calc(50% - 4px), transparent 98%, black 99%);
+                    mask: radial-gradient(circle calc(50% - 4px), transparent 98%, black 99%);
+                    filter: blur(0.4px); animation: spin 6s linear infinite; opacity:.75; }
+  .wwd-card h3 { margin:0 0 4px; font-size:1.07rem; }
+  .wwd-card p { margin:0; color:#aab0bd; font-size:.95rem; }
+  .wwd-card[data-v="learn"] { --g1:#22d3ee; --g2:#3b82f6; --bar:linear-gradient(180deg,#22d3ee,#3b82f6); }
+  .wwd-card[data-v="build"] { --g1:#34d399; --g2:#10b981; --bar:linear-gradient(180deg,#34d399,#10b981); }
+  .wwd-card[data-v="events"]{ --g1:#f59e0b; --g2:#fbbf24; --bar:linear-gradient(180deg,#f59e0b,#fbbf24); }
+  .wwd-card[data-v="community"]{ --g1:#a78bfa; --g2:#6366f1; --bar:linear-gradient(180deg,#a78bfa,#6366f1); }
+  .wwd-card:hover { transform: translateY(-1px); transition: transform .18s ease; }
+
+  @media (max-width: 430px){
+    .wwd-card { padding-left: 64px; }
+    .wwd-ico { width:40px; height:40px; border-radius:12px; }
+    .hero h1 { max-width: 92vw; }
+  }
+
+  /* Highlights rail */
+  .rail { max-width: 1200px; margin: 0 auto; position: relative; }
+  .rail-track { display: grid; grid-auto-flow: column; grid-auto-columns: 88%; gap: 16px; overflow-x: auto; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; padding-bottom: 10px; scroll-behavior: smooth; }
+  @media (min-width: 768px){ .rail-track { grid-auto-columns: 48%; } }
+  @media (min-width: 1280px){ .rail-track { grid-auto-columns: 33%; } }
+  .rail-card { scroll-snap-align: start; border: 1px solid rgba(255,255,255,0.08); background: linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02)); border-radius: 18px; overflow: hidden; }
+  /* Spotlight effect for highlights cards */
+  .rail-card {
+    transition: transform 0.35s ease, box-shadow 0.35s ease, opacity 0.35s ease;
+    transform-origin: center center;
+    opacity: 0.85;
+  }
+  .rail-card.is-active {
+    transform: scale(1.05);
+    opacity: 1;
+    box-shadow: 0 18px 45px rgba(15,23,42,0.9);
+    border-color: rgba(148,163,184,0.6);
+    z-index: 2;
+  }
+
+  .rail-card .img { aspect-ratio: 16 / 9; background-size: cover; background-position: center; height: auto; }
+  .rail-card .body { padding: 16px; }
+  .rail-card .kicker { font-size:.8rem; color:#9ca3af; margin-bottom:6px; }
+  .rail-card .title { font-weight:800; color:#e5e7eb; margin-bottom:6px; }
+  .rail-card .desc { color:#aab0bd; font-size:.95rem; }
+  .chip { display:inline-block; padding:3px 10px; border-radius:999px; font-size:.75rem; font-weight:700; letter-spacing:.01em; border:1px solid transparent; }
+  .chip-rose { color:#fb7185; background:rgba(251,113,133,.16); border-color:rgba(251,113,133,.30); }
+  .chip-cyan { color:#22d3ee; background:rgba(34,211,238,.14); border-color:rgba(34,211,238,.28); }
+  .chip-amber { color:#fbbf24; background:rgba(251,191,36,.14); border-color:rgba(251,191,36,.28); }
+  .chip-violet { color:#a78bfa; background:rgba(167,139,250,.14); border-color:rgba(167,139,250,.28); }
+  .chip-emerald { color:#34d399; background:rgba(52,211,153,.14); border-color:rgba(52,211,153,.28); }
+
+  .rail .ctrl { position:absolute; top: 40%; inset-inline: 0; display:flex; justify-content:space-between; pointer-events:none; z-index:5; }
+  .rail .ctrl button { pointer-events:auto; width:48px; height:48px; border-radius:999px; border:1px solid rgba(255,255,255,0.6); background:rgba(0,0,0,0.68); color:#ffffff; font-size:20px; display:grid; place-items:center; cursor:pointer; box-shadow:0 6px 20px rgba(0,0,0,0.45); }
+  .rail .ctrl button:hover { background:rgba(0,0,0,0.8); }
+  .rail .ctrl button:focus-visible { outline:var(--focus); outline-offset:2px; }
+  .rail .ctrl i { filter: drop-shadow(0 1px 1px rgba(0,0,0,.6)); }
+
+  
+  /* Make highlight rail arrows white on black */
+  .rail .ctrl button {
+    background: #000;
+    color: #fff;
+    border-radius: 999px;
+  }
+  .rail .ctrl i {
+    color: #fff;
+  }
+
+
+  /* === Slideshow + Mission layout === */
+  .mission-wrap {
+    display: flex;
+    align-items: stretch;
+    gap: 24px;
+    margin-left: 10%;
+    margin-right: 10%;
+  }
+  .slideshow {
+    flex: 0 0 420px;
+    max-width: 100%;
+    border-radius: 16px;
+    overflow: hidden;
+    position: relative;
+    background: #0f172a;
+    box-shadow: 0 10px 25px rgba(0,0,0,.15);
+    aspect-ratio: 16 / 9;
+    min-height: 230px;
+  }
+  .slide-img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: center center;
+    background: #0f172a;
+    opacity: 0;
+    transition: opacity .6s ease-in-out;
+  }
+  .slide-img.active { opacity: 1; }
+  .slide-counter {
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+    font-size: 12px;
+    color: #e5e7eb;
+    background: rgba(0,0,0,.35);
+    padding: 4px 8px;
+    border-radius: 999px;
+    border: 1px solid rgba(255,255,255,0.12);
+  }
+  .mission-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex: 1 1 0;
+    gap: 12px;
+  }
+  .body__caption {
+    text-align: justify;
+    text-align-last: center;
+    display: block;
+    max-width: 680px;
+    color:#cbd5e1;
+    line-height: 1.75;
+  }
+  .body__caption > div { margin: 0; }
+
+  @media (max-width: 900px) {
+    .mission-wrap { flex-direction: column; margin-left: 6%; margin-right: 6%; }
+    .slideshow { flex: 0 0 auto; width: 100%; min-height: 220px; aspect-ratio: 16 / 9; }
+  }
+
+
+
+  /* Highlights dropdown + center spotlight */
+  .hlbar{ display:flex; align-items:center; justify-content:space-between; gap:12px; margin:0 auto 10px; max-width:1200px; padding: 0 6px; }
+  .hlmenu-btn{ display:inline-flex; align-items:center; gap:10px; padding:10px 12px; border-radius:14px; border:1px solid rgba(255,255,255,0.18); background:rgba(255,255,255,0.06); color:#e5e7eb; font-weight:800; cursor:pointer; }
+  .hlmenu-btn:hover{ background:rgba(255,255,255,0.10); }
+  .hlhint{ color:#9ca3af; font-size: .9rem; }
+  .hlmenu{ position:absolute; top: 52px; left: 10px; width:min(520px, calc(100% - 20px)); background:rgba(10,15,35,0.92); border:1px solid rgba(255,255,255,0.14); border-radius:16px; padding:10px; display:none; z-index: 10; backdrop-filter: blur(10px); }
+  .hlmenu.open{ display:block; }
+  .hlmenu-item{ width:100%; text-align:left; padding:10px 12px; border-radius:12px; border:1px solid rgba(255,255,255,0.10); background:rgba(255,255,255,0.03); color:#e5e7eb; font-weight:800; cursor:pointer; }
+  .hlmenu-item:hover{ border-color: rgba(34,211,238,0.55); }
+
+  .rail { position: relative; }
+  .rail-card{ opacity: 0.28; transform: scale(0.92); transition: transform 0.35s ease, box-shadow 0.35s ease, opacity 0.35s ease, border-color 0.35s ease; }
+  .rail-card.near{ opacity: 0.65; transform: scale(0.97); }
+  .rail-card.is-active{ transform: scale(1.03); opacity: 1; box-shadow: 0 18px 45px rgba(15,23,42,0.9); border-color: rgba(148,163,184,0.6); z-index: 2; }
+
+footer { padding:22px 16px 28px; border-top:1px solid rgba(255,255,255,0.08); background:linear-gradient(180deg, rgba(14,165,233,0.05), transparent); }
+  .footer__copyRight { text-align:center; color:#9ca3af; }
+  .footer__copyRight a { color:#c7d2fe; }
+
+  @media (max-width: 520px){
+    .header__nav { gap: 12px; }
+    .header__nav a { padding:6px 8px; font-size:0.95rem; }
+  }
+</style>
 </head>
 <body>
-    <section class="body">
-    <p style="margin-bottom:200px;"></p>
+  <header class="header position-relative z-10">
+    <a href="index.html"><img src="image/Anteater+Eq_Logo.png" width="150" alt="Home"></a>
+    <nav aria-label="Primary">
+      <ul class="header__nav interactive-nav">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="join.html">Join</a></li>
+        <li><a href="learn.html">Learn</a></li>
+        <li><a href="team.html">Team</a></li>
+        <li><a href="event.html">Events</a></li>
+        <li><a href="projects.html">Projects</a></li>
+        <li><a href="contact_us.html">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
 
-    <!-- === New: Slideshow + Mission statement side-by-side (stacks on small screens) === -->
+  <!-- HERO -->
+  <section class="hero">
+    <canvas aria-hidden="true" id="quantumField"></canvas>
+    <div aria-hidden="true" class="halo"></div>
+    <div>
+      <h1 aria-live="polite" id="typewrite">Welcome to QC@UCI<span class="cursor">▍</span></h1>
+      <p class="subhead">Unleash your curiosity, implement cutting-edge algorithms, and explore the future of computation — one qubit at a time.</p>
+      <div class="cta">
+        <a class="btn btn-primary" href="join.html"><i class="fa-solid fa-user-plus"></i> Join the Club</a>
+        <a class="btn btn-ghost" href="learn.html"><i class="fa-solid fa-graduation-cap"></i> Start Learning</a>
+        <a class="btn btn-ghost" href="projects.html"><i class="fa-solid fa-flask"></i> Explore Projects</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- MISSION (keeps original content, repackaged) -->
+  <section aria-label="Our mission">
+    <h2 class="section-title">Our Mission</h2>
+    <p class="section-sub">A beginner-friendly community that doesn’t stop at definitions — we move from intuition to code to projects.</p>
+
     <div class="mission-wrap">
-      <!-- Slideshow (auto-discovers photos/1..20 with common extensions) -->
       <div class="slideshow" id="mission-slideshow" aria-label="Club photos slideshow">
-        <!-- Images injected by JS -->
         <div class="slide-counter" id="slide-counter" aria-hidden="true">0/0</div>
       </div>
 
-      <!-- Text column: title + caption. Title centered relative to this column only -->
       <div class="mission-text">
-        <h2 class="body__title">Our Mission</h2>
         <div class="body__caption">
           <div><span>
             At the Quantum Computing Club, we’re all about unlocking the power of quantum software and building a vibrant quantum community at UCI! Whether you're a total beginner or already dreaming in qubits, we’re here to help you design, experiment, and innovate with real quantum algorithms.
@@ -190,118 +285,297 @@
         </div>
       </div>
     </div>
-    <!-- === End new block === -->
-
-    <p style="margin-bottom:70px;"></p>
   </section>
 
-  <section class="body2">
-    <h2 class="body2__title" style="text-align:center;">What We Do</h2>
-    <div class="whatwedoContainer">
-      <div class="whatwedoItem">
-        <img class="whatwedoImage" src="image/QFF_discussion.jpeg" alt="Weekly Discussions">
-        <div class="whatwedoDescription">
-          <div class="whatwedoTitle">Weekly Discussions</div>
-          <div class="whatwedoText">Join us every week for insightful discussions on the latest in quantum computing.</div>
-        </div>
-      </div>
-      <div class="whatwedoItem">
-        <img class="whatwedoImage" src="image/research_proj_2024.png" alt="Research Projects">
-        <div class="whatwedoDescription">
-          <div class="whatwedoTitle">Research Projects</div>
-          <div class="whatwedoText">Participate in cutting-edge research projects and contribute to groundbreaking discoveries.</div>
-        </div>
-      </div>
-      <div class="whatwedoItem">
-        <img class="whatwedoImage" src="image/Shion_GuestSpeaker.JPG" alt="Guest Speakers">
-        <div class="whatwedoDescription">
-          <div class="whatwedoTitle">Guest Speakers</div>
-          <div class="whatwedoText">Attend talks by renowned experts in the field of quantum computing and expand your knowledge.</div>
-        </div>
-      </div>
+  <!-- WHAT WE DO (original content, redesigned cards) -->
+  <!-- WHAT WE DO (enhanced) -->
+  <section aria-label="What we do">
+    <h2 class="section-title">What we do</h2>
+    <p class="section-sub">We learn together, build open-source projects, host speakers & workshops, and grow a welcoming community.</p>
+    <div class="wwd-grid">
+      <article class="wwd-card" data-v="learn">
+        <div class="wwd-ico" aria-hidden="true"><i class="fa-solid fa-comments"></i></div>
+        <h3>Weekly Discussions</h3>
+        <p>Join us every week for insightful discussions on the latest in quantum computing.</p>
+      </article>
+      <article class="wwd-card" data-v="build">
+        <div class="wwd-ico" aria-hidden="true"><i class="fa-solid fa-flask"></i></div>
+        <h3>Research Projects</h3>
+        <p>Participate in cutting-edge research projects and contribute to groundbreaking discoveries.</p>
+      </article>
+      <article class="wwd-card" data-v="events">
+        <div class="wwd-ico" aria-hidden="true"><i class="fa-solid fa-microphone"></i></div>
+        <h3>Guest Speakers</h3>
+        <p>Attend talks by renowned experts in the field of quantum computing and expand your knowledge.</p>
+      </article>
     </div>
   </section>
 
-  <section class="body3 px-4 py-16 bg-gray-50">
-    <h2 class="text-3xl font-bold text-center mb-12">Hackathons and Conferences</h2>
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto">
-      <div class="bg-white shadow-lg rounded-lg overflow-hidden transform transition duration-300 hover:scale-105">
-        <img class="w-full h-64 object-contain p-6" src="image/QFF23_logo.png" alt="Qiskit Fall Fest 2023">
-        <div class="px-6 pb-6">
-          <h3 class="text-xl font-semibold text-gray-600 text-center">IBM Qiskit Fall Fest</h3>
-          <p class="mt-2 text-sm text-gray-600 text-center"> Student-driven quantum event with IBM’s support — featuring workshops, coding challenges, and guest speakers</p>
-        </div>
-      </div>
+  <!-- HACKATHONS + CONFERENCES (original content, repackaged) -->
+  <section aria-label="Hackathons and Conferences">
+    <h2 class="section-title">Hackathons and Conferences</h2>
+    <p class="section-sub">Flagship moments that raised the bar — workshops, coding challenges, collaboration, and networking.</p>
 
-      <div class="bg-white shadow-lg rounded-lg overflow-hidden transform transition duration-300 hover:scale-105">
-        <img class="w-full h-64 object-contain bg-white p-6" src="image/SQUID.png" alt="Quantum Coalition">
-        <div class="px-6 pb-6">
-          <h3 class="text-xl font-semibold text-gray-600 text-center">Quantum Coalition</h3>
-          <p class="mt-2 text-sm text-gray-600 text-center">A collaboration between top university quantum clubs across the world, focused on innovation, talks, and networking.</p>
+    <div class="wwd-grid" style="align-items:stretch;">
+      <article class="wwd-card" data-v="events" style="padding-left:16px;">
+        <div class="img" style="height:180px; border-radius:14px; overflow:hidden; border:1px solid rgba(255,255,255,0.08); background:#0f172a; display:grid; place-items:center; margin-bottom:12px;">
+          <img src="image/QFF23_logo.png" alt="Qiskit Fall Fest 2023" style="max-height:160px; max-width:92%; object-fit:contain;" />
         </div>
-      </div>
+        <h3 style="margin-top:0;">IBM Qiskit Fall Fest</h3>
+        <p>Student-driven quantum event with IBM’s support — featuring workshops, coding challenges, and guest speakers</p>
+      </article>
+
+      <article class="wwd-card" data-v="community" style="padding-left:16px;">
+        <div class="img" style="height:180px; border-radius:14px; overflow:hidden; border:1px solid rgba(255,255,255,0.08); background:#0f172a; display:grid; place-items:center; margin-bottom:12px;">
+          <img src="image/SQUID.png" alt="Quantum Coalition" style="max-height:160px; max-width:92%; object-fit:contain;" />
+        </div>
+        <h3 style="margin-top:0;">Quantum Coalition</h3>
+        <p>A collaboration between top university quantum clubs across the world, focused on innovation, talks, and networking.</p>
+      </article>
     </div>
   </section>
 
-  <section class="news-section">
-    <h2 class="news-title">Highlights</h2>
-    <div class="news-container">
-      <div class="news-item">
-        <div class="news-img" style="background-image: url('image/Anteater+Eq_Logo_Dark.png');"></div>
-        <div class="news-content">
-          <div class="news-date">June 28, 2024</div>
-          <div class="news-summary"> QC@UCI is officially an ICS-affiliated Organization. Check them out below!</div>
-          <div class="news-read-more"><a href="https://ics.uci.edu/student-experience/clubs-organizations/">Read more</a></div>
-        </div>
+
+  <!-- HIGHLIGHTS (dropdown + spotlight center) -->
+  <section aria-label="Highlights">
+    <h2 class="section-title">Highlights</h2>
+
+    <div class="rail" id="hlRail" aria-label="Highlights cards">
+      <!--
+      <div class="hlbar">
+        <button type="button" class="hlmenu-btn" id="hlMenuBtn" aria-expanded="false" aria-controls="hlMenu">
+          Choose highlight <i class="fa-solid fa-chevron-down"></i>
+        </button>
       </div>
-      <div class="news-item">
-        <div class="news-img" style="background-image: url('image/sandyirani.jpg');"></div>
-        <div class="news-content">
-          <div class="news-date">April 15, 2024</div>
-          <div class="news-summary">Join us for an exciting guest lecture on quantum complexity theory by Professor Sandy Irani from UCI.</div>
-          <div class="news-read-more"><a href="https://simons.berkeley.edu/people/sandy-irani">Read bio</a></div>
-        </div>
+
+      
+      <div class="hlmenu" id="hlMenu" role="menu" aria-label="Highlights dropdown">
+        <button class="hlmenu-item" type="button" data-hl="0" role="menuitem">June 28, 2024 — ICS-affiliated Organization</button>
+        <button class="hlmenu-item" type="button" data-hl="1" role="menuitem">April 15, 2024 — Prof. Sandy Irani Guest Lecture</button>
+      </div>
+      -->
+
+      <div class="rail-track" id="hlRailTrack">
+        <article class="rail-card" tabindex="0">
+          <div class="img" style="background-image:url('image/brain_doolittle.jpeg')" role="img" aria-label="Dr. Brian Doolittle"></div>
+          <div class="body">
+            <div class="kicker"><span class="chip chip-amber">Talk</span> — December 01, 2025</div>
+            <div class="title">Guest lecture: Dr. Brian Doolittle</div>
+            <p class="desc">Join us for an exciting industry talk on Quantum Networking. <a href="https://www.aliroquantum.com" target="_blank" rel="noreferrer">Explore Aliro →</a></p>
+          </div>
+        </article>
+
+        <article class="rail-card" tabindex="0">
+          <div class="img" style="background-image:url('photos/AIF2025-2.jpg')" role="img" aria-label="AIF 2025"></div>
+          <div class="body">
+            <div class="kicker"><span class="chip chip-emerald">Event</span> — Sept 22, 2025</div>
+            <div class="title">QC@UCI's Booth at Anteater Involvement Fair</div>
+            <p class="desc">We'll be set up at Aldrich Park from 11am-4pm at booth D178! Come check us out!!! <a href="https://campusorgs.uci.edu/signature-programs-events/fall-quarter/anteater-involvement-fair/" target="_blank" rel="noreferrer">Locate us →</a></p>
+          </div>
+        </article>
+
+        <article class="rail-card" tabindex="0">
+          <div class="img" style="background-image:url('image/sandyirani.jpg')" role="img" aria-label="Professor Sandy Irani"></div>
+          <div class="body">
+            <div class="kicker"><span class="chip chip-amber">Talk</span> — April 15, 2024</div>
+            <div class="title">Guest lecture: Professor Sandy Irani</div>
+            <p class="desc">Join us for an exciting guest lecture on quantum complexity theory. <a href="https://simons.berkeley.edu/people/sandy-irani" target="_blank" rel="noreferrer">Read bio →</a></p>
+          </div>
+        </article>
+      </div>
+
+      <div class="ctrl" aria-hidden="false">
+        <button type="button" class="hl-prev" aria-label="Scroll left"><i class="fa-solid fa-chevron-left"></i></button>
+        <button type="button" class="hl-next" aria-label="Scroll right"><i class="fa-solid fa-chevron-right"></i></button>
       </div>
     </div>
   </section>
 
   <footer>
     <div class="footer__copyRight">
-      <p><a href="./contact_us.html">Copyright © 2025 Quantum Computing @ UCI. All Rights Reserved. </a></p>
+      <p><a href="./contact_us.html">Copyright © 2025 Quantum Computing @ UCI. All Rights Reserved.</a></p>
     </div>
   </footer>
 
-  <!-- Minimal JS to auto-discover photos and run slideshow -->
   <script>
+    // Typewriter headline (with reduced-motion support)
+    (function typewriter(){
+      const el = document.getElementById('typewrite');
+      if (!el) return;
+
+      const prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const base = "Welcome to QC@UCI: ";
+      const phrases = [
+        "Learn Quantum Algorithms",
+        "Explore Quantum Solutions",
+        "Meet Inspiring Speakers",
+        "Shape the Future of Computing"
+      ];
+
+      // If user prefers reduced motion: just show one phrase, no typing loop.
+      if (prefersReduced) {
+        el.innerHTML = base + phrases[0] + '<span class="cursor">▍</span>';
+        return;
+      }
+
+      let i = 0, j = 0, del = false;
+      function tick() {
+        const p = phrases[i];
+        el.innerHTML = base + p.slice(0, j) + '<span class="cursor">▍</span>';
+
+        if (!del && j < p.length) {
+          j++;
+          setTimeout(tick, 120);
+        } else if (del && j > 0) {
+          j--;
+          setTimeout(tick, 60);
+        } else {
+          del = !del;
+          if (!del) i = (i + 1) % phrases.length;
+          setTimeout(tick, del ? 1500 : 250);
+        }
+      }
+      tick();
+    })();
+
+    // Canvas particles (starting animation, performance tuned)
+    (function quantumField(){
+      const canvas = document.getElementById('quantumField');
+      if (!canvas) return;
+
+      const prefersReduced =
+        window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      // For reduced motion, keep a static background (no JS animation).
+      if (prefersReduced) {
+        canvas.style.display = 'none'; // or keep it but without drawing
+        return;
+      }
+
+      const ctx = canvas.getContext('2d');
+      let w, h, dpr, parts = [], mouse = {x:-9999, y:-9999};
+      let lastTime = 0;
+
+      function resize() {
+        dpr = Math.min(window.devicePixelRatio || 1, 1.5);           // cap DPR lower
+        w = canvas.clientWidth;
+        h = canvas.clientHeight;
+        canvas.width  = Math.floor(w * dpr);
+        canvas.height = Math.floor(h * dpr);
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        make();
+      }
+
+      function make() {
+        // fewer particles overall
+        const n = Math.floor((w * h) / 50000); // was 22000 → ~2x fewer
+        parts = Array.from({ length: n }, () => ({
+          x: Math.random() * w,
+          y: Math.random() * h,
+          vx: (Math.random() - 0.5) * 0.35,
+          vy: (Math.random() - 0.5) * 0.35,
+          r: Math.random() * 1.4 + 0.6
+        }));
+      }
+
+      function step(time) {
+        // Throttle to ~20 FPS
+        if (time - lastTime < 50) {
+          requestAnimationFrame(step);
+          return;
+        }
+        lastTime = time;
+
+        ctx.clearRect(0, 0, w, h);
+
+        // Move particles
+        for (const p of parts) {
+          p.x += p.vx;
+          p.y += p.vy;
+          if (p.x < 0 || p.x > w) p.vx *= -1;
+          if (p.y < 0 || p.y > h) p.vy *= -1;
+        }
+
+        // Draw limited connections (only nearest neighbors in array)
+        for (let i = 0; i < parts.length; i++) {
+          const p = parts[i];
+
+          // Only check a small neighborhood instead of all pairs (O(n*k))
+          for (let j = i + 1; j < Math.min(parts.length, i + 12); j++) {
+            const q = parts[j];
+            const dx = p.x - q.x;
+            const dy = p.y - q.y;
+            const d  = Math.hypot(dx, dy);
+            if (d < 100) {
+              const a = 1 - d / 100;
+              ctx.strokeStyle = `rgba(167,139,250,${0.12 * a})`;
+              ctx.beginPath();
+              ctx.moveTo(p.x, p.y);
+              ctx.lineTo(q.x, q.y);
+              ctx.stroke();
+            }
+          }
+
+          const md = Math.hypot(p.x - mouse.x, p.y - mouse.y);
+          if (md < 120) {
+            const a = 1 - md / 120;
+            ctx.strokeStyle = `rgba(14,165,233,${0.18 * a})`;
+            ctx.beginPath();
+            ctx.moveTo(p.x, p.y);
+            ctx.lineTo(mouse.x, mouse.y);
+            ctx.stroke();
+          }
+        }
+
+        // Draw nodes
+        for (const p of parts) {
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+          ctx.fillStyle = 'rgba(226,232,240,0.9)';
+          ctx.fill();
+        }
+
+        requestAnimationFrame(step);
+      }
+
+      window.addEventListener('resize', resize);
+      window.addEventListener('mousemove', e => {
+        const r = canvas.getBoundingClientRect();
+        mouse.x = e.clientX - r.left;
+        mouse.y = e.clientY - r.top;
+      });
+
+      resize();
+      requestAnimationFrame(step);
+    })();
+
+    
+
+    // Slideshow for Mission section (kept from original)
     (function () {
       const container = document.getElementById('mission-slideshow');
       if (!container) return;
 
-      // Predefined list of actual photo filenames found in the repo (try these first).
       const knownPhotos = [
-        'photos/fall_quarter_meeting1.jpeg',
-        'photos/farewall_2025_pic1.jpg',
-        'photos/hackatuci_workshop_1.jpg',
-        'photos/sandy_irani_talk1.jpg',
-        'photos/sean_doan_guest_lecture_1.jpg',
-        'photos/shion_guest_lecture_1.jpg',
         'photos/winter_quarter_2024_pic1.jpg',
-        'photos/winter_quarter_meeting_3.jpg'
+        'photos/winter_quarter_meeting_3.jpg', 
+        'photos/fall_quarter_2025_pic1.jpg',
+        'photos/fall_quarter_2025_pic2.jpg',
+        'photos/fall_quarter_2025_pic3.jpg',
+        'photos/AIF2025.jpg',
+        'photos/guest_speaker_kaustubh_simha.jpg',
+        'photos/fall_2025_social.jpg'
       ];
 
-      // Try to auto-discover up to N photos with common names/extensions as a fallback.
       const MAX_TRY = 20;
       const bases = Array.from({length: MAX_TRY}, (_, i) => (i+1).toString());
       const exts  = ['jpg','jpeg','png','webp'];
       const candidates = [];
       bases.forEach(b => exts.forEach(e => candidates.push(`photos/${b}.${e}`)));
-
-      // Also try some common gallery names.
       ['cover','hero','group','event','img1','img2','img3'].forEach(name=>{
         exts.forEach(e => candidates.push(`photos/${name}.${e}`));
       });
 
-      // Preload images; keep only those that actually load. Use a Set to avoid duplicates.
       let active = 0;
       const found = [];
       const attempted = new Set();
@@ -334,13 +608,9 @@
         c.textContent = `${(active % found.length) + 1}/${found.length}`;
       }
 
-      // Try known explicit filenames first (these match the repository photos/ folder).
       knownPhotos.forEach(addSlide);
-
-      // Then try the guessed numbered/common names as a fallback.
       candidates.forEach(addSlide);
 
-      // Advance slides every 3.5s
       setInterval(() => {
         const slides = container.querySelectorAll('.slide-img');
         if (slides.length < 1) return;
@@ -349,6 +619,99 @@
         slides[active].classList.add('active');
         updateCounter();
       }, 3500);
+    })();
+
+// Rail controls (Highlights + dropdown + spotlight center)
+    (function(){
+      const rail = document.getElementById('hlRail');
+      if (!rail) return;
+
+      const track = document.getElementById('hlRailTrack');
+      if (!track) return;
+
+      const cards = Array.from(track.querySelectorAll('.rail-card'));
+      const prev = rail.querySelector('.hl-prev');
+      const next = rail.querySelector('.hl-next');
+
+      const menuBtn = document.getElementById('hlMenuBtn');
+      const menu = document.getElementById('hlMenu');
+
+      const prefersReduced =
+        window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      let current = 0;
+      let timerId = null;
+
+      function setActive(index, opts){
+        opts = opts || {};
+        const len = cards.length;
+        current = ((index % len) + len) % len;
+
+        cards.forEach((card, i) => {
+          card.classList.toggle('is-active', i === current);
+          card.classList.toggle('near', i === current - 1 || i === current + 1);
+        });
+
+        if (opts.scroll !== false && !prefersReduced) {
+          const activeCard = cards[current];
+          const desired = activeCard.offsetLeft - (track.clientWidth - activeCard.clientWidth) / 2;
+          track.scrollTo({ left: Math.max(0, desired), behavior: 'smooth' });
+        }
+      }
+
+      function advance(delta){
+        setActive(current + delta);
+        restartTimer();
+      }
+
+      function restartTimer(){
+        if (prefersReduced) return;
+        if (timerId) clearInterval(timerId);
+        timerId = setInterval(() => setActive(current + 1), 5000);
+      }
+
+      prev?.addEventListener('click', () => advance(-1));
+      next?.addEventListener('click', () => advance(+1));
+
+      rail.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowLeft') { e.preventDefault(); advance(-1); }
+        else if (e.key === 'ArrowRight') { e.preventDefault(); advance(+1); }
+        else if (e.key === 'Escape') { menu?.classList.remove('open'); menuBtn?.setAttribute('aria-expanded','false'); }
+      });
+
+      // Dropdown toggle
+      function setMenu(open){
+        if (!menu || !menuBtn) return;
+        menu.classList.toggle('open', open);
+        menuBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+      }
+      menuBtn?.addEventListener('click', (e) => {
+        e.stopPropagation();
+        setMenu(!menu?.classList.contains('open'));
+      });
+      document.addEventListener('click', (e) => {
+        if (!menu || !menuBtn) return;
+        if (menu.classList.contains('open') && !menu.contains(e.target) && e.target !== menuBtn) setMenu(false);
+      });
+
+      menu?.querySelectorAll('[data-hl]').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const idx = parseInt(btn.getAttribute('data-hl') || '0', 10);
+          setActive(idx);
+          setMenu(false);
+          restartTimer();
+        });
+      });
+
+      // focus/click selects
+      cards.forEach((card, idx) => {
+        card.addEventListener('focusin', () => setActive(idx, { scroll: false }));
+        card.addEventListener('click', () => { setActive(idx); restartTimer(); });
+      });
+
+      // init
+      setActive(0, { scroll: false });
+      restartTimer();
     })();
   </script>
 </body>
