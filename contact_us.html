@@ -1,17 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <script src="https://kit.fontawesome.com/2d323a629b.js" crossorigin="anonymous"></script>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto&display=swap">
   <link rel="stylesheet" href="css/tailwind_style.css">
   <link rel="stylesheet" href="css/style.css">
-  <title>Join | QC@UCI</title>
+  <title>Contact | QC@UCI</title>
+
+  <!-- Page-only polish + accessibility helpers -->
   <style>
+    html { scroll-padding-top: 110px; }
+
+    /* Screen-reader helper */
+    .sr-only {
+      position: absolute !important;
+      width: 1px !important;
+      height: 1px !important;
+      padding: 0 !important;
+      margin: -1px !important;
+      overflow: hidden !important;
+      clip: rect(0,0,0,0) !important;
+      white-space: nowrap !important;
+      border: 0 !important;
+    }
+    .skip-link {
+      position: absolute;
+      left: 0.75rem;
+      top: 0.75rem;
+      padding: 0.65rem 0.9rem;
+      border-radius: 0.75rem;
+      background: rgba(15, 23, 42, 0.95);
+      color: white;
+      transform: translateY(-150%);
+      transition: transform 0.2s ease;
+      z-index: 1000;
+      outline: 2px solid transparent;
+      outline-offset: 2px;
+    }
+    .skip-link:focus { transform: translateY(0); outline-color: rgba(34, 211, 238, 0.85); }
+
+    /* Accessible focus ring across the page */
+    :focus-visible { outline: 3px solid rgba(34, 211, 238, 0.85); outline-offset: 3px; }
+
+    /* Nav underline animation (kept from original, tuned) */
     .interactive-nav li a {
-      transition: all 0.3s ease;
+      transition: color 0.2s ease;
       position: relative;
+      display: inline-block;
+      padding: 0.25rem 0.1rem;
     }
     .interactive-nav li a::after {
       content: '';
@@ -20,23 +58,177 @@
       height: 2px;
       left: 0;
       bottom: -2px;
-      background-color: #3b82f6;
-      transition: width 0.3s ease;
+      background-color: #22d3ee;
+      transition: width 0.25s ease;
     }
-    .interactive-nav li a:hover::after {
+    .interactive-nav li a:hover::after,
+    .interactive-nav li a:focus-visible::after { width: 100%; }
+
+    /* Layout */
+    .contact-page {
+      min-height: calc(100vh - 140px);
+      /* Add extra top padding so the hero never tucks under the (likely fixed) site header */
+      padding: 12.5rem 1rem 3rem;
+    }
+    .contact-shell {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    /* Hero */
+    .contact-hero {
+      border-radius: 1.5rem;
+      padding: 2rem 1.5rem;
+      background:
+        radial-gradient(900px 300px at 10% 0%, rgba(34, 211, 238, 0.22), transparent 60%),
+        radial-gradient(900px 300px at 90% 0%, rgba(16, 185, 129, 0.18), transparent 60%),
+        linear-gradient(180deg, rgba(15, 23, 42, 0.92), rgba(2, 6, 23, 0.92));
+      border: 1px solid rgba(148, 163, 184, 0.22);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.35);
+    }
+    .contact-hero h1 {
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      letter-spacing: -0.02em;
+      color: rgba(255,255,255,0.96);
+      margin: 0 0 0.5rem;
+    }
+    .contact-hero p {
+      color: rgba(226, 232, 240, 0.92);
+      margin: 0;
+      max-width: 65ch;
+      line-height: 1.6;
+    }
+
+    /* Cards */
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.25rem;
+      margin-top: 1.25rem;
+    }
+    @media (min-width: 900px) {
+      .grid-2 { grid-template-columns: 1.05fr 0.95fr; align-items: start; }
+    }
+    .card {
+      border-radius: 1.25rem;
+      background: rgba(15, 23, 42, 0.70);
+      border: 1px solid rgba(148, 163, 184, 0.18);
+      box-shadow: 0 18px 50px rgba(0,0,0,0.28);
+      overflow: hidden;
+    }
+    .card-header {
+      padding: 1.15rem 1.25rem 0.65rem;
+      border-bottom: 1px solid rgba(148, 163, 184, 0.14);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.75rem;
+    }
+    .card-title {
+      margin: 0;
+      color: rgba(255,255,255,0.95);
+      font-size: 1.05rem;
+      letter-spacing: 0.01em;
+    }
+    .card-body { padding: 1.15rem 1.25rem 1.25rem; }
+
+    /* Form controls (higher contrast + consistent focus) */
+    .field-label {
+      display: block;
+      color: rgba(226,232,240,0.92);
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 0.35rem;
+    }
+    .field-help {
+      color: rgba(148, 163, 184, 0.95);
+      font-size: 0.85rem;
+      line-height: 1.4;
+      margin-top: 0.4rem;
+    }
+    .control {
       width: 100%;
+      background: rgba(255,255,255,0.96);
+      color: rgba(15,23,42,0.95);
+      border: 1px solid rgba(148,163,184,0.55);
+      border-radius: 0.9rem;
+      padding: 0.85rem 0.95rem;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
     }
+    .control::placeholder { color: rgba(71, 85, 105, 0.8); }
+    .control:focus { border-color: rgba(34, 211, 238, 0.95); box-shadow: 0 0 0 4px rgba(34,211,238,0.18); outline: none; }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.55rem;
+      padding: 0.85rem 1rem;
+      border-radius: 0.95rem;
+      background: linear-gradient(135deg, rgba(34, 211, 238, 0.95), rgba(16, 185, 129, 0.92));
+      color: rgba(2, 6, 23, 0.95);
+      font-weight: 800;
+      border: 0;
+      cursor: pointer;
+      box-shadow: 0 16px 40px rgba(34, 211, 238, 0.18);
+      transition: transform 0.12s ease, filter 0.12s ease;
+    }
+    .btn-primary:hover { transform: translateY(-1px); filter: brightness(1.02); }
+    .btn-primary:active { transform: translateY(0); }
+
+    /* Contact methods list */
+    .methods {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0.9rem;
+    }
+    .method {
+      display: flex;
+      gap: 0.9rem;
+      align-items: flex-start;
+      padding: 0.95rem 1rem;
+      border-radius: 1rem;
+      background: rgba(2, 6, 23, 0.55);
+      border: 1px solid rgba(148, 163, 184, 0.16);
+      color: rgba(226,232,240,0.95);
+    }
+    .method i {
+      font-size: 1.25rem;
+      margin-top: 0.15rem;
+      color: rgba(34, 211, 238, 0.95);
+      width: 1.6rem;
+      text-align: center;
+      flex: 0 0 auto;
+    }
+    .method strong { display: block; color: rgba(255,255,255,0.96); font-size: 0.95rem; }
+    .method p { margin: 0.2rem 0 0; color: rgba(226,232,240,0.88); line-height: 1.45; }
+    .method a { color: rgba(34, 211, 238, 0.95); text-decoration: underline; text-underline-offset: 3px; }
+    .method a:hover { text-decoration-thickness: 2px; }
+
+    /* Tiny note */
+    .privacy-note {
+      margin-top: 0.9rem;
+      color: rgba(148, 163, 184, 0.95);
+      font-size: 0.85rem;
+      line-height: 1.45;
+    }
+
+    /* Footer spacing parity */
+    footer { margin-top: 2.5rem; }
   </style>
 </head>
-<p style="margin-bottom:200px;"></p>
 
 <body>
+  <a class="skip-link" href="#main">Skip to content</a>
 
-  <header class="header">
-    <a href="index.html">
-      <img src="image/navy_anteater_bloch.png" width="150" alt="Home">
+  <header class="header" role="banner">
+    <a href="index.html" aria-label="QC at UCI home">
+      <img src="image/navy_anteater_bloch.png" width="150" alt="QC at UCI logo" />
     </a>
-    <nav>
+
+    <nav aria-label="Primary navigation">
       <ul class="header__nav interactive-nav">
         <li><a href="index.html">Home</a></li>
         <li><a href="join.html">Join</a></li>
@@ -44,56 +236,154 @@
         <li><a href="team.html">Team</a></li>
         <li><a href="event.html">Events</a></li>
         <li><a href="projects.html">Projects</a></li>
-        <li><a href="contact_us.html">Contact</a></li>
+        <li><a href="contact_us.html" aria-current="page">Contact</a></li>
       </ul>
     </nav>
   </header>
 
-     <div class="contact__title">Contact Us</div>
-     
-		<div class="flex justify-center">
-		<form class="w-full max-w-lg" name="input" accept-charset="utf-8" action="https://formspree.io/quantumcomputing@uci.edu" method="POST">
-			<div class="flex flex-wrap -mx-3 mb-6">
-				<div class="w-full px-3 mb-6 md:mb-0">
-					<label class="block uppercase tracking-wide text-gray-200 text-xs font-bold mb-2" for="grid-first-name">
-						Name
-					</label>
-					<input class="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="grid-first-name" type="text" placeholder="Peter Anteater" name="Name">
-				</div>
-			</div>
-			<div class="flex flex-wrap -mx-3 mb-6">
-				<div class="w-full px-3">
-					<label class="block uppercase tracking-wide text-gray-200 text-xs font-bold mb-2" for="grid-password">
-						E-mail
-					</label>
-					<input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="email" type="email" name="_replyto">
-					<p class="text-gray-600 text-xs italic">Please use your UCI email if you have one</p>
-				</div>
-			</div>
-			<div class="flex flex-wrap -mx-3 mb-6">
-				<div class="w-full px-3">
-					<label class="block uppercase tracking-wide text-gray-200 text-xs font-bold mb-2" for="grid-password">
-						Message
-					</label>
-					<textarea class="resize-y  appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500 h-48 resize-none" id="message" name="message"></textarea>
-				</div>
-			</div>
-			<div class="md:flex md:items-center">
-				<div class="md:w-1/3">
-					<input class="shadow bg-teal-400 hover:bg-teal-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded" type="submit", value="Send">
-				</div>
-				<div class="md:w-2/3"></div>
-			</div>
-		</form>
-		</div>
-   
-    <footer>
-      <div class="footer__copyRight">
-         <p><a href="./contact_us.html">Copyright © 2025 Quantum Computing @ UCI. All Rights Reserved.</a></p>
-      </div>
-   </footer>
+  <main id="main" class="contact-page" role="main">
+    <div class="contact-shell">
+      <section class="contact-hero" aria-labelledby="contact-title">
+        <h1 id="contact-title">Contact QC@UCI</h1>
+        <p>
+          Want to collaborate, sponsor an event, or ask about joining? Send us a message below.
+          We usually reply within a few days during the academic quarter.
+        </p>
+      </section>
 
+      <section class="grid-2" aria-label="Contact options">
+        <!-- Form card -->
+        <div class="card" aria-labelledby="form-title">
+          <div class="card-header">
+            <h2 class="card-title" id="form-title">Send a message</h2>
+            <span class="sr-only" id="required-note">All fields marked required must be filled.</span>
+          </div>
+
+          <div class="card-body">
+            <form
+              name="input"
+              accept-charset="utf-8"
+              action="https://formspree.io/quantumcomputing@uci.edu"
+              method="POST"
+              aria-describedby="form-help required-note"
+            >
+              <p id="form-help" class="field-help" style="margin-top:0;">
+                Fields marked with <span aria-hidden="true">*</span> are required.
+              </p>
+
+              <div style="margin-top: 1rem;">
+                <label class="field-label" for="name">Name <span aria-hidden="true">*</span></label>
+                <input
+                  class="control"
+                  id="name"
+                  name="Name"
+                  type="text"
+                  placeholder="Peter Anteater"
+                  autocomplete="name"
+                  required
+                />
+              </div>
+
+              <div style="margin-top: 1rem;">
+                <label class="field-label" for="email">Email <span aria-hidden="true">*</span></label>
+                <input
+                  class="control"
+                  id="email"
+                  name="_replyto"
+                  type="email"
+                  placeholder="panteater@uci.edu"
+                  autocomplete="email"
+                  inputmode="email"
+                  required
+                  aria-describedby="email-help"
+                />
+                <div id="email-help" class="field-help">Tip: use your UCI email if you have one.</div>
+              </div>
+
+              <div style="margin-top: 1rem;">
+                <label class="field-label" for="message">Message <span aria-hidden="true">*</span></label>
+                <textarea
+                  class="control"
+                  id="message"
+                  name="message"
+                  rows="8"
+                  placeholder="Tell us how we can help…"
+                  required
+                ></textarea>
+              </div>
+
+              <div style="margin-top: 1.25rem; display:flex; gap: 0.75rem; flex-wrap: wrap; align-items: center;">
+                <button class="btn-primary" type="submit" aria-label="Send message to QC at UCI">
+                  <i class="fa-solid fa-paper-plane" aria-hidden="true"></i>Send
+                </button>
+
+                <p class="privacy-note" id="privacy-note">
+                  By submitting, you’re sending this form to our club inbox via Formspree.
+                  Please don’t include sensitive personal information.
+                </p>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <!-- Methods card -->
+        <aside class="card" aria-labelledby="methods-title">
+          <div class="card-header">
+            <h2 class="card-title" id="methods-title">Other ways to reach us</h2>
+          </div>
+
+          <div class="card-body">
+            <div class="methods">
+              <div class="method">
+                <i class="fa-solid fa-envelope" aria-hidden="true"></i>
+                <div>
+                  <strong>Email</strong>
+                  <p>
+                    <a href="mailto:quantumcomputing@uci.edu">quantumcomputing@uci.edu</a><br />
+                    Best for collaborations, speaker requests, and sponsorships.
+                  </p>
+                </div>
+              </div>
+
+              <div class="method">
+                <i class="fa-solid fa-calendar-days" aria-hidden="true"></i>
+                <div>
+                  <strong>Events</strong>
+                  <p>
+                    Check our upcoming workshops and socials on the
+                    <a href="event.html">Events page</a>.
+                  </p>
+                </div>
+              </div>
+
+              <div class="method">
+                <i class="fa-solid fa-people-group" aria-hidden="true"></i>
+                <div>
+                  <strong>Team</strong>
+                  <p>
+                    Looking for the right person? See officers and advisors on the
+                    <a href="team.html">Team page</a>.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <!--
+            <p class="privacy-note" style="margin-bottom:0;">
+              Accessibility note: this page supports keyboard navigation, visible focus,
+              high-contrast text, and proper form labels.
+            </p>
+            -->
+          </div>
+        </aside>
+      </section>
+    </div>
+  </main>
+
+  <footer role="contentinfo">
+    <div class="footer__copyRight">
+      <p><a href="./contact_us.html">Copyright © 2025 Quantum Computing @ UCI. All Rights Reserved.</a></p>
+    </div>
+  </footer>
 </body>
-
-
 </html>
