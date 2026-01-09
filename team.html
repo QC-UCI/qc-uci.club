@@ -4,174 +4,792 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Team | QC@UCI</title>
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
   <script src="https://kit.fontawesome.com/2d323a629b.js" crossorigin="anonymous"></script>
   <script src="https://cdn.tailwindcss.com"></script>
+
   <style>
-    :root {
-      --qc-navy: #0b1b3a;
-      --qc-blue: #2563eb;
-      --qc-gold: #f59e0b;
-      --card-bg: #0f172a;
-    }
-    html, body { font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji"; }
-    .quantum-bg {
-      background: radial-gradient(1000px 500px at 10% 0%, rgba(37,99,235,.08), transparent 60%),
-                  radial-gradient(800px 400px at 90% 10%, rgba(245,158,11,.08), transparent 60%),
-                  linear-gradient(#0b1023, #0b1023);
-    }
-    .sticky-tabs { backdrop-filter: saturate(140%) blur(8px); }
-    .tab-btn[aria-selected="true"] { color: white; background: linear-gradient(135deg, var(--qc-blue), #3b82f6); box-shadow: 0 6px 18px rgba(37, 99, 235, .35); }
-    .tab-btn { transition: transform .15s ease, box-shadow .2s ease; }
-    .tab-btn:active { transform: translateY(1px) scale(.98); }
+    :root{
+      --qc-navy:#0b1b3a;
+      --qc-blue:#2563eb;
+      --qc-gold:#f59e0b;
 
-    .member-card { background: linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02)); }
-    .member-card:hover { box-shadow: 0 12px 30px rgba(0,0,0,.35); }
+      --bg-0:#060a17;
+      --bg-1:#070d1e;
+      --card:rgba(255,255,255,.04);
+      --card-2:rgba(255,255,255,.06);
+      --stroke:rgba(148,163,184,.18);
+      --stroke-2:rgba(148,163,184,.28);
+      --text-dim:rgba(226,232,240,.82);
+      --glow:rgba(37,99,235,.18);
+      --glow2:rgba(245,158,11,.12);
+      --radius:20px;
+    }
+
+    html,body{
+      font-family:'Inter',system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,"Apple Color Emoji","Segoe UI Emoji";
+      background: radial-gradient(900px 460px at 12% 0%, rgba(37,99,235,.10), transparent 62%),
+                  radial-gradient(760px 420px at 90% 12%, rgba(245,158,11,.10), transparent 60%),
+                  radial-gradient(900px 520px at 50% 120%, rgba(16,185,129,.08), transparent 60%),
+                  linear-gradient(var(--bg-0), var(--bg-1));
+      color:#e2e8f0;
+      min-height:100%;
+    }
+
+    /* smoother, more web-friendly defaults */
+    a,button{ -webkit-tap-highlight-color: transparent; }
+    :focus-visible{ outline: 2px solid rgba(56,189,248,.75); outline-offset: 3px; border-radius: 12px; }
+
+    /* header */
+    .site-header{
+      background: linear-gradient(180deg, rgba(9,27,70,1), rgba(9,27,70,.92));
+      border-bottom: 1px solid rgba(148,163,184,.12);
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: saturate(140%) blur(10px);
+    }
+    .header-link{ position:relative; }
+    .header-link:after{
+      content:""; position:absolute; left:0; bottom:-6px; width:0; height:2px;
+      background: linear-gradient(90deg, rgba(56,189,248,.9), rgba(37,99,235,.9));
+      transition: width .18s ease;
+    }
+    .header-link:hover:after{ width:100%; }
+    .logo-wrap img{ filter: drop-shadow(0 2px 10px rgba(0,0,0,.35)); }
+
+    /* title block */
+    .hero-shell{
+      border: 1px solid rgba(148,163,184,.14);
+      background: linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.015));
+      border-radius: var(--radius);
+      box-shadow: 0 18px 46px rgba(0,0,0,.28);
+      overflow: hidden;
+      position: relative;
+    }
+    .hero-shell:before{
+      content:"";
+      position:absolute; inset:-2px;
+      background: radial-gradient(900px 280px at 10% 10%, rgba(56,189,248,.14), transparent 60%),
+                  radial-gradient(720px 280px at 90% 10%, rgba(245,158,11,.10), transparent 62%);
+      pointer-events:none;
+    }
+
+    /* tabs */
+    .tabs-wrap{
+      background: rgba(2,6,23,.52);
+      border: 1px solid rgba(148,163,184,.16);
+      border-radius: 18px;
+      backdrop-filter: saturate(140%) blur(10px);
+      box-shadow: 0 10px 26px rgba(0,0,0,.22);
+    }
+    .tab-btn{
+      transition: transform .14s ease, box-shadow .18s ease, background-color .18s ease, color .18s ease;
+      border: 1px solid transparent;
+      white-space: nowrap;
+    }
+    .tab-btn[aria-selected="true"]{
+      color: white;
+      background: linear-gradient(135deg, rgba(37,99,235,1), rgba(56,189,248,.9));
+      border-color: rgba(56,189,248,.18);
+      box-shadow: 0 10px 24px rgba(37,99,235,.30), inset 0 0 0 1px rgba(255,255,255,.06);
+    }
+    .tab-btn:hover{ transform: translateY(-1px); }
+    .tab-btn:active{ transform: translateY(0) scale(.99); }
+
+    /* cards */
+    .member-card{
+      border-radius: var(--radius);
+      border: 1px solid rgba(148,163,184,.16);
+      background: linear-gradient(180deg, rgba(255,255,255,.045), rgba(255,255,255,.02));
+      box-shadow: 0 16px 34px rgba(0,0,0,.28);
+      overflow:hidden;
+      position: relative;
+    }
+    .member-card:before{
+      content:"";
+      position:absolute; inset:-1px;
+      background: radial-gradient(560px 240px at 20% 0%, rgba(37,99,235,.14), transparent 60%),
+                  radial-gradient(520px 240px at 90% 10%, rgba(245,158,11,.10), transparent 62%);
+      opacity:.30;
+      pointer-events:none;
+    }
+    .member-card:hover{
+      box-shadow: 0 22px 54px rgba(0,0,0,.38);
+      border-color: rgba(148,163,184,.26);
+    }
+
     /* SQUARE, FACE-FRIENDLY HEADSHOTS */
-    .member-photo { filter: saturate(105%); width: 100%; aspect-ratio: 1 / 1; object-fit: cover; object-position: center top; }
-    .member-hover { transition: opacity .25s ease, transform .25s ease; }
-    .member-card:hover .member-hover { opacity: 1; transform: translateY(0); }
+    .member-photo{
+      filter: saturate(108%);
+      width: 100%;
+      aspect-ratio: 1/1;
+      object-fit: cover;
+      object-position: center top;
+      transform: scale(1.02);
+    }
 
-    .bio-collapsible[aria-expanded="true"] + .bio-panel { grid-template-rows: 1fr; opacity: 1; }
-    .bio-panel { display: grid; grid-template-rows: 0fr; transition: grid-template-rows .25s ease, opacity .25s ease; opacity: .8; }
-    .bio-panel > div { overflow: hidden; }
+    /* Desktop hover bio overlay; mobile uses collapsible */
+    .bio-overlay{
+      transition: opacity .22s ease, transform .22s ease;
+    }
+    @media (hover:hover) and (pointer:fine){
+      .bio-overlay{
+        position:absolute; inset:0;
+        background: rgba(2,6,23,.78);
+        opacity:0;
+        transform: translateY(-6px);
+        padding: 16px;
+      }
+      .member-card:hover .bio-overlay{
+        opacity:1;
+        transform: translateY(0);
+      }
+    }
+    @media (hover:none), (pointer:coarse){
+      .bio-overlay{ display:none; }
+    }
 
-    .tab-section { opacity: 0; transform: translateY(6px); transition: opacity .2s ease, transform .2s ease; display: none; }
-    .tab-section.active { display: block; opacity: 1; transform: translateY(0); }
+    /* mobile bio disclosure */
+    .bio-disclosure{
+      border-top: 1px solid rgba(148,163,184,.16);
+      background: rgba(2,6,23,.18);
+    }
+    .bio-toggle{
+      width: 100%;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap: 10px;
+      padding: 12px 14px;
+      color: rgba(226,232,240,.92);
+      font-weight: 600;
+    }
+    .bio-panel{
+      display:grid;
+      grid-template-rows: 0fr;
+      transition: grid-template-rows .22s ease;
+    }
+    .bio-panel > div{ overflow:hidden; padding: 0 14px 12px; color: var(--text-dim); font-size: 14px; line-height: 1.55; }
+    .bio-toggle[aria-expanded="true"] + .bio-panel{ grid-template-rows: 1fr; }
 
-    .date-badge { border: 1px solid rgba(255,255,255,.12); }
+    /* misc */
+    .date-badge{ border: 1px solid rgba(148,163,184,.22); }
+    .section-shell{
+      border: 1px solid rgba(148,163,184,.12);
+      background: rgba(2,6,23,.28);
+      border-radius: 22px;
+      padding: 16px;
+    }
+    @media (prefers-reduced-motion: reduce){
+      *{ transition:none !important; scroll-behavior:auto !important; }
+    }
+  
+    /* executive emphasis */
+    .exec-card{ border-color: rgba(56,189,248,.22); box-shadow: 0 18px 52px rgba(0,0,0,.34); }
+    .exec-card:before{ opacity:.42; }
+    .exec-tag{
+      font-size: 10px;
+      letter-spacing: .14em;
+      font-weight: 800;
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(56,189,248,.22);
+      background: linear-gradient(135deg, rgba(37,99,235,.55), rgba(56,189,248,.25));
+      color: rgba(226,232,240,.92);
+      box-shadow: 0 10px 24px rgba(37,99,235,.18);
+      white-space: nowrap;
+    }
 
-    .header-link { position: relative; }
-    .header-link:after { content:""; position:absolute; left:0; bottom:-6px; width:0; height:2px; background: var(--qc-blue); transition: width .2s ease; }
-    .header-link:hover:after { width:100%; }
+    /* team blocks */
+    .team-grid{ display: grid; gap: 14px; }
+    .team-block{
+      border: 1px solid rgba(148,163,184,.14);
+      background: linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.015));
+      border-radius: 18px;
+      overflow: hidden;
+    }
+    .team-summary{
+      list-style: none;
+      cursor: pointer;
+      padding: 14px 14px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap: 16px;
+      user-select:none;
+    }
+    .team-summary::-webkit-details-marker{ display:none; }
+    .team-icon{
+      width: 40px; height: 40px;
+      border-radius: 14px;
+      display:grid; place-items:center;
+      background: rgba(2,6,23,.45);
+      border: 1px solid rgba(148,163,184,.16);
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,.03);
+    }
+    .team-title{ font-weight: 800; letter-spacing: -0.01em; }
+    .team-subtitle{ font-size: 12px; color: rgba(226,232,240,.68); margin-top: 2px; }
+    .team-meta{
+      min-width: 36px;
+      height: 28px;
+      padding: 0 10px;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      border-radius: 999px;
+      border: 1px solid rgba(148,163,184,.18);
+      background: rgba(2,6,23,.35);
+      color: rgba(226,232,240,.80);
+      font-weight: 700;
+      font-size: 12px;
+    }
+    .team-content{
+      padding: 0 14px 14px;
+      border-top: 1px solid rgba(148,163,184,.12);
+      background: rgba(2,6,23,.18);
+    }
 
-    .logo-wrap img { filter: drop-shadow(0 2px 6px rgba(0,0,0,.35)); }
+    /* placeholders for members without headshots yet */
+    .placeholder-photo{
+      width: 100%;
+      aspect-ratio: 1/1;
+      background:
+        radial-gradient(260px 140px at 20% 0%, rgba(56,189,248,.14), transparent 60%),
+        radial-gradient(240px 140px at 90% 10%, rgba(245,158,11,.10), transparent 62%),
+        linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
+      border-bottom: 1px solid rgba(148,163,184,.12);
+    }
+
   </style>
 </head>
-<body class="text-slate-100 quantum-bg min-h-screen">
-  <!-- Header -->
-  <header class="w-full" style="background-color: #091b46;">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 lg:h-auto">
-    <div class="flex flex-col items-center gap-3 lg:flex-row lg:items-center lg:justify-between lg:h-full py-3 lg:py-0">
-      <!-- Logo (stacks above on narrow screens) -->
-      <a class="logo-wrap inline-flex items-center gap-3 order-1 lg:order-none" href="index.html">
-        <img src="image/navy_anteater_bloch.png" alt="QC@UCI" class="h-auto w-40"/>
-        <span class="sr-only">Return Home</span>
-      </a>
-      <!-- Nav: always visible; wraps on narrow screens -->
-      <nav class="w-full lg:w-auto order-2 lg:order-none">
-        <ul class="flex flex-wrap items-center justify-center lg:justify-end gap-x-6 gap-y-2 text-slate-200 text-sm">
-          <li><a class="header-link hover:text-white" href="index.html">Home</a></li>
-          <li><a class="header-link hover:text-white" href="join.html">Join</a></li>
-          <li><a class="header-link hover:text-white" href="learn.html">Learn</a></li>
-          <li><a class="header-link hover:text-white" href="team.html">Team</a></li>
-          <li><a class="header-link hover:text-white" href="event.html">Events</a></li>
-          <li><a class="header-link hover:text-white" href="projects.html">Projects</a></li>
-          <li><a class="header-link hover:text-white" href="contact_us.html">Contact</a></li>
-        </ul>
-      </nav>
-    </div>
-  </div>
-</header>
 
+<body class="min-h-screen">
+  <!-- Header -->
+  <header class="site-header">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex flex-col items-center gap-3 lg:flex-row lg:items-center lg:justify-between py-3">
+        <a class="logo-wrap inline-flex items-center gap-3" href="index.html">
+          <img src="image/Anteater_Bloch_White.png" alt="QC@UCI" class="h-auto w-40"/>
+          <span class="sr-only">Return Home</span>
+        </a>
+
+        <nav class="w-full lg:w-auto">
+          <ul class="flex flex-wrap items-center justify-center lg:justify-end gap-x-6 gap-y-2 text-slate-200 text-sm">
+            <li><a class="header-link hover:text-white" href="index.html">Home</a></li>
+            <li><a class="header-link hover:text-white" href="join.html">Join</a></li>
+            <li><a class="header-link hover:text-white" href="learn.html">Learn</a></li>
+            <li><a class="header-link hover:text-white" href="team.html">Team</a></li>
+            <li><a class="header-link hover:text-white" href="event.html">Events</a></li>
+            <li><a class="header-link hover:text-white" href="projects.html">Projects</a></li>
+            <li><a class="header-link hover:text-white" href="contact_us.html">Contact</a></li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </header>
 
   <!-- Title -->
-  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4 pb-2">
-    <div class="flex items-center gap-3">
-      <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight">Meet our team</h1>
-      <span class="hidden sm:inline-flex text-xs px-2 py-1 rounded-full bg-slate-800/60 date-badge">Quantum@UCI</span>
+  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-5 pb-4">
+    <div class="hero-shell px-5 sm:px-7 py-5 sm:py-6">
+      <div class="relative">
+        <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-2">
+          <div class="flex items-center gap-3">
+            <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight">Meet our team</h1>
+            <!--<span class="hidden sm:inline-flex text-xs px-2 py-1 rounded-full bg-slate-800/50 date-badge">Quantum@UCI</span>-->
+          </div>
+        </div>
+        <p class="mt-3 text-slate-300/90 max-w-3xl">
+          We’re a student-led community building quantum software skills, hosting talks, and running projects across Computer Science, Physics, and Engineering.
+        </p>
+      </div>
     </div>
-    <p class="mt-2 text-slate-300/90 max-w-3xl">We’re a student-led community building quantum software skills, hosting talks, and running projects across Computer Science, Physics, and Engineering.</p>
   </section>
 
   <!-- Sticky Tabs -->
-  <div class="sticky top-0 z-40 px-4 sm:px-6 lg:px-8">
-    <div class="sticky-tabs max-w-7xl mx-auto bg-slate-900/70 border border-slate-700/40 rounded-2xl p-2 flex gap-2">
-      <button class="tab-btn flex-1 md:flex-none md:px-4 px-3 py-2 rounded-xl text-slate-200 text-sm font-medium" data-tab="current" aria-selected="true">Current Board</button>
-      <button class="tab-btn flex-1 md:flex-none md:px-4 px-3 py-2 rounded-xl text-slate-200 text-sm font-medium" data-tab="advisors" aria-selected="false">Advisors</button>
-      <button class="tab-btn flex-1 md:flex-none md:px-4 px-3 py-2 rounded-xl text-slate-200 text-sm font-medium" data-tab="previous" aria-selected="false">Previous Board</button>
+  <div class="sticky top-[64px] sm:top-[72px] z-40 px-4 sm:px-6 lg:px-8">
+    <div class="tabs-wrap max-w-7xl mx-auto p-2">
+      <div class="flex gap-2 overflow-x-auto no-scrollbar">
+        <button class="tab-btn flex-1 md:flex-none md:px-4 px-3 py-2 rounded-xl text-slate-200 text-sm font-medium" data-tab="current" aria-selected="true">Current Board</button>
+        <button class="tab-btn flex-1 md:flex-none md:px-4 px-3 py-2 rounded-xl text-slate-200 text-sm font-medium" data-tab="advisors" aria-selected="false">Advisors</button>
+        <button class="tab-btn flex-1 md:flex-none md:px-4 px-3 py-2 rounded-xl text-slate-200 text-sm font-medium" data-tab="previous" aria-selected="false">Previous Board</button>
+      </div>
     </div>
   </div>
 
   <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-10">
     <!-- CURRENT BOARD -->
-    <section id="tab-current" class="tab-section active">
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        <!-- Card: Diptanshu Sikdar -->
-        <article class="member-card group rounded-2xl border border-white/10 overflow-hidden shadow-xl">
-          <div class="relative">
-            <img src="image/DiptanshuSikdar.png" alt="Diptanshu Sikdar" class="member-photo w-full object-cover"/>
-            <div class="member-hover absolute inset-0 bg-slate-900/80 opacity-0 -translate-y-1 p-4">
-              <p class="text-sm leading-relaxed text-slate-200">
-                I’m a senior majoring in Computer Science at UC Irvine, with a strong interest in quantum machine learning algorithms and over five years of experience working with quantum software. As president of the Quantum Computing Club, I aim to make quantum computing approachable and exciting for students of all backgrounds. Outside of research and coding, I enjoy taking outdoor walks to clear my mind and listening to music from a wide range of genres.
-              </p>
-            </div>
-          </div>
-          <div class="p-5">
-            <h3 class="text-lg font-semibold">Diptanshu Sikdar</h3>
-            <div class="flex items-center gap-2 mt-1 text-sky-400 font-medium">
-              <i class="fa-solid fa-crown"></i>
-              <span>President</span>
-            </div>
-            <p class="mt-1 text-xs text-slate-300 date-badge inline-flex items-center gap-1 px-2 py-1 rounded-md" data-dates-for="Diptanshu Sikdar">Role dates: <span class="dates">TBD</span></p>
-            <p class="mt-2 text-slate-300 text-sm">Computer Science</p>
-          </div>
-        </article>
+    
+    <!-- CURRENT BOARD -->
+    <section id="tab-current" class="tab-section active space-y-10">
 
-        <!-- Card: Hokulani Topping -->
-        <article class="member-card group rounded-2xl border border-white/10 overflow-hidden shadow-xl">
-          <div class="relative">
-            <img src="image/HokulaniTopping.png" alt="Hokulani Topping" class="member-photo w-full object-cover"/>
-            <div class="member-hover absolute inset-0 bg-slate-900/80 opacity-0 -translate-y-1 p-4">
-              <p class="text-sm leading-relaxed text-slate-200">Aloha everyone! My name is Hokulani Topping, and I’m a senior at UCI majoring in Informatics with a focus on Human–Computer Interaction. I have a growing interest in quantum computing, and as the new Vice President of the Quantum Computing Club, my goal is to make the field fun and welcoming to everyone—no matter their background. Outside of academics, I do taekwondo, I’m an avid surfer, and someone who’s always looking for ways to stay active. I’m deeply passionate about my Hawaiian culture, and I’m also a huge fan of rap music.</p>
-            </div>
-          </div>
-          <div class="p-5">
-            <h3 class="text-lg font-semibold">Hokulani Topping</h3>
-            <div class="flex items-center gap-2 mt-1 text-sky-400 font-medium">
-              <i class="fa-regular fa-compass"></i>
-              <span>Vice President</span>
-            </div>
-            <p class="mt-1 text-xs text-slate-300 date-badge inline-flex items-center gap-1 px-2 py-1 rounded-md" data-dates-for="Hokulani Topping">Role dates: <span class="dates">TBD</span></p>
-            <p class="mt-2 text-slate-300 text-sm">Informatics</p>
-          </div>
-        </article>
+      <!-- Executive Board -->
+      <div class="section-shell">
+        <div class="flex items-center justify-between gap-3 mb-4">
+          <h2 class="text-lg sm:text-xl font-extrabold tracking-tight">Executive Board</h2>
+          <!--<span class="text-xs px-2 py-1 rounded-full date-badge bg-slate-800/40">Leadership</span>-->
+        </div>
 
-        <!-- Card: Nicole Ying -->
-        <article class="member-card group rounded-2xl border border-white/10 overflow-hidden shadow-xl">
-          <div class="relative">
-            <img src="image/NicoleYing.jpg" alt="Nicole Ying" class="member-photo w-full object-cover"/>
-            <div class="member-hover absolute inset-0 bg-slate-900/80 opacity-0 -translate-y-1 p-4">
-              <p class="text-sm leading-relaxed text-slate-200">I’m a third-year Computer Science major with a strong interest in software engineering and machine learning. I joined the Quantum Computing Club in my freshman year, where I gained valuable knowledge of quantum computing algorithms and concepts through both learning sessions and hands-on projects. Beyond writing code, I have a passion for photography and aesthetics, which allows me to explore creativity and design from a different perspective.</p>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <!-- Card: Diptanshu Sikdar -->
+          <article class="member-card group exec-card" data-has-bio="true">
+            <div class="relative">
+              <img src="image/DiptanshuSikdar.png" alt="Diptanshu Sikdar" class="member-photo"/>
+              <div class="bio-overlay">
+                <div class="text-sm leading-relaxed text-slate-200" data-bio-slot="overlay"></div>
+              </div>
             </div>
-          </div>
-          <div class="p-5">
-            <h3 class="text-lg font-semibold">Nicole Ying</h3>
-            <div class="flex items-center gap-2 mt-1 text-sky-400 font-medium">
-              <i class="fa-solid fa-coins"></i>
-              <span>Treasurer</span>
+
+            <div class="relative p-5">
+              <div class="flex items-start justify-between gap-3">
+                <div>
+                  <h3 class="text-lg font-semibold">Diptanshu Sikdar</h3>
+                  <div class="flex items-center gap-2 mt-1 text-sky-400 font-medium">
+                    <i class="fa-solid fa-crown"></i>
+                    <span>President</span>
+                  </div>
+                </div>
+                <!--<span class="exec-tag">EXEC</span>-->
+              </div>
+              <p class="mt-1 text-xs text-slate-300 date-badge inline-flex items-center gap-1 px-2 py-1 rounded-md" data-dates-for="Diptanshu Sikdar">Role dates: <span class="dates">June 2023 - Present</span></p>
+              <p class="mt-2 text-slate-300 text-sm">Computer Science</p>
             </div>
-            <p class="mt-1 text-xs text-slate-300 date-badge inline-flex items-center gap-1 px-2 py-1 rounded-md" data-dates-for="Nicole Ying">Role dates: <span class="dates">TBD</span></p>
-            <p class="mt-2 text-slate-300 text-sm">Computer Science & Quantitative Economics</p>
-          </div>
-        </article>
+
+            <div class="bio-disclosure sm:hidden">
+              <button class="bio-toggle" type="button" aria-expanded="false">
+                <span>Bio</span>
+                <i class="fa-solid fa-chevron-down"></i>
+              </button>
+              <div class="bio-panel" aria-hidden="true">
+                <div data-bio-slot="mobile"></div>
+              </div>
+            </div>
+
+            <template data-bio-template>
+              I’m a senior majoring in Computer Science at UC Irvine, with a strong interest in quantum machine learning algorithms and over five years of experience working with quantum software. As president of the Quantum Computing Club, I aim to make quantum computing approachable and exciting for students of all backgrounds. Outside of research and coding, I enjoy taking outdoor walks to clear my mind and listening to music from a wide range of genres.
+            </template>
+          </article>
+
+          <!-- Card: Nicole Ying -->
+          <article class="member-card group exec-card" data-has-bio="true">
+            <div class="relative">
+              <img src="image/NicoleYing.jpg" alt="Nicole Ying" class="member-photo"/>
+              <div class="bio-overlay">
+                <div class="text-sm leading-relaxed text-slate-200" data-bio-slot="overlay"></div>
+              </div>
+            </div>
+
+            <div class="relative p-5">
+              <div class="flex items-start justify-between gap-3">
+                <div>
+                  <h3 class="text-lg font-semibold">Nicole Ying</h3>
+                  <div class="flex items-center gap-2 mt-1 text-sky-400 font-medium">
+                    <i class="fa-solid fa-user-gear"></i>
+                    <span>Internal Vice President</span>
+                  </div>
+                </div>
+                <!--<span class="exec-tag">EXEC</span>-->
+              </div>
+              <p class="mt-1 text-xs text-slate-300 date-badge inline-flex items-center gap-1 px-2 py-1 rounded-md" data-dates-for="Nicole Ying">Role dates: <span class="dates">June 2025 - Present</span></p>
+              <p class="mt-2 text-slate-300 text-sm">Computer Science & Quantitative Economics</p>
+            </div>
+
+            <div class="bio-disclosure sm:hidden">
+              <button class="bio-toggle" type="button" aria-expanded="false">
+                <span>Bio</span>
+                <i class="fa-solid fa-chevron-down"></i>
+              </button>
+              <div class="bio-panel" aria-hidden="true">
+                <div data-bio-slot="mobile"></div>
+              </div>
+            </div>
+
+            <template data-bio-template>
+              I’m a third-year Computer Science major with a strong interest in software engineering and machine learning. I joined the Quantum Computing Club in my freshman year, where I gained valuable knowledge of quantum computing algorithms and concepts through both learning sessions and hands-on projects. Beyond writing code, I have a passion for photography and aesthetics, which allows me to explore creativity and design from a different perspective.
+            </template>
+          </article>
+
+          <!-- Card: Hokulani Topping -->
+          <article class="member-card group exec-card" data-has-bio="true">
+            <div class="relative">
+              <img src="image/HokulaniTopping.png" alt="Hokulani Topping" class="member-photo"/>
+              <div class="bio-overlay">
+                <div class="text-sm leading-relaxed text-slate-200" data-bio-slot="overlay"></div>
+              </div>
+            </div>
+
+            <div class="relative p-5">
+              <div class="flex items-start justify-between gap-3">
+                <div>
+                  <h3 class="text-lg font-semibold">Hokulani Topping</h3>
+                  <div class="flex items-center gap-2 mt-1 text-sky-400 font-medium">
+                    <i class="fa-solid fa-globe"></i>
+                    <span>External Vice President</span>
+                  </div>
+                </div>
+                <!--<span class="exec-tag">EXEC</span>-->
+              </div>
+              <p class="mt-1 text-xs text-slate-300 date-badge inline-flex items-center gap-1 px-2 py-1 rounded-md" data-dates-for="Hokulani Topping">Role dates: <span class="dates">June 2025 - Present</span></p>
+              <p class="mt-2 text-slate-300 text-sm">Informatics</p>
+            </div>
+
+            <div class="bio-disclosure sm:hidden">
+              <button class="bio-toggle" type="button" aria-expanded="false">
+                <span>Bio</span>
+                <i class="fa-solid fa-chevron-down"></i>
+              </button>
+              <div class="bio-panel" aria-hidden="true">
+                <div data-bio-slot="mobile"></div>
+              </div>
+            </div>
+
+            <template data-bio-template>
+              Aloha everyone! My name is Hokulani Topping, and I’m a senior at UCI majoring in Informatics with a focus on Human–Computer Interaction. I have a growing interest in quantum computing, and as the new Vice President of the Quantum Computing Club, my goal is to make the field fun and welcoming to everyone—no matter their background. Outside of academics, I do taekwondo, I’m an avid surfer, and someone who’s always looking for ways to stay active. I’m deeply passionate about my Hawaiian culture, and I’m also a huge fan of rap music.
+            </template>
+          </article>
+        </div>
       </div>
+
+      <!-- Board Teams -->
+      <div class="section-shell">
+        <div class="flex items-center justify-between gap-3 mb-4">
+          <h2 class="text-lg sm:text-xl font-extrabold tracking-tight">Board</h2>
+          <!-- <p class="text-xs text-slate-300/80">Tap a team to expand on mobile.</p> -->
+        </div>
+
+        <div class="team-grid">
+
+          <!-- Education Team -->
+          <details class="team-block" open>
+            <summary class="team-summary">
+              <div class="flex items-center gap-3">
+                <span class="team-icon"><i class="fa-solid fa-chalkboard-user"></i></span>
+                <div>
+                  <div class="team-title">Education Team</div>
+                  <div class="team-subtitle">Workshops, curriculum, learning sessions</div>
+                </div>
+              </div>
+              <span class="team-meta">›</span>
+            </summary>
+
+            <div class="team-content">
+              <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Hamed -->
+                <article class="member-card group exec-card" data-has-bio="true">
+                  <div class="relative">
+                    <img src="image/HamedFazelRezai.jpg" alt="Hamed Fazel-Rezai" class="member-photo"/>
+                    <div class="bio-overlay">
+                      <div class="text-sm leading-relaxed text-slate-200" data-bio-slot="overlay"></div>
+                    </div>
+                  </div>
+
+                  <div class="relative p-5">
+                    <div class="flex items-start justify-between gap-3">
+                      <div>
+                        <h3 class="text-lg font-semibold">Hamed Fazel-Rezai</h3>
+                        <div class="flex items-center gap-2 mt-1 text-sky-400 font-medium">
+                          <i class="fa-solid fa-user-gear"></i>
+                          <span>Education Fellow</span>
+                        </div>
+                      </div>
+                    </div>
+                    <p class="mt-1 text-xs text-slate-300 date-badge inline-flex items-center gap-1 px-2 py-1 rounded-md" data-dates-for="Hamed Fazel-Rezai">Role dates: <span class="dates">Jan 2026 - present</span></p>
+                    <p class="mt-2 text-slate-300 text-sm">Computer Science</p>
+                  </div>
+
+                  <div class="bio-disclosure sm:hidden">
+                    <button class="bio-toggle" type="button" aria-expanded="false">
+                      <span>Bio</span>
+                      <i class="fa-solid fa-chevron-down"></i>
+                    </button>
+                    <div class="bio-panel" aria-hidden="true">
+                      <div data-bio-slot="mobile"></div>
+                    </div>
+                  </div>
+
+                  <template data-bio-template>
+                    Hello! I’m Hamed, a first year student at UC Irvine majoring in Computer Science. I am interested in quantum computing and algorithms. My goal as a member of the Education Team is to make quantum computing feel accessible to all students. Outside of classes and quantum computing, I play the viola and enjoy listening to music.
+                  </template>
+                </article>
+
+                <!-- John -->
+                <article class="member-card group exec-card" data-has-bio="true">
+                  <div class="relative">
+                    <img src="image/JohnChen.jpg" alt="John Chen" class="member-photo"/>
+                    <div class="bio-overlay">
+                      <div class="text-sm leading-relaxed text-slate-200" data-bio-slot="overlay"></div>
+                    </div>
+                  </div>
+
+                  <div class="relative p-5">
+                    <div class="flex items-start justify-between gap-3">
+                      <div>
+                        <h3 class="text-lg font-semibold">John Chen</h3>
+                        <div class="flex items-center gap-2 mt-1 text-sky-400 font-medium">
+                          <i class="fa-solid fa-user-gear"></i>
+                          <span>Education Fellow</span>
+                        </div>
+                      </div>
+                    </div>
+                    <p class="mt-1 text-xs text-slate-300 date-badge inline-flex items-center gap-1 px-2 py-1 rounded-md" data-dates-for="Hamed Fazel-Rezai">Role dates: <span class="dates">Jan 2026 - present</span></p>
+                    <p class="mt-2 text-slate-300 text-sm">Physics</p>
+                  </div>
+
+                  <div class="bio-disclosure sm:hidden">
+                    <button class="bio-toggle" type="button" aria-expanded="false">
+                      <span>Bio</span>
+                      <i class="fa-solid fa-chevron-down"></i>
+                    </button>
+                    <div class="bio-panel" aria-hidden="true">
+                      <div data-bio-slot="mobile"></div>
+                    </div>
+                  </div>
+
+                  <template data-bio-template>
+                    I'm currently a third-year Physics major at UC Irvine with a strong passion for quantum physics and its applications. Moreover, I have a strong interest in quantum error correction and quantum algorithms research, and as a new education fellow for the Quantum Computing Club, I wish to make quantum computing accessible for students of all academic backgrounds and to make the field more approaching and less daunting. Outside of academics, I enjoy training combat sports (mainly striking), cooking, and working out. I also love learning history and listening to RnB.
+                  </template>
+                </article>
+
+              </div>
+            </div>
+          </details>
+
+          <!-- Marketing Team -->
+          <details class="team-block" open>
+            <summary class="team-summary">
+              <div class="flex items-center gap-3">
+                <span class="team-icon"><i class="fa-solid fa-bullhorn"></i></span>
+                <div>
+                  <div class="team-title">Marketing Team</div>
+                  <div class="team-subtitle">Outreach, content, partnerships</div>
+                </div>
+              </div>
+              <span class="team-meta">›</span>
+            </summary>
+
+            <div class="team-content">
+              <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                
+
+                <!-- Erielle Arce -->
+                 <article class="member-card group exec-card" data-has-bio="true">
+                  <div class="relative">
+                    <img src="image/ErielleArce.jpeg" alt="Erielle Arce" class="member-photo"/>
+                    <div class="bio-overlay">
+                      <div class="text-sm leading-relaxed text-slate-200" data-bio-slot="overlay"></div>
+                    </div>
+                  </div>
+
+                  <div class="relative p-5">
+                    <div class="flex items-start justify-between gap-3">
+                      <div>
+                        <h3 class="text-lg font-semibold">Erielle Arce</h3>
+                        <div class="flex items-center gap-2 mt-1 text-sky-400 font-medium">
+                          <i class="fa-solid fa-user-gear"></i>
+                          <span>Marketing Fellow</span>
+                        </div>
+                      </div>
+                    </div>
+                    <p class="mt-1 text-xs text-slate-300 date-badge inline-flex items-center gap-1 px-2 py-1 rounded-md" data-dates-for="Erielle Arce">Role dates: <span class="dates">Jan 2026 - present</span></p>
+                    <p class="mt-2 text-slate-300 text-sm">Computer Science & Engineering</p>
+                  </div>
+
+                  <div class="bio-disclosure sm:hidden">
+                    <button class="bio-toggle" type="button" aria-expanded="false">
+                      <span>Bio</span>
+                      <i class="fa-solid fa-chevron-down"></i>
+                    </button>
+                    <div class="bio-panel" aria-hidden="true">
+                      <div data-bio-slot="mobile"></div>
+                    </div>
+                  </div>
+
+                  <template data-bio-template>
+                    I'm a first year CSE major interested in hardware and embedded systems. I was introduced to quantum principles through a physics perspective, and later explored their uses in programming through the Quantum Computing Club. I am interested in exploring business and graphic design and its applications in club marketing. Outside of academics, I love fashion, video games, and rugby. I'm excited to meet you all!
+                  </template>
+                </article>
+
+              </div>
+            </div>
+          </details>
+
+          <!-- Webmasters -->
+          <details class="team-block" open>
+            <summary class="team-summary">
+              <div class="flex items-center gap-3">
+                <span class="team-icon"><i class="fa-solid fa-code"></i></span>
+                <div>
+                  <div class="team-title">Webmasters</div>
+                  <div class="team-subtitle">Website, User Experience</div>
+                </div>
+              </div>
+              <span class="team-meta">›</span>
+            </summary>
+
+            <div class="team-content">
+              <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                
+                <!-- Jordan Moreno -->
+                 <article class="member-card group exec-card" data-has-bio="true">
+                  <div class="relative">
+                    <img src="image/JordanMoreno.jpeg" alt="Jordan Moreno" class="member-photo"/>
+                    <div class="bio-overlay">
+                      <div class="text-sm leading-relaxed text-slate-200" data-bio-slot="overlay"></div>
+                    </div>
+                  </div>
+
+                  <div class="relative p-5">
+                    <div class="flex items-start justify-between gap-3">
+                      <div>
+                        <h3 class="text-lg font-semibold">Jordan Moreno</h3>
+                        <div class="flex items-center gap-2 mt-1 text-sky-400 font-medium">
+                          <i class="fa-solid fa-user-gear"></i>
+                          <span>Co-Webmaster</span>
+                        </div>
+                      </div>
+                    </div>
+                    <p class="mt-1 text-xs text-slate-300 date-badge inline-flex items-center gap-1 px-2 py-1 rounded-md" data-dates-for="Jordan Moreno">Role dates: <span class="dates">Jan 2026 - present</span></p>
+                    <p class="mt-2 text-slate-300 text-sm">Physics</p>
+                  </div>
+
+                  <div class="bio-disclosure sm:hidden">
+                    <button class="bio-toggle" type="button" aria-expanded="false">
+                      <span>Bio</span>
+                      <i class="fa-solid fa-chevron-down"></i>
+                    </button>
+                    <div class="bio-panel" aria-hidden="true">
+                      <div data-bio-slot="mobile"></div>
+                    </div>
+                  </div>
+
+                  <template data-bio-template>
+                    Hi! My name is Jordan Moreno, I’m a senior majoring in Software Engineering. I am interested in physics, software and new technologies, especially quantum computing! Some of my hobbies are playing basketball, producing music, and traveling. I will be working on the club’s website and hopefully harboring good experience for visitors.
+                  </template>
+                </article>
+
+                <!-- Cole Saldanha -->
+                 <article class="member-card group exec-card" data-has-bio="true">
+                  <div class="relative">
+                    <img src="image/ColeSaldanha.jpg" alt="Cole Saldanha" class="member-photo"/>
+                    <div class="bio-overlay">
+                      <div class="text-sm leading-relaxed text-slate-200" data-bio-slot="overlay"></div>
+                    </div>
+                  </div>
+
+                  <div class="relative p-5">
+                    <div class="flex items-start justify-between gap-3">
+                      <div>
+                        <h3 class="text-lg font-semibold">Cole Saldanha</h3>
+                        <div class="flex items-center gap-2 mt-1 text-sky-400 font-medium">
+                          <i class="fa-solid fa-user-gear"></i>
+                          <span>Co-Webmaster</span>
+                        </div>
+                      </div>
+                    </div>
+                    <p class="mt-1 text-xs text-slate-300 date-badge inline-flex items-center gap-1 px-2 py-1 rounded-md" data-dates-for="Cole Saldanha">Role dates: <span class="dates">Jan 2026 - present</span></p>
+                    <p class="mt-2 text-slate-300 text-sm">Computer Science</p>
+                  </div>
+
+                  <div class="bio-disclosure sm:hidden">
+                    <button class="bio-toggle" type="button" aria-expanded="false">
+                      <span>Bio</span>
+                      <i class="fa-solid fa-chevron-down"></i>
+                    </button>
+                    <div class="bio-panel" aria-hidden="true">
+                      <div data-bio-slot="mobile"></div>
+                    </div>
+                  </div>
+
+                  <template data-bio-template>
+                    Hi! I’m a second-year Computer Science major with an interest in Cybersecurity and Software Engineering. I joined the Quantum Computing Club with an interest in how Quantum Computing can be used to shape the Computer Science landscape, specifically with the rise of Quantum Cryptography. Outside of the club, I enjoy hiking, reading, and doing CTF competitions!
+                  </template>
+                </article>
+
+              </div>
+            </div>
+          </details>
+
+          <!-- Treasurer -->
+          <details class="team-block" open>
+            <summary class="team-summary">
+              <div class="flex items-center gap-3">
+                <span class="team-icon"><i class="fa-solid fa-coins"></i></span>
+                <div>
+                  <div class="team-title">Treasurer</div>
+                  <div class="team-subtitle">Budget, reimbursements, funding</div>
+                </div>
+              </div>
+              <span class="team-meta">›</span>
+            </summary>
+
+            <div class="team-content">
+              <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+
+                 <!-- Onuva Ekram -->
+                 <article class="member-card group exec-card" data-has-bio="true">
+                  <div class="relative">
+                    <img src="image/OnuvaEkram.jpg" alt="Onuva Ekram" class="member-photo"/>
+                    <div class="bio-overlay">
+                      <div class="text-sm leading-relaxed text-slate-200" data-bio-slot="overlay"></div>
+                    </div>
+                  </div>
+
+                  <div class="relative p-5">
+                    <div class="flex items-start justify-between gap-3">
+                      <div>
+                        <h3 class="text-lg font-semibold">Onuva Ekram</h3>
+                        <div class="flex items-center gap-2 mt-1 text-sky-400 font-medium">
+                          <i class="fa-solid fa-user-gear"></i>
+                          <span>Treasurer</span>
+                        </div>
+                      </div>
+                    </div>
+                    <p class="mt-1 text-xs text-slate-300 date-badge inline-flex items-center gap-1 px-2 py-1 rounded-md" data-dates-for="Onuva Ekram">Role dates: <span class="dates">Jan 2026 - present</span></p>
+                    <p class="mt-2 text-slate-300 text-sm">Computer Science</p>
+                  </div>
+
+                  <div class="bio-disclosure sm:hidden">
+                    <button class="bio-toggle" type="button" aria-expanded="false">
+                      <span>Bio</span>
+                      <i class="fa-solid fa-chevron-down"></i>
+                    </button>
+                    <div class="bio-panel" aria-hidden="true">
+                      <div data-bio-slot="mobile"></div>
+                    </div>
+                  </div>
+
+                  <template data-bio-template>
+                    Hi there! My name is Onuva and I'm a sophomore in Computer Science. I have been interested in quantum computing algorithms since my first year, which is when I started coming to this club. I learned so much and look forward to helping this club run smoothly so more people can have as great of an experience as I did! Outside of my studies, I enjoy baking various desserts and taking long walks (while taking a concerning amount of photos).
+                  </template>
+                </article>
+
+              </div>
+            </div>
+          </details>
+
+        </div>
+      </div>
+
     </section>
+
 
     <!-- ADVISORS -->
     <section id="tab-advisors" class="tab-section">
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         <!-- Sandy Irani -->
-        <article class="member-card group rounded-2xl border border-white/10 overflow-hidden shadow-xl">
+        <article class="member-card group" data-has-bio="true">
           <div class="relative">
-            <img src="image/sandyirani.jpg" alt="Professor Sandy Irani" class="member-photo w-full object-cover"/>
-            <div class="member-hover absolute inset-0 bg-slate-900/80 opacity-0 -translate-y-1 p-4">
-              <p class="text-sm leading-relaxed text-slate-200">Professor of Computer Science, Associate Dean for Undergraduate Student Affairs (ICS). Research in quantum computation and complexity.</p>
+            <img src="image/sandyirani.jpg" alt="Professor Sandy Irani" class="member-photo"/>
+            <div class="bio-overlay">
+              <div class="text-sm leading-relaxed text-slate-200" data-bio-slot="overlay"></div>
             </div>
           </div>
-          <div class="p-5">
+
+          <div class="relative p-5">
             <h3 class="text-lg font-semibold">Professor Sandy Irani</h3>
             <div class="flex items-center gap-2 mt-1 text-amber-300 font-medium">
               <i class="fa-solid fa-user-tie"></i>
@@ -180,17 +798,32 @@
             <p class="mt-1 text-xs text-slate-300 date-badge inline-flex items-center gap-1 px-2 py-1 rounded-md" data-dates-for="Professor Sandy Irani">Advisor since: <span class="dates">TBD</span></p>
             <p class="mt-2 text-slate-300 text-sm">Computer Science Dept.</p>
           </div>
+
+          <div class="bio-disclosure sm:hidden">
+            <button class="bio-toggle" type="button" aria-expanded="false">
+              <span>Bio</span>
+              <i class="fa-solid fa-chevron-down"></i>
+            </button>
+            <div class="bio-panel" aria-hidden="true">
+              <div data-bio-slot="mobile"></div>
+            </div>
+          </div>
+
+          <template data-bio-template>
+            Professor of Computer Science, Associate Dean for Undergraduate Student Affairs (ICS). Research in quantum computation and complexity.
+          </template>
         </article>
 
         <!-- Shion Fukuzawa -->
-        <article class="member-card group rounded-2xl border border-white/10 overflow-hidden shadow-xl">
+        <article class="member-card group" data-has-bio="true">
           <div class="relative">
-            <img src="image/ShionFukuzawa.png" alt="Shion Fukuzawa" class="member-photo w-full object-cover"/>
-            <div class="member-hover absolute inset-0 bg-slate-900/80 opacity-0 -translate-y-1 p-4">
-              <p class="text-sm leading-relaxed text-slate-200">PhD candidate in Computer Science (Theory). Focus on computational geometry and quantum.</p>
+            <img src="image/ShionFukuzawa.png" alt="Shion Fukuzawa" class="member-photo"/>
+            <div class="bio-overlay">
+              <div class="text-sm leading-relaxed text-slate-200" data-bio-slot="overlay"></div>
             </div>
           </div>
-          <div class="p-5">
+
+          <div class="relative p-5">
             <h3 class="text-lg font-semibold">Shion Fukuzawa</h3>
             <div class="flex items-center gap-2 mt-1 text-amber-300 font-medium">
               <i class="fa-solid fa-graduation-cap"></i>
@@ -199,6 +832,20 @@
             <p class="mt-1 text-xs text-slate-300 date-badge inline-flex items-center gap-1 px-2 py-1 rounded-md" data-dates-for="Shion Fukuzawa">Advisor since: <span class="dates">TBD</span></p>
             <p class="mt-2 text-slate-300 text-sm">Computer Science Dept.</p>
           </div>
+
+          <div class="bio-disclosure sm:hidden">
+            <button class="bio-toggle" type="button" aria-expanded="false">
+              <span>Bio</span>
+              <i class="fa-solid fa-chevron-down"></i>
+            </button>
+            <div class="bio-panel" aria-hidden="true">
+              <div data-bio-slot="mobile"></div>
+            </div>
+          </div>
+
+          <template data-bio-template>
+            PhD candidate in Computer Science (Theory). Focus on computational geometry and quantum.
+          </template>
         </article>
       </div>
     </section>
@@ -206,9 +853,9 @@
     <!-- PREVIOUS BOARD -->
     <section id="tab-previous" class="tab-section">
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        <article class="member-card rounded-2xl border border-white/10 overflow-hidden shadow-xl">
-          <img src="image/StewartSmith.jpg" alt="Stewart Smith" class="member-photo w-full object-cover"/>
-          <div class="p-5">
+        <article class="member-card">
+          <img src="image/StewartSmith.jpg" alt="Stewart Smith" class="member-photo"/>
+          <div class="relative p-5">
             <h3 class="text-lg font-semibold">Stewart Smith</h3>
             <p class="text-sky-400 font-medium mt-1">Vice President</p>
             <p class="mt-1 text-xs text-slate-300 date-badge inline-flex items-center gap-1 px-2 py-1 rounded-md" data-dates-for="Stewart Smith">Served: <span class="dates">TBD</span></p>
@@ -216,9 +863,9 @@
           </div>
         </article>
 
-        <article class="member-card rounded-2xl border border-white/10 overflow-hidden shadow-xl">
-          <img src="image/RadhakrishnaVempati.jpg" alt="Krishna Vempati" class="member-photo w-full object-cover"/>
-          <div class="p-5">
+        <article class="member-card">
+          <img src="image/RadhakrishnaVempati.jpg" alt="Krishna Vempati" class="member-photo"/>
+          <div class="relative p-5">
             <h3 class="text-lg font-semibold">Krishna Vempati</h3>
             <p class="text-sky-400 font-medium mt-1">Treasurer</p>
             <p class="mt-1 text-xs text-slate-300 date-badge inline-flex items-center gap-1 px-2 py-1 rounded-md" data-dates-for="Krishna Vempati">Served: <span class="dates">TBD</span></p>
@@ -226,9 +873,9 @@
           </div>
         </article>
 
-        <article class="member-card rounded-2xl border border-white/10 overflow-hidden shadow-xl">
-          <img src="image/AryaMhaiskar.jpg" alt="Arya Mhaiskar" class="member-photo w-full object-cover"/>
-          <div class="p-5">
+        <article class="member-card">
+          <img src="image/AryaMhaiskar.jpg" alt="Arya Mhaiskar" class="member-photo"/>
+          <div class="relative p-5">
             <h3 class="text-lg font-semibold">Arya Mhaiskar</h3>
             <p class="text-sky-400 font-medium mt-1">Marketing Chief</p>
             <p class="mt-1 text-xs text-slate-300 date-badge inline-flex items-center gap-1 px-2 py-1 rounded-md" data-dates-for="Arya Mhaiskar">Served: <span class="dates">TBD</span></p>
@@ -236,9 +883,9 @@
           </div>
         </article>
 
-        <article class="member-card rounded-2xl border border-white/10 overflow-hidden shadow-xl">
-          <img src="image/JoshuaWang.jpg" alt="Joshua Wang" class="member-photo w-full object-cover"/>
-          <div class="p-5">
+        <article class="member-card">
+          <img src="image/JoshuaWang.jpg" alt="Joshua Wang" class="member-photo"/>
+          <div class="relative p-5">
             <h3 class="text-lg font-semibold">Joshua Wang</h3>
             <p class="text-sky-400 font-medium mt-1">Co-President</p>
             <p class="mt-1 text-xs text-slate-300 date-badge inline-flex items-center gap-1 px-2 py-1 rounded-md" data-dates-for="Joshua Wang">Served: <span class="dates">TBD</span></p>
@@ -246,9 +893,9 @@
           </div>
         </article>
 
-        <article class="member-card rounded-2xl border border-white/10 overflow-hidden shadow-xl">
-          <img src="image/RohitGanti.png" alt="Rohit Ganti" class="member-photo w-full object-cover"/>
-          <div class="p-5">
+        <article class="member-card">
+          <img src="image/RohitGanti.png" alt="Rohit Ganti" class="member-photo"/>
+          <div class="relative p-5">
             <h3 class="text-lg font-semibold">Rohit Ganti</h3>
             <p class="text-sky-400 font-medium mt-1">Co-President</p>
             <p class="mt-1 text-xs text-slate-300 date-badge inline-flex items-center gap-1 px-2 py-1 rounded-md" data-dates-for="Rohit Ganti">Served: <span class="dates">TBD</span></p>
@@ -256,9 +903,9 @@
           </div>
         </article>
 
-        <article class="member-card rounded-2xl border border-white/10 overflow-hidden shadow-xl">
-          <img src="image/SeanDoan.jpeg" alt="Sean Doan" class="member-photo w-full object-cover"/>
-          <div class="p-5">
+        <article class="member-card">
+          <img src="image/SeanDoan.jpeg" alt="Sean Doan" class="member-photo"/>
+          <div class="relative p-5">
             <h3 class="text-lg font-semibold">Sean Doan</h3>
             <p class="text-sky-400 font-medium mt-1">Secretary</p>
             <p class="mt-1 text-xs text-slate-300 date-badge inline-flex items-center gap-1 px-2 py-1 rounded-md" data-dates-for="Sean Doan">Served: <span class="dates">TBD</span></p>
@@ -266,9 +913,9 @@
           </div>
         </article>
 
-        <article class="member-card rounded-2xl border border-white/10 overflow-hidden shadow-xl">
-          <img src="image/ChrisChen.jpg" alt="Chris Chen" class="member-photo w-full object-cover"/>
-          <div class="p-5">
+        <article class="member-card">
+          <img src="image/ChrisChen.jpg" alt="Chris Chen" class="member-photo"/>
+          <div class="relative p-5">
             <h3 class="text-lg font-semibold">Chris Chen</h3>
             <p class="text-sky-400 font-medium mt-1">President</p>
             <p class="mt-1 text-xs text-slate-300 date-badge inline-flex items-center gap-1 px-2 py-1 rounded-md" data-dates-for="Chris Chen">Served: <span class="dates">TBD</span></p>
@@ -276,36 +923,36 @@
           </div>
         </article>
 
-        <article class="member-card rounded-2xl border border-white/10 overflow-hidden shadow-xl">
-          <img src="image/KylerFrazier.jpeg" alt="Kyler Frazier" class="member-photo w-full object-cover"/>
-          <div class="p-5">
+        <article class="member-card">
+          <img src="image/KylerFrazier.jpeg" alt="Kyler Frazier" class="member-photo"/>
+          <div class="relative p-5">
             <h3 class="text-lg font-semibold">Kyler Frazier</h3>
             <p class="mt-1 text-xs text-slate-300 date-badge inline-flex items-center gap-1 px-2 py-1 rounded-md" data-dates-for="Kyler Frazier">Served: <span class="dates">TBD</span></p>
             <p class="text-slate-300 text-sm mt-2">Physics / CS</p>
           </div>
         </article>
 
-        <article class="member-card rounded-2xl border border-white/10 overflow-hidden shadow-xl">
-          <img src="image/qc.png" alt="Harry Goyal" class="member-photo w-full object-cover"/>
-          <div class="p-5">
+        <article class="member-card">
+          <img src="image/qc.png" alt="Harry Goyal" class="member-photo"/>
+          <div class="relative p-5">
             <h3 class="text-lg font-semibold">Harry Goyal</h3>
             <p class="mt-1 text-xs text-slate-300 date-badge inline-flex items-center gap-1 px-2 py-1 rounded-md" data-dates-for="Harry Goyal">Served: <span class="dates">TBD</span></p>
             <p class="text-slate-300 text-sm mt-2">Informatics</p>
           </div>
         </article>
 
-        <article class="member-card rounded-2xl border border-white/10 overflow-hidden shadow-xl">
-          <img src="image/AndyPark.jpg" alt="Andy Park" class="member-photo w-full object-cover"/>
-          <div class="p-5">
+        <article class="member-card">
+          <img src="image/AndyPark.jpg" alt="Andy Park" class="member-photo"/>
+          <div class="relative p-5">
             <h3 class="text-lg font-semibold">Andy Park</h3>
             <p class="mt-1 text-xs text-slate-300 date-badge inline-flex items-center gap-1 px-2 py-1 rounded-md" data-dates-for="Andy Park">Served: <span class="dates">TBD</span></p>
             <p class="text-slate-300 text-sm mt-2">Physics / Mathematics</p>
           </div>
         </article>
 
-        <article class="member-card rounded-2xl border border-white/10 overflow-hidden shadow-xl">
-          <img src="image/ZhuHaochen.jpg" alt="Keira Zhu" class="member-photo w-full object-cover"/>
-          <div class="p-5">
+        <article class="member-card">
+          <img src="image/ZhuHaochen.jpg" alt="Keira Zhu" class="member-photo"/>
+          <div class="relative p-5">
             <h3 class="text-lg font-semibold">Keira Zhu</h3>
             <p class="mt-1 text-xs text-slate-300 date-badge inline-flex items-center gap-1 px-2 py-1 rounded-md" data-dates-for="Keira Zhu">Served: <span class="dates">TBD</span></p>
             <p class="text-slate-300 text-sm mt-2">Business Economics</p>
@@ -370,17 +1017,53 @@
         btn.setAttribute('aria-selected', 'true');
         Object.values(sections).forEach(s => s.classList.remove('active'));
         sections[key].classList.add('active');
-        // Auto-scroll intentionally disabled per request
       });
     });
 
-    // ===== Mobile bio collapsibles =====
-    document.querySelectorAll('.bio-collapsible').forEach(btn => {
+    // ===== Fill bios from template into overlay + mobile panels (single source of truth) =====
+    document.querySelectorAll('.member-card[data-has-bio="true"]').forEach(card => {
+      const tpl = card.querySelector('template[data-bio-template]');
+      if (!tpl) return;
+      const text = (tpl.innerHTML || '').trim();
+      const overlay = card.querySelector('[data-bio-slot="overlay"]');
+      const mobile = card.querySelector('[data-bio-slot="mobile"]');
+      if (overlay) overlay.textContent = text;
+      if (mobile) mobile.textContent = text;
+    });
+
+    // ===== Mobile bio toggles =====
+    document.querySelectorAll('.bio-toggle').forEach(btn => {
       btn.addEventListener('click', () => {
         const expanded = btn.getAttribute('aria-expanded') === 'true';
         btn.setAttribute('aria-expanded', String(!expanded));
       });
     });
+
+    // ===== Tab section animation (kept subtle) =====
+    document.querySelectorAll('.tab-section').forEach(sec => {
+      sec.classList.add('tab-anim');
+    });
+    // ===== Mobile team accordion: keep it tidy on small screens =====
+    const isSmall = () => window.matchMedia('(max-width: 639px)').matches;
+    const teamBlocks = Array.from(document.querySelectorAll('#tab-current details.team-block'));
+    const closeOthers = (openEl) => {
+      if (!isSmall()) return;
+      teamBlocks.forEach(dtl => { if (dtl !== openEl) dtl.removeAttribute('open'); });
+    };
+    teamBlocks.forEach(dtl => {
+      dtl.addEventListener('toggle', () => {
+        if (dtl.open) closeOthers(dtl);
+      });
+    });
+
   </script>
+
+  <style>
+    .tab-section{ opacity:0; transform: translateY(6px); transition: opacity .18s ease, transform .18s ease; display:none; }
+    .tab-section.active{ display:block; opacity:1; transform: translateY(0); }
+    /* hide scrollbar utility */
+    .no-scrollbar::-webkit-scrollbar{ display:none; }
+    .no-scrollbar{ -ms-overflow-style:none; scrollbar-width:none; }
+  </style>
 </body>
 </html>
