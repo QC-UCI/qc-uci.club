@@ -1,3 +1,13 @@
+<!--
+<ol class="mt-4 space-y-3 text-slate-300/90">
+            <li class="qc-card qc-card-hover p-3"><span class="font-semibold">Superposition</span> — represent many states at once</li>
+            <li class="qc-card qc-card-hover p-3"><span class="font-semibold">Entanglement</span> — intrinsic relationship between two or more qubits</li>
+            <li class="qc-card qc-card-hover p-3"><span class="font-semibold">Interference</span> — amplifies right answers, cancels wrong ones</li>
+            <li class="qc-card qc-card-hover p-3"><span class="font-semibold">Decoherence</span> — quantum systems collapse due to environmental disturbance</li>
+          </ol>
+-->
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,112 +18,305 @@
   <link rel="stylesheet" href="css/tailwind_style.css">
   <link rel="stylesheet" href="css/style.css">
   <title>Learn | QC@UCI</title>
+
   <style>
+    
     :root{
-      --qc-primary:#6EE7F9; /* cyan-300 */
-      --qc-accent:#A78BFA;  /* violet-400 */
-      --qc-bg:#0a0f1d;      /* deep navy */
-      --qc-card:#101933;    /* card bg */
-      --qc-grid:rgba(167,139,250,0.22);
-      --qc-neon:0 0 1px #fff, 0 0 8px var(--qc-accent), 0 0 18px var(--qc-accent);
-      --qc-header-h: 120px; /* JS updates actual value */
+      --qc-primary:#6EE7F9;
+      --qc-accent:#A78BFA;
+      --qc-bg:#0a0f1d;
+      --qc-card:#101933;
+      --qc-header-h:120px;
+      --qc-line: rgba(255,255,255,.10);
+      --qc-radius: 18px;
     }
 
-    /* Base theme */
-    html, body { background-color: var(--qc-bg) !important; color:#e5e7eb !important; margin:0; padding:0; max-width:100%; overflow-x:hidden; }
-    a{ color: var(--qc-primary); }
+    html, body {
+      background:
+        radial-gradient(1000px 520px at 18% 8%, rgba(110,231,249,.08), transparent 55%),
+        radial-gradient(900px 520px at 84% 14%, rgba(167,139,250,.10), transparent 60%),
+        var(--qc-bg);
+      color:#e5e7eb;
+      margin:0;
+      padding:0;
+      overflow-x:hidden;
+      scroll-behavior:smooth;
+    }
+
+    body > *:not(header):not(footer){
+      padding-left:5%;
+      padding-right:5%;
+    }
+
+    a{ color: var(--qc-primary); text-decoration: none; }
     a:hover{ color: var(--qc-accent); }
 
-    /* Prevent background pseudo-elements from causing sideways scroll */
-    .quantum-canvas{ position:relative; isolation:isolate; overflow:hidden; }
-    section { position: relative; z-index: 1; }
-
-    /* Consistent side spacing on ALL screen sizes (except header/footer) */
-    body > *:not(header):not(footer){ padding-left:5%; padding-right:5%; }
-
-    /* Animated starfield + grid */
-    .quantum-canvas::before, .quantum-canvas::after{ content:""; position:absolute; inset:0; z-index:-1;}
-    .quantum-canvas::before{ background:
-      radial-gradient(2px 2px at 20% 30%, rgba(255,255,255,.7) 40%, transparent 42%),
-      radial-gradient(1.5px 1.5px at 70% 60%, rgba(255,255,255,.6) 40%, transparent 42%),
-      radial-gradient(1.5px 1.5px at 40% 80%, rgba(255,255,255,.5) 40%, transparent 42%),
-      radial-gradient(1px 1px at 80% 20%, rgba(255,255,255,.45) 40%, transparent 42%),
-      radial-gradient(1px 1px at 10% 70%, rgba(255,255,255,.35) 40%, transparent 42%);
-      animation: twinkle 6s linear infinite;
-    }
-    .quantum-canvas::after{
-      background-image:
-        linear-gradient(to right, var(--qc-grid) 1px, transparent 1px),
-        linear-gradient(to bottom, var(--qc-grid) 1px, transparent 1px);
-      background-size: 40px 40px;
-      mask-image: radial-gradient(100% 60% at 50% 0%, rgba(0,0,0,.9), transparent 85%);
-      transform: perspective(800px) rotateX(60deg) translateY(-15%);
-      transform-origin: top center;
-      filter: drop-shadow(0 0 8px rgba(167,139,250,.35));
-    }
-    @keyframes twinkle{ 50%{ opacity:.6 } }
-
-    /* Divider */
-    .neon-divider{ height:1px; background:linear-gradient(90deg, transparent, var(--qc-primary), var(--qc-accent), transparent); box-shadow: var(--qc-neon); opacity:.55; margin: 2rem 0; }
-
-    /* Cards */
-    .qc-card{ background:linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,.01)); border:1px solid rgba(255,255,255,.08); backdrop-filter: blur(8px); border-radius:1rem; color:#e5e7eb; }
-    .qc-card-hover{ transition: transform .35s ease, box-shadow .35s ease, border-color .35s ease; }
-    .qc-card-hover:hover{ transform: translateY(-6px); border-color: rgba(167,139,250,.6); box-shadow:0 6px 30px rgba(167,139,250,.25); }
-
-    /* Tabs */
-    #tabs, #applications, #videos { scroll-margin-top: calc(var(--qc-header-h) + 12px); }
-    .tab-btn{ border-bottom:2px solid transparent; text-align:center; }
-    .tab-btn[aria-selected="true"]{ color:#e2e8f0; border-color: var(--qc-accent); text-shadow: var(--qc-neon); }
-    .tab-panel{ display:none }
-    .tab-panel[data-active="true"]{ display:block }
-
-    /* Video wrapper */
-    .video-wrap{ position:relative; padding-top:56.25%; border-radius:0.75rem; overflow:hidden; }
-    .video-wrap iframe{ position:absolute; inset:0; width:100%; height:100%; border:0 }
-    /* Limit Applications video width on non‑mobile */
-    @media (min-width: 769px){
-      #applications .video-wrap{ width:60%; margin-left:auto; margin-right:auto; }
+    .qc-card{
+      background: linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.015));
+      border:1px solid var(--qc-line);
+      border-radius: var(--qc-radius);
+      backdrop-filter: blur(10px);
     }
 
-    /* Responsive grids */
-    .autogrid{ display:grid; gap:1rem; }
-    @media (min-width: 640px){ .autogrid.sm-2{ grid-template-columns: repeat(2, minmax(0,1fr)); } }
-    @media (min-width: 1024px){ .autogrid.lg-3{ grid-template-columns: repeat(3, minmax(0,1fr)); } }
-
-    /* --- Applications UI (buttons + swap video) --- */
-    .app-buttons{ display:flex; gap:.5rem; flex-wrap:wrap; justify-content:center; }
-    .app-btn{ appearance:none; cursor:pointer; padding:.6rem .9rem; border-radius:.75rem; border:1px solid rgba(255,255,255,.12); background:var(--qc-card); color:#e5e7eb; font-weight:600; display:flex; align-items:center; gap:.5rem; }
-    .app-btn[aria-selected="true"]{ border-color: var(--qc-accent); box-shadow: var(--qc-neon); }
-
-    .app-panel{ display:none; justify-content:center; margin-top:1rem; }
-    .app-panel.active{ display:flex; }
-    .app-panel-inner{ width:100%; }
-    @media(min-width:769px){ .app-panel-inner{ width:60%; } }
-
-    /* Header nav underline (white text, blue wipe) */
-    .interactive-nav li a { position: relative; color:#fff !important; text-decoration:none; }
-    .interactive-nav li a:hover { color:#fff !important; }
-    .interactive-nav li a::after {
-      content: '';
-      position: absolute;
-      width: 0%;
-      height: 2px;
-      left: 0;
-      bottom: -2px;
-      background-color: #3b82f6; /* Tailwind blue-500 */
-      transition: width 0.3s ease;
+    .qc-card-hover{
+      transition: transform .28s ease, box-shadow .28s ease, border-color .28s ease;
     }
-    .interactive-nav li a:hover::after { width: 100%; }
+    .qc-card-hover:hover{
+      transform: translateY(-6px);
+      box-shadow:0 14px 42px rgba(0,0,0,.35);
+      border-color: rgba(167,139,250,.55);
+    }
+
+    .neon-divider{
+      height:1px;
+      background:linear-gradient(90deg, transparent, var(--qc-primary), var(--qc-accent), transparent);
+      margin:3.25rem 0;
+      opacity:.55;
+    }
+
+    /* Sticky micro-nav */
+    .learn-subnav{
+      position: sticky;
+      top: var(--qc-header-h);
+      z-index: 40;
+      margin-top: 1.25rem;
+      padding: .55rem;
+    }
+    .learn-subnav-inner{
+      display:flex;
+      gap:.4rem;
+      flex-wrap:wrap;
+      justify-content:center;
+      align-items:center;
+      padding:.45rem;
+      border-radius: 999px;
+      background: rgba(16,26,55,.68);
+      border:1px solid rgba(255,255,255,.10);
+      backdrop-filter: blur(12px);
+    }
+    .navchip{
+      display:inline-flex;
+      align-items:center;
+      gap:.45rem;
+      padding:.45rem .75rem;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.10);
+      color:#e5e7eb;
+      font-weight:700;
+      font-size:.92rem;
+      transition: background .2s ease, border-color .2s ease, transform .2s ease;
+    }
+    .navchip:hover{ transform: translateY(-1px); border-color: rgba(167,139,250,.55); }
+    .navchip.active{
+      background: linear-gradient(90deg, rgba(110,231,249,.18), rgba(167,139,250,.18));
+      border-color: rgba(110,231,249,.55);
+      text-shadow: 0 0 10px rgba(167,139,250,.32);
+    }
+
+    section[id]{ scroll-margin-top: calc(var(--qc-header-h) + 86px); }
+
+    .pill{
+      display:inline-flex;
+      align-items:center;
+      gap:.5rem;
+      padding:.35rem .7rem;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(16,26,55,.35);
+      color:#dbeafe;
+      font-size:.9rem;
+      font-weight:700;
+    }
+
+    .video-wrap{
+      position:relative;
+      padding-top:56.25%;
+      border-radius: 14px;
+      overflow:hidden;
+      border:1px solid rgba(255,255,255,.10);
+      background:#000;
+    }
+    .video-wrap iframe{
+      position:absolute;
+      inset:0;
+      width:100%;
+      height:100%;
+      border:0;
+    }
+
+    /* Accordion */
+    .accordion-toggle{
+      display:flex;
+      width:100%;
+      align-items:center;
+      justify-content:space-between;
+      gap:1rem;
+      background: transparent;
+      border:0;
+      color:#e5e7eb;
+      cursor:pointer;
+      padding: .35rem 0;
+      font-size: 1.03rem;
+      font-weight: 800;
+    }
+    .accordion-content{
+      display:none;
+      color: rgba(226,232,240,.82);
+      padding-top: .45rem;
+      line-height: 1.55;
+    }
+    .accordion-content.active{ display:block; }
+
+    .kbd{
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      font-size: .85rem;
+      padding: .18rem .45rem;
+      border-radius: .5rem;
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.10);
+    }
+
+    /* Math thumbnails */
+    .thumb{
+      display:flex;
+      align-items:flex-start;
+      gap:1rem;
+      padding:1.05rem;
+    }
+    .thumb-ico{
+      width:52px;height:52px;
+      display:grid;place-items:center;
+      border-radius: 14px;
+      border:1px solid rgba(255,255,255,.12);
+      background: linear-gradient(180deg, rgba(110,231,249,.12), rgba(167,139,250,.10));
+      flex: 0 0 auto;
+    }
+
+    /* Read cards */
+    .read-card{
+      display:block;
+      padding: 1rem;
+      border-radius: 14px;
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(16,26,55,.45);
+      transition: transform .2s ease, border-color .2s ease;
+    }
+    .read-card:hover{ transform: translateY(-4px); border-color: rgba(167,139,250,.55); }
+
+    /* Floating buttons */
+    #backToTop{
+      position:fixed;
+      right: 22px;
+      bottom: 22px;
+      z-index: 60;
+      display:none;
+      border-radius:999px;
+      padding:.75rem .95rem;
+      background: rgba(16,26,55,.85);
+      border:1px solid rgba(255,255,255,.18);
+      backdrop-filter: blur(10px);
+      cursor:pointer;
+      color:#e5e7eb;
+      font-weight:900;
+    }
+    #backToTop:hover{ border-color: rgba(167,139,250,.65); }
+
+    #jumpBtn{
+      position:fixed;
+      left:22px;
+      bottom:22px;
+      z-index:60;
+      display:none;
+      border-radius:999px;
+      padding:.75rem .95rem;
+      background: rgba(16,26,55,.85);
+      border:1px solid rgba(255,255,255,.18);
+      backdrop-filter: blur(10px);
+      cursor:pointer;
+      color:#e5e7eb;
+      font-weight:900;
+    }
+    #jumpBtn:hover{ border-color: rgba(110,231,249,.65); }
+
+    #jumpMenu{
+      position:fixed;
+      left:22px;
+      bottom:74px;
+      z-index:60;
+      width:min(360px, 85vw);
+      display:none;
+      padding:.65rem;
+      border-radius: 16px;
+      background: rgba(16,26,55,.92);
+      border:1px solid rgba(255,255,255,.18);
+      backdrop-filter: blur(12px);
+    }
+    .jump-item{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:1rem;
+      padding:.7rem .75rem;
+      border-radius: 14px;
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.02);
+      margin:.45rem 0;
+      color:#e5e7eb;
+      font-weight:850;
+      cursor:pointer;
+    }
+    .jump-item:hover{ border-color: rgba(167,139,250,.55); }
+
+    .muted{ color: rgba(226,232,240,.78); }
+
+    @media (prefers-reduced-motion: reduce){
+      html{ scroll-behavior:auto; }
+      .qc-card-hover, .navchip, .read-card{ transition:none; }
+    }
+  
+    /* ================================
+       Core Principles – refinements (no purple content bg, no focus ring, aqua hover)
+       Scope: ONLY #effects section
+       ================================ */
+    #effects .accordion-content{
+      background: transparent !important; /* remove any tinted/purple feel */
+      border-top: 1px solid rgba(72,187,120,.25);
+      margin-top: .6rem;
+      padding-top: .6rem;
+    }
+
+    /* Remove the orange focus/active ring/box when clicking accordion headers */
+    #effects .accordion-toggle:focus,
+    #effects .accordion-toggle:focus-visible{
+      outline: none !important;
+      box-shadow: none !important;
+    }
+    #effects .accordion-toggle::-moz-focus-inner{ border:0; }
+
+    /* Hover styling: lighter green / aqua, not orange */
+    #effects .accordion-toggle:hover{
+      color: rgba(110,231,249,.92); /* aqua */
+    }
+    #effects .accordion-toggle:hover i{
+      color: rgba(110,231,249,.92); /* aqua */
+    }
+
+    /* Default chevron color: soft green (not orange) */
+    #effects .accordion-toggle i{
+      color: rgba(72,187,120,.78);
+    }
+
   </style>
 </head>
-<body class="min-h-screen selection:bg-violet-600/60 selection:text-white">
-  <!-- ====== HEADER (kept) ====== -->
-  <header class="header">
-    <a href="index.html">
-      <img src="image/navy_anteater_bloch.png" width="150" alt="Home">
+
+<body>
+
+<header class="header" role="banner">
+    <a href="index.html" aria-label="QC at UCI home">
+      <img src="image/Anteater_Bloch_White.png" width="150" alt="QC at UCI logo" />
     </a>
-    <nav>
+
+    <nav aria-label="Primary navigation">
       <ul class="header__nav interactive-nav">
         <li><a href="index.html">Home</a></li>
         <li><a href="join.html">Join</a></li>
@@ -121,179 +324,370 @@
         <li><a href="team.html">Team</a></li>
         <li><a href="event.html">Events</a></li>
         <li><a href="projects.html">Projects</a></li>
-        <li><a href="contact_us.html">Contact</a></li>
+        <li><a href="contact_us.html" aria-current="page">Contact</a></li>
       </ul>
     </nav>
   </header>
 
-  <!-- ====== HERO ====== -->
-  <section class="quantum-canvas page" id="hero" style="padding-top: calc(var(--qc-header-h) + 1.6rem); padding-bottom: 2rem;">
-    <div class="max-w-7xl mx-auto grid lg:grid-cols-2 gap-10 items-center">
+<section id="top" style="padding-top:calc(var(--qc-header-h) + 2rem);" class="max-w-7xl mx-auto grid lg:grid-cols-2 gap-10 items-center">
+  <div class="qc-card p-7 qc-card-hover">
+    <h1 class="text-4xl md:text-5xl font-extrabold mt-5 leading-tight">
+      Learn Quantum Computing — <span style="color:var(--qc-primary)">without guessing</span> where to start.
+    </h1>
+    <p class="mt-4 text-lg muted">
+      A smooth hub for first‑timers and return visitors: core effects, the math that matters, and what quantum is actually useful for.
+    </p>
+
+    <div class="mt-6 flex flex-wrap gap-4 items-center">
+      <a href="#paths" class="qc-card qc-card-hover px-6 py-3 font-extrabold inline-flex items-center gap-2">
+        <i class="fa-solid fa-play"></i> Start Learning
+      </a>
+    </div>
+  </div>
+
+  <div class="qc-card p-4 qc-card-hover" id="overview-video">
+    <div class="video-wrap">
+      <iframe src="https://www.youtube.com/embed/ZLAZ6lJ42ak" title="Quantum overview" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe>
+    </div>
+  </div>
+</section>
+
+<!--
+<div class="learn-subnav">
+  <div class="learn-subnav-inner max-w-7xl mx-auto">
+    <a class="navchip" href="#paths" data-spy="paths"><i class="fa-solid fa-compass"></i>Paths</a>
+    <a class="navchip" href="#effects" data-spy="effects"><i class="fa-solid fa-atom"></i>Effects</a>
+    <a class="navchip" href="#math" data-spy="math"><i class="fa-solid fa-square-root-variable"></i>Math</a>
+    <a class="navchip" href="#applications" data-spy="applications"><i class="fa-solid fa-rocket"></i>Applications</a>
+    <a class="navchip" href="#continue" data-spy="continue"><i class="fa-solid fa-repeat"></i>Continue</a>
+  </div>
+</div>
+-->
+
+<div class="neon-divider"></div>
+
+<section id="paths" class="max-w-7xl mx-auto">
+  <div class="flex flex-wrap items-end justify-between gap-3 mb-7">
+    <div>
+      <h2 class="text-3xl font-extrabold">Choose any learning path</h2>
+    </div>
+  </div>
+
+  <div class="grid md:grid-cols-3 gap-6">
+    <a href="#effects" class="qc-card qc-card-hover p-6">
+      <h3 class="text-xl font-extrabold mb-2">🟦 What is it?</h3>
+      <p class="muted">Start with the fundamental principles and their implications. Learn what makes quantum special.</p>
+      <p class="mt-3 font-extrabold inline-flex items-center gap-2">Go to Core Principles<i class="fa-solid fa-arrow-right"></i></p>
+    </a>
+    <a href="#math" class="qc-card qc-card-hover p-6">
+      <h3 class="text-xl font-extrabold mb-2">🟪 How does it work?</h3>
+      <p class="muted">Get familiar with the basic math background to unlock statevectors, amplitudes, and measurements.</p>
+      <p class="mt-3 font-extrabold inline-flex items-center gap-2">Go to Math Basics<i class="fa-solid fa-arrow-right"></i></p>
+    </a>
+    <a href="#applications" class="qc-card qc-card-hover p-6">
+      <h3 class="text-xl font-extrabold mb-2">🟩 Why do we care?</h3>
+      <p class="muted">See where quantum helps: machine learning, chemistry, optimization, security — with videos & news.</p>
+      <p class="mt-3 font-extrabold inline-flex items-center gap-2">Go to Applications<i class="fa-solid fa-arrow-right"></i></p>
+    </a>
+  </div>
+</section>
+
+<div class="neon-divider"></div>
+
+<section id="effects" class="max-w-6xl mx-auto">
+  <h2 class="text-3xl font-extrabold mb-2">Core Principles</h2>
+  <p class="muted mb-6">Short definitions are easy. The useful part is the implication: what it enables, what it doesn’t, and where it shows up.</p>
+
+  <div class="space-y-4">
+    <div class="qc-card p-5">
+      <button class="accordion-toggle" type="button">
+        <span>Superposition → bigger state space (but not free parallel answers)</span>
+        <i class="fa-solid fa-chevron-down"></i>
+      </button>
+      <div class="accordion-content">
+        <ul class="list-disc list-inside space-y-2">
+          <li><b>What it is:</b> a qubit is a weighted combination of |0⟩ and |1⟩ (amplitudes can be complex).</li>
+          <li><b>Why it matters:</b> algorithms can <b>shape amplitudes</b> before measurement to bias outcomes.</li>
+          <li><b>Where you’ll see it:</b> Hadamards, amplitude amplification, phase kickback, variational circuits.</li>
+          <li><b>Common misconception:</b> “tries all answers at once.” You still measure one outcome — advantage comes from interference.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="qc-card p-5">
+      <button class="accordion-toggle" type="button">
+        <span>Interference → where most speedups live</span>
+        <i class="fa-solid fa-chevron-down"></i>
+      </button>
+      <div class="accordion-content">
+        <ul class="list-disc list-inside space-y-2">
+          <li><b>Core idea:</b> amplitudes add/cancel like waves; phase decides whether paths reinforce or destroy.</li>
+          <li><b>Implication:</b> good circuits create <b>constructive interference</b> on solutions and cancel wrong paths.</li>
+          <li><b>Examples:</b> Grover “rotations” and the QFT creating sharp peaks from hidden periodicity.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="qc-card p-5">
+      <button class="accordion-toggle" type="button">
+        <span>Entanglement → global correlations, not faster‑than‑light messaging</span>
+        <i class="fa-solid fa-chevron-down"></i>
+      </button>
+      <div class="accordion-content">
+        <ul class="list-disc list-inside space-y-2">
+          <li><b>What it is:</b> a multi‑qubit state that can’t be factored into independent single‑qubit states.</li>
+          <li><b>Why it matters:</b> it’s a resource for teleportation, error correction, and many quantum advantages.</li>
+          <li><b>Reality check:</b> correlations are non‑classical, but usable information still needs classical communication.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="qc-card p-5">
+      <button class="accordion-toggle" type="button">
+        <span>Measurement → the “readout bottleneck”</span>
+        <i class="fa-solid fa-chevron-down"></i>
+      </button>
+      <div class="accordion-content">
+        <ul class="list-disc list-inside space-y-2">
+          <li><b>What happens:</b> measurement returns a classical sample from a probability distribution.</li>
+          <li><b>Implication:</b> you must design circuits so that sampling is likely to return a useful answer.</li>
+          <li><b>Practical note:</b> many workflows rely on repeated shots to estimate expectation values.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="qc-card p-5">
+      <button class="accordion-toggle" type="button">
+        <span>Decoherence → why scaling is hard</span>
+        <i class="fa-solid fa-chevron-down"></i>
+      </button>
+      <div class="accordion-content">
+        <ul class="list-disc list-inside space-y-2">
+          <li><b>Core problem:</b> the environment leaks information and destroys phase relationships.</li>
+          <li><b>Implication:</b> depth is expensive; error mitigation and hybrid workflows dominate today.</li>
+          <li><b>Where this leads:</b> fault tolerance + quantum error correction to build robust logical qubits.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="neon-divider"></div>
+
+<section id="math" class="max-w-6xl mx-auto">
+  <div class="flex flex-wrap items-end justify-between gap-3 mb-6">
+    <div>
+      <h2 class="text-3xl font-extrabold">Math Basics</h2>
+      <p class="muted mt-2">The preliminary mathematical foundations to understand Dirac Notation</p>
+    </div>
+  </div>
+
+  <div class="grid md:grid-cols-3 gap-6">
+    <a href="learn_math_real_imag.html" class="qc-card qc-card-hover thumb">
+      <div class="thumb-ico"><i class="fa-solid fa-wave-square text-2xl"></i></div>
       <div>
-        <h1 class="text-4xl md:text-5xl font-extrabold leading-tight">What is Quantum Computing?</h1>
-        <p class="mt-4 text-slate-300/90 text-lg">A curated, click-first guide to fundamentals and real-world applications.</p>
-        <div class="mt-6 flex flex-wrap gap-3">
-          <a href="#tabs" class="qc-card qc-card-hover px-5 py-3 inline-flex items-center gap-2"><i class="fa-solid fa-microchip"></i><span>Start with the Basics</span></a>
-          <a href="#applications" class="qc-card qc-card-hover px-5 py-3 inline-flex items-center gap-2"><i class="fa-solid fa-rocket"></i><span>See Applications</span></a>
-        </div>
+        <p class="font-extrabold text-lg">Complex Numbers</p>
+        <p class="muted mt-1">Magnitude, phase, Euler’s formula — why phase drives interference.</p>
       </div>
-      <div class="qc-card p-5 shadow-xl">
-        <div class="video-wrap shadow-inner">
-          <iframe src="https://www.youtube.com/embed/ZLAZ6lJ42ak" title="Quantum Applications" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe>
-        </div>
-        <p class="mt-3 text-sm text-slate-300/80">2‑minute overview of where quantum helps.</p>
+    </a>
+
+    <a href="learn_math_tensors.html" class="qc-card qc-card-hover thumb">
+      <div class="thumb-ico"><i class="fa-solid fa-table-cells-large text-2xl"></i></div>
+      <div>
+        <p class="font-extrabold text-lg">Vectors & Matrices</p>
+        <p class="muted mt-1">Statevectors, operators, and how gates transform states.</p>
       </div>
+    </a>
+
+    <a href="learn_math_trigonometry.html" class="qc-card qc-card-hover thumb">
+      <div class="thumb-ico"><i class="fa-solid fa-circle-notch text-2xl"></i></div>
+      <div>
+        <p class="font-extrabold text-lg">Trigonometry</p>
+        <p class="muted mt-1">Rotations, Bloch sphere intuition, and phase as angle.</p>
+      </div>
+    </a>
+  </div>
+</section>
+
+<div class="neon-divider"></div>
+
+<section id="applications" class="max-w-6xl mx-auto">
+  <h2 class="text-3xl font-extrabold mb-2 text-center">Applications</h2>
+  <p class="muted text-center mb-7">Quantum computers don’t replace classical ones — they accelerate specific problems under specific conditions.</p>
+
+  <div class="grid lg:grid-cols-3 gap-6 mt-6">
+    <div class="qc-card p-4 qc-card-hover">
+      <p class="font-extrabold mb-3">Quantum Machine Learning</p>
+      <div class="video-wrap">
+        <iframe src="https://www.youtube.com/embed/hWx2Rws3L-A" title="Quantum Machine Learning" allowfullscreen loading="lazy"></iframe>
+      </div>
+      <p class="muted mt-3">The intersection of Quantum Computing and Machine learning is both fascinating and revolutionary.</p>
     </div>
-  </section>
+
+    <div class="qc-card p-4 qc-card-hover">
+      <p class="font-extrabold mb-3">Quantum Chemistry</p>
+      <div class="video-wrap">
+      <iframe src="https://www.youtube.com/embed/8VnZo8wVMm8?rel=0" title="Quantum Chemistry" allowfullscreen loading="lazy"></iframe>
+      </div>
+      <p class="muted mt-3">Natural fit: quantum systems simulate quantum molecules (hard classically at scale).</p>
+    </div>
+
+    <div class="qc-card p-4 qc-card-hover">
+      <p class="font-extrabold mb-3">Quantum Error Correction</p>
+      <div class="video-wrap">
+        <iframe src="https://www.youtube.com/embed/QuR969uMICM?rel=0" title="Quantum Error Correction" allowfullscreen loading="lazy"></iframe>
+      </div>
+      <p class="muted mt-3">Scaling is fidelity + connectivity + fault tolerance — not just “more qubits.”</p>
+    </div>
+
+    <div class="qc-card p-4 qc-card-hover">
+      <p class="font-extrabold mb-3">Quantum Optimization</p>
+      <div class="video-wrap">
+        <iframe src="https://www.youtube.com/embed/DWY3dB9FHRk?rel=0" title="Quantum Optimization" allowfullscreen loading="lazy"></iframe>
+      </div>
+      <p class="muted mt-3">Hybrid methods compete with strong classical heuristics — benchmarks matter.</p>
+    </div>
+
+    <div class="qc-card p-4 qc-card-hover">
+      <p class="font-extrabold mb-3">Security & Post‑Quantum Crypto</p>
+      <div class="video-wrap">
+        <iframe src="https://www.youtube.com/embed/-UrdExQW0cs?rel=0" title="Post-Quantum Cryptography" allowfullscreen loading="lazy"></iframe>
+      </div>
+      <p class="muted mt-3">Near‑term impact is migration to PQC standards, not instant “break everything.”</p>
+    </div>
+  </div>
 
   <div class="neon-divider"></div>
 
-  <!-- ====== TABS ====== -->
-  <section id="tabs" class="py-8 page">
-    <div class="max-w-7xl mx-auto">
-      <div role="tablist" class="flex flex-wrap gap-2 justify-center">
-        <button class="tab-btn qc-card qc-card-hover px-4 py-2" role="tab" aria-selected="true" aria-controls="tab-overview" id="tab-btn-overview">Overview</button>
-        <button class="tab-btn qc-card qc-card-hover px-4 py-2" role="tab" aria-selected="false" aria-controls="tab-math" id="tab-btn-math">Math Intuition</button>
-      </div>
+  <div class="max-w-6xl mx-auto">
+    <h3 class="text-2xl font-extrabold mb-3">Selected News Articles</h3>
+    <p class="muted mb-5">Hand‑picked links you can skim fast. (These are external sites.)</p>
 
-      <!-- Overview Panel -->
-      <div id="tab-overview" class="tab-panel mt-8 grid lg:grid-cols-12 gap-6" data-active="true" role="tabpanel" aria-labelledby="tab-btn-overview">
-        <article class="qc-card p-6 lg:col-span-5">
-          <h2 class="text-2xl font-bold mb-2">What is Quantum Computing?</h2>
-          <p class="text-slate-300/90">Quantum computing is a new and rapidly evolving computational paradigm rooted in the principles of quantum mechanics. It uses quantum bits (or qubits) that can in <strong>superpositions</strong> of 0 and 1 simultaneously. Combined with <strong>interference</strong> and <strong>entanglement</strong>, quantum programs can explore many possibilities in parallel and find solutions to certain complex problems much faster than classical computers. They're not faster computers; they just work <em>differently</em>. </p>
-          <h2 class="text-xl font-semibold">Key Concepts</h2>
-          <ol class="mt-4 space-y-3 text-slate-300/90">
-            <li class="qc-card qc-card-hover p-3"><span class="font-semibold">Superposition</span> — represent many states at once</li>
-            <li class="qc-card qc-card-hover p-3"><span class="font-semibold">Entanglement</span> — intrinsic relationship between two or more qubits</li>
-            <li class="qc-card qc-card-hover p-3"><span class="font-semibold">Interference</span> — amplifies right answers, cancels wrong ones</li>
-            <li class="qc-card qc-card-hover p-3"><span class="font-semibold">Decoherence</span> — quantum systems collapse due to environmental disturbance</li>
-          </ol>
-        </article> 
-        <!--<aside class="qc-card qc-card-hover p-6 lg:col-span-7">
-        </aside>-->
-      </div>
-
-      <!-- Math Intuition Panel -->
-      <div id="tab-math" class="tab-panel mt-8" role="tabpanel" aria-labelledby="tab-btn-math">
-        <article class="qc-card p-6">
-          <h2 class="text-xl font-semibold mb-4">Math Intuition</h2>
-          <div class="autogrid sm-2 lg-3">
-            <div class="qc-card p-4">
-              <b>Real &amp; Imaginary Numbers</b>
-              <p class="text-slate-300/90 mt-1">Complex numbers, magnitude/phase, Euler's formula.</p>
-              <a class="underline mt-2 inline-block" href="learn_math_real_imag.html">Read more →</a>
-            </div>
-            <div class="qc-card p-4">
-              <b>Tensors</b>
-              <p class="text-slate-300/90 mt-1">Vectors, matrices, tensor products (⊗), and dimensions.</p>
-              <a class="underline mt-2 inline-block" href="learn_math_tensors.html">Read more →</a>
-            </div>
-            <div class="qc-card p-4">
-              <b>Trigonometry</b>
-              <p class="text-slate-300/90 mt-1">Sine/cosine, phase shifts, and periodic signals.</p>
-              <a class="underline mt-2 inline-block" href="learn_math_trigonometry.html">Read more →</a>
-            </div>
-          </div>
-        </article>
-      </div>
+    <div class="grid md:grid-cols-3 gap-5">
+      <a class="read-card" href="https://www.nature.com/articles/s43588-025-00873-y" target="_blank" rel="noreferrer">
+        <p class="font-extrabold">Nature Computational Science</p>
+        <p class="muted mt-1">Quantum Approximate Multi-Objective Optimization</p>
+      </a>
+      <a class="read-card" href="https://quantumzeitgeist.com/quantum-blockchain-security-protocol-achieves-beyond-computational-difficulty/" target="_blank" rel="noreferrer">
+        <p class="font-extrabold">Quantum Zeitgeist</p>
+        <p class="muted mt-1">Quantum Blockchain Protocol Achieves Security Beyond Computational Difficulty</p>
+      </a>
+      <a class="read-card" href="https://www.wired.com/story/youre-not-ready-quantum-cracks/" target="_blank" rel="noreferrer">
+        <p class="font-extrabold">WIRED</p>
+        <p class="muted mt-1">You're not ready for Quantum Cracking</p>
+      </a>
     </div>
-  </section>
+  </div>
+</section>
 
-  <div class="neon-divider"></div>
+<div class="neon-divider"></div>
 
-  <!-- ====== APPLICATIONS ====== -->
-  <section id="applications" class="px-6 py-12 page">
-    <div class="max-w-7xl mx-auto">
-      <h2 class="text-3xl font-bold mb-3 text-center">Applications</h2>
-
-      <!-- Buttons row (centered, wraps on mobile) -->
-      <div class="app-buttons" role="tablist" aria-label="Applications">
-        <button class="app-btn" data-app="qml" aria-selected="true" role="tab"><img src="image/app-image2.png" alt="" class="h-6 w-6"> Machine Learning</button>
-        <button class="app-btn" data-app="finance" aria-selected="false" role="tab"><img src="image/app-image6.png" alt="" class="h-6 w-6"> Finance</button>
-        <button class="app-btn" data-app="physics" aria-selected="false" role="tab"><img src="image/app-image5.png" alt="" class="h-6 w-6"> Physics</button>
-        <button class="app-btn" data-app="logistics" aria-selected="false" role="tab"><img src="image/app-image3.png" alt="" class="h-6 w-6"> Logistics</button>
-        <button class="app-btn" data-app="cyber" aria-selected="false" role="tab"><img src="image/app-image1.png" alt="" class="h-6 w-6"> Cybersecurity</button>
-        <button class="app-btn" data-app="chem" aria-selected="false" role="tab"><img src="image/app-image4.png" alt="" class="h-6 w-6"> Chemistry</button>
-      </div>
-
-      <!-- Instant-appear video panel (single, swaps content) -->
-      <div id="app-panel" class="app-panel qc-card mt-4" role="region" aria-live="polite" aria-label="Application video">
-        <div class="app-panel-inner">
-          <!-- default content (QML) -->
-          <div class="video-wrap shadow-inner" data-app-panel="qml">
-            <iframe src="https://www.youtube.com/embed/hWx2Rws3L-A?si=OjQ1virC-13fYIpp" title="Machine Learning & Quantum" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-          </div>
-          <div class="video-wrap shadow-inner" data-app-panel="cyber" hidden>
-            <iframe src="https://www.youtube.com/embed/-UrdExQW0cs" title="Cybersecurity & Quantum" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-          </div>
-          <div class="video-wrap shadow-inner" data-app-panel="logistics" hidden>
-            <iframe src="https://www.youtube.com/embed/DWY3dB9FHRk" title="Logistics & Quantum" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-          </div>
-          <div class="video-wrap shadow-inner" data-app-panel="chem" hidden>
-            <iframe src="https://www.youtube.com/embed/8VnZo8wVMm8" title="Chemistry & Quantum" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-          </div>
-          <div class="video-wrap shadow-inner" data-app-panel="finance" hidden>
-            <iframe src="https://www.youtube.com/embed/zTK4KRzfSzw" title="Finance & Quantum" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-          </div>
-          <div class="video-wrap shadow-inner" data-app-panel="physics" hidden>
-            <iframe src="https://www.youtube.com/embed/HUr40m_Dda0" title="Physics & Quantum" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-          </div>
-        </div>
-      </div>
-
+<section id="continue" class="max-w-6xl mx-auto">
+  <div class="flex flex-wrap items-end justify-between gap-3 mb-6">
+    <div>
+      <h2 class="text-2xl font-extrabold">Explore Further</h2>
     </div>
-  </section>
+  </div>
 
-  <div class="neon-divider"></div>
+  <div class="grid md:grid-cols-3 gap-6">
+    <div class="qc-card p-6 qc-card-hover">
+      <p class="font-extrabold text-xl">🆕 Spotlight</p>
+      <p class="muted mt-2">Grover’s Algorithm: amplitude amplification + when it helps.</p>
+      <a href="event.html" class="mt-3 font-extrabold inline-flex items-center gap-2">See events <i class="fa-solid fa-arrow-right"></i></a>
+    </div>
+    <div class="qc-card p-6 qc-card-hover">
+      <p class="font-extrabold text-xl">📘 Practice loop</p>
+      <p class="muted mt-2">Build a 2‑qubit circuit, run 1,000 shots, and interpret the histogram.</p>
+      <a href="projects.html" class="mt-3 font-extrabold inline-flex items-center gap-2">See projects <i class="fa-solid fa-arrow-right"></i></a>
+    </div>
+    <div class="qc-card p-6 qc-card-hover">
+      <p class="font-extrabold text-xl">🤝 Learn together</p>
+      <p class="muted mt-2">Join the club and learn with peers — workshops, speakers, and demos.</p>
+      <a href="join.html" class="mt-3 font-extrabold inline-flex items-center gap-2">Join QC@UCI <i class="fa-solid fa-arrow-right"></i></a>
+    </div>
+  </div>
+</section>
 
-  <footer class="mt-10 py-6 bg-gray-800 text-white text-center">
-    <p><a href="./contact_us.html" class="underline">Copyright © 2025 Quantum Computing @ UCI. All Rights Reserved.</a></p>
-  </footer>
+<footer class="mt-16 py-6 bg-gray-800 text-center">
+  <p><a href="./contact_us.html" class="underline">© 2025 Quantum Computing @ UCI</a></p>
+</footer>
 
-  <script>
-    // Space content under the original header (don't modify header styles)
-    function setHeaderHeight(){
-      const h = document.querySelector('header.header') || document.querySelector('header');
-      const px = (h?.offsetHeight || 120) + 'px';
-      document.documentElement.style.setProperty('--qc-header-h', px);
+<button id="backToTop" aria-label="Back to top"><i class="fa-solid fa-arrow-up"></i> Top</button>
+<button id="jumpBtn" aria-label="Jump menu"><i class="fa-solid fa-bolt"></i> Jump</button>
+<div id="jumpMenu" aria-label="Quick jump menu">
+  <div class="jump-item" data-jump="#paths"><span><i class="fa-solid fa-compass"></i>Learning Paths</span><span class="muted">1</span></div>
+  <div class="jump-item" data-jump="#effects"><span><i class="fa-solid fa-atom"></i>Core Principles</span><span class="muted">2</span></div>
+  <div class="jump-item" data-jump="#math"><span><i class="fa-solid fa-square-root-variable"></i>Math Basics</span><span class="muted">3</span></div>
+  <div class="jump-item" data-jump="#applications"><span><i class="fa-solid fa-rocket"></i>Applications</span><span class="muted">4</span></div>
+  <div class="jump-item" data-jump="#continue"><span><i class="fa-solid fa-repeat"></i>Explore</span><span class="muted">5</span></div>
+</div>
+
+<script>
+  function setHeaderHeight(){
+    const h = document.querySelector('header.header') || document.querySelector('header');
+    document.documentElement.style.setProperty('--qc-header-h', (h?.offsetHeight || 120) + 'px');
+  }
+  setHeaderHeight();
+  window.addEventListener('resize', setHeaderHeight);
+
+  // Accordion behavior
+  document.querySelectorAll('.accordion-toggle').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const content = btn.parentElement.querySelector('.accordion-content');
+      content.classList.toggle('active');
+      const icon = btn.querySelector('i');
+      if(icon) icon.classList.toggle('fa-rotate-180');
+    });
+  });
+
+  // Scrollspy
+  const spyLinks = Array.from(document.querySelectorAll('.navchip[data-spy]'));
+  const spyIds = ['paths','effects','math','applications','continue'];
+  const spyTargets = spyIds.map(id => document.getElementById(id)).filter(Boolean);
+
+  const spyObserver = new IntersectionObserver((entries)=>{
+    const visible = entries.filter(e => e.isIntersecting).sort((a,b)=> b.intersectionRatio - a.intersectionRatio)[0];
+    if(!visible) return;
+    const id = visible.target.id;
+    spyLinks.forEach(a => a.classList.toggle('active', a.dataset.spy === id));
+  }, { threshold: [0.18, 0.28, 0.38, 0.5] });
+
+  spyTargets.forEach(el => spyObserver.observe(el));
+
+  // Floating controls
+  const topBtn = document.getElementById('backToTop');
+  const jumpBtn = document.getElementById('jumpBtn');
+  const jumpMenu = document.getElementById('jumpMenu');
+
+  function updateFloating(){
+    const show = window.scrollY > 650;
+    topBtn.style.display = show ? 'block' : 'none';
+    jumpBtn.style.display = show ? 'block' : 'none';
+    if(!show) jumpMenu.style.display = 'none';
+  }
+  window.addEventListener('scroll', updateFloating);
+  updateFloating();
+
+  topBtn.addEventListener('click', () => window.scrollTo({top:0, behavior:'smooth'}));
+
+  jumpBtn.addEventListener('click', () => {
+    jumpMenu.style.display = (jumpMenu.style.display === 'block') ? 'none' : 'block';
+  });
+
+  document.querySelectorAll('.jump-item').forEach(item => {
+    item.addEventListener('click', () => {
+      const target = item.dataset.jump;
+      jumpMenu.style.display = 'none';
+      document.querySelector(target)?.scrollIntoView({behavior:'smooth', block:'start'});
+    });
+  });
+
+  document.addEventListener('click', (e) => {
+    if(!jumpMenu.contains(e.target) && e.target !== jumpBtn && !jumpBtn.contains(e.target)){
+      jumpMenu.style.display = 'none';
     }
-    setHeaderHeight();
-    window.addEventListener('resize', setHeaderHeight);
+  });
+</script>
 
-    // Tabs logic (Overview / Math)
-    const tabButtons = document.querySelectorAll('[role="tab"].tab-btn');
-    const panels = { overview: document.getElementById('tab-overview'), math: document.getElementById('tab-math') };
-    tabButtons.forEach(btn=>btn.addEventListener('click', ()=>{
-      const id = btn.id.replace('tab-btn-','');
-      tabButtons.forEach(b=>b.setAttribute('aria-selected', String(b===btn)));
-      Object.values(panels).forEach(p=>p && p.setAttribute('data-active','false'));
-      panels[id]?.setAttribute('data-active','true');
-    }));
-
-    // --- Applications: buttons + single panel (instant swap, no animation) ---
-    const appBtns = Array.from(document.querySelectorAll('.app-btn'));
-    const appViews = Array.from(document.querySelectorAll('[data-app-panel]'));
-    const appPanel = document.getElementById('app-panel');
-
-    function showApp(key){
-      appBtns.forEach(b=> b.setAttribute('aria-selected', String(b.dataset.app===key)));
-      appViews.forEach(v=>{
-        const isTarget = v.dataset.appPanel === key;
-        if(isTarget){ v.hidden = false; }
-        else{
-          // Pause hidden videos by resetting src if they were visible
-          if(!v.hidden){
-            const iframe = v.querySelector('iframe');
-            iframe.src = iframe.src;
-          }
-          v.hidden = true;
-        }
-      });
-      appPanel.classList.add('active');
-    }
-
-    appBtns.forEach(b=> b.addEventListener('click', ()=> showApp(b.dataset.app)) );
-    showApp(document.querySelector('.app-btn[aria-selected="true"]').dataset.app);
-  </script>
 </body>
 </html>
