@@ -69,6 +69,101 @@
     .filter-btn svg { width: 1rem; height: 1rem; vertical-align: middle; }
 
     #calendar-grid button { height: 2.2rem; }
+  
+    /* ===== Calendar Spotlight ===== */
+    .calendar-spotlight{
+      background:
+        radial-gradient(900px 360px at 20% 0%, rgba(99,102,241,.16), transparent 60%),
+        radial-gradient(900px 360px at 80% 0%, rgba(56,189,248,.14), transparent 60%),
+        linear-gradient(#ffffff, #f8fafc);
+      border: 1px solid rgba(2,6,23,.06);
+      box-shadow: 0 18px 55px rgba(2,6,23,.10);
+    }
+    .cal-shell{
+      border: 1px solid rgba(2,6,23,.08);
+      background: rgba(255,255,255,.72);
+      backdrop-filter: blur(8px);
+    }
+    .cal-weekday{
+      font-size: .72rem;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      color: rgba(15,23,42,.65);
+      padding: .35rem 0;
+      user-select: none;
+    }
+    .cal-day{
+      height: 3.05rem;
+      border-radius: .85rem;
+      border: 1px solid rgba(2,6,23,.06);
+      background: #fff;
+      position: relative;
+      transition: transform .12s ease, box-shadow .2s ease, background .2s ease, border-color .2s ease;
+    }
+    .cal-day:hover:enabled{
+      transform: translateY(-1px);
+      box-shadow: 0 10px 20px rgba(2,6,23,.10);
+      border-color: rgba(99,102,241,.22);
+      background: #fbfdff;
+    }
+    .cal-day:disabled{
+      opacity: .35;
+      cursor: not-allowed;
+      background: rgba(248,250,252,.7);
+    }
+    .cal-day.selected{
+      outline: 2px solid rgba(99,102,241,.55);
+      outline-offset: 2px;
+      box-shadow: 0 14px 32px rgba(99,102,241,.18);
+    }
+    .cal-day .day-num{
+      position:absolute;
+      top:.45rem;
+      left:.55rem;
+      font-size:.85rem;
+      font-weight:700;
+      color:#0f172a;
+    }
+    .cal-day .event-count{
+      position:absolute;
+      top:.45rem;
+      right:.55rem;
+      font-size:.7rem;
+      font-weight:800;
+      padding:.1rem .45rem;
+      border-radius:9999px;
+      background: rgba(99,102,241,.12);
+      border: 1px solid rgba(99,102,241,.22);
+      color:#3730a3;
+    }
+    .cal-dots{
+      position:absolute;
+      left:50%;
+      transform:translateX(-50%);
+      bottom:.55rem;
+      display:flex;
+      gap:4px;
+      align-items:center;
+      justify-content:center;
+    }
+    .day-events{
+      border: 1px solid rgba(2,6,23,.08);
+      background:#fff;
+    }
+    .day-events .item{
+      border:1px solid rgba(2,6,23,.06);
+      transition: transform .12s ease, box-shadow .2s ease, border-color .2s ease;
+    }
+    .day-events .item:hover{
+      transform: translateY(-1px);
+      box-shadow: 0 10px 18px rgba(2,6,23,.08);
+      border-color: rgba(99,102,241,.22);
+    }
+    .kbd-hint{
+      font-size:.72rem;
+      color: rgba(15,23,42,.62);
+    }
+
   </style>
 </head>
 <body class="bg-gray-50">
@@ -134,65 +229,100 @@
     </div>
   </section>
 
+  
   <!-- ======= UPCOMING / PAST CONTAINERS ======= -->
   <main class="max-w-7xl mx-auto px-6 py-10">
-    <div class="grid lg:grid-cols-12 gap-6">
-      <!-- LEFT -->
-      <section class="lg:col-span-8" id="upcoming-col">
-        <div id="upcoming" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
-      </section>
+    <!-- Calendar Spotlight (centerpiece) -->
+    <section id="calendar-spotlight" class="calendar-spotlight rounded-3xl p-5 sm:p-7" aria-label="Events Calendar">
+      <div class="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-4">
+        <div>
+          <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">Club Calendar</h2>
+          <p class="mt-1 text-sm sm:text-base text-slate-600">
+            Click a day to see what’s happening, then click an event to open the full details.
+          </p>
+          <p class="mt-1 kbd-hint">Tip: Use the filters above to narrow categories—colors match the legend.</p>
+        </div>
 
-      <!-- RIGHT: Next up + Calendar -->
-      <aside id="aside" class="lg:col-span-4 space-y-6" aria-label="Upcoming tools">
-        <section class="rounded-xl bg-white border border-black/5 p-5 shadow-sm">
-          <div class="flex items-center justify-between">
+        <!-- Subscribe buttons (kept) -->
+        <div id="calendar-subscribe" class="flex flex-wrap items-center gap-2">
+          <a id="btn-add-gcal"
+             href="#"
+             target="_blank"
+             class="inline-flex items-center gap-2 rounded-xl px-4 py-2 bg-indigo-600 text-white text-sm font-semibold hover:bg-indigo-500">
+            <i class="fa-regular fa-calendar-plus"></i> Add Full Calendar
+          </a>
+          <a id="btn-sub-ics"
+             href="#"
+             class="inline-flex items-center gap-2 rounded-xl px-4 py-2 bg-white ring-1 ring-black/10 text-sm font-semibold hover:bg-slate-50">
+            <i class="fa-regular fa-calendar"></i> Subscribe (iCal)
+          </a>
+        </div>
+      </div>
+
+      <div class="mt-5 grid lg:grid-cols-12 gap-5 items-start">
+        <!-- Big calendar -->
+        <div class="lg:col-span-8 cal-shell rounded-2xl p-4 sm:p-5">
+          <div class="flex items-center justify-between gap-3">
             <button id="cal-prev" class="filter-btn" aria-label="Previous month">
               <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M15.5 4.5a1 1 0 0 1 .7 1.7L10.4 12l5.8 5.8a1 1 0 1 1-1.4 1.4l-6.5-6.5a1 1 0 0 1 0-1.4l6.5-6.5a1 1 0 0 1 .7-.3z"/></svg>
             </button>
-            <div id="cal-title" class="font-semibold"></div>
+            <div class="text-center">
+              <div id="cal-title" class="text-lg sm:text-xl font-bold text-slate-900"></div>
+              <div class="text-xs text-slate-500 mt-0.5">Tap a day to load events</div>
+            </div>
             <button id="cal-next" class="filter-btn" aria-label="Next month">
               <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8.5 19.5a1 1 0 0 1-.7-1.7L13.6 12 7.8 6.2a1 1 0 1 1 1.4-1.4l6.5 6.5a1 1 0 0 1 0 1.4l-6.5 6.5a1 1 0 0 1-.7.3z"/></svg>
             </button>
           </div>
-          <div id="calendar-grid" class="mt-3 grid grid-cols-7 gap-1 text-center text-sm"></div>
-          <p class="mt-2 text-xs text-slate-500">Click a date dot to jump to events.</p>
 
-          <!-- Legend (kept) -->
-          <div id="calendar-legend" class="mt-2 flex flex-wrap gap-4 items-center text-xs text-slate-600">
+          <div id="calendar-grid" class="mt-4 grid grid-cols-7 gap-2 text-center"></div>
+
+          <!-- Legend (kept + centered) -->
+          <div id="calendar-legend" class="mt-4 flex flex-wrap gap-4 items-center justify-center text-xs text-slate-600">
             <span class="inline-flex items-center gap-1">
-              <span class="inline-block w-2 h-2 rounded-full" style="background:#10b981"></span> Workshop
+              <span class="inline-block w-2.5 h-2.5 rounded-full" style="background:#10b981"></span> Workshop
             </span>
             <span class="inline-flex items-center gap-1">
-              <span class="inline-block w-2 h-2 rounded-full" style="background:#ef4444"></span> Guest
+              <span class="inline-block w-2.5 h-2.5 rounded-full" style="background:#ef4444"></span> Guest
             </span>
             <span class="inline-flex items-center gap-1">
-              <span class="inline-block w-2 h-2 rounded-full" style="background:#f59e0b"></span> Social
+              <span class="inline-block w-2.5 h-2.5 rounded-full" style="background:#f59e0b"></span> Social
             </span>
             <span class="inline-flex items-center gap-1">
-              <span class="inline-block w-2 h-2 rounded-full" style="background:#3b82f6"></span> Event
+              <span class="inline-block w-2.5 h-2.5 rounded-full" style="background:#3b82f6"></span> Event
             </span>
           </div>
+        </div>
 
-          <!-- NEW: Subscribe buttons -->
-          <div id="calendar-subscribe" class="mt-3 flex flex-wrap items-center gap-2">
-            <a id="btn-add-gcal"
-               href="#"
-               target="_blank"
-               class="inline-flex items-center gap-2 rounded-lg px-3 py-2 bg-indigo-600 text-white text-sm font-semibold hover:bg-indigo-500">
-              <i class="fa-regular fa-calendar-plus"></i> Add Full Calendar
-            </a>
-            <a id="btn-sub-ics"
-               href="#"
-               class="inline-flex items-center gap-2 rounded-lg px-3 py-2 bg-white ring-1 ring-black/10 text-sm font-semibold hover:bg-slate-50">
-              <i class="fa-regular fa-calendar"></i> Subscribe (iCal)
-            </a>
-          </div>
-        </section>
-      </aside>
-    </div>
+        <!-- Events on selected day -->
+        <div class="lg:col-span-4">
+          <section class="day-events rounded-2xl p-4 sm:p-5 shadow-sm">
+            <div class="flex items-start justify-between gap-3">
+              <div>
+                <h3 class="text-lg font-bold text-slate-900">Events on <span id="day-title">—</span></h3>
+                <p class="text-sm text-slate-600 mt-1">Click an event to open details.</p>
+              </div>
+              <button id="day-clear" class="filter-btn" type="button" aria-label="Clear selected date">Clear</button>
+            </div>
+            <div id="day-events" class="mt-4 space-y-3">
+              <p class="text-sm text-slate-500">Select a date with dots to view events here.</p>
+            </div>
+          </section>
+        </div>
+      </div>
+    </section>
+
+    <!-- Upcoming cards -->
+    <section class="mt-10" id="upcoming-col">
+      <div class="flex items-end justify-between gap-3 flex-wrap">
+        <h2 class="text-xl sm:text-2xl font-extrabold text-slate-900">Upcoming</h2>
+        <p class="text-sm text-slate-600">Or browse the next two weeks in cards.</p>
+      </div>
+      <div id="upcoming" class="mt-5 grid sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+    </section>
 
     <!-- PAST -->
-    <section id="past" class="hidden mt-6">
+    <section id="past" class="hidden mt-10">
       <div class="timeline space-y-6" id="past-timeline"></div>
     </section>
 
@@ -210,7 +340,7 @@
     </section>
   </main>
 
-  <!-- ======= MODAL ======= -->
+<!-- ======= MODAL ======= -->
   <div id="modal-1" class="modal" role="dialog" aria-modal="true" aria-label="Event Details">
     <div class="modal-card">
       <div class="p-5 border-b border-black/5 flex items-start justify-between gap-4">
@@ -221,7 +351,7 @@
         <button class="filter-btn close-modal" aria-label="Close"><i class="fa-solid fa-xmark"></i></button>
       </div>
       <div class="p-5">
-        <ul id="modal-body" class="list-disc list-inside text-slate-700 text-sm space-y-1"></ul>
+        <div id="modal-body" class="text-slate-700 text-sm leading-relaxed space-y-3"></div>
       </div>
       <div class="p-5 border-t border-black/5 bg-slate-50 flex items-center justify-end gap-2" id="modal-actions"></div>
     </div>
@@ -320,7 +450,86 @@
       if(cat==='guest') return 'red';
       return 'blue';
     }
-    function createUpcomingCard(evt){
+    
+    function buildEventProse(evt, moreLines){
+      const dateText = fmtDate(evt.start);
+      const timeText = evt.start.__allday ? 'All day' : `${fmtTime(evt.start)}${evt.end? ' – ' + fmtTime(evt.end) : ''}`;
+      const locText  = (evt.location || '').trim();
+
+      // Description in prose (no bullets): prefer the preview part + extra lines (joined into sentences).
+      const raw = (evt.description || '').replace(/\r/g,'');
+      const parts = raw.split(/\[More Details\]/i);
+      const preview = (parts[0] || '').trim().replace(/\n+/g,' ');
+      const more = Array.isArray(moreLines) ? moreLines : ((parts[1]||'').trim() ? (parts[1]||'').split(/\n+/).map(s=>s.trim()).filter(Boolean) : []);
+      const moreSentence = more.length ? more.join(' ') : '';
+      const desc = (preview || moreSentence || (evt.description || '').trim().replace(/\n+/g,' ') || 'Details will be announced soon.');
+
+      const metaBits = [];
+      metaBits.push(`📅 <strong>${dateText}</strong>`);
+      metaBits.push(`⏰ <strong>${timeText}</strong>`);
+      if (locText) metaBits.push(`📍 <strong>${locText}</strong>`);
+
+      return `
+        <p class="text-sm text-slate-700"><span class="font-semibold">${toTitleCase(evt.category || 'event')}</span> · ${metaBits.join(' &nbsp;·&nbsp; ')}</p>
+        <p class="text-sm text-slate-700">📝 ${escapeHTML(desc)}</p>
+      `;
+    }
+
+    function escapeHTML(str){
+      return String(str||'')
+        .replace(/&/g,'&amp;')
+        .replace(/</g,'&lt;')
+        .replace(/>/g,'&gt;')
+        .replace(/"/g,'&quot;')
+        .replace(/'/g,'&#039;');
+    }
+
+    function openEventModal(evt, cardEl){
+      const modal = document.getElementById('modal-1');
+      const mt = document.getElementById('modal-title');
+      const ms = document.getElementById('modal-subtitle');
+      const mb = document.getElementById('modal-body');
+      const ma = document.getElementById('modal-actions');
+
+      mt.textContent = evt.title;
+
+      // Subtitle kept short; the emoji-rich details live in the prose body.
+      ms.textContent = evt.category ? `${toTitleCase(evt.category)}` : 'Event';
+
+      // Pull "more details" lines if present (from card dataset) for richer prose.
+      let moreData = null;
+      if (cardEl && cardEl.dataset && cardEl.dataset.more){
+        try{ moreData = JSON.parse(cardEl.dataset.more); }catch(e){ moreData = null; }
+      }
+
+      mb.innerHTML = buildEventProse(evt, moreData);
+
+      ma.innerHTML = '';
+      if (evt.url){
+        const a = document.createElement('a');
+        a.href = evt.url; a.target = '_blank';
+        a.className = 'inline-flex items-center gap-2 rounded-lg px-3 py-2 bg-slate-900 text-white text-sm font-semibold hover:bg-slate-800';
+        a.innerHTML = '<i class="fa-solid fa-ticket"></i> RSVP';
+        ma.appendChild(a);
+      }
+      const btn = document.createElement('button');
+      btn.className = 'inline-flex items-center gap-2 rounded-lg px-3 py-2 bg-white ring-1 ring-black/10 text-sm font-semibold hover:bg-slate-50 add-to-cal';
+      btn.innerHTML = '<i class="fa-regular fa-calendar-plus"></i> Add to Calendar';
+      btn.addEventListener('click', ()=>{
+        const ics = makeICS({
+          title: evt.title,
+          start: toICSDate(evt.start),
+          end: evt.end? toICSDate(evt.end) : toICSDate(new Date(evt.start.getTime()+60*60*1000)),
+          location: evt.location || ''
+        });
+        downloadICS(ics, `${evt.title.replace(/\s+/g,'_')}.ics`);
+      });
+      ma.appendChild(btn);
+
+      modal.classList.add('open');
+      wireModalClose();
+    }
+function createUpcomingCard(evt){
       const dateLabel = fmtDate(evt.start);
       const timeLabel = evt.start.__allday ? 'All day' : `${fmtTime(evt.start)}${evt.end? ' – ' + fmtTime(evt.end) : ''}`;
       // Split description at marker '[More Details]'. Text before marker is preview; after marker goes to modal as bullets.
@@ -412,50 +621,15 @@
       }
       const detailsBtn = card.querySelector('.details-btn');
       if (detailsBtn){
-        detailsBtn.addEventListener('click', ()=>{
-          const modal = document.getElementById('modal-1');
-          const mt = document.getElementById('modal-title');
-          const ms = document.getElementById('modal-subtitle');
-          const mb = document.getElementById('modal-body');
-          const ma = document.getElementById('modal-actions');
-          mt.textContent = evt.title;
-          ms.innerHTML = `${fmtDate(evt.start)} · ${evt.start.__allday? 'All day' : `${fmtTime(evt.start)}${evt.end? ' – ' + fmtTime(evt.end) : ''}`} ${evt.location? ' · ' + evt.location: ''}`;
-          mb.innerHTML = '';
-          // If the card stored a `data-more` JSON array, use that for the modal bullets.
-          const moreData = card.dataset.more ? (function(){ try{ return JSON.parse(card.dataset.more); }catch(e){ return null; } })() : null;
-          if (Array.isArray(moreData) && moreData.length){
-            moreData.slice(0,20).forEach(line=>{ const li = document.createElement('li'); li.textContent = line; mb.appendChild(li); });
-          } else {
-            // Fallback: if the full description contains a marker, take everything after marker and split lines.
-            const raw = (evt.description || '').replace(/\r/g,'');
-            const parts = raw.split(/\[More Details\]/i);
-            const after = (parts[1] || '').trim();
-            if (after){ after.split(/\n+/).map(s=>s.trim()).filter(Boolean).slice(0,20).forEach(line=>{ const li = document.createElement('li'); li.textContent = line; mb.appendChild(li); }); }
-            else { const li = document.createElement('li'); li.textContent = (evt.description || 'Details will be announced soon.'); mb.appendChild(li); }
-          }
-           ma.innerHTML = '';
-           if (evt.url){
-             const a = document.createElement('a');
-             a.href = evt.url; a.target = '_blank';
-             a.className = 'inline-flex items-center gap-2 rounded-lg px-3 py-2 bg-slate-900 text-white text-sm font-semibold hover:bg-slate-800';
-             a.innerHTML = '<i class="fa-solid fa-ticket"></i> RSVP';
-             ma.appendChild(a);
-           }
-           const btn = document.createElement('button');
-           btn.className = 'inline-flex items-center gap-2 rounded-lg px-3 py-2 bg-white ring-1 ring-black/10 text-sm font-semibold hover:bg-slate-50 add-to-cal';
-           btn.innerHTML = '<i class="fa-regular fa-calendar-plus"></i> Add to Calendar';
-           btn.addEventListener('click', ()=>{
-             const ics = makeICS({ title: evt.title, start: toICSDate(evt.start), end: evt.end? toICSDate(evt.end) : toICSDate(new Date(evt.start.getTime()+60*60*1000)), location: evt.location || '' });
-             downloadICS(ics, `${evt.title.replace(/\s+/g,'_')}.ics`);
-           });
-           ma.appendChild(btn);
+        
+detailsBtn.addEventListener('click', ()=>{
+          openEventModal(evt, card);
+        });
+      }
+}
 
-           modal.classList.add('open');
-         });
-       }
-     }
-
-    let ALL_EVENTS = [];
+        let SELECTED_DATE = null;
+let ALL_EVENTS = [];
     let FOCUS_DATE = null;
 
     async function loadCalendar(){
@@ -484,7 +658,8 @@
     }
 
     function renderAll(){
-      const { upcoming, past } = splitUpcomingPast(filterBySearchAndCategory(ALL_EVENTS));
+      const filtered = filterBySearchAndCategory(ALL_EVENTS);
+      const { upcoming, past } = splitUpcomingPast(filtered);
       const activeCategory = currentCategory();
       let upToShow = upcoming;
 
@@ -505,7 +680,7 @@
       pt.innerHTML = '';
       past.forEach(evt => pt.appendChild(createPastTimelineItem(evt)));
 
-      const now = new Date(); renderCalendar(now.getMonth(), now.getFullYear(), upcoming);
+      const now = new Date(); renderCalendar(now.getMonth(), now.getFullYear(), filtered);
       wireModalClose();
 
       if (FOCUS_DATE){
@@ -545,18 +720,35 @@
     }));
     search.addEventListener('input', ()=>{ FOCUS_DATE = null; renderAll(); });
 
+    
     const tabBtns = document.querySelectorAll('[data-tab]');
-    const upcomingContainer = document.getElementById('upcoming');
+    const upcomingContainer = document.getElementById('upcoming-col');
     const pastSection = document.getElementById('past');
+    const calSpotlight = document.getElementById('calendar-spotlight');
+
     tabBtns.forEach(btn=>btn.addEventListener('click', ()=>{
-      tabBtns.forEach(b=>b.setAttribute('aria-pressed','false')); btn.setAttribute('aria-pressed','true');
-      const tab = btn.dataset.tab; if(tab==='past'){ upcomingContainer.classList.add('hidden'); pastSection.classList.remove('hidden'); document.getElementById('aside').classList.add('hidden'); } else { pastSection.classList.add('hidden'); upcomingContainer.classList.remove('hidden'); document.getElementById('aside').classList.remove('hidden'); }
+      tabBtns.forEach(b=>b.setAttribute('aria-pressed','false'));
+      btn.setAttribute('aria-pressed','true');
+      const tab = btn.dataset.tab;
+
+      if(tab==='past'){
+        if (upcomingContainer) upcomingContainer.classList.add('hidden');
+        if (calSpotlight) calSpotlight.classList.add('hidden');
+        if (pastSection) pastSection.classList.remove('hidden');
+      } else {
+        if (pastSection) pastSection.classList.add('hidden');
+        if (calSpotlight) calSpotlight.classList.remove('hidden');
+        if (upcomingContainer) upcomingContainer.classList.remove('hidden');
+      }
       window.scrollTo({ top: document.querySelector('.hero').offsetHeight, behavior:'smooth' });
     }));
 
-    function renderCalendar(month, year, events){
+function renderCalendar(month, year, events){
       const grid  = document.getElementById('calendar-grid');
       const title = document.getElementById('cal-title');
+      const dayTitle = document.getElementById('day-title');
+      const dayList = document.getElementById('day-events');
+      const clearBtn = document.getElementById('day-clear');
       if(!grid || !title) return;
 
       grid.innerHTML = '';
@@ -564,9 +756,19 @@
       const last  = new Date(year, month+1, 0);
       title.textContent = first.toLocaleDateString(undefined,{month:'long', year:'numeric'});
 
+      // Weekday headers
+      const week = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+      week.forEach(w=>{
+        const h = document.createElement('div');
+        h.className = 'cal-weekday';
+        h.textContent = w;
+        grid.appendChild(h);
+      });
+
+      // Offset for first day (after header row)
       for(let i=0;i<first.getDay();i++){
         const cell=document.createElement('div');
-        cell.className='h-8';
+        cell.className='h-10';
         grid.appendChild(cell);
       }
 
@@ -578,38 +780,74 @@
         }
       });
 
+      function setSelectedDate(d){
+        SELECTED_DATE = d;
+        FOCUS_DATE = d;
+
+        // Highlight selected cell
+        [...grid.querySelectorAll('button.cal-day')].forEach(b=>{
+          b.classList.toggle('selected', b.dataset.date === d.toISOString().slice(0,10));
+        });
+
+        // Populate day list (clickable events)
+        if (dayTitle) dayTitle.textContent = fmtDate(d);
+        if (dayList){
+          const dayEvents = (eventsByDay[d.getDate()] || []).slice().sort((a,b)=>a.start-b.start);
+          dayList.innerHTML = '';
+          if (!dayEvents.length){
+            dayList.innerHTML = '<p class="text-sm text-slate-500">No events on this day (with current filters).</p>';
+          } else {
+            dayEvents.forEach(evt=>{
+              const item = document.createElement('button');
+              item.type = 'button';
+              item.className = 'item w-full text-left rounded-xl p-3 bg-white';
+              item.style.borderLeft = `6px solid ${categoryColor(evt.category)}`;
+              const timeText = evt.start.__allday ? 'All day' : `${fmtTime(evt.start)}${evt.end? ' – ' + fmtTime(evt.end) : ''}`;
+              item.innerHTML = `
+                <div class="flex items-start justify-between gap-3">
+                  <div>
+                    <div class="inline-flex items-center gap-2">
+                      <span class="badge ${badgeClass(evt.category)}">${evt.category? toTitleCase(evt.category) : 'Event'}</span>
+                      <span class="text-sm font-semibold text-slate-900">${evt.title}</span>
+                    </div>
+                    <div class="mt-1 text-xs text-slate-600">⏰ ${timeText}${evt.location ? ` &nbsp;·&nbsp; 📍 ${evt.location}` : ''}</div>
+                  </div>
+                  <span class="text-xs text-slate-500 mt-1">Open</span>
+                </div>
+              `;
+              item.addEventListener('click', ()=> openEventModal(evt, null));
+              dayList.appendChild(item);
+            });
+          }
+        }
+      }
+
+      // Day cells
       for(let day=1; day<=last.getDate(); day++){
         const cell=document.createElement('button');
-        cell.className='h-8 rounded-md hover:bg-slate-100 relative flex items-center justify-center';
+        cell.type = 'button';
+        cell.className='cal-day';
+        const ymd = new Date(year, month, day).toISOString().slice(0,10);
+        cell.dataset.date = ymd;
         cell.setAttribute('aria-label', `Day ${day}`);
-        cell.innerHTML=`<span class="text-xs">${day}</span>`;
+        cell.innerHTML = `<span class="day-num">${day}</span>`;
 
-        if(eventsByDay[day]){
-          const cats = Array.from(new Set(eventsByDay[day].map(e=>e.category || 'event')));
+        const dayEvents = eventsByDay[day] || [];
+        if(dayEvents.length){
+          const cats = Array.from(new Set(dayEvents.map(e=>e.category || 'event')));
           const rail = document.createElement('div');
-          rail.style.cssText = 'position:absolute; left:50%; transform:translateX(-50%); bottom:3px; display:flex; gap:3px;';
-          cats.forEach(cat=>{
+          rail.className = 'cal-dots';
+          cats.slice(0,4).forEach(cat=>{
             const dot = document.createElement('span');
-            dot.style.cssText = `width:6px; height:6px; border-radius:9999px; background:${categoryColor(cat)}; box-shadow:0 0 0 1px rgba(0,0,0,.06) inset;`;
+            dot.style.cssText = `width:7px; height:7px; border-radius:9999px; background:${categoryColor(cat)}; box-shadow:0 0 0 1px rgba(0,0,0,.08) inset;`;
             dot.title = cat;
             rail.appendChild(dot);
           });
           cell.appendChild(rail);
-
-          cell.addEventListener('click', ()=>{
+cell.addEventListener('click', ()=>{
             const upcomingTabBtn = document.querySelector('[data-tab="upcoming"]');
             if (upcomingTabBtn) upcomingTabBtn.click();
-
-            const allBtn = document.querySelector('[data-filter="all"]');
-            if (allBtn){
-              document.querySelectorAll('[data-filter]').forEach(x=>x.setAttribute('aria-pressed','false'));
-              allBtn.setAttribute('aria-pressed','true');
-            }
-            const searchInput = document.getElementById('search');
-            if (searchInput){ searchInput.value = ''; }
-
-            FOCUS_DATE = new Date(year, month, day);
-            renderAll();
+            setSelectedDate(new Date(year, month, day));
           });
         } else {
           cell.disabled = true;
@@ -618,10 +856,36 @@
         grid.appendChild(cell);
       }
 
+      // prev/next month navigation
       const prev = document.getElementById('cal-prev');
       const next = document.getElementById('cal-next');
-      prev.onclick = ()=>{ const m = month===0?11:month-1; const y = month===0?year-1:year; renderCalendar(m,y,events); };
-      next.onclick = ()=>{ const m = month===11?0:month+1; const y = month===11?year+1:year; renderCalendar(m,y,events); };
+      if (prev) prev.onclick = ()=>{ const m = month===0?11:month-1; const y = month===0?year-1:year; renderCalendar(m,y,events); };
+      if (next) next.onclick = ()=>{ const m = month===11?0:month+1; const y = month===11?year+1:year; renderCalendar(m,y,events); };
+
+      // clear selected day
+      if (clearBtn){
+        clearBtn.onclick = ()=>{
+          SELECTED_DATE = null;
+          FOCUS_DATE = null;
+          if (dayTitle) dayTitle.textContent = '—';
+          if (dayList) dayList.innerHTML = '<p class="text-sm text-slate-500">Select a date with dots to view events here.</p>';
+          [...grid.querySelectorAll('button.cal-day')].forEach(b=>b.classList.remove('selected'));
+        };
+      }
+
+      // If we already have a selected date within this month/year, reselect it.
+      if (SELECTED_DATE && SELECTED_DATE.getMonth()===month && SELECTED_DATE.getFullYear()===year){
+        setSelectedDate(new Date(SELECTED_DATE.getFullYear(), SELECTED_DATE.getMonth(), SELECTED_DATE.getDate()));
+      } else {
+        // Default: auto-select the first day with events in the month (keeps the spotlight feeling alive).
+        const firstWithEvents = Object.keys(eventsByDay).map(Number).sort((a,b)=>a-b)[0];
+        if (firstWithEvents){
+          setSelectedDate(new Date(year, month, firstWithEvents));
+        } else {
+          if (dayTitle) dayTitle.textContent = '—';
+          if (dayList) dayList.innerHTML = '<p class="text-sm text-slate-500">No events in this month (with current filters).</p>';
+        }
+      }
     }
 
     function categoryColor(cat){
@@ -662,19 +926,6 @@
       });
     }, { threshold: .6 });
     counters.forEach(c=>io.observe(c));
-
-    (function(){
-      const aside = document.getElementById('aside');
-      const tabBtns = document.querySelectorAll('[data-tab]');
-      function updateAsideVisibility(){
-        const active = document.querySelector('[data-tab][aria-pressed="true"]');
-        if(!aside || !active) return;
-        if(active.dataset.tab === 'past'){ aside.classList.add('hidden'); }
-        else { aside.classList.remove('hidden'); }
-      }
-      updateAsideVisibility();
-      tabBtns.forEach(btn=>btn.addEventListener('click', ()=> setTimeout(updateAsideVisibility, 0)));
-    })();
 
     (function(){
       function applyOffsets(){
