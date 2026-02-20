@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<script crossorigin="anonymous" src="https://kit.fontawesome.com/2d323a629b.js"></script>
+<script defer crossorigin="anonymous" src="https://kit.fontawesome.com/2d323a629b.js"></script>
 <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900&display=swap" rel="stylesheet"/>
 <link href="css/tailwind_style.css" rel="stylesheet"/>
 <link href="css/style.css" rel="stylesheet"/>
@@ -12,9 +12,13 @@
   :root { --ink:#e5e7eb; --muted:#9ca3af; --edge:#1f2937; --accent:#0ea5e9; --bg:#0b1020; }
   html, body { background: var(--bg); color: var(--ink); font-family: 'Roboto', system-ui, -apple-system, Segoe UI, Helvetica, Arial; margin:0; }
   .header { position: sticky; top: 0; backdrop-filter: saturate(140%) blur(8px); background: linear-gradient(180deg, rgba(10,15,35,0.85), rgba(10,15,35,0.55)); border-bottom: 1px solid rgba(255,255,255,0.08); padding: 10px 18px; display:flex; align-items:center; justify-content:space-between; z-index:10; }
-  .header__nav { display:flex; gap:18px; list-style:none; padding:0; margin:0; font-weight:500; }
+  .header__nav { display:flex; gap:18px; list-style:none; padding:0; margin:0; font-weight:500; flex-wrap:wrap; row-gap:8px; }
   .header__nav a { color:#d1d5db; position:relative; padding:8px 10px; border-radius:10px; }
   .header__nav a:hover { color:#fff; }
+  @media (max-width: 900px){
+    .header { flex-direction:column; align-items:flex-start; gap:10px; }
+    .header__nav { justify-content:flex-start; }
+  }
   main { max-width: 900px; margin: 40px auto; padding: 0 16px 60px; }
   h1 { font-size: clamp(1.8rem, 3.5vw, 2.6rem); margin: 0 0 6px; }
   .meta { color: var(--muted); margin-bottom: 24px; }
@@ -29,14 +33,20 @@
   .back i { font-size: 14px; }
   hr { border: 0; height: 1px; background: linear-gradient(90deg, transparent, rgba(255,255,255,.15), transparent); margin: 28px 0; }
 </style>
+  <link rel="stylesheet" href="css/site-header.css?v=20260220a">
+  <script defer src="js/site-header.js?v=20260220a"></script>
 </head>
 <body>
-  <header class="header">
-    <a href="index.html"><img src="image/Anteater+Eq_Logo.png" width="140" alt="QC@UCI"></a>
-    <nav aria-label="Primary">
+  <header class="header" role="banner">
+    <a href="index.html" aria-label="QC at UCI home"><img src="image/Anteater_Bloch_White.png" width="150" alt="QC at UCI logo"></a>
+    <nav aria-label="Primary navigation">
       <ul class="header__nav interactive-nav">
         <li><a href="index.html">Home</a></li>
+        <li><a href="join.html">Join</a></li>
+        <li><a href="learn.html">Learn</a></li>
+        <li><a href="team.html">Team</a></li>
         <li><a href="event.html">Events</a></li>
+        <li><a href="projects.html">Projects</a></li>
         <li><a href="contact_us.html">Contact</a></li>
       </ul>
     </nav>

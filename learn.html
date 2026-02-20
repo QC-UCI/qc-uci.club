@@ -13,7 +13,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <script src="https://kit.fontawesome.com/2d323a629b.js" crossorigin="anonymous"></script>
+  <script defer src="https://kit.fontawesome.com/2d323a629b.js" crossorigin="anonymous"></script>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
   <link rel="stylesheet" href="css/tailwind_style.css">
   <link rel="stylesheet" href="css/style.css">
@@ -307,6 +307,8 @@
     }
 
   </style>
+  <link rel="stylesheet" href="css/site-header.css?v=20260220a">
+  <script defer src="js/site-header.js?v=20260220a"></script>
 </head>
 
 <body>
@@ -320,16 +322,16 @@
       <ul class="header__nav interactive-nav">
         <li><a href="index.html">Home</a></li>
         <li><a href="join.html">Join</a></li>
-        <li><a href="learn.html">Learn</a></li>
+        <li><a href="learn.html" aria-current="page">Learn</a></li>
         <li><a href="team.html">Team</a></li>
         <li><a href="event.html">Events</a></li>
         <li><a href="projects.html">Projects</a></li>
-        <li><a href="contact_us.html" aria-current="page">Contact</a></li>
+        <li><a href="contact_us.html">Contact</a></li>
       </ul>
     </nav>
   </header>
 
-<section id="top" style="padding-top:calc(var(--qc-header-h) + 2rem);" class="max-w-7xl mx-auto grid lg:grid-cols-2 gap-10 items-center">
+<section id="top" style="padding-top:clamp(1.25rem, 3vw, 2.5rem);" class="max-w-7xl mx-auto grid lg:grid-cols-2 gap-10 items-center">
   <div class="qc-card p-7 qc-card-hover">
     <h1 class="text-4xl md:text-5xl font-extrabold mt-5 leading-tight">
       Learn Quantum Computing — <span style="color:var(--qc-primary)">without guessing</span> where to start.
@@ -609,7 +611,7 @@
 </section>
 
 <footer class="mt-16 py-6 bg-gray-800 text-center">
-  <p><a href="./contact_us.html" class="underline">© 2025 Quantum Computing @ UCI</a></p>
+  <p><a href="./contact_us.html" class="underline">© 2026 Quantum Computing @ UCI</a></p>
 </footer>
 
 <button id="backToTop" aria-label="Back to top"><i class="fa-solid fa-arrow-up"></i> Top</button>

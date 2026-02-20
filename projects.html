@@ -4,7 +4,7 @@
 <head>
    <meta charset="UTF-8">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <script src="https://kit.fontawesome.com/2d323a629b.js" crossorigin="anonymous"></script>
+   <script defer src="https://kit.fontawesome.com/2d323a629b.js" crossorigin="anonymous"></script>
    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto&display=swap">
    <link rel="stylesheet" href="css/tailwind_style.css">
    <link rel="stylesheet" href="css/style.css">
@@ -34,7 +34,7 @@
          background: linear-gradient(to right, #f9fafb, #eef2f7);
       }
       .projects-section {
-         padding: 180px 20px 100px;
+         padding: clamp(2.5rem, 5vw, 4.5rem) 20px 100px;
          text-align: center;
       }
       .projects-section h1 {
@@ -80,21 +80,23 @@
          margin-top: 10px;
       }
    </style>
+  <link rel="stylesheet" href="css/site-header.css?v=20260220a">
+  <script defer src="js/site-header.js?v=20260220a"></script>
 </head>
 
 <body>
-   <header class="header position-relative z-10">
-      <a href="index.html">
-         <img src="image/navy_anteater_bloch.png" width="150" alt="Home">
+   <header class="header position-relative z-10" role="banner">
+      <a href="index.html" aria-label="QC at UCI home">
+         <img src="image/Anteater_Bloch_White.png" width="150" alt="QC at UCI logo">
       </a>
-      <nav>
+      <nav aria-label="Primary navigation">
          <ul class="header__nav interactive-nav">
             <li><a href="index.html">Home</a></li>
             <li><a href="join.html">Join</a></li>
             <li><a href="learn.html">Learn</a></li>
             <li><a href="team.html">Team</a></li>
             <li><a href="event.html">Events</a></li>
-            <li><a href="projects.html">Projects</a></li>
+            <li><a href="projects.html" aria-current="page">Projects</a></li>
             <li><a href="contact_us.html">Contact</a></li>
          </ul>
       </nav>
@@ -140,7 +142,7 @@
 
    <footer>
       <div class="footer__copyRight">
-         <p><a href="./contact_us.html">Copyright © 2025 Quantum Computing @ UCI. All Rights Reserved. </a></p>
+         <p><a href="./contact_us.html">Copyright © 2026 Quantum Computing @ UCI. All Rights Reserved. </a></p>
       </div>
    </footer>
 

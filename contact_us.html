@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <script src="https://kit.fontawesome.com/2d323a629b.js" crossorigin="anonymous"></script>
+  <script defer src="https://kit.fontawesome.com/2d323a629b.js" crossorigin="anonymous"></script>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto&display=swap">
   <link rel="stylesheet" href="css/tailwind_style.css">
   <link rel="stylesheet" href="css/style.css">
@@ -67,8 +67,7 @@
     /* Layout */
     .contact-page {
       min-height: calc(100vh - 140px);
-      /* Add extra top padding so the hero never tucks under the (likely fixed) site header */
-      padding: 12.5rem 1rem 3rem;
+      padding: clamp(2rem, 4vw, 3.25rem) 1rem 3rem;
     }
     .contact-shell {
       max-width: 1100px;
@@ -218,6 +217,8 @@
     /* Footer spacing parity */
     footer { margin-top: 2.5rem; }
   </style>
+  <link rel="stylesheet" href="css/site-header.css?v=20260220a">
+  <script defer src="js/site-header.js?v=20260220a"></script>
 </head>
 
 <body>
@@ -225,7 +226,7 @@
 
   <header class="header" role="banner">
     <a href="index.html" aria-label="QC at UCI home">
-      <img src="image/navy_anteater_bloch.png" width="150" alt="QC at UCI logo" />
+      <img src="image/Anteater_Bloch_White.png" width="150" alt="QC at UCI logo" />
     </a>
 
     <nav aria-label="Primary navigation">
@@ -382,7 +383,7 @@
 
   <footer role="contentinfo">
     <div class="footer__copyRight">
-      <p><a href="./contact_us.html">Copyright © 2025 Quantum Computing @ UCI. All Rights Reserved.</a></p>
+      <p><a href="./contact_us.html">Copyright © 2026 Quantum Computing @ UCI. All Rights Reserved.</a></p>
     </div>
   </footer>
 </body>

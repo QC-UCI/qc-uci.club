@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Events | QC@UCI</title>
   <!-- Icons & Fonts (kept from original) -->
-  <script src="https://kit.fontawesome.com/2d323a629b.js" crossorigin="anonymous"></script>
+  <script defer src="https://kit.fontawesome.com/2d323a629b.js" crossorigin="anonymous"></script>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto&display=swap">
   <!-- Project CSS (kept) -->
   <link rel="stylesheet" href="css/tailwind_style.css">
@@ -34,6 +34,9 @@
                   linear-gradient(#f8fafc,#f1f5f9);
       overflow: hidden;
     }
+    .hero > .max-w-7xl { margin-top: 0 !important; padding-top: 0 !important; }
+    .hero-stats { margin-top: 0 !important; padding-top: 1.5rem !important; }
+    @media (min-width: 640px){ .hero-stats { padding-top: 2rem !important; } }
     .orb{ position:absolute; border-radius:9999px; filter: blur(40px); opacity:.35; mix-blend:multiply; animation: float 14s ease-in-out infinite; }
     .orb.indigo{ background: radial-gradient(circle at 30% 30%, #a5b4fc, #6366f1); width:340px; height:340px; top:-60px; left:-60px; }
     .orb.sky{ background: radial-gradient(circle at 70% 70%, #93c5fd, #38bdf8); width:300px; height:300px; bottom:-60px; right:-60px; animation-delay: 2s; }
@@ -165,6 +168,8 @@
     }
 
   </style>
+  <link rel="stylesheet" href="css/site-header.css?v=20260220a">
+  <script defer src="js/site-header.js?v=20260220a"></script>
 </head>
 <body class="bg-gray-50">
   <!-- AOS -->
@@ -172,17 +177,17 @@
   <script> window.addEventListener('DOMContentLoaded',()=>AOS.init({ duration: 800, once:true, offset: 100 })); </script>
 
   <!-- ======= Header ======= -->
-  <header class="header">
-    <a href="index.html">
-      <img src="image/navy_anteater_bloch.png" width="150" alt="Home">
+  <header class="header" role="banner">
+    <a href="index.html" aria-label="QC at UCI home">
+      <img src="image/Anteater_Bloch_White.png" width="150" alt="QC at UCI logo">
     </a>
-    <nav>
+    <nav aria-label="Primary navigation">
       <ul class="header__nav interactive-nav">
         <li><a href="index.html">Home</a></li>
         <li><a href="join.html">Join</a></li>
         <li><a href="learn.html">Learn</a></li>
         <li><a href="team.html">Team</a></li>
-        <li><a href="event.html">Events</a></li>
+        <li><a href="event.html" aria-current="page">Events</a></li>
         <li><a href="projects.html">Projects</a></li>
         <li><a href="contact_us.html">Contact</a></li>
       </ul>
@@ -194,7 +199,7 @@
     <div class="orb indigo" aria-hidden="true"></div>
     <div class="orb sky" aria-hidden="true"></div>
     <div class="max-w-7xl mx-auto px-6">
-      <div class="pt-24 grid grid-cols-2 sm:grid-cols-4 gap-4 max-w-4xl mx-auto">
+      <div class="hero-stats grid grid-cols-2 sm:grid-cols-4 gap-4 max-w-4xl mx-auto">
         <div class="rounded-2xl bg-white border border-black/5 p-5 text-center shadow-sm" data-aos="zoom-in-up"><div class="text-3xl font-extrabold"><span class="counter" data-target="20">15</span>+</div><div class="text-xs text-slate-500 mt-1">Seminars</div></div>
         <div class="rounded-2xl bg-white border border-black/5 p-5 text-center shadow-sm" data-aos="zoom-in-up" data-aos-delay="120"><div class="text-3xl font-extrabold"><span class="counter" data-target="25">15</span>+</div><div class="text-xs text-slate-500 mt-1">Hands-on Workshops</div></div>
         <div class="rounded-2xl bg-white border border-black/5 p-5 text-center shadow-sm" data-aos="zoom-in-up" data-aos-delay="120"><div class="text-3xl font-extrabold"><span class="counter" data-target="10">0</span>+</div><div class="text-xs text-slate-500 mt-1">Socials</div></div>
@@ -358,7 +363,7 @@
   </div>
 
   <footer class="py-8 bg-gray-800 text-white text-center mt-16">
-    <p><a href="./contact_us.html" class="underline">Copyright © 2025 Quantum Computing @ UCI. All Rights Reserved.</a></p>
+    <p><a href="./contact_us.html" class="underline">Copyright © 2026 Quantum Computing @ UCI. All Rights Reserved.</a></p>
   </footer>
 
   <!-- ======= JS ======= -->
@@ -929,13 +934,13 @@ cell.addEventListener('click', ()=>{
 
     (function(){
       function applyOffsets(){
-        const header = document.querySelector('header.header');
-        const hero = document.querySelector('.hero');
+        const header = document.querySelector('.qc-site-header');
         const stickyBar = document.querySelector('section.bg-white.border-y');
         if(!header) return;
         const h = header.getBoundingClientRect().height || 0;
-        if (hero) hero.style.setProperty('padding-top', (h + 16) + 'px', 'important');
-        if (stickyBar) stickyBar.style.setProperty('top', h + 'px', 'important');
+        if (stickyBar && getComputedStyle(stickyBar).position === 'sticky') {
+          stickyBar.style.setProperty('top', h + 'px', 'important');
+        }
       }
       window.addEventListener('load', applyOffsets);
       window.addEventListener('resize', applyOffsets);

@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<script crossorigin="anonymous" src="https://kit.fontawesome.com/2d323a629b.js"></script>
+<script defer crossorigin="anonymous" src="https://kit.fontawesome.com/2d323a629b.js"></script>
 <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900&display=swap" rel="stylesheet"/>
 <link href="css/tailwind_style.css" rel="stylesheet"/>
 <link href="css/style.css" rel="stylesheet"/>
@@ -56,11 +56,15 @@
   .cursor { display:inline-block; width:1ch; animation:blink 1.1s steps(1) infinite; }
   @keyframes blink { 50% { opacity:0; } }
   .cta { display:flex; gap:14px; justify-content:center; margin-top:26px; flex-wrap:wrap; }
-  .btn { padding:12px 18px; border-radius:14px; font-weight:700; letter-spacing:.01em; border:1px solid rgba(255,255,255,0.12); transition:transform .18s ease, box-shadow .18s ease; display:inline-flex; align-items:center; gap:10px; white-space:nowrap; }
-  .btn-primary { background:linear-gradient(90deg, var(--qc-primary), var(--qc-accent)); color:#0b0f1f !important; }
-  .btn-primary:hover, .btn-primary:focus, .btn-primary:active { background:linear-gradient(90deg, var(--qc-primary), var(--qc-accent)); color:#0b0f1f !important; transform:none; box-shadow:none; }
-  .btn-ghost { background:rgba(255,255,255,0.06); color:#e5e7eb; }
-  .btn-ghost:hover { transform:translateY(-2px); background:rgba(255,255,255,0.10); }
+  .btn { padding:12px 18px; border-radius:14px; font-weight:700; letter-spacing:.01em; border:1px solid rgba(255,255,255,0.20); transition:transform .18s ease, box-shadow .18s ease, background .18s ease; display:inline-flex; align-items:center; gap:10px; white-space:nowrap; }
+  .btn-primary, .btn-ghost { background:linear-gradient(180deg, #0a1a45, #08153b); color:#e7efff !important; }
+  .btn-primary:hover, .btn-primary:focus, .btn-primary:active,
+  .btn-ghost:hover, .btn-ghost:focus, .btn-ghost:active {
+    background:linear-gradient(180deg, #102657, #0a1a45);
+    color:#ffffff !important;
+    transform:translateY(-2px);
+    box-shadow:0 10px 24px rgba(2,6,23,.35);
+  }
   #quantumField { position:absolute; inset:0; z-index:-2; opacity:.9; }
 
   section { padding:60px 16px; }
@@ -234,13 +238,17 @@ footer { padding:22px 16px 28px; border-top:1px solid rgba(255,255,255,0.08); ba
     .header__nav a { padding:6px 8px; font-size:0.95rem; }
   }
 </style>
+  <link rel="stylesheet" href="css/site-header.css?v=20260220a">
+  <script defer src="js/site-header.js?v=20260220a"></script>
 </head>
 <body>
-  <header class="header position-relative z-10">
-    <a href="index.html"><img src="image/Anteater+Eq_Logo.png" width="150" alt="Home"></a>
-    <nav aria-label="Primary">
+  <header class="header position-relative z-10" role="banner">
+    <a href="index.html" aria-label="QC at UCI home">
+      <img src="image/Anteater_Bloch_White.png" width="150" alt="QC at UCI logo">
+    </a>
+    <nav aria-label="Primary navigation">
       <ul class="header__nav interactive-nav">
-        <li><a href="index.html">Home</a></li>
+        <li><a href="index.html" aria-current="page">Home</a></li>
         <li><a href="join.html">Join</a></li>
         <li><a href="learn.html">Learn</a></li>
         <li><a href="team.html">Team</a></li>
@@ -255,7 +263,7 @@ footer { padding:22px 16px 28px; border-top:1px solid rgba(255,255,255,0.08); ba
   <section class="hero">
     <canvas aria-hidden="true" id="quantumField"></canvas>
     <div aria-hidden="true" class="halo"></div>
-    <div>
+    <div id="hero-content">
       <h1 aria-live="polite" id="typewrite">Welcome to QC@UCI<span class="cursor">▍</span></h1>
       <p class="subhead">Unleash your curiosity, implement cutting-edge algorithms, and explore the future of computation — one qubit at a time.</p>
       <div class="cta">
@@ -393,7 +401,7 @@ footer { padding:22px 16px 28px; border-top:1px solid rgba(255,255,255,0.08); ba
 
   <footer>
     <div class="footer__copyRight">
-      <p><a href="./contact_us.html">Copyright © 2025 Quantum Computing @ UCI. All Rights Reserved.</a></p>
+      <p><a href="./contact_us.html">Copyright © 2026 Quantum Computing @ UCI. All Rights Reserved.</a></p>
     </div>
   </footer>
 
@@ -411,6 +419,29 @@ footer { padding:22px 16px 28px; border-top:1px solid rgba(255,255,255,0.08); ba
         "Meet Inspiring Speakers",
         "Shape the Future of Computing"
       ];
+
+      // Lock title height using the tallest possible typing state (including partial words).
+      function lockTypeHeight() {
+        const original = el.innerHTML;
+        let max = 0;
+
+        phrases.forEach((phrase) => {
+          for (let k = 0; k <= phrase.length; k++) {
+            el.innerHTML = base + phrase.slice(0, k) + '<span class="cursor">▍</span>';
+            max = Math.max(max, el.getBoundingClientRect().height);
+          }
+        });
+
+        el.innerHTML = original;
+        el.style.minHeight = Math.ceil(max) + 'px';
+      }
+
+      const relock = () => window.requestAnimationFrame(lockTypeHeight);
+      relock();
+      if (document.fonts && document.fonts.ready) {
+        document.fonts.ready.then(relock);
+      }
+      window.addEventListener('resize', relock);
 
       // If user prefers reduced motion: just show one phrase, no typing loop.
       if (prefersReduced) {

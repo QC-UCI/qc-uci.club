@@ -8,7 +8,7 @@
 <link href="https://fonts.googleapis.com" rel="preconnect"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
-<script crossorigin="anonymous" src="https://kit.fontawesome.com/2d323a629b.js"></script>
+<script defer crossorigin="anonymous" src="https://kit.fontawesome.com/2d323a629b.js"></script>
 <script src="https://cdn.tailwindcss.com"></script>
 <style>
     :root{ --qc-navy:#0b1b3a; --qc-blue:#2563eb; --qc-emerald:#10b981; --qc-amber:#f59e0b; --qc-indigo:#4f46e5;}
@@ -144,17 +144,19 @@ body{ padding-top: 110px; }
   .header__nav li a{ font-size: 16px; padding: 6px 4px; }
   body{ padding-top: 150px; }  /* extra room for taller stacked header */
 }
-</style></head>
+</style>  <link rel="stylesheet" href="css/site-header.css?v=20260220a">
+  <script defer src="js/site-header.js?v=20260220a"></script>
+</head>
 <body class="text-slate-100 quantum-bg min-h-screen">
 <!-- ===== Header ===== -->
-<header class="header">
-<a href="index.html">
-<img alt="Home" src="image/Anteater_Bloch_White.png" width="150"/>
+<header class="header" role="banner">
+<a aria-label="QC at UCI home" href="index.html">
+<img alt="QC at UCI logo" src="image/Anteater_Bloch_White.png" width="150"/>
 </a>
-<nav>
+<nav aria-label="Primary navigation">
 <ul class="header__nav interactive-nav">
 <li><a href="index.html">Home</a></li>
-<li><a href="join.html">Join</a></li>
+<li><a aria-current="page" href="join.html">Join</a></li>
 <li><a href="learn.html">Learn</a></li>
 <li><a href="team.html">Team</a></li>
 <li><a href="event.html">Events</a></li>
@@ -483,7 +485,7 @@ body{ padding-top: 110px; }
 </section>
 <footer class="mt-14 border-t border-slate-800/60">
 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 text-center text-slate-400 text-sm">
-<a class="hover:text-slate-200" href="./contact_us.html">Copyright © 2025 Quantum Computing @ UCI. All Rights Reserved.</a>
+<a class="hover:text-slate-200" href="./contact_us.html">Copyright © 2026 Quantum Computing @ UCI. All Rights Reserved.</a>
 </div>
 </footer>
 <script>

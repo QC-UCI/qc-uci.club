@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
-  <script src="https://kit.fontawesome.com/2d323a629b.js" crossorigin="anonymous"></script>
+  <script defer src="https://kit.fontawesome.com/2d323a629b.js" crossorigin="anonymous"></script>
   <script src="https://cdn.tailwindcss.com"></script>
 
   <style>
@@ -60,6 +60,11 @@
       transition: width .18s ease;
     }
     .header-link:hover:after{ width:100%; }
+    .header-link[aria-current="page"]{
+      color: #fff;
+      font-weight: 700;
+    }
+    .header-link[aria-current="page"]:after{ width:100%; }
     .logo-wrap img{ filter: drop-shadow(0 2px 10px rgba(0,0,0,.35)); }
 
     /* title block */
@@ -266,24 +271,26 @@
     }
 
   </style>
+  <link rel="stylesheet" href="css/site-header.css?v=20260220a">
+  <script defer src="js/site-header.js?v=20260220a"></script>
 </head>
 
 <body class="min-h-screen">
   <!-- Header -->
-  <header class="site-header">
+  <header class="site-header" role="banner">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex flex-col items-center gap-3 lg:flex-row lg:items-center lg:justify-between py-3">
-        <a class="logo-wrap inline-flex items-center gap-3" href="index.html">
+        <a class="logo-wrap inline-flex items-center gap-3" href="index.html" aria-label="QC at UCI home">
           <img src="image/Anteater_Bloch_White.png" alt="QC@UCI" class="h-auto w-40"/>
           <span class="sr-only">Return Home</span>
         </a>
 
-        <nav class="w-full lg:w-auto">
-          <ul class="flex flex-wrap items-center justify-center lg:justify-end gap-x-6 gap-y-2 text-slate-200 text-sm">
+        <nav class="w-full lg:w-auto" aria-label="Primary navigation">
+          <ul class="header__nav interactive-nav flex flex-wrap items-center justify-center lg:justify-end gap-x-6 gap-y-2 text-slate-200 text-sm">
             <li><a class="header-link hover:text-white" href="index.html">Home</a></li>
             <li><a class="header-link hover:text-white" href="join.html">Join</a></li>
             <li><a class="header-link hover:text-white" href="learn.html">Learn</a></li>
-            <li><a class="header-link hover:text-white" href="team.html">Team</a></li>
+            <li><a class="header-link hover:text-white" href="team.html" aria-current="page">Team</a></li>
             <li><a class="header-link hover:text-white" href="event.html">Events</a></li>
             <li><a class="header-link hover:text-white" href="projects.html">Projects</a></li>
             <li><a class="header-link hover:text-white" href="contact_us.html">Contact</a></li>
@@ -964,7 +971,7 @@
 
   <footer class="mt-12 border-t border-slate-800/60">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 text-center text-slate-400 text-sm">
-      <a class="hover:text-slate-200" href="./contact_us.html">Copyright © 2025 Quantum Computing @ UCI. All Rights Reserved.</a>
+      <a class="hover:text-slate-200" href="./contact_us.html">Copyright © 2026 Quantum Computing @ UCI. All Rights Reserved.</a>
     </div>
   </footer>
 
