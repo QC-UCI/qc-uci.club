@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<script defer crossorigin="anonymous" src="https://kit.fontawesome.com/2d323a629b.js"></script>
+<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900&display=swap" rel="stylesheet"/>
+<link href="css/tailwind_style.css" rel="stylesheet"/>
+<link href="css/style.css" rel="stylesheet"/>
+<title>QC@UCI Workshop at IrvineHacks 2025 — Quantum Computing at UCI</title>
+<style>
+  :root { --ink:#e5e7eb; --muted:#9ca3af; --edge:#1f2937; --accent:#0ea5e9; --bg:#0b1020; }
+  html, body { background: var(--bg); color: var(--ink); font-family: 'Roboto', system-ui, -apple-system, Segoe UI, Helvetica, Arial; margin:0; }
+  .header { position: sticky; top: 0; backdrop-filter: saturate(140%) blur(8px); background: linear-gradient(180deg, rgba(10,15,35,0.85), rgba(10,15,35,0.55)); border-bottom: 1px solid rgba(255,255,255,0.08); padding: 10px 18px; display:flex; align-items:center; justify-content:space-between; z-index:10; }
+  .header__nav { display:flex; gap:18px; list-style:none; padding:0; margin:0; font-weight:500; flex-wrap:wrap; row-gap:8px; }
+  .header__nav a { color:#d1d5db; position:relative; padding:8px 10px; border-radius:10px; }
+  .header__nav a:hover { color:#fff; }
+  @media (max-width: 900px){
+    .header { flex-direction:column; align-items:flex-start; gap:10px; }
+    .header__nav { justify-content:flex-start; }
+  }
+  main { max-width: 900px; margin: 40px auto; padding: 0 16px 60px; }
+  h1 { font-size: clamp(1.8rem, 3.5vw, 2.6rem); margin: 0 0 6px; }
+  .meta { color: var(--muted); margin-bottom: 24px; }
+  .story p { line-height: 1.7; margin: 1rem 0; }
+  figure { margin: 18px 0; }
+  figure img { width: 100%; border-radius: 12px; display:block; }
+  figure figcaption { color: var(--muted); font-size: .9rem; margin-top: 6px; }
+  .float-left { float: left; width: 44%; margin: .2rem 1.2rem 1rem 0; }
+  .float-right { float: right; width: 44%; margin: .2rem 0 1rem 1.2rem; }
+  @media (max-width: 900px){ .float-left, .float-right { float:none; width:100%; margin: .5rem 0; } }
+  .back { display:inline-flex; align-items:center; gap:8px; color:#c7d2fe; text-decoration:none; font-weight:600; }
+  .back i { font-size: 14px; }
+  hr { border: 0; height: 1px; background: linear-gradient(90deg, transparent, rgba(255,255,255,.15), transparent); margin: 28px 0; }
+</style>
+<link rel="stylesheet" href="css/site-header.css?v=20260220a">
+<script defer src="js/site-header.js?v=20260220a"></script>
+</head>
+<body>
+  <header class="header" role="banner">
+    <a href="index.html" aria-label="QC at UCI home"><img src="image/Anteater_Bloch_White.png" width="150" alt="QC at UCI logo"></a>
+    <nav aria-label="Primary navigation">
+      <ul class="header__nav interactive-nav">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="join.html">Join</a></li>
+        <li><a href="learn.html">Learn</a></li>
+        <li><a href="team.html">Team</a></li>
+        <li><a href="event.html">Events</a></li>
+        <li><a href="projects.html">Projects</a></li>
+        <li><a href="contact_us.html">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <a class="back" href="index.html"><i class="fa-solid fa-arrow-left"></i> Back to Highlights</a>
+    <h1>QC@UCI Brings Quantum Optimization to IrvineHacks 2025</h1>
+    <div class="meta">By QC@UCI Communications • Jan 24, 2025</div>
+
+    <article class="story">
+
+      <figure class="float-left">
+        <img src="photos/hackatuci_workshop_1.jpg" alt="QC@UCI workshop at IrvineHacks 2025">
+        <figcaption>Student hackers explore quantum optimization during our one-hour QAOA workshop.</figcaption>
+      </figure>
+
+      <p>
+        During <strong>Hack@UCI’s IrvineHacks 2025</strong>, the Quantum Computing club hosted a one-hour, interactive workshop introducing students to one of the most exciting quantum algorithms in near-term computing: the <strong>Quantum Approximate Optimization Algorithm (QAOA)</strong>. The session was led by Diptanshu, Stewart, and Krishna, who guided participants from foundational concepts to a live quantum coding demonstration.
+      </p>
+
+      <p>
+        The workshop began with a high-level introduction to quantum computing, adapted from our IrvineHacks slide deck. Students were introduced to the core principles of superposition, entanglement, and interference, along with an overview of qubits, quantum gates, and quantum circuits. Rather than assuming prior knowledge, the team framed quantum computing in terms familiar to hackers—optimization, algorithmic efficiency, and real-world applications in machine learning, finance, and security.
+      </p>
+
+      <p>
+        Building on this foundation, the focus shifted to QAOA and its application to combinatorial optimization problems. Using a classroom-inspired “team formation” optimization scenario (similar to the one outlined in our slides), participants saw how classical constraints can be encoded into a cost Hamiltonian and solved through parameterized quantum circuits. The presenters emphasized how QAOA bridges classical and quantum computing: a classical optimizer tunes parameters, while a quantum circuit evaluates candidate solutions.
+      </p>
+
+      <figure class="float-right">
+        <img src="photos/hackatuci_workshop_2.jpg" alt="Live QAOA demo using Qiskit">
+        <figcaption>Live coding demo using IBM Qiskit to run QAOA on a sample optimization problem.</figcaption>
+      </figure>
+
+      <p>
+        The highlight of the session was a live coding demonstration using IBM’s Qiskit framework. Participants followed along with our interactive notebook, where we constructed a parameterized quantum circuit, applied alternating cost and mixer operators, and executed simulations to observe measurement distributions. Watching probability amplitudes shift as parameters were optimized gave attendees a tangible sense of how quantum interference can amplify better solutions.
+      </p>
+
+      <p>
+        Many students were surprised to learn that near-term quantum algorithms like QAOA are designed specifically for today’s noisy intermediate-scale quantum (NISQ) devices. Rather than requiring fully fault-tolerant quantum computers, QAOA leverages shallow circuits and hybrid classical-quantum workflows, making it one of the most practical algorithms currently studied in quantum optimization.
+      </p>
+
+      <p>
+        Throughout the session, the room remained highly engaged. Participants asked questions about hardware limitations, scalability, and whether QAOA could outperform classical heuristics in practice. Others were curious about career pathways in quantum software and how they could begin contributing as undergraduates. By the end of the hour, several hackers expressed interest in joining QC@UCI to explore quantum algorithms further.
+      </p>
+
+      <p>
+        For QC@UCI, the IrvineHacks workshop represented more than just a technical presentation—it was an opportunity to make quantum computing accessible to a new audience of builders and innovators. By connecting abstract quantum principles to hands-on code and optimization problems, the team demonstrated that quantum computing is not a distant future technology, but an evolving field that students today can actively shape.
+      </p>
+
+      <p>
+        We thank Hack@UCI for the opportunity to collaborate and look forward to continuing our mission of empowering Anteaters to design and implement quantum algorithms.
+      </p>
+
+    </article>
+
+    <hr/>
+    <p class="meta">
+      Interested in future workshops or collaborations? Reach out at 
+      <a href="mailto:quantumcomputing@uci.edu">quantumcomputing@uci.edu</a>.
+    </p>
+  </main>
+</body>
+</html>
