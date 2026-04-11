@@ -1,0 +1,34 @@
+/* Tensors-specific styles layered on top of learn-math-base.css */
+
+.info{ display:flex; align-items:flex-start; gap:10px; padding:12px; border-left:4px solid var(--accent); background:rgba(167,139,250,0.08); border-radius:8px; margin:18px 0; }
+.info-icon{ font-weight:bold; border:2px solid var(--accent); border-radius:50%; width:22px; height:22px; display:flex; align-items:center; justify-content:center; margin-top:2px; }
+
+/* Scoped styles for the vector addition demo */
+.va-demo{ margin-top:16px }
+.va-wrap{ width:100%; max-width:950px; aspect-ratio:3/2; border:1px solid rgba(255,255,255,.12); border-radius:12px; box-shadow:0 8px 32px rgba(0,0,0,.2); overflow:hidden; background: var(--card); position: relative; margin-inline:auto }
+.va-wrap svg{ width:100%; height:100%; display:block }
+
+/* Theme tokens for the demo */
+.va-demo{ --a:#6EE7F9; --b:#F97316; --sum:#10B981; --diff:#EF4444; --grid:#334155; --axis:#64748B; --text:#e5e7eb; }
+.va-legend{ position:absolute; left:12px; top:12px; padding:8px 10px; border-radius:10px; background: rgba(2,6,23,0.85); box-shadow: 0 4px 16px rgba(0,0,0,.25); font-size:14px; line-height:1.1; border:1px solid rgba(255,255,255,.08) }
+.va-legend div{ display:flex; align-items:center; gap:.5rem; margin:4px 0 }
+.va-swatch{ width:14px; height:14px; border-radius:3px; flex:none }
+.va-swatch-a { background: var(--a); }
+.va-swatch-b { background: var(--b); }
+.va-swatch-sum { background: var(--sum); }
+.va-swatch-diff { background: var(--diff); }
+.va-note{ font-size:12px; opacity:.85; margin-top:6px; color: var(--muted) }
+
+.va-readout{ position:absolute; right:12px; top:12px; padding:8px 10px; border-radius:10px; background: rgba(2,6,23,0.85); box-shadow: 0 4px 16px rgba(0,0,0,.25); font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace; font-size:13px; line-height:1.2; border:1px solid rgba(255,255,255,.08); color: var(--text) }
+
+.va-controls{ position:absolute; left:50%; bottom:10px; transform: translateX(-50%); background: rgba(2,6,23,0.85); border-radius:999px; padding:6px 10px; box-shadow:0 4px 16px rgba(0,0,0,.25); display:flex; gap:12px; align-items:center; font-size:14px; border:1px solid rgba(255,255,255,.08); color: var(--text) }
+.va-controls label{ display:inline-flex; align-items:center; gap:6px; user-select:none }
+.va-controls input{ accent-color: var(--accent) }
+
+/* Keep strokes crisp when scaling */
+[vector]{ vector-effect: non-scaling-stroke }
+
+.va-handle{ cursor: grab; transition: r .15s ease }
+.va-handle:active{ cursor: grabbing }
+.va-handle:hover{ r: 7.5px }
+

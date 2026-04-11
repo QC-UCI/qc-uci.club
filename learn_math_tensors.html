@@ -6,37 +6,15 @@
   <title>Tensors | QC@UCI</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap">
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" defer></script>
-  <style>
-    :root{ --bg:#0a0f1d; --card:#101933; --text:#e5e7eb; --muted:#93a3b8; --accent:#A78BFA; }
-    *{ box-sizing:border-box }
-    html,body{ margin:0; background:var(--bg); color:var(--text); font-family:Inter,system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif }
-    a{ color:#6EE7F9; }
-    a:hover{ color:var(--accent) }
-    .wrap{ max-width: 900px; margin: 0 auto; padding: 28px 16px; }
-    .card{ background: linear-gradient(180deg,rgba(255,255,255,.04),rgba(255,255,255,.02)); border:1px solid rgba(255,255,255,.08); border-radius:14px; padding:18px; }
-    .grid{ display:grid; gap:16px }
-    @media(min-width:880px){ .grid{ grid-template-columns: 1.2fr .8fr } }
-
-    .info{ display:flex; align-items:flex-start; gap:10px; padding:12px; border-left:4px solid var(--accent); background:rgba(167,139,250,0.08); border-radius:8px; margin:18px 0; }
-    .info-icon{ font-weight:bold; border:2px solid var(--accent); border-radius:50%; width:22px; height:22px; display:flex; align-items:center; justify-content:center; margin-top:2px; }
-
-    .qa{ border:1px solid rgba(255,255,255,.1); border-radius:12px; padding:14px; margin:10px 0; background:var(--card) }
-    .q{ display:flex; align-items:center; justify-content:space-between; gap:12px }
-    .q h4{ margin:0; font-size:16px }
-    .ans{ max-height:0; overflow:hidden; transition:max-height .35s ease, opacity .35s ease; opacity:0 }
-    .ans.open{ max-height:360px; opacity:1 }
-    .btn{ appearance:none; border:1px solid rgba(255,255,255,.2); background:transparent; color:var(--text); border-radius:10px; padding:6px 10px; cursor:pointer }
-    .btn:hover{ border-color:var(--accent) }
-    .muted{ color:var(--muted) }
-    header{ display:flex; align-items:center; justify-content:space-between; gap:10px; margin-bottom:16px }
-  </style>
   <link rel="stylesheet" href="css/site-header.css?v=20260220a">
   <script defer src="js/site-header.js?v=20260220a"></script>
+  <link rel="stylesheet" href="css/pages/learn_math_tensors.css?v=20260411a">
+  <link rel="stylesheet" href="css/pages/learn-math-base.css?v=20260411a">
 </head>
 <body>
   <div class="wrap">
     <header>
-      <h1 style="margin:0">Tensors</h1>
+      <h1 class="u-m-0">Tensors</h1>
       <a href="/learn.html" class="btn">← Back to Learn</a>
     </header>
 
@@ -55,40 +33,14 @@
 
     <!-- Vector Addition & Subtraction — Interactive SVG (integrated) -->
 <div class="va-demo">
-  <style>
-    /* Scoped styles for the vector addition demo */
-    .va-demo{ margin-top:16px }
-    .va-wrap{ width:100%; max-width:950px; aspect-ratio:3/2; border:1px solid rgba(255,255,255,.12); border-radius:12px; box-shadow:0 8px 32px rgba(0,0,0,.2); overflow:hidden; background: var(--card); position: relative; margin-inline:auto }
-    .va-wrap svg{ width:100%; height:100%; display:block }
-
-    /* Theme tokens for the demo */
-    .va-demo{ --a:#6EE7F9; --b:#F97316; --sum:#10B981; --diff:#EF4444; --grid:#334155; --axis:#64748B; --text:#e5e7eb; }
-    .va-legend{ position:absolute; left:12px; top:12px; padding:8px 10px; border-radius:10px; background: rgba(2,6,23,0.85); box-shadow: 0 4px 16px rgba(0,0,0,.25); font-size:14px; line-height:1.1; border:1px solid rgba(255,255,255,.08) }
-    .va-legend div{ display:flex; align-items:center; gap:.5rem; margin:4px 0 }
-    .va-swatch{ width:14px; height:14px; border-radius:3px; flex:none }
-    .va-note{ font-size:12px; opacity:.85; margin-top:6px; color: var(--muted) }
-
-    .va-readout{ position:absolute; right:12px; top:12px; padding:8px 10px; border-radius:10px; background: rgba(2,6,23,0.85); box-shadow: 0 4px 16px rgba(0,0,0,.25); font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace; font-size:13px; line-height:1.2; border:1px solid rgba(255,255,255,.08); color: var(--text) }
-
-    .va-controls{ position:absolute; left:50%; bottom:10px; transform: translateX(-50%); background: rgba(2,6,23,0.85); border-radius:999px; padding:6px 10px; box-shadow:0 4px 16px rgba(0,0,0,.25); display:flex; gap:12px; align-items:center; font-size:14px; border:1px solid rgba(255,255,255,.08); color: var(--text) }
-    .va-controls label{ display:inline-flex; align-items:center; gap:6px; user-select:none }
-    .va-controls input{ accent-color: var(--accent) }
-
-    /* Keep strokes crisp when scaling */
-    [vector]{ vector-effect: non-scaling-stroke }
-
-    .va-handle{ cursor: grab; transition: r .15s ease }
-    .va-handle:active{ cursor: grabbing }
-    .va-handle:hover{ r: 7.5px }
-  </style>
 
   <div class="va-wrap">
     <!-- Legend -->
     <div class="va-legend">
-      <div><span class="va-swatch" style="background:var(--a)"></span> a</div>
-      <div><span class="va-swatch" style="background:var(--b)"></span> b</div>
-      <div><span class="va-swatch" style="background:var(--sum)"></span> a + b</div>
-      <div><span class="va-swatch" style="background:var(--diff)"></span> a − b</div>
+      <div><span class="va-swatch va-swatch-a"></span> a</div>
+      <div><span class="va-swatch va-swatch-b"></span> b</div>
+      <div><span class="va-swatch va-swatch-sum"></span> a + b</div>
+      <div><span class="va-swatch va-swatch-diff"></span> a − b</div>
       <div class="va-note">Drag the colored dots to move vectors.</div>
     </div>
 

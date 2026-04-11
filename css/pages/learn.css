@@ -1,0 +1,290 @@
+/* Extracted from learn.html on 2026-04-11 */
+
+:root{
+      --qc-primary:#6EE7F9;
+      --qc-accent:#A78BFA;
+      --qc-bg:#0a0f1d;
+      --qc-card:#101933;
+      --qc-header-h:120px;
+      --qc-line: rgba(255,255,255,.10);
+      --qc-radius: 18px;
+    }
+
+    html, body {
+      background:
+        radial-gradient(1000px 520px at 18% 8%, rgba(110,231,249,.08), transparent 55%),
+        radial-gradient(900px 520px at 84% 14%, rgba(167,139,250,.10), transparent 60%),
+        var(--qc-bg);
+      color:#e5e7eb;
+      margin:0;
+      padding:0;
+      overflow-x:hidden;
+      scroll-behavior:smooth;
+    }
+
+    body > *:not(header):not(footer){
+      padding-left:5%;
+      padding-right:5%;
+    }
+
+    a{ color: var(--qc-primary); text-decoration: none; }
+    a:hover{ color: var(--qc-accent); }
+
+    .qc-card{
+      background: linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.015));
+      border:1px solid var(--qc-line);
+      border-radius: var(--qc-radius);
+      backdrop-filter: blur(10px);
+    }
+
+    .qc-card-hover{
+      transition: transform .28s ease, box-shadow .28s ease, border-color .28s ease;
+    }
+    .qc-card-hover:hover{
+      transform: translateY(-6px);
+      box-shadow:0 14px 42px rgba(0,0,0,.35);
+      border-color: rgba(167,139,250,.55);
+    }
+
+    .neon-divider{
+      height:1px;
+      background:linear-gradient(90deg, transparent, var(--qc-primary), var(--qc-accent), transparent);
+      margin:3.25rem 0;
+      opacity:.55;
+    }
+
+    /* Sticky micro-nav */
+    .learn-subnav{
+      position: sticky;
+      top: var(--qc-header-h);
+      z-index: 40;
+      margin-top: 1.25rem;
+      padding: .55rem;
+    }
+    .learn-subnav-inner{
+      display:flex;
+      gap:.4rem;
+      flex-wrap:wrap;
+      justify-content:center;
+      align-items:center;
+      padding:.45rem;
+      border-radius: 999px;
+      background: rgba(16,26,55,.68);
+      border:1px solid rgba(255,255,255,.10);
+      backdrop-filter: blur(12px);
+    }
+    .navchip{
+      display:inline-flex;
+      align-items:center;
+      gap:.45rem;
+      padding:.45rem .75rem;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.10);
+      color:#e5e7eb;
+      font-weight:700;
+      font-size:.92rem;
+      transition: background .2s ease, border-color .2s ease, transform .2s ease;
+    }
+    .navchip:hover{ transform: translateY(-1px); border-color: rgba(167,139,250,.55); }
+    .navchip.active{
+      background: linear-gradient(90deg, rgba(110,231,249,.18), rgba(167,139,250,.18));
+      border-color: rgba(110,231,249,.55);
+      text-shadow: 0 0 10px rgba(167,139,250,.32);
+    }
+
+    section[id]{ scroll-margin-top: calc(var(--qc-header-h) + 86px); }
+
+    .pill{
+      display:inline-flex;
+      align-items:center;
+      gap:.5rem;
+      padding:.35rem .7rem;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(16,26,55,.35);
+      color:#dbeafe;
+      font-size:.9rem;
+      font-weight:700;
+    }
+
+    .video-wrap{
+      position:relative;
+      padding-top:56.25%;
+      border-radius: 14px;
+      overflow:hidden;
+      border:1px solid rgba(255,255,255,.10);
+      background:#000;
+    }
+    .video-wrap iframe{
+      position:absolute;
+      inset:0;
+      width:100%;
+      height:100%;
+      border:0;
+    }
+
+    /* Accordion */
+    .accordion-toggle{
+      display:flex;
+      width:100%;
+      align-items:center;
+      justify-content:space-between;
+      gap:1rem;
+      background: transparent;
+      border:0;
+      color:#e5e7eb;
+      cursor:pointer;
+      padding: .35rem 0;
+      font-size: 1.03rem;
+      font-weight: 800;
+    }
+    .accordion-content{
+      display:none;
+      color: rgba(226,232,240,.82);
+      padding-top: .45rem;
+      line-height: 1.55;
+    }
+    .accordion-content.active{ display:block; }
+
+    .kbd{
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      font-size: .85rem;
+      padding: .18rem .45rem;
+      border-radius: .5rem;
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.10);
+    }
+
+    /* Math thumbnails */
+    .thumb{
+      display:flex;
+      align-items:flex-start;
+      gap:1rem;
+      padding:1.05rem;
+    }
+    .thumb-ico{
+      width:52px;height:52px;
+      display:grid;place-items:center;
+      border-radius: 14px;
+      border:1px solid rgba(255,255,255,.12);
+      background: linear-gradient(180deg, rgba(110,231,249,.12), rgba(167,139,250,.10));
+      flex: 0 0 auto;
+    }
+
+    /* Read cards */
+    .read-card{
+      display:block;
+      padding: 1rem;
+      border-radius: 14px;
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(16,26,55,.45);
+      transition: transform .2s ease, border-color .2s ease;
+    }
+    .read-card:hover{ transform: translateY(-4px); border-color: rgba(167,139,250,.55); }
+
+    /* Floating buttons */
+    #backToTop{
+      position:fixed;
+      right: 22px;
+      bottom: 22px;
+      z-index: 60;
+      display:none;
+      border-radius:999px;
+      padding:.75rem .95rem;
+      background: rgba(16,26,55,.85);
+      border:1px solid rgba(255,255,255,.18);
+      backdrop-filter: blur(10px);
+      cursor:pointer;
+      color:#e5e7eb;
+      font-weight:900;
+    }
+    #backToTop:hover{ border-color: rgba(167,139,250,.65); }
+
+    #jumpBtn{
+      position:fixed;
+      left:22px;
+      bottom:22px;
+      z-index:60;
+      display:none;
+      border-radius:999px;
+      padding:.75rem .95rem;
+      background: rgba(16,26,55,.85);
+      border:1px solid rgba(255,255,255,.18);
+      backdrop-filter: blur(10px);
+      cursor:pointer;
+      color:#e5e7eb;
+      font-weight:900;
+    }
+    #jumpBtn:hover{ border-color: rgba(110,231,249,.65); }
+
+    #jumpMenu{
+      position:fixed;
+      left:22px;
+      bottom:74px;
+      z-index:60;
+      width:min(360px, 85vw);
+      display:none;
+      padding:.65rem;
+      border-radius: 16px;
+      background: rgba(16,26,55,.92);
+      border:1px solid rgba(255,255,255,.18);
+      backdrop-filter: blur(12px);
+    }
+    .jump-item{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:1rem;
+      padding:.7rem .75rem;
+      border-radius: 14px;
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.02);
+      margin:.45rem 0;
+      color:#e5e7eb;
+      font-weight:850;
+      cursor:pointer;
+    }
+    .jump-item:hover{ border-color: rgba(167,139,250,.55); }
+
+    .muted{ color: rgba(226,232,240,.78); }
+
+    @media (prefers-reduced-motion: reduce){
+      html{ scroll-behavior:auto; }
+      .qc-card-hover, .navchip, .read-card{ transition:none; }
+    }
+  
+    /* ================================
+       Core Principles – refinements (no purple content bg, no focus ring, aqua hover)
+       Scope: ONLY #effects section
+       ================================ */
+    #effects .accordion-content{
+      background: transparent !important; /* remove any tinted/purple feel */
+      border-top: 1px solid rgba(72,187,120,.25);
+      margin-top: .6rem;
+      padding-top: .6rem;
+    }
+
+    /* Remove the orange focus/active ring/box when clicking accordion headers */
+    #effects .accordion-toggle:focus,
+    #effects .accordion-toggle:focus-visible{
+      outline: none !important;
+      box-shadow: none !important;
+    }
+    #effects .accordion-toggle::-moz-focus-inner{ border:0; }
+
+    /* Hover styling: lighter green / aqua, not orange */
+    #effects .accordion-toggle:hover{
+      color: rgba(110,231,249,.92); /* aqua */
+    }
+    #effects .accordion-toggle:hover i{
+      color: rgba(110,231,249,.92); /* aqua */
+    }
+
+    /* Default chevron color: soft green (not orange) */
+    #effects .accordion-toggle i{
+      color: rgba(72,187,120,.78);
+    }
+
+    .learn-top-section { padding-top: clamp(1.25rem, 3vw, 2.5rem); }
+    .learn-primary-text { color: var(--qc-primary); }
+
