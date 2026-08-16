@@ -595,46 +595,241 @@
       line-height: 1.58;
     }
 
-    .alumni-grid {
-      display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 14px;
-    }
-
-    .alumni-card {
-      min-width: 0;
-      overflow: hidden;
+    .alumni-graph {
+      position: relative;
+      min-height: clamp(560px, 68vw, 760px);
+      overflow: visible;
       border: 1px solid var(--line);
       border-radius: var(--radius);
-      background: var(--panel);
-      box-shadow: 0 10px 24px rgba(15, 23, 42, 0.07);
+      background:
+        radial-gradient(circle at 50% 48%, rgba(37, 99, 235, 0.11), transparent 28%),
+        radial-gradient(circle at 18% 18%, rgba(8, 145, 178, 0.11), transparent 24%),
+        radial-gradient(circle at 82% 76%, rgba(217, 119, 6, 0.12), transparent 25%),
+        linear-gradient(180deg, #f8fafc, #ffffff);
+      box-shadow: var(--shadow);
+      isolation: isolate;
     }
 
-    .alumni-card img {
+    .alumni-graph__svg {
+      position: absolute;
+      inset: 0;
       width: 100%;
-      aspect-ratio: 1 / 1;
+      height: 100%;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .alumni-graph__line {
+      stroke: rgba(71, 85, 105, 0.22);
+      stroke-width: 0.22;
+      transition: opacity 160ms ease, stroke 160ms ease, stroke-width 160ms ease;
+    }
+
+    .alumni-graph__line.is-hub {
+      stroke: rgba(37, 99, 235, 0.28);
+      stroke-width: 0.28;
+    }
+
+    .alumni-graph__line.is-highlighted {
+      stroke: rgba(8, 145, 178, 0.86);
+      stroke-width: 0.55;
+      opacity: 1;
+    }
+
+    .alumni-graph__line.is-muted {
+      opacity: 0.12;
+    }
+
+    .alumni-hub {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      z-index: 2;
+      display: grid;
+      place-items: center;
+      width: 118px;
+      height: 118px;
+      padding: 16px;
+      transform: translate(-50%, -50%);
+      border: 1px solid rgba(37, 99, 235, 0.28);
+      border-radius: 50%;
+      background: linear-gradient(135deg, #071833, #0f766e);
+      color: #ffffff;
+      box-shadow: 0 18px 42px rgba(15, 23, 42, 0.2);
+      font-size: 0.95rem;
+      font-weight: 950;
+      line-height: 1.05;
+      text-align: center;
+    }
+
+    .alumni-node {
+      --float-y: -7px;
+      position: absolute;
+      top: var(--node-y);
+      left: var(--node-x);
+      z-index: 3;
+      transform: translate(-50%, -50%);
+      animation: alumni-float var(--float-duration, 6s) ease-in-out infinite;
+      animation-delay: var(--float-delay, 0s);
+    }
+
+    .alumni-node__button {
+      display: block;
+      width: 76px;
+      height: 76px;
+      padding: 0;
+      overflow: hidden;
+      border: 3px solid #ffffff;
+      border-radius: 50%;
+      background: #ffffff;
+      box-shadow: 0 12px 26px rgba(15, 23, 42, 0.18);
+      cursor: pointer;
+      transition: transform 160ms ease, box-shadow 160ms ease, opacity 160ms ease;
+    }
+
+    .alumni-node__button img {
+      width: 100%;
+      height: 100%;
       object-fit: cover;
       object-position: center top;
-      background: var(--panel-soft);
     }
 
-    .alumni-card__body {
-      padding: 14px;
+    .alumni-node:hover,
+    .alumni-node:focus-within {
+      z-index: 6;
+      animation-play-state: paused;
     }
 
-    .alumni-card h3 {
+    .alumni-node:hover .alumni-node__button,
+    .alumni-node:focus-within .alumni-node__button {
+      transform: scale(1.13);
+      box-shadow: 0 18px 42px rgba(15, 23, 42, 0.24);
+    }
+
+    .alumni-graph.has-active .alumni-node.is-muted .alumni-node__button {
+      opacity: 0.34;
+    }
+
+    .alumni-node.is-active .alumni-node__button,
+    .alumni-node.is-connected .alumni-node__button {
+      border-color: #67e8f9;
+    }
+
+    .alumni-node__tooltip {
+      position: absolute;
+      bottom: calc(100% + 14px);
+      left: 50%;
+      width: min(230px, 72vw);
+      padding: 12px;
+      transform: translateX(-50%) translateY(6px);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: rgba(255, 255, 255, 0.97);
+      box-shadow: 0 18px 40px rgba(15, 23, 42, 0.18);
+      color: var(--ink);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 160ms ease, transform 160ms ease;
+    }
+
+    .alumni-node[data-tooltip-placement="bottom"] .alumni-node__tooltip {
+      top: calc(100% + 14px);
+      bottom: auto;
+      transform: translateX(-50%) translateY(-6px);
+    }
+
+    .alumni-node[data-tooltip-align="left"] .alumni-node__tooltip {
+      left: 0;
+      transform: translateY(6px);
+    }
+
+    .alumni-node[data-tooltip-align="right"] .alumni-node__tooltip {
+      right: 0;
+      left: auto;
+      transform: translateY(6px);
+    }
+
+    .alumni-node[data-tooltip-placement="bottom"][data-tooltip-align="left"] .alumni-node__tooltip,
+    .alumni-node[data-tooltip-placement="bottom"][data-tooltip-align="right"] .alumni-node__tooltip {
+      transform: translateY(-6px);
+    }
+
+    .alumni-node:hover .alumni-node__tooltip,
+    .alumni-node:focus-within .alumni-node__tooltip {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    .alumni-node[data-tooltip-align="left"]:hover .alumni-node__tooltip,
+    .alumni-node[data-tooltip-align="left"]:focus-within .alumni-node__tooltip,
+    .alumni-node[data-tooltip-align="right"]:hover .alumni-node__tooltip,
+    .alumni-node[data-tooltip-align="right"]:focus-within .alumni-node__tooltip {
+      transform: translateY(0);
+    }
+
+    .alumni-node__tooltip h3 {
       margin: 0;
-      font-size: 1rem;
+      font-size: 0.98rem;
       line-height: 1.2;
       font-weight: 900;
     }
 
-    .alumni-card p {
-      margin: 7px 0 0;
+    .alumni-node__tooltip p {
+      margin: 6px 0 0;
       color: #475569;
-      font-size: 0.84rem;
-      line-height: 1.4;
+      font-size: 0.78rem;
+      line-height: 1.35;
       font-weight: 650;
+    }
+
+    .alumni-node__connections {
+      color: #0f766e !important;
+    }
+
+    .alumni-node__link {
+      display: inline-flex;
+      width: fit-content;
+      align-items: center;
+      gap: 7px;
+      margin-top: 10px;
+      padding: 7px 9px;
+      border: 1px solid #bfdbfe;
+      border-radius: 6px;
+      color: #1d4ed8;
+      background: #eff6ff;
+      font-size: 0.78rem;
+      font-weight: 850;
+      line-height: 1;
+      text-decoration: none;
+    }
+
+    .alumni-node__link:hover,
+    .alumni-node__link:focus-visible {
+      color: #ffffff;
+      background: #2563eb;
+    }
+
+    .alumni-graph__hint {
+      position: absolute;
+      right: 18px;
+      bottom: 16px;
+      z-index: 2;
+      max-width: 270px;
+      margin: 0;
+      color: #64748b;
+      font-size: 0.78rem;
+      line-height: 1.45;
+    }
+
+    @keyframes alumni-float {
+      0%,
+      100% {
+        margin-top: 0;
+      }
+      50% {
+        margin-top: var(--float-y);
+      }
     }
 
     .footer {
@@ -667,8 +862,8 @@
         grid-template-columns: 1fr;
       }
 
-      .alumni-grid {
-        grid-template-columns: repeat(3, minmax(0, 1fr));
+      .alumni-graph {
+        min-height: 720px;
       }
     }
 
@@ -708,9 +903,19 @@
       }
 
       .people-grid,
-      .people-grid.featured,
-      .alumni-grid {
+      .people-grid.featured {
         grid-template-columns: 1fr;
+      }
+
+      .alumni-node__button {
+        width: 66px;
+        height: 66px;
+      }
+
+      .alumni-hub {
+        width: 102px;
+        height: 102px;
+        font-size: 0.84rem;
       }
 
       .advisor-card {
@@ -823,7 +1028,7 @@
           </div>
           <span class="section-count" id="alumni-count"></span>
         </div>
-        <div class="alumni-grid" id="alumni-board"></div>
+        <div class="alumni-graph" id="alumni-board" aria-label="Board alumni relationship graph"></div>
       </section>
     </div>
   </main>
@@ -924,24 +1129,34 @@
         major: "Computer Science",
         image: "image/DiptanshuSikdar.png",
         accent: "gold",
-        bio: "He is a UCI alumnus who led QC@UCI as its president from 2023 to 2026. He now supports the club externally with continuity, technical perspective, and guidance for future board members."
+        bio: "He is a UCI alumnus who helped lead QC@UCI and contributed significantly to its growth. He now supports the club externally with continuity, technical perspective, and guidance for future board members."
       }
     ];
 
     const alumni = [
       {
+        name: "Diptanshu Sikdar",
+        role: "President",
+        served: "Served 2023-26",
+        major: "Computer Science",
+        image: "image/DiptanshuSikdar.png",
+        linkedin: "https://www.linkedin.com/in/diptanshu-sikdar"
+      },
+      {
         name: "Hokulani Topping",
         role: "VP & Social Media Director",
         served: "Served 2025-26",
         major: "Informatics",
-        image: "image/HokulaniTopping.png"
+        image: "image/HokulaniTopping.png",
+        linkedin: "https://www.linkedin.com/in/hokulani-topping"
       },
       {
         name: "Shion Fukuzawa",
         role: "Advisor",
         served: "Served 2023-25",
         major: "Computer Science",
-        image: "image/ShionFukuzawa.png"
+        image: "image/ShionFukuzawa.png",
+        linkedin: "https://www.linkedin.com/in/shionfukuzawa"
       },
       {
         name: "Stewart Smith",
@@ -955,70 +1170,79 @@
         role: "Treasurer",
         served: "Served 2023-25",
         major: "Computer Science",
-        image: "image/RadhakrishnaVempati.jpg"
+        image: "image/RadhakrishnaVempati.jpg",
+        linkedin: "https://www.linkedin.com/in/radhakrishnavempati"
       },
       {
         name: "Arya Mhaiskar",
         role: "Marketing Chief",
         served: "Served 2023-24",
         major: "Computer Science",
-        image: "image/AryaMhaiskar.jpg"
+        image: "image/AryaMhaiskar.jpg",
+        linkedin: "https://www.linkedin.com/in/arya-mhaiskar"
       },
       {
         name: "Joshua Wang",
         role: "Co-President",
         served: "Served 2022-23",
         major: "Physics / CSE",
-        image: "image/JoshuaWang.jpg"
+        image: "image/JoshuaWang.jpg",
+        linkedin: "https://www.linkedin.com/in/joshua-wang-5004b4248/"
       },
       {
         name: "Rohit Ganti",
         role: "Co-President",
         served: "Served 2022-23",
         major: "Physics",
-        image: "image/RohitGanti.png"
+        image: "image/RohitGanti.png",
+        linkedin: "https://www.linkedin.com/in/rohit-ganti-64280a19b/"
       },
       {
         name: "Sean Doan",
         role: "Secretary",
         served: "Served 2022-23",
         major: "Physics",
-        image: "image/SeanDoan.jpeg"
+        image: "image/SeanDoan.jpeg",
+        linkedin: "https://www.linkedin.com/in/sean-doan-3a23553a5/"
       },
       {
         name: "Chris Chen",
         role: "President",
         served: "Served 2021-22",
         major: "Physics / CS",
-        image: "image/ChrisChen.jpg"
+        image: "image/ChrisChen.jpg",
+        linkedin: "https://www.linkedin.com/in/jielun-chen/"
       },
       {
         name: "Kyler Frazier",
         role: "Board Alumni",
         served: "Served 2021-22",
         major: "Physics / CS",
-        image: "image/KylerFrazier.jpeg"
+        image: "image/KylerFrazier.jpeg",
+        linkedin: "https://www.linkedin.com/in/kyler-frazier"
       },
       {
         name: "Harry Goyal",
         role: "Board Alumni",
         served: "Served 2021-22",
         major: "Informatics",
-        image: "image/qc.png"
+        image: "image/Unknown_person.jpg"
       },
       {
         name: "Andy Park",
         role: "Board Alumni",
         served: "Served 2021-22",
         major: "Physics / Mathematics",
-        image: "image/AndyPark.jpg"
+        image: "image/AndyPark.jpg",
+        linkedin: "https://www.linkedin.com/in/andyypark/"
       },
       {
         name: "Keira Zhu",
         role: "Board Alumni",
         served: "Served 2021-22",
         major: "Business Economics",
-        image: "image/ZhuHaochen.jpg"
+        image: "image/ZhuHaochen.jpg",
+        linkedin: "https://www.linkedin.com/in/haochen-zhu-keira/"
       }
     ];
 
@@ -1076,17 +1300,185 @@
       </article>
     `;
 
-    const alumniCard = (person) => `
-      <article class="alumni-card">
-        <img src="${escapeHtml(person.image)}" alt="${escapeHtml(person.name)}" loading="lazy" />
-        <div class="alumni-card__body">
-          <h3>${escapeHtml(person.name)}</h3>
-          <p>${escapeHtml(person.role)}</p>
-          <p>${escapeHtml(person.served)}</p>
-          <p>${escapeHtml(person.major)}</p>
-        </div>
-      </article>
-    `;
+    const slugify = (value) => String(value)
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, "-")
+      .replace(/(^-|-$)/g, "");
+
+    const serviceRange = (served) => {
+      const match = String(served).match(/(\d{4})-(\d{2,4})/);
+      if (!match) return { start: 0, end: 0 };
+
+      const start = Number(match[1]);
+      const end = match[2].length === 2
+        ? Number(`${String(start).slice(0, 2)}${match[2]}`)
+        : Number(match[2]);
+
+      return { start, end };
+    };
+
+    const servedTogether = (first, second) => {
+      const a = serviceRange(first.served);
+      const b = serviceRange(second.served);
+      return a.start <= b.end && b.start <= a.end;
+    };
+
+    const graphPositions = [
+      { x: 50, y: 12 },
+      { x: 72, y: 16 },
+      { x: 28, y: 16 },
+      { x: 87, y: 31 },
+      { x: 13, y: 31 },
+      { x: 90, y: 52 },
+      { x: 10, y: 52 },
+      { x: 82, y: 72 },
+      { x: 18, y: 72 },
+      { x: 63, y: 86 },
+      { x: 37, y: 86 },
+      { x: 50, y: 76 },
+      { x: 30, y: 50 },
+      { x: 70, y: 50 }
+    ];
+
+    function renderAlumniGraph() {
+      const graph = document.getElementById("alumni-board");
+      const people = alumni.map((person, index) => ({
+        ...person,
+        id: slugify(person.name),
+        x: graphPositions[index % graphPositions.length].x,
+        y: graphPositions[index % graphPositions.length].y,
+        floatDuration: `${5.4 + (index % 5) * 0.55}s`,
+        floatDelay: `${(index % 7) * -0.42}s`
+      }));
+
+      const peopleById = new Map(people.map((person) => [person.id, person]));
+      const peerLinks = [];
+
+      people.forEach((person, index) => {
+        people.slice(index + 1).forEach((other) => {
+          if (servedTogether(person, other)) {
+            peerLinks.push({ source: person.id, target: other.id, type: "peer" });
+          }
+        });
+      });
+
+      const hubLinks = people.map((person) => ({ source: "qc-uci", target: person.id, type: "hub" }));
+      const links = [...hubLinks, ...peerLinks];
+      const peerMap = new Map(people.map((person) => [person.id, []]));
+
+      peerLinks.forEach((link) => {
+        peerMap.get(link.source).push(peopleById.get(link.target));
+        peerMap.get(link.target).push(peopleById.get(link.source));
+      });
+
+      const lineMarkup = links.map((link) => {
+        const source = link.source === "qc-uci" ? { x: 50, y: 50 } : peopleById.get(link.source);
+        const target = peopleById.get(link.target);
+        const classes = link.type === "hub" ? "alumni-graph__line is-hub" : "alumni-graph__line";
+
+        return `
+          <line
+            class="${classes}"
+            x1="${source.x}"
+            y1="${source.y}"
+            x2="${target.x}"
+            y2="${target.y}"
+            data-source="${escapeHtml(link.source)}"
+            data-target="${escapeHtml(link.target)}"
+          />`;
+      }).join("");
+
+      const nodeMarkup = people.map((person) => {
+        const connections = peerMap.get(person.id);
+        const connectionCount = connections.length;
+        const connectionText = connectionCount === 1
+          ? "Worked with 1 other"
+          : `Worked with ${connectionCount} others`;
+        const linkedinMarkup = person.linkedin
+          ? `<a class="alumni-node__link" href="${escapeHtml(person.linkedin)}" target="_blank" rel="noopener noreferrer" aria-label="${escapeHtml(`Open ${person.name}'s LinkedIn profile`)}"><i class="fa-brands fa-linkedin" aria-hidden="true"></i>LinkedIn</a>`
+          : "";
+        const placement = person.y < 30 ? "bottom" : "top";
+        const align = person.x < 24 ? "left" : person.x > 76 ? "right" : "center";
+
+        return `
+          <article
+            class="alumni-node"
+            data-node-id="${escapeHtml(person.id)}"
+            data-connections="${escapeHtml(connections.map((connection) => connection.id).join(" "))}"
+            data-tooltip-placement="${placement}"
+            data-tooltip-align="${align}"
+            style="--node-x: ${person.x}%; --node-y: ${person.y}%; --float-duration: ${person.floatDuration}; --float-delay: ${person.floatDelay};"
+          >
+            <button
+              class="alumni-node__button"
+              type="button"
+              aria-label="${escapeHtml(`${person.name}, ${person.role}, ${person.served}, ${person.major}. ${connectionText}.`)}"
+            >
+              <img src="${escapeHtml(person.image)}" alt="${escapeHtml(person.name)}" loading="lazy" />
+            </button>
+            <div class="alumni-node__tooltip" role="tooltip">
+              <h3>${escapeHtml(person.name)}</h3>
+              <p>${escapeHtml(person.role)}</p>
+              <p>${escapeHtml(person.served)} · ${escapeHtml(person.major)}</p>
+              <p class="alumni-node__connections">${escapeHtml(connectionText)}</p>
+              ${linkedinMarkup}
+            </div>
+          </article>
+        `;
+      }).join("");
+
+      graph.innerHTML = `
+        <svg class="alumni-graph__svg" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+          ${lineMarkup}
+        </svg>
+        <div class="alumni-hub" aria-hidden="true">QC@UCI</div>
+        ${nodeMarkup}
+        <p class="alumni-graph__hint">Hover or focus a profile to see their role, service years, and boardmates from overlapping service periods.</p>
+      `;
+
+      const nodes = Array.from(graph.querySelectorAll(".alumni-node"));
+      const lines = Array.from(graph.querySelectorAll(".alumni-graph__line"));
+
+      function setActive(id) {
+        const activeNode = graph.querySelector(`[data-node-id="${id}"]`);
+        const connectedIds = new Set((activeNode.dataset.connections || "").split(" ").filter(Boolean));
+
+        graph.classList.add("has-active");
+
+        nodes.forEach((node) => {
+          const nodeId = node.dataset.nodeId;
+          const isActive = nodeId === id;
+          const isConnected = connectedIds.has(nodeId);
+
+          node.classList.toggle("is-active", isActive);
+          node.classList.toggle("is-connected", isConnected);
+          node.classList.toggle("is-muted", !isActive && !isConnected);
+        });
+
+        lines.forEach((line) => {
+          const isHighlighted =
+            (line.dataset.source === "qc-uci" && line.dataset.target === id) ||
+            (line.dataset.source === id && connectedIds.has(line.dataset.target)) ||
+            (line.dataset.target === id && connectedIds.has(line.dataset.source));
+
+          line.classList.toggle("is-highlighted", isHighlighted);
+          line.classList.toggle("is-muted", !isHighlighted);
+        });
+      }
+
+      function clearActive() {
+        graph.classList.remove("has-active");
+        nodes.forEach((node) => node.classList.remove("is-active", "is-connected", "is-muted"));
+        lines.forEach((line) => line.classList.remove("is-highlighted", "is-muted"));
+      }
+
+      nodes.forEach((node) => {
+        node.addEventListener("pointerenter", () => setActive(node.dataset.nodeId));
+        node.addEventListener("pointerleave", clearActive);
+        node.querySelector("button").addEventListener("focus", () => setActive(node.dataset.nodeId));
+        node.querySelector("button").addEventListener("blur", clearActive);
+      });
+    }
 
     document.getElementById("current-board").innerHTML = boardGroups.map((group) => `
       <section class="group-block" aria-labelledby="${escapeHtml(group.title.toLowerCase().replace(/[^a-z0-9]+/g, "-"))}">
@@ -1104,7 +1496,7 @@
     `).join("");
 
     document.getElementById("advisor-board").innerHTML = advisors.map(advisorCard).join("");
-    document.getElementById("alumni-board").innerHTML = alumni.map(alumniCard).join("");
+    renderAlumniGraph();
 
     document.getElementById("current-count").textContent = `${boardGroups.reduce((total, group) => total + group.people.length, 0)} current officers`;
     document.getElementById("advisor-count").textContent = `${advisors.length} advisors`;
