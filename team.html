@@ -755,7 +755,8 @@
     }
 
     .alumni-node:hover .alumni-node__tooltip,
-    .alumni-node:focus-within .alumni-node__tooltip {
+    .alumni-node:focus-within .alumni-node__tooltip,
+    .alumni-node.is-pinned .alumni-node__tooltip {
       opacity: 1;
       pointer-events: auto;
       transform: translateX(-50%) translateY(0);
@@ -763,9 +764,17 @@
 
     .alumni-node[data-tooltip-align="left"]:hover .alumni-node__tooltip,
     .alumni-node[data-tooltip-align="left"]:focus-within .alumni-node__tooltip,
+    .alumni-node[data-tooltip-align="left"].is-pinned .alumni-node__tooltip,
     .alumni-node[data-tooltip-align="right"]:hover .alumni-node__tooltip,
-    .alumni-node[data-tooltip-align="right"]:focus-within .alumni-node__tooltip {
+    .alumni-node[data-tooltip-align="right"]:focus-within .alumni-node__tooltip,
+    .alumni-node[data-tooltip-align="right"].is-pinned .alumni-node__tooltip {
       transform: translateY(0);
+    }
+
+    .alumni-graph.has-pinned .alumni-node:not(.is-pinned):hover .alumni-node__tooltip,
+    .alumni-graph.has-pinned .alumni-node:not(.is-pinned):focus-within .alumni-node__tooltip {
+      opacity: 0;
+      pointer-events: none;
     }
 
     .alumni-node__tooltip h3 {
@@ -789,17 +798,17 @@
 
     .alumni-node__link {
       display: inline-flex;
-      width: fit-content;
+      width: 34px;
+      height: 34px;
       align-items: center;
-      gap: 7px;
+      justify-content: center;
       margin-top: 10px;
-      padding: 7px 9px;
+      padding: 0;
       border: 1px solid #bfdbfe;
       border-radius: 6px;
       color: #1d4ed8;
       background: #eff6ff;
-      font-size: 0.78rem;
-      font-weight: 850;
+      font-size: 1rem;
       line-height: 1;
       text-decoration: none;
     }
@@ -808,6 +817,12 @@
     .alumni-node__link:focus-visible {
       color: #ffffff;
       background: #2563eb;
+    }
+
+    .alumni-node__link img {
+      width: 18px;
+      height: 18px;
+      object-fit: contain;
     }
 
     .alumni-graph__hint {
@@ -1163,7 +1178,8 @@
         role: "Vice President",
         served: "Served 2023-25",
         major: "Computer Science",
-        image: "image/StewartSmith.jpg"
+        image: "image/StewartSmith.jpg",
+        linkedin: "https://www.linkedin.com/in/stewart-smith-334858330/"
       },
       {
         name: "Krishna Vempati",
@@ -1226,7 +1242,7 @@
         role: "Board Alumni",
         served: "Served 2021-22",
         major: "Informatics",
-        image: "image/Unknown_person.jpg"
+        image: "image/unknown_person.jpg"
       },
       {
         name: "Andy Park",
@@ -1395,7 +1411,7 @@
           ? "Worked with 1 other"
           : `Worked with ${connectionCount} others`;
         const linkedinMarkup = person.linkedin
-          ? `<a class="alumni-node__link" href="${escapeHtml(person.linkedin)}" target="_blank" rel="noopener noreferrer" aria-label="${escapeHtml(`Open ${person.name}'s LinkedIn profile`)}"><i class="fa-brands fa-linkedin" aria-hidden="true"></i>LinkedIn</a>`
+          ? `<a class="alumni-node__link" href="${escapeHtml(person.linkedin)}" target="_blank" rel="noopener noreferrer" aria-label="${escapeHtml(`Open ${person.name}'s LinkedIn profile`)}" title="LinkedIn"><img src="image/linkedin_icon.png" alt="" aria-hidden="true" /></a>`
           : "";
         const placement = person.y < 30 ? "bottom" : "top";
         const align = person.x < 24 ? "left" : person.x > 76 ? "right" : "center";
@@ -1438,6 +1454,7 @@
 
       const nodes = Array.from(graph.querySelectorAll(".alumni-node"));
       const lines = Array.from(graph.querySelectorAll(".alumni-graph__line"));
+      let pinnedId = null;
 
       function setActive(id) {
         const activeNode = graph.querySelector(`[data-node-id="${id}"]`);
@@ -1467,16 +1484,55 @@
       }
 
       function clearActive() {
-        graph.classList.remove("has-active");
-        nodes.forEach((node) => node.classList.remove("is-active", "is-connected", "is-muted"));
+        graph.classList.remove("has-active", "has-pinned");
+        nodes.forEach((node) => node.classList.remove("is-active", "is-connected", "is-muted", "is-pinned"));
         lines.forEach((line) => line.classList.remove("is-highlighted", "is-muted"));
       }
 
+      function pinNode(id) {
+        pinnedId = id;
+        setActive(id);
+        graph.classList.add("has-pinned");
+        nodes.forEach((node) => node.classList.toggle("is-pinned", node.dataset.nodeId === id));
+      }
+
+      function clearPinned() {
+        pinnedId = null;
+        clearActive();
+      }
+
       nodes.forEach((node) => {
-        node.addEventListener("pointerenter", () => setActive(node.dataset.nodeId));
-        node.addEventListener("pointerleave", clearActive);
-        node.querySelector("button").addEventListener("focus", () => setActive(node.dataset.nodeId));
-        node.querySelector("button").addEventListener("blur", clearActive);
+        const button = node.querySelector("button");
+
+        node.addEventListener("pointerenter", () => {
+          if (!pinnedId) setActive(node.dataset.nodeId);
+        });
+        node.addEventListener("pointerleave", () => {
+          if (!pinnedId) clearActive();
+        });
+        button.addEventListener("focus", () => {
+          if (!pinnedId) setActive(node.dataset.nodeId);
+        });
+        button.addEventListener("blur", () => {
+          if (!pinnedId) clearActive();
+        });
+        button.addEventListener("click", (event) => {
+          event.stopPropagation();
+          if (pinnedId === node.dataset.nodeId) {
+            clearPinned();
+          } else {
+            pinNode(node.dataset.nodeId);
+          }
+        });
+
+        node.querySelector(".alumni-node__tooltip").addEventListener("click", (event) => {
+          event.stopPropagation();
+        });
+      });
+
+      document.addEventListener("click", clearPinned);
+      document.addEventListener("keydown", (event) => {
+        if (event.key === "Escape" && pinnedId) clearPinned();
       });
     }
 
