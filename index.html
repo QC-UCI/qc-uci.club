@@ -108,143 +108,155 @@
     .hero h1 { max-width: 92vw; }
   }
 
-  /* Highlights (clickable tabs + modal stories) */
-  .hltabs{
-    max-width:1200px;
-    margin:0 auto 16px;
-    display:flex;
-    gap:12px;
-    flex-wrap:wrap;
-    justify-content:center;
-  }
-  .hltab-btn{
-    display:flex;
-    align-items:center;
-    gap:12px;
-    padding:12px 14px;
-    border-radius:16px;
-    border:1px solid rgba(255,255,255,0.14);
-    background:rgba(255,255,255,0.05);
-    color:#e5e7eb;
-    font-weight:800;
-    cursor:pointer;
-
-    /* Make every tab the same size (responsive on mobile) */
-    width:min(360px, 92vw);
-    height:88px;
-
-    text-align:left;
-    transition:transform .18s ease, background .18s ease, border-color .18s ease;
-  }
-  /* Hover should match the aqua "active" look */
-  .hltab-btn:hover{
-    transform:translateY(-1px);
-    border-color:rgba(34,211,238,0.55);
-    background:linear-gradient(180deg, rgba(34,211,238,0.14), rgba(255,255,255,0.05));
-  }
-  .hltab-btn[aria-selected="true"]{
-    border-color:rgba(34,211,238,0.55);
-    background:linear-gradient(180deg, rgba(34,211,238,0.14), rgba(255,255,255,0.05));
-  }
-  .hltab-btn:focus-visible{ outline:var(--focus); outline-offset:3px; }
-  .hltab-thumb{
-    width:60px;
-    height:60px;
-    border-radius:14px;
-    object-fit:cover;
-    object-position:center;
-    flex:0 0 60px;
-    border:1px solid rgba(255,255,255,0.16);
-    background:rgba(0,0,0,0.25);
-  }
-  .hltab-meta{ display:flex; flex-direction:column; gap:2px; min-width:0; }
-  .hltab-kicker{ font-size:.78rem; color:#9ca3af; font-weight:800; }
-  .hltab-title{ font-size:.98rem; color:#e5e7eb; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
-
-  /* Panels are used as story templates; kept in DOM but visually hidden when modal is used */
-  .hlpanels{
+  /* Highlights rotating carousel */
+  .highlight-carousel{
+    position:relative;
     max-width:1200px;
     margin:0 auto;
-    display:none;
-  }
-
-  /* Story card inside modal */
-  .hlpanel{
-    display:grid;
-    grid-template-columns: 1.15fr 1fr;
-    gap:16px;
-    border:1px solid rgba(255,255,255,0.10);
-    background:linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02));
-    border-radius:18px;
+    min-height:420px;
     overflow:hidden;
   }
-  .hlpanel-media{
-    min-height:240px;
-    background-size:cover;
-    background-position:center;
-  }
-  .hlpanel-body{ padding:18px; display:flex; flex-direction:column; gap:8px; }
-  .hlpanel-title{ margin:0; font-size:1.25rem; font-weight:900; }
-  .hlpanel-desc{ margin:0; color:#aab0bd; line-height:1.55; }
-  .hlpanel-link{ margin-top:6px; display:inline-flex; width:max-content; gap:8px; padding:10px 12px; border-radius:14px;
-    border:1px solid rgba(255,255,255,0.20); background:rgba(0,0,0,0.35); color:#ffffff; font-weight:800;
-  }
-  .hlpanel-link:hover{ background:rgba(0,0,0,0.55); }
-
-  @media (max-width: 900px){
-    .hlpanel{ grid-template-columns: 1fr; }
-    .hlpanel-media{ min-height:220px; }
-    .hltab-btn{ min-width: min(520px, 92vw); }
-  }
-
-  /* Modal */
-  .hlmodal[hidden]{ display:none; }
-  .hlmodal{
-    position:fixed;
-    inset:0;
-    z-index:100;
-    display:grid;
-    place-items:center;
-    padding:18px;
-  }
-  .hlmodal-backdrop{
-    position:absolute;
-    inset:0;
-    background:rgba(0,0,0,0.65);
-    backdrop-filter: blur(6px);
-  }
-  .hlmodal-dialog{
+  .highlight-rail{
     position:relative;
-    width:min(980px, 96vw);
-    max-height:min(86vh, 780px);
-    overflow:auto;
+    min-height:375px;
+    margin:0 auto;
+  }
+  .hltab-btn{
+    --x:0px;
+    --scale:1;
+    position:absolute;
+    left:50%;
+    top:50%;
+    display:block;
+    width:min(370px, 76vw);
+    min-height:330px;
+    padding:12px 12px 18px;
     border-radius:18px;
     border:1px solid rgba(255,255,255,0.16);
-    background:linear-gradient(180deg, rgba(18,22,53,0.92), rgba(11,16,32,0.92));
-    box-shadow:0 25px 80px rgba(0,0,0,0.6);
-    padding:14px;
-  }
-  .hlmodal-close{
-    position:sticky;
-    top:8px;
-    margin-left:auto;
-    display:grid;
-    place-items:center;
-    width:40px;
-    height:40px;
-    border-radius:14px;
-    border:1px solid rgba(255,255,255,0.18);
-    background:rgba(0,0,0,0.35);
-    color:#ffffff;
-    font-size:22px;
-    font-weight:900;
+    background:
+      linear-gradient(135deg, rgba(14,165,233,0.13), rgba(167,139,250,0.09)),
+      rgba(255,255,255,0.055);
+    color:#e5e7eb;
+    text-align:left;
     cursor:pointer;
-    z-index:2;
+    opacity:.34;
+    transform:translate(-50%, -50%) translateX(var(--x)) scale(var(--scale));
+    transition:transform .55s cubic-bezier(.2,.8,.2,1), opacity .55s ease, border-color .55s ease, box-shadow .55s ease, background .55s ease;
+    box-shadow:0 12px 28px rgba(0,0,0,.24);
   }
-  .hlmodal-close:hover{ background:rgba(0,0,0,0.55); }
-  .hlmodal-close:focus-visible{ outline:var(--focus); outline-offset:3px; }
-  .hlmodal-content{ padding-top:10px; }
-  .hlmodal-content .hlpanel{ border-color: rgba(255,255,255,0.12); }
+  .hltab-btn.is-active{
+    --scale:1.08;
+    opacity:1;
+    z-index:5;
+    border-color:rgba(34,211,238,0.62);
+    background:
+      linear-gradient(135deg, rgba(34,211,238,0.22), rgba(167,139,250,0.18)),
+      rgba(255,255,255,0.08);
+    box-shadow:0 22px 58px rgba(2,6,23,.62), 0 0 0 1px rgba(34,211,238,0.12);
+  }
+  .hltab-btn.is-near{ opacity:.72; z-index:3; }
+  .hltab-btn.is-far{ opacity:0; pointer-events:none; z-index:1; }
+  .hltab-btn:focus-visible{ outline:var(--focus); outline-offset:4px; }
+  .hltab-photo{
+    display:block;
+    width:100%;
+    aspect-ratio:16 / 9;
+    margin-bottom:14px;
+    border-radius:14px;
+    overflow:hidden;
+    border:1px solid rgba(255,255,255,.16);
+    background:#0f172a;
+  }
+  .hltab-photo img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    object-position:center;
+    display:block;
+  }
+  .hltab-photo--contain img{
+    object-fit:contain;
+    padding:10px;
+  }
+  .hltab-copy{
+    display:block;
+    min-width:0;
+    padding:0 4px;
+  }
+  .hltab-title{
+    display:block;
+    color:#ffffff;
+    font-size:1rem;
+    line-height:1.25;
+    font-weight:900;
+  }
+  .hltab-topic{
+    display:block;
+    margin-top:8px;
+    color:#ffffff;
+    font-size:.95rem;
+    line-height:1.3;
+    font-weight:400;
+  }
+  .hltab-date{
+    display:block;
+    margin-top:8px;
+    color:#9ca3af;
+    font-size:.88rem;
+    line-height:1.25;
+    font-weight:400;
+  }
+  .hltab-more{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    margin-top:14px;
+    min-height:36px;
+    padding:8px 14px;
+    border-radius:12px;
+    border:1px solid rgba(34,211,238,.34);
+    background:rgba(34,211,238,.12);
+    color:#ffffff;
+    font-size:.86rem;
+    font-weight:800;
+    cursor:pointer;
+  }
+  .hltab-more:hover,
+  .hltab-more:focus-visible{
+    background:rgba(34,211,238,.2);
+    outline:none;
+  }
+  .highlight-dots{
+    display:flex;
+    justify-content:center;
+    gap:8px;
+    margin-top:26px;
+  }
+  .highlight-dot{
+    width:8px;
+    height:8px;
+    border:0;
+    border-radius:999px;
+    background:rgba(255,255,255,.28);
+    padding:0;
+    cursor:pointer;
+  }
+  .highlight-dot[aria-pressed="true"]{
+    width:24px;
+    background:#22d3ee;
+  }
+
+  @media (max-width: 720px){
+    .highlight-carousel{ min-height:410px; }
+    .highlight-rail{ min-height:365px; }
+    .hltab-btn{ width:min(330px, 84vw); min-height:328px; padding:12px 12px 18px; }
+    .hltab-title{ font-size:.95rem; }
+    .hltab-topic{ font-size:.9rem; }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    .hltab-btn{ transition:none; }
+  }
 
   /* Chips (shared styles) */
 
@@ -319,23 +331,6 @@
     .mission-wrap { flex-direction: column; margin-left: 6%; margin-right: 6%; }
     .slideshow { flex: 0 0 auto; width: 100%; min-height: 220px; aspect-ratio: 16 / 9; }
   }
-
-
-
-  /* Highlights dropdown + center spotlight */
-  .hlbar{ display:flex; align-items:center; justify-content:space-between; gap:12px; margin:0 auto 10px; max-width:1200px; padding: 0 6px; }
-  .hlmenu-btn{ display:inline-flex; align-items:center; gap:10px; padding:10px 12px; border-radius:14px; border:1px solid rgba(255,255,255,0.18); background:rgba(255,255,255,0.06); color:#e5e7eb; font-weight:800; cursor:pointer; }
-  .hlmenu-btn:hover{ background:rgba(255,255,255,0.10); }
-  .hlhint{ color:#9ca3af; font-size: .9rem; }
-  .hlmenu{ position:absolute; top: 52px; left: 10px; width:min(520px, calc(100% - 20px)); background:rgba(10,15,35,0.92); border:1px solid rgba(255,255,255,0.14); border-radius:16px; padding:10px; display:none; z-index: 10; backdrop-filter: blur(10px); }
-  .hlmenu.open{ display:block; }
-  .hlmenu-item{ width:100%; text-align:left; padding:10px 12px; border-radius:12px; border:1px solid rgba(255,255,255,0.10); background:rgba(255,255,255,0.03); color:#e5e7eb; font-weight:800; cursor:pointer; }
-  .hlmenu-item:hover{ border-color: rgba(34,211,238,0.55); }
-
-  .rail { position: relative; }
-  .rail-card{ opacity: 0.28; transform: scale(0.92); transition: transform 0.35s ease, box-shadow 0.35s ease, opacity 0.35s ease, border-color 0.35s ease; }
-  .rail-card.near{ opacity: 0.65; transform: scale(0.97); }
-  .rail-card.is-active{ transform: scale(1.03); opacity: 1; box-shadow: 0 18px 45px rgba(15,23,42,0.9); border-color: rgba(148,163,184,0.6); z-index: 2; }
 
 footer { padding:22px 16px 28px; border-top:1px solid rgba(255,255,255,0.08); background:linear-gradient(180deg, rgba(14,165,233,0.05), transparent); }
   .footer__copyRight { text-align:center; color:#9ca3af; }
@@ -439,10 +434,10 @@ footer { padding:22px 16px 28px; border-top:1px solid rgba(255,255,255,0.08); ba
     <div class="wwd-grid" style="align-items:stretch;">
       <article class="wwd-card" data-v="events" style="padding-left:16px;">
         <div class="img" style="height:180px; border-radius:14px; overflow:hidden; border:1px solid rgba(255,255,255,0.08); background:#0f172a; display:grid; place-items:center; margin-bottom:12px;">
-          <img src="image/QFF23_logo.png" alt="Qiskit Fall Fest 2023" style="max-height:160px; max-width:92%; object-fit:contain;" />
+          <img src="image/Qiskit-Fall-Fest.png" alt="Qiskit Fall Fest" style="max-height:160px; max-width:92%; object-fit:contain;" />
         </div>
-        <h3 style="margin-top:0;">IBM Qiskit Fall Fest</h3>
-        <p>Student-driven quantum event with IBM’s support — featuring workshops, coding challenges, and guest speakers</p>
+        <h3 style="margin-top:0;">Qiskit Fall Fest 2026</h3>
+        <p>We are beyond thrilled to host Qiskit Fall Fest 2026 with IBM Quantum this fall. Expect industry-level guest speakers, hackathons, workshops, merch, and professional knowledge. More details coming soon.</p>
       </article>
 
       <article class="wwd-card" data-v="community" style="padding-left:16px;">
@@ -456,94 +451,82 @@ footer { padding:22px 16px 28px; border-top:1px solid rgba(255,255,255,0.08); ba
   </section>
 
 
-  <!-- HIGHLIGHTS (dropdown + spotlight center) -->
+  <!-- HIGHLIGHTS (rotating center spotlight) -->
   <section aria-label="Highlights">
-  <h2 class="section-title">Highlights</h2>
+    <h2 class="section-title">Highlights</h2>
 
-  <div class="hltabs" id="hlTabs" role="tablist" aria-label="Highlights">
-    <button class="hltab-btn" role="tab" aria-selected="false" aria-controls="hl-panel-0" id="hl-tab-0" data-hl="0" type="button">
-      <img class="hltab-thumb" src="image/brain_doolittle.jpeg" alt="Dr. Brian Doolittle thumbnail">
-      <span class="hltab-meta">
-        <span class="hltab-kicker">Talk · Dec 01, 2025</span>
-        <span class="hltab-title">Dr. Brian Doolittle</span>
-      </span>
-    </button>
-    <button class="hltab-btn" role="tab" aria-selected="false" aria-controls="hl-panel-1" id="hl-tab-1" data-hl="1" type="button">
-      <img class="hltab-thumb" src="image/irvinehacks25.png" alt="IrvineHacks 2025 Workshop thumbnail">
-      <span class="hltab-meta">
-        <span class="hltab-kicker">Talk · January 24, 2025</span>
-        <span class="hltab-title">IrvineHacks 2025 Workshop</span>
-      </span>
-    </button>
-    <button class="hltab-btn" role="tab" aria-selected="false" aria-controls="hl-panel-2" id="hl-tab-2" data-hl="2" type="button">
-      <img class="hltab-thumb" src="image/sandyirani.jpg" alt="Professor Sandy Irani thumbnail">
-      <span class="hltab-meta">
-        <span class="hltab-kicker">Talk · April 15, 2024</span>
-        <span class="hltab-title">Professor Sandy Irani</span>
-      </span>
-    </button>
-    <button class="hltab-btn" role="tab" aria-selected="false" aria-controls="hl-panel-3" id="hl-tab-3" data-hl="3" type="button">
-      <img class="hltab-thumb" src="image/SQUID.png" alt="SQUID 2023 thumbnail">
-      <span class="hltab-meta">
-        <span class="hltab-kicker">Project · Jun 06, 2023</span>
-        <span class="hltab-title">S.Q.U.I.D 2023 Project</span>
-      </span>
-    </button>
-  </div>
-
-  <div class="hlpanels" id="hlPanels">
-    <article class="hlpanel" role="tabpanel" tabindex="0" aria-labelledby="hl-tab-0" id="hl-panel-0" data-hl="0">
-      <div class="hlpanel-media" style="background-image:url('image/brain_doolittle.jpeg')" role="img" aria-label="Dr. Brian Doolittle"></div>
-      <div class="hlpanel-body">
-        <div class="kicker"><span class="chip chip-amber">Talk</span> — December 01, 2025</div>
-        <h3 class="hlpanel-title">Guest lecture: Dr. Brian Doolittle</h3>
-        <p class="hlpanel-desc">Join us for an exciting industry talk on Quantum Networking.</p>
-        <a class="hlpanel-link" href="https://www.aliroquantum.com" target="_blank" rel="noreferrer">Explore Aliro →</a>
+    <div class="highlight-carousel" aria-roledescription="carousel">
+      <div class="highlight-rail" id="hlTabs" role="listbox" aria-label="Recent QC@UCI highlights">
+        <article class="hltab-btn" role="option" aria-selected="false" data-hl="0" tabindex="0">
+          <span class="hltab-photo hltab-photo--contain" aria-hidden="true">
+            <img src="photos/QC_FPA_HS.jpeg" alt="Fairmont Preparatory Academy High School Workshop">
+          </span>
+          <span class="hltab-copy">
+            <span class="hltab-title">Fairmont Preparatory Academy High School Workshop</span>
+            <span class="hltab-topic">Introduction to Quantum Computing</span>
+            <span class="hltab-date">May 13, 2026</span>
+            <button class="hltab-more" type="button" aria-label="More info for Fairmont Preparatory Academy High School Workshop">More Info</button>
+          </span>
+        </article>
+        <article class="hltab-btn" role="option" aria-selected="false" data-hl="1" tabindex="0">
+          <span class="hltab-photo hltab-photo--contain" aria-hidden="true">
+            <img src="photos/Tom_Finke.jpeg" alt="Tom Finke">
+          </span>
+          <span class="hltab-copy">
+            <span class="hltab-title">Guest Speaker: Tom Finke (AQS)</span>
+            <span class="hltab-topic">Quantum Computing for Enterprise Finance</span>
+            <span class="hltab-date">May 11, 2026</span>
+            <button class="hltab-more" type="button" aria-label="More info for Guest Speaker Tom Finke">More Info</button>
+          </span>
+        </article>
+        <article class="hltab-btn" role="option" aria-selected="false" data-hl="2" tabindex="0">
+          <span class="hltab-photo" aria-hidden="true">
+            <img src="photos/Quantum_Blockchain.jpeg" alt="QC x Blockchain Collaboration">
+          </span>
+          <span class="hltab-copy">
+            <span class="hltab-title">QC x Blockchain Collaboration</span>
+            <span class="hltab-topic">Quantum Blockchain &amp; Security</span>
+            <span class="hltab-date">April 13, 2026</span>
+            <button class="hltab-more" type="button" aria-label="More info for QC x Blockchain Collaboration">More Info</button>
+          </span>
+        </article>
+        <article class="hltab-btn" role="option" aria-selected="false" data-hl="3" tabindex="0">
+          <span class="hltab-photo" aria-hidden="true">
+            <img src="image/brain_doolittle.jpeg" alt="">
+          </span>
+          <span class="hltab-copy">
+            <span class="hltab-title">Guest Speaker: Dr. Brian Doolittle</span>
+            <span class="hltab-topic">All About Quantum Networks</span>
+            <span class="hltab-date">December 01, 2025</span>
+            <button class="hltab-more" type="button" aria-label="More info for Guest Speaker Dr. Brian Doolittle">More Info</button>
+          </span>
+        </article>
+        <article class="hltab-btn" role="option" aria-selected="false" data-hl="4" tabindex="0">
+          <span class="hltab-photo hltab-photo--contain" aria-hidden="true">
+            <img src="photos/HackAtUCI_QC_Wksp.jpg" alt="Hack@UCI Quantum Computing Workshop">
+          </span>
+          <span class="hltab-copy">
+            <span class="hltab-title">Hack@UCI Quantum Computing Workshop</span>
+            <span class="hltab-topic">Real-world Quantum Optimization</span>
+            <span class="hltab-date">January 24, 2025</span>
+            <button class="hltab-more" type="button" aria-label="More info for Hack at UCI Quantum Computing Workshop">More Info</button>
+          </span>
+        </article>
+        <article class="hltab-btn" role="option" aria-selected="false" data-hl="5" tabindex="0">
+          <span class="hltab-photo" aria-hidden="true">
+            <img src="image/sandyirani.jpg" alt="">
+          </span>
+          <span class="hltab-copy">
+            <span class="hltab-title">Guest Speaker: Dr. Sandy Irani (UCI)</span>
+            <span class="hltab-topic">Quantum Complexity Theory</span>
+            <span class="hltab-date">April 15, 2024</span>
+            <button class="hltab-more" type="button" aria-label="More info for Guest Speaker Dr. Sandy Irani">More Info</button>
+          </span>
+        </article>
       </div>
-    </article>
-
-    <article class="hlpanel" role="tabpanel" tabindex="0" aria-labelledby="hl-tab-2" id="hl-panel-2" data-hl="2" hidden>
-      <div class="hlpanel-media" style="background-image:url('image/irvinehacks25.png')" role="img" aria-label="IrvineHacks 2025 Workshop"></div>
-      <div class="hlpanel-body">
-        <div class="kicker"><span class="chip chip-rose">Workshop</span> — January 24, 2025</div>
-        <h3 class="hlpanel-title">Irvine Hacks 2025 Workshop</h3>
-        <p class="hlpanel-desc">Join us for an exciting workshop on quantum computing at IrvineHacks 2025.</p>
-        <a class="hlpanel-link" href="news-irvinehacks25-workshop.html" target="_blank" rel="noreferrer">Read more</a>
-      </div>
-    </article>
-
-    <article class="hlpanel" role="tabpanel" tabindex="0" aria-labelledby="hl-tab-2" id="hl-panel-2" data-hl="2" hidden>
-      <div class="hlpanel-media" style="background-image:url('image/sandyirani.jpg')" role="img" aria-label="Professor Sandy Irani"></div>
-      <div class="hlpanel-body">
-        <div class="kicker"><span class="chip chip-amber">Talk</span> — April 15, 2024</div>
-        <h3 class="hlpanel-title">Guest lecture: Professor Sandy Irani</h3>
-        <p class="hlpanel-desc">Join us for an exciting guest lecture on quantum complexity theory.</p>
-        <a class="hlpanel-link" href="news-sandy-irani.html" target="_blank" rel="noreferrer">Read more</a>
-      </div>
-    </article>
-
-    <article class="hlpanel" role="tabpanel" tabindex="0" aria-labelledby="hl-tab-1" id="hl-panel-1" data-hl="1" hidden>
-      <div class="hlpanel-media" style="background-image:url('image/SQUID.png')" role="img" aria-label="SQUID 2023"></div>
-      <div class="hlpanel-body">
-        <div class="kicker"><span class="chip chip-emerald">Project</span> — June 06, 2023</div>
-        <h3 class="hlpanel-title">Symposium on Quantum Undergraduate Inquiry and Discovery</h3>
-        <p class="hlpanel-desc">We presented our quantum machine learning project for autonomous driving.</p>
-        <a class="hlpanel-link" href="https://youtu.be/6ZsC3KYIhbg" target="_blank" rel="noreferrer">See video</a>
-      </div>
-    </article>
-
-  </div>
-
-  <!-- Highlight story modal -->
-  <div class="hlmodal" id="hlModal" hidden>
-    <div class="hlmodal-backdrop" data-close="true"></div>
-    <div class="hlmodal-dialog" role="dialog" aria-modal="true" aria-labelledby="hlModalTitle">
-      <button class="hlmodal-close" type="button" aria-label="Close story" data-close="true">×</button>
-      <div class="hlmodal-content" id="hlModalContent"></div>
+      <div class="highlight-dots" id="hlDots" aria-label="Choose highlight"></div>
     </div>
-  </div>
-
-</section>
+  </section>
 
   <footer>
     <div class="footer__copyRight">
@@ -798,111 +781,95 @@ footer { padding:22px 16px 28px; border-top:1px solid rgba(255,255,255,0.08); ba
       }, 3500);
     })();
 
-// Highlights: small tabs open stories in a modal
+    // Highlights: rotating horizontal carousel with a center spotlight
     (function(){
-      const tabs = Array.from(document.querySelectorAll('#hlTabs [role="tab"]'));
-      const panels = Array.from(document.querySelectorAll('#hlPanels [role="tabpanel"]'));
-      const modal = document.getElementById('hlModal');
-      const modalContent = document.getElementById('hlModalContent');
-      const closeBtns = modal ? Array.from(modal.querySelectorAll('[data-close="true"]')) : [];
+      const rail = document.getElementById('hlTabs');
+      const dotsRoot = document.getElementById('hlDots');
+      const tabs = rail ? Array.from(rail.querySelectorAll('.hltab-btn')) : [];
+      if (!rail || !dotsRoot || !tabs.length) return;
 
-      if (!tabs.length || !panels.length || !modal || !modalContent) return;
-
-      let lastFocus = null;
+      const prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       let current = 0;
+      let timer = null;
 
-      function setSelected(idx){
-        current = Math.max(0, Math.min(tabs.length - 1, idx));
-        tabs.forEach((t, i) => t.setAttribute('aria-selected', i === current ? 'true' : 'false'));
+      const dots = tabs.map((_, idx) => {
+        const dot = document.createElement('button');
+        dot.className = 'highlight-dot';
+        dot.type = 'button';
+        dot.setAttribute('aria-label', `Show highlight ${idx + 1}`);
+        dot.addEventListener('click', () => {
+          setActive(idx);
+          restart();
+        });
+        dotsRoot.appendChild(dot);
+        return dot;
+      });
+
+      function signedDistance(index) {
+        const total = tabs.length;
+        let diff = index - current;
+        if (diff > total / 2) diff -= total;
+        if (diff < -total / 2) diff += total;
+        return diff;
       }
 
-      function getFocusable(container){
-        return Array.from(container.querySelectorAll('a[href], button:not([disabled]), textarea, input, select, [tabindex]:not([tabindex="-1"])'))
-          .filter(el => !el.hasAttribute('disabled') && !el.getAttribute('aria-hidden'));
+      function setActive(idx) {
+        current = (idx + tabs.length) % tabs.length;
+        const isCompact = window.matchMedia('(max-width: 720px)').matches;
+        const cardWidth = tabs[0].offsetWidth || 360;
+        const step = cardWidth * 1.08;
+        const canShowNeighbors = !isCompact && rail.clientWidth >= cardWidth * 2.95;
+        const visibleLimit = canShowNeighbors ? 1 : 0;
+
+        tabs.forEach((tab, index) => {
+          const diff = signedDistance(index);
+          const abs = Math.abs(diff);
+          const hiddenOffset = diff === 0 ? 0 : (diff < 0 ? -1 : 1);
+          const visibleDiff = abs > visibleLimit ? hiddenOffset : diff;
+
+          tab.classList.toggle('is-active', diff === 0);
+          tab.classList.toggle('is-near', abs === 1 && visibleLimit > 0);
+          tab.classList.toggle('is-far', abs > visibleLimit);
+          tab.setAttribute('aria-selected', diff === 0 ? 'true' : 'false');
+          tab.style.setProperty('--x', `${visibleDiff * step}px`);
+        });
+
+        dots.forEach((dot, index) => dot.setAttribute('aria-pressed', index === current ? 'true' : 'false'));
       }
 
-      function openModal(idx){
-        setSelected(idx);
-        lastFocus = document.activeElement;
-
-        // Clone the story panel into the modal
-        const clone = panels[idx].cloneNode(true);
-        clone.removeAttribute('hidden');
-        clone.removeAttribute('tabindex');
-        clone.removeAttribute('role');
-        clone.removeAttribute('aria-labelledby');
-        clone.id = '';
-
-        // Ensure the modal has a proper label
-        const titleEl = clone.querySelector('.hlpanel-title');
-        if (titleEl) titleEl.id = 'hlModalTitle';
-
-        modalContent.innerHTML = '';
-        modalContent.appendChild(clone);
-
-        // Show modal
-        modal.hidden = false;
-        document.body.style.overflow = 'hidden';
-
-        // Focus close button for accessibility
-        const closeBtn = modal.querySelector('.hlmodal-close');
-        if (closeBtn) closeBtn.focus();
-
-        // Focus trap
-        function onKeyDown(e){
-          if (e.key === 'Escape') { e.preventDefault(); closeModal(); return; }
-          if (e.key !== 'Tab') return;
-
-          const focusables = getFocusable(modal);
-          if (!focusables.length) return;
-
-          const first = focusables[0];
-          const last = focusables[focusables.length - 1];
-
-          if (e.shiftKey && document.activeElement === first){
-            e.preventDefault(); last.focus();
-          } else if (!e.shiftKey && document.activeElement === last){
-            e.preventDefault(); first.focus();
-          }
-        }
-
-        modal._onKeyDown = onKeyDown;
-        document.addEventListener('keydown', onKeyDown);
+      function next() {
+        setActive(current + 1);
       }
 
-      function closeModal(){
-        if (modal.hidden) return;
-        modal.hidden = true;
-        modalContent.innerHTML = '';
-        document.body.style.overflow = '';
-
-        if (modal._onKeyDown){
-          document.removeEventListener('keydown', modal._onKeyDown);
-          modal._onKeyDown = null;
-        }
-
-        // Restore focus
-        if (lastFocus && typeof lastFocus.focus === 'function') lastFocus.focus();
+      function restart() {
+        if (timer) clearInterval(timer);
+        if (!prefersReduced) timer = setInterval(next, 3200);
       }
 
-      // Click handlers
-      tabs.forEach((t, idx) => {
-        t.addEventListener('click', () => openModal(idx));
-        t.addEventListener('keydown', (e) => {
-          // "Tabs" keyboard feel: arrows move selection, Enter/Space opens modal.
-          if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') { e.preventDefault(); setSelected((current - 1 + tabs.length) % tabs.length); tabs[current].focus(); }
-          if (e.key === 'ArrowRight' || e.key === 'ArrowDown') { e.preventDefault(); setSelected((current + 1) % tabs.length); tabs[current].focus(); }
-          if (e.key === 'Home') { e.preventDefault(); setSelected(0); tabs[0].focus(); }
-          if (e.key === 'End') { e.preventDefault(); setSelected(tabs.length - 1); tabs[tabs.length - 1].focus(); }
-          if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openModal(idx); }
+      tabs.forEach((tab, idx) => {
+        tab.addEventListener('click', (e) => {
+          if (e.target.closest('.hltab-more')) return;
+          setActive(idx);
+          restart();
+        });
+        tab.addEventListener('keydown', (e) => {
+          if (e.key === 'ArrowLeft') { e.preventDefault(); setActive(current - 1); tabs[current].focus(); restart(); }
+          if (e.key === 'ArrowRight') { e.preventDefault(); setActive(current + 1); tabs[current].focus(); restart(); }
+          if (e.key === 'Home') { e.preventDefault(); setActive(0); tabs[current].focus(); restart(); }
+          if (e.key === 'End') { e.preventDefault(); setActive(tabs.length - 1); tabs[current].focus(); restart(); }
+          if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setActive(idx); restart(); }
         });
       });
 
-      // Close handlers (backdrop + close button)
-      closeBtns.forEach(btn => btn.addEventListener('click', closeModal));
+      rail.querySelectorAll('.hltab-more').forEach((button) => {
+        button.addEventListener('click', (e) => {
+          e.stopPropagation();
+        });
+      });
 
-      // Init selection
-      setSelected(0);
+      window.addEventListener('resize', () => setActive(current));
+      setActive(0);
+      restart();
     })();
 
 
