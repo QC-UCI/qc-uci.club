@@ -46,7 +46,7 @@
     --border-radius: 6px;
 
     /* Background Color */
-    --background-color: var(--white-color);*/ /*#584848;*/ /*#372424;*/
+    --background-color: var(--white-color); /*#584848;*/ /*#372424;*/
     --text-color: var(--black-color);
 }
 
