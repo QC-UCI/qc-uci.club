@@ -10,6 +10,8 @@
     if (page === "team.html") return "team";
     if (page === "qiskit_fall_fest_2026.html") return "qiskit-fall-fest";
     if (page === "event.html" || page.indexOf("news-") === 0) return "events";
+    if (page === "gallery.html") return "gallery";
+    if (page === "gallery-story.html") return "gallery";
     if (page === "projects.html") return "projects";
     if (page === "contact_us.html") return "contact";
 
@@ -17,6 +19,7 @@
   }
 
   function buildHeader(activeSection) {
+    var useCompactMenu = true;
     var links = [
       { key: "home", href: "index.html", label: "Home" },
       { key: "qiskit-fall-fest", href: "qiskit_fall_fest_2026.html", label: "Qiskit Fall Fest" },
@@ -24,6 +27,7 @@
       { key: "learn", href: "learn.html", label: "Learn" },
       { key: "team", href: "team.html", label: "Team" },
       { key: "events", href: "event.html", label: "Events" },
+      { key: "gallery", href: "gallery.html", label: "Gallery" },
       { key: "projects", href: "projects.html", label: "Projects" },
       { key: "contact", href: "contact_us.html", label: "Contact" }
     ];
@@ -51,21 +55,86 @@
       .join("");
 
     var header = document.createElement("div");
+    var innerClass = "qc-site-header__inner" + (useCompactMenu ? " qc-site-header__inner--compact" : "");
+    var navContent = useCompactMenu
+      ? '<nav class="qc-site-header__menu" aria-label="Primary navigation">' +
+        '<button class="qc-site-header__menu-button" type="button" aria-expanded="false" aria-controls="qc-site-menu">' +
+        '<span aria-hidden="true">≡</span>' +
+        '<span class="qc-site-header__sr-only">Open navigation menu</span>' +
+        "</button>" +
+        '<ul id="qc-site-menu" class="qc-site-header__nav qc-site-header__nav--dropdown">' +
+        navHtml +
+        "</ul>" +
+        "</nav>"
+      : '<nav aria-label="Primary navigation">' +
+        '<ul class="qc-site-header__nav">' +
+        navHtml +
+        "</ul>" +
+        "</nav>";
+
     header.className = "qc-site-header";
     header.setAttribute("role", "banner");
     header.innerHTML =
-      '<div class="qc-site-header__inner">' +
+      '<div class="' +
+      innerClass +
+      '">' +
       '<a class="qc-site-header__brand" href="index.html" aria-label="QC at UCI home">' +
       '<img class="qc-site-header__logo" src="image/Anteater_Bloch_White.png" alt="QC at UCI logo">' +
       "</a>" +
-      '<nav aria-label="Primary navigation">' +
-      '<ul class="qc-site-header__nav">' +
-      navHtml +
-      "</ul>" +
-      "</nav>" +
+      navContent +
       "</div>";
 
     return header;
+  }
+
+  function setupCompactMenu(headerRoot) {
+    var menu = headerRoot.querySelector(".qc-site-header__menu");
+    if (!menu) return;
+
+    var button = menu.querySelector(".qc-site-header__menu-button");
+    if (!button) return;
+
+    function setOpen(isOpen) {
+      menu.classList.toggle("is-open", isOpen);
+      button.setAttribute("aria-expanded", isOpen ? "true" : "false");
+    }
+
+    menu.addEventListener("mouseenter", function () {
+      setOpen(true);
+    });
+
+    menu.addEventListener("mouseleave", function () {
+      setOpen(false);
+    });
+
+    menu.addEventListener("focusin", function () {
+      setOpen(true);
+    });
+
+    menu.addEventListener("focusout", function () {
+      window.setTimeout(function () {
+        if (!menu.contains(document.activeElement)) {
+          setOpen(false);
+        }
+      }, 0);
+    });
+
+    button.addEventListener("click", function () {
+      setOpen(!menu.classList.contains("is-open"));
+    });
+
+    headerRoot.addEventListener("keydown", function (event) {
+      if (event.key === "Escape") {
+        setOpen(false);
+        button.focus();
+      }
+    });
+
+    document.addEventListener("click", function (event) {
+      if (!menu.contains(event.target)) {
+        setOpen(false);
+      }
+    });
   }
 
   function canPrefetchUrl(url) {
@@ -132,6 +201,15 @@
     });
   }
 
+  function syncHeaderHeight(headerRoot) {
+    function setHeight() {
+      document.documentElement.style.setProperty("--qc-header-h", headerRoot.offsetHeight + "px");
+    }
+
+    setHeight();
+    window.addEventListener("resize", setHeight, { passive: true });
+  }
+
   function mountGlobalHeader() {
     if (!document.body) return;
 
@@ -162,6 +240,8 @@
 
     document.body.classList.add("qc-has-global-header");
     setupHeaderPrefetch(newHeader);
+    setupCompactMenu(newHeader);
+    syncHeaderHeight(newHeader);
   }
 
   if (document.readyState === "loading") {
