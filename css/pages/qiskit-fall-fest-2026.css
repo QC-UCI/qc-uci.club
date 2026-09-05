@@ -1,0 +1,188 @@
+.qiskit-fall-fest-page {
+  --qff-ink: #e5e7eb;
+  --qff-muted: #cbd5e1;
+  --qff-blue: #60a5fa;
+  --qff-cyan: #22d3ee;
+  --qff-pink: #ff7eb6;
+  margin: 0;
+  color: var(--qff-ink);
+  background: #0b1023;
+  font-family: Inter, system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+
+.qiskit-fall-fest-page,
+.qiskit-fall-fest-page * {
+  box-sizing: border-box;
+}
+
+.qiskit-fall-fest__skip-link {
+  position: absolute;
+  left: 1rem;
+  top: -4rem;
+  z-index: 1100;
+  padding: 0.7rem 1rem;
+  color: #fff;
+  background: #0b1b3a;
+}
+
+.qiskit-fall-fest__skip-link:focus {
+  top: 1rem;
+}
+
+.qiskit-fall-fest__hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(300px, 0.95fr);
+  align-items: center;
+  gap: clamp(2rem, 6vw, 6rem);
+  min-height: min(720px, calc(100vh - 74px));
+  padding: clamp(3rem, 8vw, 7rem) max(1.25rem, calc((100% - 1160px) / 2));
+  background:
+    radial-gradient(900px 400px at 10% -10%, rgba(37, 99, 235, 0.1), transparent 60%),
+    radial-gradient(700px 300px at 110% 0%, rgba(245, 158, 11, 0.08), transparent 60%),
+    linear-gradient(#0b1023, #0b1023);
+}
+
+.qiskit-fall-fest__hero-image-wrap {
+  display: grid;
+  place-items: center;
+  min-height: 260px;
+  padding: clamp(1rem, 3vw, 2.5rem);
+  background: rgba(15, 23, 42, 0.55);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 18px 18px 0 var(--qff-pink);
+}
+
+.qiskit-fall-fest__hero-image {
+  display: block;
+  width: 100%;
+  max-height: 460px;
+  object-fit: contain;
+}
+
+.qiskit-fall-fest__hero-copy {
+  max-width: 540px;
+}
+
+.qiskit-fall-fest__eyebrow {
+  margin: 0 0 0.8rem;
+  color: var(--qff-blue);
+  font-size: 0.8rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.qiskit-fall-fest__hero h1,
+.qiskit-fall-fest__section h2,
+.qiskit-fall-fest__signup h2 {
+  margin: 0;
+  font-family: inherit;
+  font-weight: 800;
+  letter-spacing: 0;
+}
+
+.qiskit-fall-fest__hero h1 {
+  max-width: 8ch;
+  color: #f8fafc;
+  font-size: clamp(3rem, 8vw, 6.5rem);
+  line-height: 0.92;
+}
+
+.qiskit-fall-fest__lede {
+  max-width: 30rem;
+  margin: 1.5rem 0 0;
+  color: var(--qff-muted);
+  font-size: clamp(1.05rem, 2vw, 1.35rem);
+  line-height: 1.55;
+}
+
+.qiskit-fall-fest__section {
+  padding: clamp(4rem, 9vw, 8rem) 1.25rem;
+  background: #0b1023;
+}
+
+.qiskit-fall-fest__section-inner {
+  max-width: 760px;
+  margin: 0 auto;
+}
+
+.qiskit-fall-fest__section h2,
+.qiskit-fall-fest__signup h2 {
+  font-size: clamp(2rem, 4vw, 3.4rem);
+  line-height: 1.05;
+}
+
+.qiskit-fall-fest__section p:not(.qiskit-fall-fest__eyebrow),
+.qiskit-fall-fest__signup p:not(.qiskit-fall-fest__eyebrow) {
+  max-width: 680px;
+  margin: 1.25rem 0 0;
+  color: var(--qff-muted);
+  font-size: 1.08rem;
+  line-height: 1.75;
+}
+
+.qiskit-fall-fest__signup {
+  padding: clamp(3rem, 7vw, 6rem) 1.25rem;
+  color: #fff;
+  background: linear-gradient(135deg, rgba(37, 99, 235, 0.25), rgba(37, 99, 235, 0.1)), rgba(15, 23, 42, 0.55);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.qiskit-fall-fest__signup .qiskit-fall-fest__eyebrow {
+  color: #7ee8f4;
+}
+
+.qiskit-fall-fest__signup h2,
+.qiskit-fall-fest__signup p:not(.qiskit-fall-fest__eyebrow) {
+  color: #fff;
+}
+
+.qiskit-fall-fest__signup-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.qiskit-fall-fest__button {
+  flex: 0 0 auto;
+  min-height: 3rem;
+  padding: 0.8rem 1.1rem;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  border-radius: 0;
+  color: rgba(255, 255, 255, 0.65);
+  background: rgba(255, 255, 255, 0.1);
+  font: inherit;
+  font-weight: 700;
+  cursor: not-allowed;
+}
+
+@media (max-width: 760px) {
+  .qiskit-fall-fest__hero {
+    grid-template-columns: 1fr;
+    min-height: auto;
+    gap: 3.5rem;
+  }
+
+  .qiskit-fall-fest__hero-copy {
+    order: -1;
+  }
+
+  .qiskit-fall-fest__hero h1 {
+    max-width: 10ch;
+  }
+
+  .qiskit-fall-fest__signup-inner {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 430px) {
+  .qiskit-fall-fest__hero-image-wrap {
+    box-shadow: 10px 10px 0 var(--qff-pink
+);
+  }
+}

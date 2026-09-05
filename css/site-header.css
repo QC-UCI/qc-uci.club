@@ -13,6 +13,7 @@
   font-family: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   border-bottom: 1px solid rgba(255, 255, 255, 0.12);
   background: linear-gradient(180deg, #0a1a45, #08153b);
+  --color-gold: #f59e0b;
   backdrop-filter: none;
 }
 
@@ -114,4 +115,13 @@ body.qc-has-global-header {
     justify-content: flex-start;
     gap: 6px 12px;
   }
+}
+.qc-site-header__link--qiskit {
+  color: var(--color-gold);
+}
+
+.qc-site-header__link--qiskit:hover,
+.qc-site-header__link--qiskit:focus-visible,
+.qc-site-header__link--qiskit.is-active {
+  color: var(--color-gold);
 }

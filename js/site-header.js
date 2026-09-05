@@ -8,6 +8,7 @@
     if (page === "join.html" || page === "join_old.html") return "join";
     if (page === "learn.html" || page.indexOf("learn_math_") === 0) return "learn";
     if (page === "team.html") return "team";
+    if (page === "qiskit_fall_fest_2026.html") return "qiskit-fall-fest";
     if (page === "event.html" || page.indexOf("news-") === 0) return "events";
     if (page === "projects.html") return "projects";
     if (page === "contact_us.html") return "contact";
@@ -18,6 +19,7 @@
   function buildHeader(activeSection) {
     var links = [
       { key: "home", href: "index.html", label: "Home" },
+      { key: "qiskit-fall-fest", href: "qiskit_fall_fest_2026.html", label: "Qiskit Fall Fest" },
       { key: "join", href: "join.html", label: "Join" },
       { key: "learn", href: "learn.html", label: "Learn" },
       { key: "team", href: "team.html", label: "Team" },
@@ -30,10 +32,12 @@
       .map(function (link) {
         var isActive = link.key === activeSection;
         var activeClass = isActive ? " is-active" : "";
+        var qiskitClass = link.key === "qiskit-fall-fest" ? " qc-site-header__link--qiskit" : "";
         var ariaCurrent = isActive ? ' aria-current="page"' : "";
 
         return (
           '<li><a class="qc-site-header__link' +
+          qiskitClass +
           activeClass +
           '" href="' +
           link.href +
