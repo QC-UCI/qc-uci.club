@@ -61,110 +61,164 @@
 
     .modal{ position:fixed; inset:0; background:rgba(2,6,23,.55); display:none; align-items:center; justify-content:center; padding:1rem; z-index:80; }
     .modal.open{ display:flex; }
-    .modal-card{ background:#fff; width:min(720px, 94vw); border-radius:1rem; overflow:hidden; box-shadow:0 25px 60px rgba(2,6,23,.35); }
+    .modal-card{ background:#fff; width:min(860px, 94vw); max-height:min(88vh, 980px); border-radius:1rem; overflow:hidden; box-shadow:0 25px 60px rgba(2,6,23,.35); display:flex; flex-direction:column; }
+    .modal-card > .p-5:nth-child(2){ overflow:auto; }
+    #modal-actions:empty{ display:none; }
+    .event-detail{
+      border:1px solid rgba(15,23,42,.10);
+      border-radius:1rem;
+      padding:1rem;
+      background:linear-gradient(180deg, #ffffff, #f8fbff);
+    }
+    .event-detail + .event-detail{ margin-top:1rem; }
+    .event-detail__meta{
+      display:flex;
+      flex-wrap:wrap;
+      gap:.45rem .8rem;
+      color:#334155;
+      font-size:.92rem;
+    }
+    .event-detail__description{
+      white-space:pre-line;
+    }
+    .event-detail__notes ul{
+      margin:.6rem 0 0 1.1rem;
+      list-style:disc;
+    }
+    .event-detail__notes li + li{ margin-top:.25rem; }
+    .event-detail__actions{
+      margin-top:1rem;
+      display:flex;
+      flex-wrap:wrap;
+      gap:.5rem;
+    }
 
     .timeline{ position:relative; padding-left:1.25rem; }
     .timeline::before{ content:""; position:absolute; left:.5rem; top:.25rem; bottom:.25rem; width:2px; background:linear-gradient(#c7d2fe,#93c5fd); }
     .t-dot{ position:absolute; left:-.125rem; width:.75rem; height:.75rem; border-radius:9999px; background:#6366f1; box-shadow:0 0 0 4px #e0e7ff; }
 
-    #cal-prev, #cal-next, #calendar-grid button, .filter-btn#cal-prev, .filter-btn#cal-next { color:#111827; }
+    #cal-prev, #cal-next, #cal-today, #calendar-grid button, .filter-btn#cal-prev, .filter-btn#cal-next { color:#111827; }
     .filter-btn#cal-prev i, .filter-btn#cal-next i { color:#111827 !important; }
     .filter-btn svg { width: 1rem; height: 1rem; vertical-align: middle; }
 
-    #calendar-grid button { height: 2.2rem; }
-  
     /* ===== Calendar Spotlight ===== */
     .calendar-spotlight{
-      background:
-        radial-gradient(900px 360px at 20% 0%, rgba(99,102,241,.16), transparent 60%),
-        radial-gradient(900px 360px at 80% 0%, rgba(56,189,248,.14), transparent 60%),
-        linear-gradient(#ffffff, #f8fafc);
-      border: 1px solid rgba(2,6,23,.06);
-      box-shadow: 0 18px 55px rgba(2,6,23,.10);
+      background:#f8fafc;
+      border:1px solid rgba(15,23,42,.10);
+      box-shadow:0 18px 52px rgba(8,17,31,.10);
     }
+    .calendar-status{
+      min-height: 1.3rem;
+      color:#475569;
+      font-size:.86rem;
+    }
+    .calendar-status[data-state="error"]{ color:#9f1239; }
     .cal-shell{
-      border: 1px solid rgba(2,6,23,.08);
-      background: rgba(255,255,255,.72);
-      backdrop-filter: blur(8px);
+      border:1px solid rgba(15,23,42,.10);
+      background:#ffffff;
+      box-shadow:0 12px 34px rgba(8,17,31,.07);
+    }
+    .cal-toolbar{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:1rem;
+    }
+    .cal-month-meta{
+      margin-top:.15rem;
+      color:#64748b;
+      font-size:.8rem;
+      font-weight:600;
     }
     .cal-weekday{
+      color: rgba(15,23,42,.62);
       font-size: .72rem;
-      letter-spacing: .06em;
+      font-weight: 900;
+      letter-spacing: .08em;
       text-transform: uppercase;
-      color: rgba(15,23,42,.65);
       padding: .35rem 0;
       user-select: none;
     }
+    .cal-spacer{
+      min-height: clamp(5.4rem, 8vw, 7rem);
+      border-radius:.6rem;
+      background:#f8fafc;
+    }
     .cal-day{
-      height: 3.05rem;
-      border-radius: .85rem;
-      border: 1px solid rgba(2,6,23,.06);
-      background: #fff;
+      min-height: clamp(5.4rem, 8vw, 7rem);
+      border-radius:.6rem;
+      border: 1px solid rgba(15,23,42,.08);
+      display:flex;
+      flex-direction:column;
+      align-items:flex-start;
+      justify-content:flex-start;
+      gap:.45rem;
+      padding:.65rem;
+      background:#ffffff;
       position: relative;
+      text-align:left;
       transition: transform .12s ease, box-shadow .2s ease, background .2s ease, border-color .2s ease;
     }
-    .cal-day:hover:enabled{
-      transform: translateY(-1px);
-      box-shadow: 0 10px 20px rgba(2,6,23,.10);
-      border-color: rgba(99,102,241,.22);
-      background: #fbfdff;
+    .cal-day:hover{
+      transform:translateY(-1px);
+      box-shadow:0 10px 22px rgba(8,17,31,.10);
+      border-color:rgba(11,61,145,.22);
+      background:#fbfdff;
     }
-    .cal-day:disabled{
-      opacity: .35;
-      cursor: not-allowed;
-      background: rgba(248,250,252,.7);
+    .cal-day:focus-visible{
+      outline: 3px solid rgba(255,210,0,.62);
+      outline-offset: 2px;
+    }
+    .cal-day.is-empty{
+      color:#94a3b8;
+      background:#f8fafc;
+    }
+    .cal-day.is-today{
+      border-color:rgba(245,158,11,.75);
+      box-shadow:inset 0 0 0 1px rgba(245,158,11,.24);
     }
     .cal-day.selected{
-      outline: 2px solid rgba(99,102,241,.55);
-      outline-offset: 2px;
-      box-shadow: 0 14px 32px rgba(99,102,241,.18);
+      border-color:rgba(11,61,145,.65);
+      background:#eff6ff;
+      box-shadow:0 12px 26px rgba(11,61,145,.12), inset 0 0 0 1px rgba(11,61,145,.14);
     }
     .cal-day .day-num{
-      position:absolute;
-      top:.45rem;
-      left:.55rem;
-      font-size:.85rem;
-      font-weight:700;
       color:#0f172a;
+      font-size:.96rem;
+      font-weight:900;
+      line-height:1;
     }
-    .cal-day .event-count{
-      position:absolute;
-      top:.45rem;
-      right:.55rem;
+    .cal-day.is-empty .day-num{ color:#94a3b8; }
+    .cal-events-list{
+      width:100%;
+      display:grid;
+      gap:.28rem;
+    }
+    .cal-event-chip{
+      width:100%;
+      overflow:hidden;
+      padding:.22rem .42rem;
+      border-left:4px solid var(--event-color, #3b82f6);
+      border-radius:.35rem;
+      color:#1e293b;
+      background:#f8fafc;
       font-size:.7rem;
       font-weight:800;
-      padding:.1rem .45rem;
-      border-radius:9999px;
-      background: rgba(99,102,241,.12);
-      border: 1px solid rgba(99,102,241,.22);
-      color:#3730a3;
-    }
-    .cal-dots{
-      position:absolute;
-      left:50%;
-      transform:translateX(-50%);
-      bottom:.55rem;
-      display:flex;
-      gap:4px;
-      align-items:center;
-      justify-content:center;
-    }
-    .day-events{
-      border: 1px solid rgba(2,6,23,.08);
-      background:#fff;
-    }
-    .day-events .item{
-      border:1px solid rgba(2,6,23,.06);
-      transition: transform .12s ease, box-shadow .2s ease, border-color .2s ease;
-    }
-    .day-events .item:hover{
-      transform: translateY(-1px);
-      box-shadow: 0 10px 18px rgba(2,6,23,.08);
-      border-color: rgba(99,102,241,.22);
+      line-height:1.2;
+      text-overflow:ellipsis;
+      white-space:nowrap;
     }
     .kbd-hint{
-      font-size:.72rem;
+      font-size:.78rem;
       color: rgba(15,23,42,.62);
+    }
+    @media (max-width: 640px){
+      .cal-toolbar{ align-items:stretch; flex-direction:column; }
+      .cal-toolbar .calendar-controls{ justify-content:space-between; }
+      .cal-weekday{ font-size:.64rem; }
+      .cal-spacer{ min-height: 3.4rem; }
+      .cal-day{ min-height: 4.2rem; padding:.45rem; border-radius:.75rem; }
+      .cal-event-chip{ font-size:0; min-height:.42rem; padding:0; border-left-width:0; background:var(--event-color, #3b82f6); }
     }
 
   </style>
@@ -174,7 +228,11 @@
 <body class="bg-gray-50">
   <!-- AOS -->
   <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
-  <script> window.addEventListener('DOMContentLoaded',()=>AOS.init({ duration: 800, once:true, offset: 100 })); </script>
+  <script>
+    window.addEventListener('DOMContentLoaded', () => {
+      if (window.AOS) window.AOS.init({ duration: 800, once:true, offset: 100 });
+    });
+  </script>
 
   <!-- ======= Header ======= -->
   <header class="header" role="banner">
@@ -213,7 +271,7 @@
     <div class="max-w-7xl mx-auto px-6 py-3 grid grid-cols-12 gap-3 items-center">
       <div class="col-span-12 sm:col-span-5 lg:col-span-4 order-1">
         <div class="flex items-center gap-2" role="tablist" aria-label="Event Tabs">
-          <button class="filter-btn" data-tab="upcoming" aria-pressed="true">Upcoming</button>
+          <button class="filter-btn" data-tab="calendar" aria-pressed="true">Calendar</button>
           <button class="filter-btn" data-tab="past" aria-pressed="false">Past</button>
         </div>
       </div>
@@ -235,7 +293,7 @@
   </section>
 
   
-  <!-- ======= UPCOMING / PAST CONTAINERS ======= -->
+  <!-- ======= CALENDAR / PAST CONTAINERS ======= -->
   <main class="max-w-7xl mx-auto px-6 py-10">
     <!-- Calendar Spotlight (centerpiece) -->
     <section id="calendar-spotlight" class="calendar-spotlight rounded-3xl p-5 sm:p-7" aria-label="Events Calendar">
@@ -243,9 +301,9 @@
         <div>
           <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">Club Calendar</h2>
           <p class="mt-1 text-sm sm:text-base text-slate-600">
-            Click a day to see what’s happening, then click an event to open the full details.
+            Browse upcoming workshops, talks, socials, and club events by date.
           </p>
-          <p class="mt-1 kbd-hint">Tip: Use the filters above to narrow categories—colors match the legend.</p>
+          <p id="calendar-status" class="mt-1 calendar-status" role="status" aria-live="polite">Loading calendar events...</p>
         </div>
 
         <!-- Subscribe buttons (kept) -->
@@ -264,20 +322,23 @@
         </div>
       </div>
 
-      <div class="mt-5 grid lg:grid-cols-12 gap-5 items-start">
+      <div class="mt-5">
         <!-- Big calendar -->
-        <div class="lg:col-span-8 cal-shell rounded-2xl p-4 sm:p-5">
-          <div class="flex items-center justify-between gap-3">
+        <div class="cal-shell rounded-2xl p-4 sm:p-5">
+          <div class="cal-toolbar">
             <button id="cal-prev" class="filter-btn" aria-label="Previous month">
               <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M15.5 4.5a1 1 0 0 1 .7 1.7L10.4 12l5.8 5.8a1 1 0 1 1-1.4 1.4l-6.5-6.5a1 1 0 0 1 0-1.4l6.5-6.5a1 1 0 0 1 .7-.3z"/></svg>
             </button>
             <div class="text-center">
               <div id="cal-title" class="text-lg sm:text-xl font-bold text-slate-900"></div>
-              <div class="text-xs text-slate-500 mt-0.5">Tap a day to load events</div>
+              <div id="cal-month-meta" class="cal-month-meta">Loading events</div>
             </div>
-            <button id="cal-next" class="filter-btn" aria-label="Next month">
-              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8.5 19.5a1 1 0 0 1-.7-1.7L13.6 12 7.8 6.2a1 1 0 1 1 1.4-1.4l6.5 6.5a1 1 0 0 1 0 1.4l-6.5 6.5a1 1 0 0 1-.7.3z"/></svg>
-            </button>
+            <div class="calendar-controls flex items-center gap-2">
+              <button id="cal-today" class="filter-btn" type="button">Today</button>
+              <button id="cal-next" class="filter-btn" aria-label="Next month">
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8.5 19.5a1 1 0 0 1-.7-1.7L13.6 12 7.8 6.2a1 1 0 1 1 1.4-1.4l6.5 6.5a1 1 0 0 1 0 1.4l-6.5 6.5a1 1 0 0 1-.7.3z"/></svg>
+              </button>
+            </div>
           </div>
 
           <div id="calendar-grid" class="mt-4 grid grid-cols-7 gap-2 text-center"></div>
@@ -298,32 +359,7 @@
             </span>
           </div>
         </div>
-
-        <!-- Events on selected day -->
-        <div class="lg:col-span-4">
-          <section class="day-events rounded-2xl p-4 sm:p-5 shadow-sm">
-            <div class="flex items-start justify-between gap-3">
-              <div>
-                <h3 class="text-lg font-bold text-slate-900">Events on <span id="day-title">—</span></h3>
-                <p class="text-sm text-slate-600 mt-1">Click an event to open details.</p>
-              </div>
-              <button id="day-clear" class="filter-btn" type="button" aria-label="Clear selected date">Clear</button>
-            </div>
-            <div id="day-events" class="mt-4 space-y-3">
-              <p class="text-sm text-slate-500">Select a date with dots to view events here.</p>
-            </div>
-          </section>
-        </div>
       </div>
-    </section>
-
-    <!-- Upcoming cards -->
-    <section class="mt-10" id="upcoming-col">
-      <div class="flex items-end justify-between gap-3 flex-wrap">
-        <h2 class="text-xl sm:text-2xl font-extrabold text-slate-900">Upcoming</h2>
-        <p class="text-sm text-slate-600">Or browse the next two weeks in cards.</p>
-      </div>
-      <div id="upcoming" class="mt-5 grid sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
     </section>
 
     <!-- PAST -->
@@ -374,6 +410,10 @@
     const fmtDate = (d) => d.toLocaleDateString(undefined,{ month:'short', day:'numeric', year:'numeric' });
     const fmtTime = (d) => d.toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' });
     const isSameDay = (a,b) => a.getFullYear()===b.getFullYear() && a.getMonth()===b.getMonth() && a.getDate()===b.getDate();
+    const formatYMD = (d) => {
+      const pad = n => String(n).padStart(2, '0');
+      return `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`;
+    };
 
     function normalizeTitleAndCategory(summary, fallbackCategory='event'){
       const raw = (summary||'').trim();
@@ -397,23 +437,33 @@
     }
 
     function unfoldICSLines(text){ return text.replace(/\r?\n[ \t]/g, ''); }
+    function decodeICSValue(value){
+      return String(value || '')
+        .replace(/\\n/gi, '\n')
+        .replace(/\\,/g, ',')
+        .replace(/\\;/g, ';')
+        .replace(/\\\\/g, '\\')
+        .trim();
+    }
     function parseICSTimestamp(val){
+      if (!val) return null;
       val = val.replace(/^(?:TZID=[^:;]+:)/, '');
       if (/^\d{8}$/.test(val)){ const y = +val.slice(0,4), m = +val.slice(4,6)-1, d = +val.slice(6,8); const dt = new Date(y, m, d); dt.__allday = true; return dt; }
-      if (/Z$/.test(val)) return new Date(val);
-      const m = val.match(/^(\d{4})(\d{2})(\d{2})T(\d{2})(\d{2})(\d{2})?$/);
-      if (m){ const [_,Y,Mo,D,H,Mi,S] = m; return new Date(+Y, +Mo-1, +D, +H, +Mi, +(S||'0')); }
+      const utc = val.match(/^(\d{4})(\d{2})(\d{2})T(\d{2})(\d{2})(\d{2})?Z$/);
+      if (utc){ const [_,Y,Mo,D,H,Mi,S] = utc; return new Date(Date.UTC(+Y, +Mo-1, +D, +H, +Mi, +(S||'0'))); }
+      const local = val.match(/^(\d{4})(\d{2})(\d{2})T(\d{2})(\d{2})(\d{2})?$/);
+      if (local){ const [_,Y,Mo,D,H,Mi,S] = local; return new Date(+Y, +Mo-1, +D, +H, +Mi, +(S||'0')); }
       const d = new Date(val); return isNaN(d)? null : d;
     }
     function parseICS(text){
       const data = unfoldICSLines(text);
       const events = [];
-      const blocks = data.split(/BEGIN:VEVENT\n/i).slice(1);
+      const blocks = data.split(/BEGIN:VEVENT\r?\n/i).slice(1);
       for (const blkRaw of blocks){
         const blk = blkRaw.split(/END:VEVENT/)[0];
         const get = (prop) => {
           const re = new RegExp(`^${prop}(?:;[^:]+)?:([^\n\r]+)`, 'mi');
-          const m = blk.match(re); return m? m[1].trim() : '';
+          const m = blk.match(re); return m? decodeICSValue(m[1]) : '';
         };
         const summary = get('SUMMARY');
         const location = get('LOCATION');
@@ -422,8 +472,12 @@
         const startRaw = get('DTSTART');
         const endRaw = get('DTEND');
         const start = parseICSTimestamp(startRaw);
-        const end = parseICSTimestamp(endRaw);
+        let end = parseICSTimestamp(endRaw);
         if (!start) continue;
+        if (start.__allday && end && end.__allday && end > start) {
+          end = new Date(end.getTime() - 1);
+          end.__allday = true;
+        }
 
         let category = '';
         const catLine = (description.match(/CATEGORY:\s*(.*)/i)?.[1]||'').trim();
@@ -456,27 +510,71 @@
       return 'blue';
     }
     
-    function buildEventProse(evt, moreLines){
+    function cleanNoteLine(line){
+      return String(line || '').trim().replace(/^[-*•]\s*/, '').trim();
+    }
+
+    function splitDetailLines(text){
+      const raw = String(text || '').trim();
+      if (!raw) return [];
+
+      const withBreaks = raw
+        .replace(/\s*[-*•]\s+/g, '\n')
+        .replace(/([?!])(?=\S)/g, '$1\n')
+        .replace(/\.\s+(?=[A-Z])/g, '.\n');
+
+      return withBreaks
+        .split(/\n+/)
+        .map(cleanNoteLine)
+        .filter(Boolean);
+    }
+
+    function parseEventNotes(description){
+      const raw = String(description || '').replace(/\r/g, '').trim();
+      const rsvpMatch = raw.match(/\[RSVP:\s*([^\]]*)\]/i);
+      let rsvpUrl = '';
+      if (rsvpMatch){
+        const value = (rsvpMatch[1] || '').trim().replace(/^<|>$/g, '');
+        if (value && !/^(false|no|none|null)$/i.test(value)) rsvpUrl = value;
+      }
+
+      const withoutRsvp = raw
+        .replace(/\[RSVP:\s*[^\]]*\]/ig, '')
+        .replace(/^CATEGORY:\s.*$/gim, '')
+        .trim();
+      const parts = withoutRsvp.split(/\[More Details\]/i);
+      const preview = (parts[0] || '').trim().replace(/\n{2,}/g, '\n');
+      const detailsText = (parts.slice(1).join('\n') || '').trim();
+      const detailLines = splitDetailLines(detailsText);
+
+      return { preview, detailLines, rsvpUrl };
+    }
+
+    function addEventDetails(evt, parsedNotes){
+      const notes = parsedNotes || parseEventNotes(evt.description);
+      evt.notesPreview = notes.preview;
+      evt.moreDetails = notes.detailLines;
+      evt.rsvpUrl = notes.rsvpUrl;
+      return evt;
+    }
+
+    function buildEventProse(evt){
+      const details = addEventDetails(evt);
       const dateText = fmtDate(evt.start);
       const timeText = evt.start.__allday ? 'All day' : `${fmtTime(evt.start)}${evt.end? ' – ' + fmtTime(evt.end) : ''}`;
       const locText  = (evt.location || '').trim();
-
-      // Description in prose (no bullets): prefer the preview part + extra lines (joined into sentences).
-      const raw = (evt.description || '').replace(/\r/g,'');
-      const parts = raw.split(/\[More Details\]/i);
-      const preview = (parts[0] || '').trim().replace(/\n+/g,' ');
-      const more = Array.isArray(moreLines) ? moreLines : ((parts[1]||'').trim() ? (parts[1]||'').split(/\n+/).map(s=>s.trim()).filter(Boolean) : []);
-      const moreSentence = more.length ? more.join(' ') : '';
-      const desc = (preview || moreSentence || (evt.description || '').trim().replace(/\n+/g,' ') || 'Details will be announced soon.');
-
-      const metaBits = [];
-      metaBits.push(`📅 <strong>${dateText}</strong>`);
-      metaBits.push(`⏰ <strong>${timeText}</strong>`);
-      if (locText) metaBits.push(`📍 <strong>${locText}</strong>`);
-
+      const preview = details.notesPreview || 'Details will be announced soon.';
+      const moreHtml = details.moreDetails && details.moreDetails.length
+        ? `<div class="event-detail__notes"><p class="mt-3 font-semibold text-slate-900">More Details</p><ul>${details.moreDetails.map(line => `<li>${escapeHTML(line)}</li>`).join('')}</ul></div>`
+        : '';
       return `
-        <p class="text-sm text-slate-700"><span class="font-semibold">${toTitleCase(evt.category || 'event')}</span> · ${metaBits.join(' &nbsp;·&nbsp; ')}</p>
-        <p class="text-sm text-slate-700">📝 ${escapeHTML(desc)}</p>
+        <div class="event-detail__meta">
+          <span>📅 <strong>${dateText}</strong></span>
+          <span>⏰ <strong>${timeText}</strong></span>
+          ${locText ? `<span>📍 <strong>${escapeHTML(locText)}</strong></span>` : ''}
+        </div>
+        <p class="mt-3 text-sm text-slate-700 event-detail__description">${escapeHTML(preview)}</p>
+        ${moreHtml}
       `;
     }
 
@@ -489,102 +587,101 @@
         .replace(/'/g,'&#039;');
     }
 
-    function openEventModal(evt, cardEl){
+    function buildEventActions(evt){
+      const details = addEventDetails(evt);
+      const safeTitle = escapeHTML(evt.title);
+      const rsvp = details.rsvpUrl
+        ? `<a href="${escapeHTML(details.rsvpUrl)}" target="_blank" rel="noopener" class="inline-flex items-center gap-2 rounded-lg px-3 py-2 bg-slate-900 text-white text-sm font-semibold hover:bg-slate-800"><i class="fa-solid fa-ticket"></i> RSVP</a>`
+        : '';
+      return `
+        ${rsvp}
+        <button class="inline-flex items-center gap-2 rounded-lg px-3 py-2 bg-white ring-1 ring-black/10 text-sm font-semibold hover:bg-slate-50 add-to-cal" type="button" data-event-title="${safeTitle}">
+          <i class="fa-regular fa-calendar-plus"></i> Add to Calendar
+        </button>
+      `;
+    }
+
+    function createEventDetailHTML(evt){
+      addEventDetails(evt);
+      return `
+        <article class="event-detail" style="border-left: 6px solid ${categoryColor(evt.category)}">
+          <div class="flex flex-wrap items-center justify-between gap-3">
+            <h4 class="text-xl font-bold text-slate-900">${escapeHTML(evt.title)}</h4>
+            <span class="badge ${badgeClass(evt.category)}">${evt.category? toTitleCase(evt.category) : 'Event'}</span>
+          </div>
+          <div class="mt-3">${buildEventProse(evt)}</div>
+          <div class="event-detail__actions">${buildEventActions(evt)}</div>
+        </article>
+      `;
+    }
+
+    function wireCalendarButtons(root, events){
+      root.querySelectorAll('.add-to-cal').forEach((btn, index)=>{
+        const evt = events[index] || events.find(e => e.title === btn.dataset.eventTitle);
+        if (!evt) return;
+        btn.addEventListener('click', ()=>{
+          const ics = makeICS({
+            title: evt.title,
+            start: toICSDate(evt.start),
+            end: evt.end? toICSDate(evt.end) : toICSDate(new Date(evt.start.getTime()+60*60*1000)),
+            location: evt.location || ''
+          });
+          downloadICS(ics, `${evt.title.replace(/\s+/g,'_')}.ics`);
+        });
+      });
+    }
+
+    function openEventModal(evt){
       const modal = document.getElementById('modal-1');
       const mt = document.getElementById('modal-title');
       const ms = document.getElementById('modal-subtitle');
       const mb = document.getElementById('modal-body');
       const ma = document.getElementById('modal-actions');
+      if (!modal || !mt || !ms || !mb || !ma) return;
 
       mt.textContent = evt.title;
-
-      // Subtitle kept short; the emoji-rich details live in the prose body.
       ms.textContent = evt.category ? `${toTitleCase(evt.category)}` : 'Event';
-
-      // Pull "more details" lines if present (from card dataset) for richer prose.
-      let moreData = null;
-      if (cardEl && cardEl.dataset && cardEl.dataset.more){
-        try{ moreData = JSON.parse(cardEl.dataset.more); }catch(e){ moreData = null; }
-      }
-
-      mb.innerHTML = buildEventProse(evt, moreData);
-
+      mb.innerHTML = createEventDetailHTML(evt);
       ma.innerHTML = '';
-      if (evt.url){
-        const a = document.createElement('a');
-        a.href = evt.url; a.target = '_blank';
-        a.className = 'inline-flex items-center gap-2 rounded-lg px-3 py-2 bg-slate-900 text-white text-sm font-semibold hover:bg-slate-800';
-        a.innerHTML = '<i class="fa-solid fa-ticket"></i> RSVP';
-        ma.appendChild(a);
-      }
-      const btn = document.createElement('button');
-      btn.className = 'inline-flex items-center gap-2 rounded-lg px-3 py-2 bg-white ring-1 ring-black/10 text-sm font-semibold hover:bg-slate-50 add-to-cal';
-      btn.innerHTML = '<i class="fa-regular fa-calendar-plus"></i> Add to Calendar';
-      btn.addEventListener('click', ()=>{
-        const ics = makeICS({
-          title: evt.title,
-          start: toICSDate(evt.start),
-          end: evt.end? toICSDate(evt.end) : toICSDate(new Date(evt.start.getTime()+60*60*1000)),
-          location: evt.location || ''
-        });
-        downloadICS(ics, `${evt.title.replace(/\s+/g,'_')}.ics`);
-      });
-      ma.appendChild(btn);
+      wireCalendarButtons(mb, [evt]);
 
       modal.classList.add('open');
       wireModalClose();
     }
-function createUpcomingCard(evt){
-      const dateLabel = fmtDate(evt.start);
-      const timeLabel = evt.start.__allday ? 'All day' : `${fmtTime(evt.start)}${evt.end? ' – ' + fmtTime(evt.end) : ''}`;
-      // Split description at marker '[More Details]'. Text before marker is preview; after marker goes to modal as bullets.
-      const rawDesc = (evt.description || '').replace(/\r/g,'');
-      const parts = rawDesc.split(/\[More Details\]/i);
-      const previewText = (parts[0] || '').trim().replace(/\n+/g,' ');
-      const moreDetailsText = (parts[1] || '').trim();
-      const moreLines = moreDetailsText ? moreDetailsText.split(/\n+/).map(s=>s.trim()).filter(Boolean) : [];
 
-      const el = document.createElement('article');
-      el.className = 'event-card';
-      el.dataset.category = evt.category || '';
-      el.dataset.title = evt.title || '';
-      el.dataset.date = evt.start.toISOString().slice(0,10);
-      el.dataset.location = evt.location || '';
-      if (moreLines.length) el.dataset.more = JSON.stringify(moreLines);
-      el.innerHTML = `
-        <div class="event-accent" aria-hidden="true"></div>
-        <div class="p-5">
-          <div class="flex items-center justify-between gap-3">
-            <span class="badge ${badgeClass(evt.category)}">${evt.category? toTitleCase(evt.category) : 'Event'}</span>
-            <time class="text-sm font-semibold text-slate-700">${dateLabel}</time>
-          </div>
-          <h3 class="mt-2 text-xl font-bold text-slate-900">${evt.title}</h3>
-          <p class="mt-1 text-sm text-slate-600 line-clamp-2">${previewText || ((evt.description||'').replace(/\n/g,' ').slice(0,180))}</p>
-          <div class="mt-3 flex flex-wrap items-center gap-2 text-sm text-slate-600">
-            <span class="inline-flex items-center gap-1"><i class="fa-regular fa-clock"></i> ${timeLabel}</span>
-            ${evt.location? `<span class="inline-flex items-center gap-1"><i class="fa-solid fa-location-dot"></i> ${evt.location}</span>`: ''}
-          </div>
-          <div class="mt-4 flex items-center gap-2">
-            ${evt.url? `<a href="${evt.url}" target="_blank" class="inline-flex items-center gap-2 rounded-lg px-3 py-2 bg-slate-900 text-white text-sm font-semibold hover:bg-slate-800"><i class="fa-solid fa-ticket"></i> RSVP</a>`: ''}
-            <button class="inline-flex items-center gap-2 rounded-lg px-3 py-2 bg-white ring-1 ring-black/10 text-sm font-semibold hover:bg-slate-50 details-btn"><i class="fa-regular fa-circle-question"></i> More Details</button>
-          </div>
-        </div>`;
-      return el;
+    function openDateEventsModal(date, events){
+      const modal = document.getElementById('modal-1');
+      const mt = document.getElementById('modal-title');
+      const ms = document.getElementById('modal-subtitle');
+      const mb = document.getElementById('modal-body');
+      const ma = document.getElementById('modal-actions');
+      if (!modal || !mt || !ms || !mb || !ma) return;
+
+      const dayEvents = events.slice().sort((a,b)=>a.start-b.start);
+      mt.textContent = fmtDate(date);
+      ms.textContent = dayEvents.length
+        ? `${dayEvents.length} event${dayEvents.length === 1 ? '' : 's'}`
+        : 'No events';
+      mb.innerHTML = dayEvents.length
+        ? dayEvents.map(createEventDetailHTML).join('')
+        : '<p class="rounded-xl bg-slate-50 p-4 text-sm text-slate-600 ring-1 ring-black/5">No events on this date with the current filters.</p>';
+      ma.innerHTML = '';
+      wireCalendarButtons(mb, dayEvents);
+      modal.classList.add('open');
+      wireModalClose();
     }
     function createPastTimelineItem(evt){
+      addEventDetails(evt);
       const container = document.createElement('div');
       container.className = 'relative pl-6';
       container.dataset.category = evt.category || '';
       container.dataset.title = evt.title || '';
-      container.dataset.date = evt.start.toISOString().slice(0,10);
+      container.dataset.date = formatYMD(evt.start);
       container.dataset.location = evt.location || '';
-      // Split description at marker '[More Details]' similar to upcoming cards
-      const rawDesc = (evt.description || '').replace(/\r/g,'');
-      const parts = rawDesc.split(/\[More Details\]/i);
-      const previewText = (parts[0] || '').trim().replace(/\n+/g,' ');
-      const moreDetailsText = (parts[1] || '').trim();
-      const moreLines = moreDetailsText ? moreDetailsText.split(/\n+/).map(s=>s.trim()).filter(Boolean) : [];
-      if (moreLines.length) container.dataset.more = JSON.stringify(moreLines);
+      const safeTitle = escapeHTML(evt.title);
+      const safePreview = escapeHTML((evt.notesPreview || 'Details will be announced soon.').replace(/\n+/g,' '));
+      const safeLocation = escapeHTML(evt.location || '');
+      const safeRsvp = escapeHTML(evt.rsvpUrl || '');
 
       container.innerHTML = `
         <span class="t-dot" aria-hidden="true" style="top: .6rem"></span>
@@ -594,109 +691,66 @@ function createUpcomingCard(evt){
             <span class="badge ${badgeClass(evt.category)}">${evt.category? toTitleCase(evt.category) : 'Event'}</span>
             <time class="text-sm font-semibold text-slate-700">${fmtDate(evt.start)}</time>
           </div>
-          <h3 class="mt-2 text-xl font-bold text-slate-900">${evt.title}</h3>
-          <p class="mt-1 text-sm text-slate-600">${previewText || ((evt.description||'').replace(/\n/g,' ').slice(0,220))}</p>
+          <h3 class="mt-2 text-xl font-bold text-slate-900">${safeTitle}</h3>
+          <p class="mt-1 text-sm text-slate-600">${safePreview}</p>
           <div class="mt-3 flex flex-wrap items-center gap-2 text-sm text-slate-600">
             ${evt.start.__allday? `<span class="inline-flex items-center gap-1"><i class="fa-regular fa-clock"></i> All day</span>` : `<span class="inline-flex items-center gap-1"><i class="fa-regular fa-clock"></i> ${fmtTime(evt.start)}${evt.end? ' – ' + fmtTime(evt.end) : ''}</span>`}
-            ${evt.location? `<span class="inline-flex items-center gap-1"><i class="fa-solid fa-location-dot"></i> ${evt.location}</span>`: ''}
+            ${evt.location? `<span class="inline-flex items-center gap-1"><i class="fa-solid fa-location-dot"></i> ${safeLocation}</span>`: ''}
+          </div>
+          <div class="mt-4 flex items-center gap-2">
+            ${evt.rsvpUrl? `<a href="${safeRsvp}" target="_blank" rel="noopener" class="inline-flex items-center gap-2 rounded-lg px-3 py-2 bg-slate-900 text-white text-sm font-semibold hover:bg-slate-800"><i class="fa-solid fa-ticket"></i> RSVP</a>`: ''}
+            <button class="inline-flex items-center gap-2 rounded-lg px-3 py-2 bg-white ring-1 ring-black/10 text-sm font-semibold hover:bg-slate-50 details-btn"><i class="fa-regular fa-circle-question"></i> More Details</button>
           </div>
         </div>`;
+      const detailsBtn = container.querySelector('.details-btn');
+      if (detailsBtn) detailsBtn.addEventListener('click', ()=> openEventModal(evt));
       return container;
     }
-    function attachCardInteractions(card, evt){
-      card.addEventListener('mousemove', (e)=>{
-        const r = card.getBoundingClientRect();
-        const x = (e.clientX - r.left)/r.width - .5;
-        const y = (e.clientY - r.top)/r.height - .5;
-        card.style.transform = `rotateX(${(-y*4).toFixed(2)}deg) rotateY(${(x*6).toFixed(2)}deg)`;
-      });
-      card.addEventListener('mouseleave', ()=>{ card.style.transform = 'rotateX(0deg) rotateY(0deg)'; });
+    let SELECTED_DATE = null;
+    let ALL_EVENTS = [];
+    let CURRENT_CALENDAR_DATE = new Date();
+    let CALENDAR_LOAD_STATE = 'loading';
 
-      const addBtn = card.querySelector('.add-to-cal');
-      if (addBtn){
-        addBtn.addEventListener('click', ()=>{
-          const ics = makeICS({
-            title: evt.title,
-            start: toICSDate(evt.start),
-            end: evt.end? toICSDate(evt.end) : toICSDate(new Date(evt.start.getTime()+60*60*1000)),
-            location: evt.location || ''
-          });
-          downloadICS(ics, `${evt.title.replace(/\s+/g,'_')}.ics`);
-        });
-      }
-      const detailsBtn = card.querySelector('.details-btn');
-      if (detailsBtn){
-        
-detailsBtn.addEventListener('click', ()=>{
-          openEventModal(evt, card);
-        });
-      }
-}
-
-        let SELECTED_DATE = null;
-let ALL_EVENTS = [];
-    let FOCUS_DATE = null;
-
-    async function loadCalendar(){
-      const res = await fetch(CALENDAR_ICS_URL, { cache: 'no-store' });
-      const text = await res.text();
-      ALL_EVENTS = parseICS(text).filter(e => e.start && !isNaN(e.start));
-      renderAll();
+    function setCalendarStatus(message, state){
+      const status = document.getElementById('calendar-status');
+      if (!status) return;
+      status.textContent = message || '';
+      if (state) status.dataset.state = state;
     }
 
-    function splitUpcomingPast(evts){
+    function getPastEvents(evts){
       // Use current time as the cutoff so events that ended earlier today are treated as past.
       // For all-day events we consider them to end at the end of the day.
       const now = new Date();
-      const upcoming = [], past = [];
+      const past = [];
       for (const e of evts){
         const rawEnd = e.end || e.start;
         let end = rawEnd;
         if (end && end.__allday){
           end = new Date(end.getFullYear(), end.getMonth(), end.getDate(), 23, 59, 59, 999);
         }
-        if (end < now) past.push(e); else upcoming.push(e);
+        if (end < now) past.push(e);
       }
-      upcoming.sort((a,b)=> a.start - b.start);
       past.sort((a,b)=> b.start - a.start);
-      return { upcoming, past };
+      return past;
     }
 
     function renderAll(){
       const filtered = filterBySearchAndCategory(ALL_EVENTS);
-      const { upcoming, past } = splitUpcomingPast(filtered);
-      const activeCategory = currentCategory();
-      let upToShow = upcoming;
-
-      if(activeCategory === 'all'){
-        const lim = new Date(); lim.setDate(lim.getDate()+14);
-        upToShow = upcoming.filter(e => e.start <= lim || (FOCUS_DATE && isSameDay(e.start, FOCUS_DATE)));
-      }
-
-      const up = document.getElementById('upcoming');
-      up.innerHTML = '';
-      upToShow.forEach(evt => {
-        const card = createUpcomingCard(evt);
-        up.appendChild(card);
-        attachCardInteractions(card, evt);
-      });
+      const past = getPastEvents(filtered);
 
       const pt = document.getElementById('past-timeline');
-      pt.innerHTML = '';
-      past.forEach(evt => pt.appendChild(createPastTimelineItem(evt)));
-
-      const now = new Date(); renderCalendar(now.getMonth(), now.getFullYear(), filtered);
-      wireModalClose();
-
-      if (FOCUS_DATE){
-        const ymd = new Date(FOCUS_DATE.getFullYear(), FOCUS_DATE.getMonth(), FOCUS_DATE.getDate()).toISOString().slice(0,10);
-        const target = [...document.querySelectorAll('#upcoming .event-card')].find(c => c.dataset.date === ymd);
-        if (target){
-          target.scrollIntoView({behavior:'smooth', block:'center'});
-          target.classList.add('ring-2','ring-indigo-400');
-          setTimeout(()=>target.classList.remove('ring-2','ring-indigo-400'), 1600);
+      if (pt){
+        pt.innerHTML = '';
+        if (!past.length){
+          pt.innerHTML = '<p class="rounded-2xl bg-white p-5 text-sm text-slate-600 shadow-sm ring-1 ring-black/5">No past events match the current filters.</p>';
+        } else {
+          past.forEach(evt => pt.appendChild(createPastTimelineItem(evt)));
         }
       }
+
+      renderCalendar(CURRENT_CALENDAR_DATE.getMonth(), CURRENT_CALENDAR_DATE.getFullYear(), filtered);
+      wireModalClose();
     }
 
     const filterBtns = document.querySelectorAll('[data-filter]');
@@ -708,7 +762,7 @@ let ALL_EVENTS = [];
     }
     function filterBySearchAndCategory(events){
       const cat = currentCategory();
-      const term = (search.value||'').toLowerCase();
+      const term = ((search && search.value) || '').toLowerCase();
       return events.filter(e => {
         const matchCat = (cat==='all') || (e.category===cat);
         const text = (e.title + ' ' + (e.location||'') + ' ' + (e.description||'')).toLowerCase();
@@ -718,16 +772,14 @@ let ALL_EVENTS = [];
     }
 
     filterBtns.forEach(b=> b.addEventListener('click', ()=>{
-      FOCUS_DATE = null;
       filterBtns.forEach(x=>x.setAttribute('aria-pressed','false'));
       b.setAttribute('aria-pressed','true');
       renderAll();
     }));
-    search.addEventListener('input', ()=>{ FOCUS_DATE = null; renderAll(); });
+    if (search) search.addEventListener('input', ()=>{ renderAll(); });
 
     
     const tabBtns = document.querySelectorAll('[data-tab]');
-    const upcomingContainer = document.getElementById('upcoming-col');
     const pastSection = document.getElementById('past');
     const calSpotlight = document.getElementById('calendar-spotlight');
 
@@ -737,29 +789,28 @@ let ALL_EVENTS = [];
       const tab = btn.dataset.tab;
 
       if(tab==='past'){
-        if (upcomingContainer) upcomingContainer.classList.add('hidden');
         if (calSpotlight) calSpotlight.classList.add('hidden');
         if (pastSection) pastSection.classList.remove('hidden');
       } else {
         if (pastSection) pastSection.classList.add('hidden');
         if (calSpotlight) calSpotlight.classList.remove('hidden');
-        if (upcomingContainer) upcomingContainer.classList.remove('hidden');
       }
-      window.scrollTo({ top: document.querySelector('.hero').offsetHeight, behavior:'smooth' });
+      const hero = document.querySelector('.hero');
+      window.scrollTo({ top: hero ? hero.offsetHeight : 0, behavior:'smooth' });
     }));
 
 function renderCalendar(month, year, events){
       const grid  = document.getElementById('calendar-grid');
       const title = document.getElementById('cal-title');
-      const dayTitle = document.getElementById('day-title');
-      const dayList = document.getElementById('day-events');
-      const clearBtn = document.getElementById('day-clear');
+      const meta = document.getElementById('cal-month-meta');
       if(!grid || !title) return;
 
       grid.innerHTML = '';
       const first = new Date(year, month, 1);
       const last  = new Date(year, month+1, 0);
+      const today = new Date();
       title.textContent = first.toLocaleDateString(undefined,{month:'long', year:'numeric'});
+      CURRENT_CALENDAR_DATE = first;
 
       // Weekday headers
       const week = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
@@ -773,7 +824,8 @@ function renderCalendar(month, year, events){
       // Offset for first day (after header row)
       for(let i=0;i<first.getDay();i++){
         const cell=document.createElement('div');
-        cell.className='h-10';
+        cell.className='cal-spacer';
+        cell.setAttribute('aria-hidden', 'true');
         grid.appendChild(cell);
       }
 
@@ -784,46 +836,28 @@ function renderCalendar(month, year, events){
           (eventsByDay[day] ??= []).push(e);
         }
       });
+      Object.values(eventsByDay).forEach(list => list.sort((a,b)=>a.start-b.start));
 
-      function setSelectedDate(d){
+      const monthEventCount = Object.values(eventsByDay).reduce((sum, dayEvents) => sum + dayEvents.length, 0);
+      if (meta){
+        meta.textContent = CALENDAR_LOAD_STATE === 'loading'
+          ? 'Loading events'
+          : monthEventCount
+          ? 'Events available this month'
+          : 'No events this month';
+      }
+
+      function setSelectedDate(d, openPopup){
         SELECTED_DATE = d;
-        FOCUS_DATE = d;
+        const selectedKey = formatYMD(d);
 
         // Highlight selected cell
         [...grid.querySelectorAll('button.cal-day')].forEach(b=>{
-          b.classList.toggle('selected', b.dataset.date === d.toISOString().slice(0,10));
+          b.classList.toggle('selected', b.dataset.date === selectedKey);
         });
 
-        // Populate day list (clickable events)
-        if (dayTitle) dayTitle.textContent = fmtDate(d);
-        if (dayList){
-          const dayEvents = (eventsByDay[d.getDate()] || []).slice().sort((a,b)=>a.start-b.start);
-          dayList.innerHTML = '';
-          if (!dayEvents.length){
-            dayList.innerHTML = '<p class="text-sm text-slate-500">No events on this day (with current filters).</p>';
-          } else {
-            dayEvents.forEach(evt=>{
-              const item = document.createElement('button');
-              item.type = 'button';
-              item.className = 'item w-full text-left rounded-xl p-3 bg-white';
-              item.style.borderLeft = `6px solid ${categoryColor(evt.category)}`;
-              const timeText = evt.start.__allday ? 'All day' : `${fmtTime(evt.start)}${evt.end? ' – ' + fmtTime(evt.end) : ''}`;
-              item.innerHTML = `
-                <div class="flex items-start justify-between gap-3">
-                  <div>
-                    <div class="inline-flex items-center gap-2">
-                      <span class="badge ${badgeClass(evt.category)}">${evt.category? toTitleCase(evt.category) : 'Event'}</span>
-                      <span class="text-sm font-semibold text-slate-900">${evt.title}</span>
-                    </div>
-                    <div class="mt-1 text-xs text-slate-600">⏰ ${timeText}${evt.location ? ` &nbsp;·&nbsp; 📍 ${evt.location}` : ''}</div>
-                  </div>
-                  <span class="text-xs text-slate-500 mt-1">Open</span>
-                </div>
-              `;
-              item.addEventListener('click', ()=> openEventModal(evt, null));
-              dayList.appendChild(item);
-            });
-          }
+        if (openPopup) {
+          openDateEventsModal(d, eventsByDay[d.getDate()] || []);
         }
       }
 
@@ -831,32 +865,47 @@ function renderCalendar(month, year, events){
       for(let day=1; day<=last.getDate(); day++){
         const cell=document.createElement('button');
         cell.type = 'button';
-        cell.className='cal-day';
-        const ymd = new Date(year, month, day).toISOString().slice(0,10);
+        const cellDate = new Date(year, month, day);
+        const dayEvents = eventsByDay[day] || [];
+        cell.className='cal-day' + (dayEvents.length ? '' : ' is-empty') + (isSameDay(cellDate, today) ? ' is-today' : '');
+        const ymd = formatYMD(cellDate);
         cell.dataset.date = ymd;
-        cell.setAttribute('aria-label', `Day ${day}`);
+        cell.setAttribute('aria-label', `${first.toLocaleDateString(undefined,{month:'long'})} ${day}, ${year}${dayEvents.length ? ', has events' : ', no events'}`);
         cell.innerHTML = `<span class="day-num">${day}</span>`;
 
-        const dayEvents = eventsByDay[day] || [];
         if(dayEvents.length){
-          const cats = Array.from(new Set(dayEvents.map(e=>e.category || 'event')));
-          const rail = document.createElement('div');
-          rail.className = 'cal-dots';
-          cats.slice(0,4).forEach(cat=>{
-            const dot = document.createElement('span');
-            dot.style.cssText = `width:7px; height:7px; border-radius:9999px; background:${categoryColor(cat)}; box-shadow:0 0 0 1px rgba(0,0,0,.08) inset;`;
-            dot.title = cat;
-            rail.appendChild(dot);
+          const list = document.createElement('div');
+          list.className = 'cal-events-list';
+          dayEvents.slice(0, 2).forEach(evt=>{
+            const chip = document.createElement('span');
+            chip.className = 'cal-event-chip';
+            chip.style.setProperty('--event-color', categoryColor(evt.category));
+            chip.textContent = evt.title;
+            list.appendChild(chip);
           });
-          cell.appendChild(rail);
-cell.addEventListener('click', ()=>{
-            const upcomingTabBtn = document.querySelector('[data-tab="upcoming"]');
-            if (upcomingTabBtn) upcomingTabBtn.click();
-            setSelectedDate(new Date(year, month, day));
-          });
-        } else {
-          cell.disabled = true;
+          if (dayEvents.length > 2){
+            const chip = document.createElement('span');
+            chip.className = 'cal-event-chip';
+            chip.style.setProperty('--event-color', '#64748b');
+            chip.textContent = 'More events';
+            list.appendChild(chip);
+          }
+          cell.appendChild(list);
         }
+
+        cell.addEventListener('click', ()=>{
+          setSelectedDate(new Date(year, month, day), true);
+        });
+
+        cell.addEventListener('keydown', (event)=>{
+          const movement = { ArrowLeft: -1, ArrowRight: 1, ArrowUp: -7, ArrowDown: 7 }[event.key];
+          if (!movement) return;
+          event.preventDefault();
+          const nextDate = new Date(year, month, day + movement);
+          if (nextDate.getMonth() !== month) return;
+          const nextCell = grid.querySelector(`[data-date="${formatYMD(nextDate)}"]`);
+          if (nextCell) nextCell.focus();
+        });
 
         grid.appendChild(cell);
       }
@@ -864,32 +913,19 @@ cell.addEventListener('click', ()=>{
       // prev/next month navigation
       const prev = document.getElementById('cal-prev');
       const next = document.getElementById('cal-next');
-      if (prev) prev.onclick = ()=>{ const m = month===0?11:month-1; const y = month===0?year-1:year; renderCalendar(m,y,events); };
-      if (next) next.onclick = ()=>{ const m = month===11?0:month+1; const y = month===11?year+1:year; renderCalendar(m,y,events); };
-
-      // clear selected day
-      if (clearBtn){
-        clearBtn.onclick = ()=>{
-          SELECTED_DATE = null;
-          FOCUS_DATE = null;
-          if (dayTitle) dayTitle.textContent = '—';
-          if (dayList) dayList.innerHTML = '<p class="text-sm text-slate-500">Select a date with dots to view events here.</p>';
-          [...grid.querySelectorAll('button.cal-day')].forEach(b=>b.classList.remove('selected'));
-        };
-      }
+      const todayBtn = document.getElementById('cal-today');
+      if (prev) prev.onclick = ()=>{ const nextMonth = new Date(year, month-1, 1); renderCalendar(nextMonth.getMonth(), nextMonth.getFullYear(), events); };
+      if (next) next.onclick = ()=>{ const nextMonth = new Date(year, month+1, 1); renderCalendar(nextMonth.getMonth(), nextMonth.getFullYear(), events); };
+      if (todayBtn) todayBtn.onclick = ()=>{
+        const now = new Date();
+        SELECTED_DATE = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+        renderCalendar(now.getMonth(), now.getFullYear(), events);
+        openDateEventsModal(SELECTED_DATE, events.filter(evt => isSameDay(evt.start, SELECTED_DATE)));
+      };
 
       // If we already have a selected date within this month/year, reselect it.
       if (SELECTED_DATE && SELECTED_DATE.getMonth()===month && SELECTED_DATE.getFullYear()===year){
-        setSelectedDate(new Date(SELECTED_DATE.getFullYear(), SELECTED_DATE.getMonth(), SELECTED_DATE.getDate()));
-      } else {
-        // Default: auto-select the first day with events in the month (keeps the spotlight feeling alive).
-        const firstWithEvents = Object.keys(eventsByDay).map(Number).sort((a,b)=>a-b)[0];
-        if (firstWithEvents){
-          setSelectedDate(new Date(year, month, firstWithEvents));
-        } else {
-          if (dayTitle) dayTitle.textContent = '—';
-          if (dayList) dayList.innerHTML = '<p class="text-sm text-slate-500">No events in this month (with current filters).</p>';
-        }
+        setSelectedDate(new Date(SELECTED_DATE.getFullYear(), SELECTED_DATE.getMonth(), SELECTED_DATE.getDate()), false);
       }
     }
 
@@ -903,7 +939,11 @@ cell.addEventListener('click', ()=>{
     }
 
     function wireModalClose(){
-      document.querySelectorAll('.modal').forEach(m=> m.addEventListener('click', (e)=>{ if(e.target===m || e.target.closest('.close-modal')) m.classList.remove('open'); }));
+      document.querySelectorAll('.modal').forEach(m=> {
+        if (m.dataset.closeWired) return;
+        m.dataset.closeWired = 'true';
+        m.addEventListener('click', (e)=>{ if(e.target===m || e.target.closest('.close-modal')) m.classList.remove('open'); });
+      });
     }
     function toICSDate(d){
       const pad = n => String(n).padStart(2,'0');
@@ -965,10 +1005,26 @@ const GCAL_API_KEY = 'AIzaSyC3nTOoTGckugpCCaf5PUEdiD5DBu1B6Vk';
 const GCAL_CAL_ID  = 'quantumcomputing@uci.edu';
 const GCAL_BASE = `https://www.googleapis.com/calendar/v3/calendars/${encodeURIComponent(GCAL_CAL_ID)}/events?singleEvents=true&showDeleted=false&maxResults=2500&orderBy=startTime&key=${GCAL_API_KEY}`;
 
+async function fetchWithTimeout(url, options = {}, timeoutMs = 9000){
+  const controller = new AbortController();
+  const timer = window.setTimeout(() => controller.abort(), timeoutMs);
+  try {
+    const res = await fetch(url, { ...options, signal: controller.signal });
+    if (!res.ok) throw new Error(`Request failed with ${res.status}`);
+    return res;
+  } finally {
+    window.clearTimeout(timer);
+  }
+}
+
 function stripHtml(html){
   if(!html) return '';
+  const normalized = String(html)
+    .replace(/<br\s*\/?>/gi, '\n')
+    .replace(/<li[^>]*>/gi, '\n- ')
+    .replace(/<\/(p|div|li|h[1-6])>/gi, '\n');
   const tmp = document.createElement('div');
-  tmp.innerHTML = html;
+  tmp.innerHTML = normalized;
   return (tmp.textContent || tmp.innerText || '').trim();
 }
 function deriveCategoryFromText(summary, description){
@@ -995,7 +1051,11 @@ function mapGoogleEvent(it){
   }
   if(it.end){
     if(it.end.dateTime){ end = new Date(it.end.dateTime); }
-    else if(it.end.date){ end = new Date(it.end.date + 'T00:00:00'); if(start) end.__allday = start.__allday; }
+    else if(it.end.date){
+      end = new Date(it.end.date + 'T00:00:00');
+      if(start) end.__allday = start.__allday;
+      if(start && start.__allday && end > start) end = new Date(end.getTime() - 1);
+    }
   }
   const rawSummary = (it.summary || '').trim();
   const description = stripHtml(it.description || '');
@@ -1013,23 +1073,58 @@ function mapGoogleEvent(it){
     category: norm.category
   };
 }
+
+async function loadGoogleCalendarEvents(){
+  const nowIso = new Date().toISOString();
+  const [upRes, pastRes] = await Promise.all([
+    fetchWithTimeout(GCAL_BASE + `&timeMin=${encodeURIComponent(nowIso)}`),
+    fetchWithTimeout(GCAL_BASE + `&timeMax=${encodeURIComponent(nowIso)}`)
+  ]);
+  const upJson = await upRes.json();
+  const pastJson = await pastRes.json();
+  const combined = [ ...(upJson.items||[]), ...(pastJson.items||[]) ];
+  const mapped = combined.map(mapGoogleEvent).filter(e => e && e.start && !isNaN(e.start));
+  const byId = new Map();
+  mapped.forEach(e=>{
+    if(!byId.has(e.id)) {
+      byId.set(e.id, e);
+    } else {
+      const prev = byId.get(e.id);
+      if((e.end||e.start) > (prev.end||prev.start)) byId.set(e.id, e);
+    }
+  });
+  return Array.from(byId.values());
+}
+
+async function loadICSEvents(){
+  const res = await fetchWithTimeout(CALENDAR_ICS_URL, { cache: 'no-store' });
+  const text = await res.text();
+  return parseICS(text).filter(e => e.start && !isNaN(e.start));
+}
+
 async function loadCalendar(){
+  setCalendarStatus('Loading calendar events...', 'loading');
+  ALL_EVENTS = [];
+  renderAll();
   try{
-    const nowIso = new Date().toISOString();
-    const [upRes, pastRes] = await Promise.all([
-      fetch(GCAL_BASE + `&timeMin=${encodeURIComponent(nowIso)}`),
-      fetch(GCAL_BASE + `&timeMax=${encodeURIComponent(nowIso)}`)
-    ]);
-    const upJson = await upRes.json();
-    const pastJson = await pastRes.json();
-    const combined = [ ...(upJson.items||[]), ...(pastJson.items||[]) ];
-    const mapped = combined.map(mapGoogleEvent).filter(e => e && e.start && !isNaN(e.start));
-    const byId = new Map();
-    mapped.forEach(e=>{ if(!byId.has(e.id)) byId.set(e.id, e); else { const prev = byId.get(e.id); if((e.end||e.start) > (prev.end||prev.start)) byId.set(e.id, e);} });
-    ALL_EVENTS = Array.from(byId.values());
+    ALL_EVENTS = await loadGoogleCalendarEvents();
+    CALENDAR_LOAD_STATE = 'ready';
+    setCalendarStatus(`${ALL_EVENTS.length} calendar event${ALL_EVENTS.length === 1 ? '' : 's'} loaded.`, 'ready');
     renderAll();
   }catch(err){
-    console.error('Failed to load Google Calendar events:', err);
+    console.warn('Google Calendar API failed; trying ICS fallback:', err);
+    try{
+      ALL_EVENTS = await loadICSEvents();
+      CALENDAR_LOAD_STATE = 'ready';
+      setCalendarStatus(`${ALL_EVENTS.length} calendar event${ALL_EVENTS.length === 1 ? '' : 's'} loaded from the public calendar feed.`, 'ready');
+      renderAll();
+    }catch(fallbackErr){
+      CALENDAR_LOAD_STATE = 'error';
+      ALL_EVENTS = [];
+      console.error('Failed to load calendar events:', fallbackErr);
+      setCalendarStatus('Calendar events could not load right now. Try refreshing in a moment.', 'error');
+      renderAll();
+    }
   }
 }
   </script>
