@@ -159,6 +159,12 @@
   text-decoration: none;
 }
 
+.qiskit-fall-fest__section .qiskit-fall-fest__button {
+  display: block;
+  width: fit-content;
+  margin: 1.75rem auto 0;
+}
+
 @media (max-width: 760px) {
   .qiskit-fall-fest__hero {
     grid-template-columns: 1fr;
