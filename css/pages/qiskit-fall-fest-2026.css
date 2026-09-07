@@ -152,11 +152,11 @@
   padding: 0.8rem 1.1rem;
   border: 1px solid rgba(255, 255, 255, 0.35);
   border-radius: 0;
-  color: rgba(255, 255, 255, 0.65);
+  color: #fff;
   background: rgba(255, 255, 255, 0.1);
   font: inherit;
   font-weight: 700;
-  cursor: not-allowed;
+  text-decoration: none;
 }
 
 @media (max-width: 760px) {
